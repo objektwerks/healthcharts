@@ -1,12 +1,13 @@
 package chart
 
-import java.awt.EventQueue
 import java.awt.BorderLayout
+import java.awt.EventQueue
 
 import javax.swing.JFrame
 import javax.swing.WindowConstants
 
 object App {
+  val centerWindow = null
   def main(args: Array[String]): Unit = {
     EventQueue.invokeLater( new Runnable() {
       override def run(): Unit = {
@@ -16,7 +17,7 @@ object App {
         frame.setTitle("JFreeChart")
         frame.setSize(640, 480)
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
-        frame.setLocationRelativeTo(null)
+        frame.setLocationRelativeTo(centerWindow)
         frame.setVisible(true);
       }
     })
