@@ -6,6 +6,7 @@ import org.jfree.data.xy.XYSeries
 import org.jfree.chart.ChartFactory
 import org.jfree.chart.ChartPanel
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer
+import java.awt.Color
 
 object LineChart {
   def apply(): ChartPanel = Chart.build()
@@ -24,6 +25,7 @@ object LineChart {
       val plot = chart.getXYPlot()
       val renderer = new XYLineAndShapeRenderer()
       plot.setRenderer(renderer)
+      plot.setBackgroundPaint(Color.DARK_GRAY)
       new ChartPanel(chart)
     }
 
