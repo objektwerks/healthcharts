@@ -1,0 +1,73 @@
+package chart
+
+import java.awt.BorderLayout
+
+import javax.swing.JFrame
+import javax.swing.JPanel
+import javax.swing.WindowConstants
+
+import org.jfree.data.xy.XYDataset
+import org.jfree.data.xy.XYSeriesCollection
+import org.jfree.data.xy.XYSeries
+import org.jfree.chart.ChartFactory
+import org.jfree.chart.ChartPanel
+
+object LineChart {
+    def apply(): JFrame = new LineChart()
+}
+
+class LineChart extends JFrame {
+  val chart = buildChart()
+  add(chart, BorderLayout.CENTER)
+  setTitle("JFreeChart")
+  setSize(640, 480)
+  setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
+  setLocationRelativeTo(null)
+
+  def buildChart(): JPanel = {
+    val chartTitle = "Line Chart"
+    val xAxisLabel = "X"
+    val yAxisLabel = "Y"
+ 
+    val dataset = buildDataset()
+ 
+    val chart = ChartFactory.createXYLineChart(
+      chartTitle,
+      xAxisLabel,
+      yAxisLabel,
+      dataset)
+ 
+    new ChartPanel(chart)
+  }
+
+  def buildDataset(): XYDataset = {
+    val dataset = new XYSeriesCollection()
+    val series1 = new XYSeries("1")
+    val series2 = new XYSeries("2")
+    val series3 = new XYSeries("3")
+ 
+    series1.add(1.0, 2.0)
+    series1.add(2.0, 3.0)
+    series1.add(3.0, 2.5)
+    series1.add(3.5, 2.8)
+    series1.add(4.2, 6.0)
+ 
+    series2.add(2.0, 1.0)
+    series2.add(2.5, 2.4)
+    series2.add(3.2, 1.2)
+    series2.add(3.9, 2.8)
+    series2.add(4.6, 3.0)
+ 
+    series3.add(1.2, 4.0)
+    series3.add(2.5, 4.4)
+    series3.add(3.8, 4.2)
+    series3.add(4.3, 3.8)
+    series3.add(4.5, 4.0)
+ 
+    dataset.addSeries(series1)
+    dataset.addSeries(series2)
+    dataset.addSeries(series3)
+ 
+    dataset
+  }
+}
