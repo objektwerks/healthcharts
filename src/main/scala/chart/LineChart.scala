@@ -5,6 +5,7 @@ import org.jfree.data.xy.XYSeriesCollection
 import org.jfree.data.xy.XYSeries
 import org.jfree.chart.ChartFactory
 import org.jfree.chart.ChartPanel
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer
 
 object LineChart {
   def apply(): ChartPanel = Chart.build()
@@ -20,6 +21,9 @@ object LineChart {
         xAxisLabel,
         yAxisLabel,
         dataset)
+      val plot = chart.getXYPlot()
+      val renderer = new XYLineAndShapeRenderer()
+      plot.setRenderer(renderer)
       new ChartPanel(chart)
     }
 
