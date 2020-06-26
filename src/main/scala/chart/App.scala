@@ -12,8 +12,8 @@ object App {
     try {
       EventQueue.invokeLater( new Runnable() {
         override def run(): Unit = {
-          val frame = new JFrame()
           val chart = LineChart()
+          val frame = new JFrame()
           frame.add(chart, BorderLayout.CENTER)
           frame.setTitle("JFreeChart")
           frame.setSize(640, 480)

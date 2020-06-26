@@ -14,19 +14,16 @@ object LineChart {
       val chartTitle = "Line Chart"
       val xAxisLabel = "X"
       val yAxisLabel = "Y"
-    
       val dataset = buildDataset()
-    
       val chart = ChartFactory.createXYLineChart(
         chartTitle,
         xAxisLabel,
         yAxisLabel,
         dataset)
-    
       new ChartPanel(chart)
     }
 
-    private def buildDataset(): XYDataset = {
+    def buildDataset(): XYDataset = {
       val dataset = new XYSeriesCollection()
       val series1 = new XYSeries("1")
       val series2 = new XYSeries("2")
@@ -53,7 +50,6 @@ object LineChart {
       dataset.addSeries(series1)
       dataset.addSeries(series2)
       dataset.addSeries(series3)
-    
       dataset
     }
   }
