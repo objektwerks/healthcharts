@@ -6,7 +6,7 @@ import java.awt.EventQueue
 import javax.swing.JFrame
 import javax.swing.WindowConstants
 
-object App {
+object LineChartApp {
   val centerWindow = null
   def main(args: Array[String]): Unit = {
     EventQueue.invokeLater( new Runnable() {
