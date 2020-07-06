@@ -5,7 +5,6 @@ import java.awt.Color
 import org.jfree.chart.ChartFactory
 import org.jfree.chart.ChartPanel
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer
-import org.jfree.data.xy.XYDataset
 import org.jfree.data.xy.XYSeries
 import org.jfree.data.xy.XYSeriesCollection
 import org.jfree.chart.plot.PlotOrientation
@@ -21,12 +20,12 @@ object LineScatterChart {
       val chartTitle = "Line-Scatter Chart"
       val xAxisLabel = "Domain"
       val yAxisLabel = "Range"
-      val dataset = buildDataset()
+      val xySeries = buildXYSeriesCollection()
       val chart = ChartFactory.createXYLineChart(
         chartTitle,
         xAxisLabel,
         yAxisLabel,
-        dataset,
+        xySeries,
         PlotOrientation.VERTICAL,
         true,  // legend
         true,  // tooltips
@@ -42,23 +41,31 @@ object LineScatterChart {
       new ChartPanel(chart)
     }
 
-    def buildDataset(): XYDataset = {
+    def buildXYSeriesCollection(): XYSeriesCollection = {
       val lineSeries = new XYSeries("Line Series")
       lineSeries.add(1, 2)
       lineSeries.add(3, 4)
       lineSeries.add(5, 6)
       lineSeries.add(7, 8)
+      lineSeries.add(9, 10)
+      lineSeries.add(11, 12)
+      lineSeries.add(13, 14)
+      lineSeries.add(15, 16)
 
       val scatterSeries = new XYSeries("Scatter Series")
       scatterSeries.add(2, 1)
       scatterSeries.add(4, 3)
       scatterSeries.add(6, 5)
       scatterSeries.add(8, 7)
+      scatterSeries.add(10, 9)
+      scatterSeries.add(12, 11)
+      scatterSeries.add(14, 13)
+      scatterSeries.add(16, 15)
 
-      val dataset = new XYSeriesCollection()
-      dataset.addSeries(lineSeries)
-      dataset.addSeries(scatterSeries)
-      dataset
+      val xySeries = new XYSeriesCollection()
+      xySeries.addSeries(lineSeries)
+      xySeries.addSeries(scatterSeries)
+      xySeries
     }
   }
 }
