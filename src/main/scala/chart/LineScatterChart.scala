@@ -28,9 +28,9 @@ object LineScatterChart {
         yAxisLabel,
         dataset,
         PlotOrientation.VERTICAL,
-        true,
-        true, 
-        false)
+        true,  // legend
+        true,  // tooltips
+        false) // urls
       val plot = chart.getXYPlot()
       val renderer = new XYLineAndShapeRenderer()
       renderer.setSeriesLinesVisible(lineChart, true)
