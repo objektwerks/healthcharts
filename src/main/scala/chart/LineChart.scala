@@ -15,8 +15,8 @@ object LineChart {
   private object Chart {
     def build(): ChartPanel = {
       val chartTitle = "Line Chart"
-      val xAxisLabel = "X"
-      val yAxisLabel = "Y"
+      val xAxisLabel = "Domain"
+      val yAxisLabel = "Range"
       val dataset = buildDataset()
       val chart = ChartFactory.createXYLineChart(
         chartTitle,
