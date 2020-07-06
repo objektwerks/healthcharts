@@ -8,13 +8,17 @@ import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer
 import org.jfree.data.xy.XYDataset
 import org.jfree.data.xy.XYSeries
 import org.jfree.data.xy.XYSeriesCollection
+import org.jfree.chart.plot.PlotOrientation
 
 object LineScatterChart {
+  private val lineChart = 0
+  private val scatterChart = 1
+
   def apply(): ChartPanel = Chart.build()
 
   private object Chart {
     def build(): ChartPanel = {
-      val chartTitle = "Line Chart"
+      val chartTitle = "Line-Scatter Chart"
       val xAxisLabel = "X"
       val yAxisLabel = "Y"
       val dataset = buildDataset()
@@ -22,41 +26,38 @@ object LineScatterChart {
         chartTitle,
         xAxisLabel,
         yAxisLabel,
-        dataset)
+        dataset,
+        PlotOrientation.VERTICAL,
+        true,
+        true, 
+        false)
       val plot = chart.getXYPlot()
       val renderer = new XYLineAndShapeRenderer()
-      plot.setRenderer(renderer)
+      renderer.setSeriesLinesVisible(lineChart, true)
+      renderer.setSeriesShapesVisible(lineChart, true)
+      renderer.setSeriesLinesVisible(scatterChart, false)
+      renderer.setSeriesShapesVisible(scatterChart, true)
       plot.setBackgroundPaint(Color.DARK_GRAY)
+      plot.setRenderer(renderer)
       new ChartPanel(chart)
     }
 
     def buildDataset(): XYDataset = {
+      val lineSeries = new XYSeries("Line Series")
+      lineSeries.add(1, 2)
+      lineSeries.add(3, 4)
+      lineSeries.add(5, 6)
+      lineSeries.add(7, 8)
+
+      val scatterSeries = new XYSeries("Scatter Series")
+      scatterSeries.add(2, 1)
+      scatterSeries.add(4, 3)
+      scatterSeries.add(6, 5)
+      scatterSeries.add(8, 7)
+
       val dataset = new XYSeriesCollection()
-      val series1 = new XYSeries("1")
-      val series2 = new XYSeries("2")
-      val series3 = new XYSeries("3")
-    
-      series1.add(1.0, 2.0)
-      series1.add(2.0, 3.0)
-      series1.add(3.0, 2.5)
-      series1.add(3.5, 2.8)
-      series1.add(4.2, 6.0)
-    
-      series2.add(2.0, 1.0)
-      series2.add(2.5, 2.4)
-      series2.add(3.2, 1.2)
-      series2.add(3.9, 2.8)
-      series2.add(4.6, 3.0)
-    
-      series3.add(1.2, 4.0)
-      series3.add(2.5, 4.4)
-      series3.add(3.8, 4.2)
-      series3.add(4.3, 3.8)
-      series3.add(4.5, 4.0)
-    
-      dataset.addSeries(series1)
-      dataset.addSeries(series2)
-      dataset.addSeries(series3)
+      dataset.addSeries(lineSeries)
+      dataset.addSeries(scatterSeries)
       dataset
     }
   }
