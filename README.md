@@ -21,4 +21,4 @@ sbt clean test
 
 Run
 ---
-sbt clean compile run
+sbt run

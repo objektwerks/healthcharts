@@ -9,13 +9,13 @@ import org.jfree.data.xy.XYSeries
 import org.jfree.data.xy.XYSeriesCollection
 import org.jfree.chart.plot.PlotOrientation
 
-object LineScatterChart {
+object Chart {
   private val lineChart = 0
   private val scatterChart = 1
 
-  def apply(): ChartPanel = Chart.build()
+  def apply(): ChartPanel = Builder.build()
 
-  private object Chart {
+  private object Builder {
     def build(): ChartPanel = {
       val chartTitle = "Line-Scatter Chart"
       val xAxisLabel = "Domain"
