@@ -1,6 +1,6 @@
-Medical Chart
--------------
->Medical chart.
+Glucose-Meds Chart
+------------------
+>Glucose-Meds medical chart.
 
 Model
 -----
@@ -14,7 +14,7 @@ Model
 Chart
 -----
 1. X-Axis : DateTime - 72-hour range with 5-hour splits, bounded by min/max datetimes, displayed in 'd,hh:mm a' format.
-2. Y-Axis : Measurement - Line (Glucose), Scatter(Med)
+2. Y-Axis : Measurement - Compound or Overlaid Line (Glucose) and Scatter(Med) charts.
 
 Test
 ----
