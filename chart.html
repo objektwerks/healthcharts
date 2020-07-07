@@ -1,0 +1,75 @@
+  <html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('datetime', 'DayTime');
+        data.addColumn('number', 'Glucose');
+        data.addColumn('number', 'Med A');
+        data.addColumn('number', 'Med B');
+        data.addColumn('number', 'Med C');
+
+        var beginDate = new Date()
+        var year = beginDate.getFullYear()
+        var month = beginDate.getMonth() + 1
+        var day = beginDate.getDate()
+
+        data.addRows([
+          [new Date(year, month, day, 22, 30), 70, 10, 30, 50],
+
+          [new Date(year, month, day + 1, 2, 30), 75, 10, 30, 50],
+          [new Date(year, month, day + 1, 6, 30), 80, 10, 30, 50],
+          [new Date(year, month, day + 1, 10, 30), 85, 10, 30, 50],
+          [new Date(year, month, day + 1, 22, 30), 70, 10, 30, 50],
+
+          [new Date(year, month, day + 2, 2, 30), 75, 10, 30, 50],
+          [new Date(year, month, day + 2, 6, 30), 80, 10, 30, 50],
+          [new Date(year, month, day + 2, 10, 30), 85, 10, 30, 50],
+          [new Date(year, month, day + 2, 22, 30), 70, 10, 30, 50],
+
+          [new Date(year, month, day + 3, 2, 30), 75, 10, 30, 50],
+          [new Date(year, month, day + 3, 6, 30), 80, 10, 30, 50],
+          [new Date(year, month, day + 3, 10, 30), 85, 10, 30, 50]
+        ]);
+
+        var endDate = new Date();
+        endDate.setDate(beginDate.getDate() + 3);
+        var formattedBeginDate = year + '-' + month + '-' + day;
+        var formattedEndDate = endDate.getFullYear() + '-' + (endDate.getMonth() + 1) + '-' + endDate.getDate();
+
+        var tickmarks = [];
+        for (var i = 0; i < data.getNumberOfRows(); i++) {
+          tickmarks.push(data.getValue(i, 0));
+        }
+
+        var options = {
+          title: 'Glucose Meds Chart: [ ' + formattedBeginDate + ':10:30PM - ' + formattedEndDate + ':10:30AM ]',
+          curveType: 'function',
+          lineWidth: 0,
+          pointsVisible: 'true',
+          pointSize: 13,
+          pointShape: 'diamond',
+          width: 1600,
+          height: 800,
+          series: {
+            0: { targetAxisIndex: 0, lineWidth: 3, pointShape: 'circle' }
+          },
+          vAxes: {
+            0: { title: 'Measurements', ticks: [0, 50, 100, 150, 200, 250, 300] }
+          },
+          hAxis: { title: 'Day,Time', ticks: tickmarks, format: 'd,hh:mm a' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('linechart'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="linechart"></div>
+  </body>
+</html>
