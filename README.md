@@ -7,6 +7,8 @@ Model
 1. Glucose: datetime, level (1)
 2. Med: datetime, type (2), dosage (3)
 
+Notes
+-----
 1. 0 - 300, 70 - 100 is normal
 2. insulin, steroids
 3. 1 - 100 
