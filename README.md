@@ -4,18 +4,17 @@ Medical Chart
 
 Model
 -----
-* Glucose: datetime, level *
-* Med: datetime, type **, dosage ***
+1. Glucose: datetime, level (1)
+2. Med: datetime, type (2), dosage (3)
 
-* 0 - 300, 70 - 100 is normal
-** insulin, steroids
-*** 1 - 100 
+1. 0 - 300, 70 - 100 is normal
+2. insulin, steroids
+3. 1 - 100 
 
 Chart
 -----
-1. Period: 72 hours ( 14.4 * 5-hour splits as 'ha' )
-2. X-Axis: Date Range bounded by Period min and max datetimes.
-3. Y-Axis: Line (Glucose), Scatter(Med)
+1. X-Axis : DateTime - 72-hour range with 5-hour splits, bounded by min/max datetimes, displayed in 'd,hh:mm a' format.
+2. Y-Axis : Measurement - Line (Glucose), Scatter(Med)
 
 Test
 ----
