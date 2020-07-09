@@ -27,6 +27,10 @@ Run
 ---
 sbt run
 
+Package
+-------
+1. sbt clean test universal:packageBin
+
 License
 -------
 >Copyright (c) 2020 Mike Funk

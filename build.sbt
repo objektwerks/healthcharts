@@ -1,3 +1,5 @@
+enablePlugins(JlinkPlugin)
+
 name := "medcharts"
 organization := "objektwerks"
 version := "0.1-SNAPSHOT"
@@ -8,3 +10,7 @@ libraryDependencies ++= {
     "org.scalatest" %% "scalatest" % "3.2.0" % Test
   )
 }
+jlinkModules := {
+  jlinkModules.value :+ "jdk.unsupported"
+}
+jlinkIgnoreMissingDependency := JlinkIgnore.everything
