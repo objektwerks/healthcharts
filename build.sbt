@@ -1,4 +1,4 @@
-name := "medical.chart"
+name := "medcharts"
 organization := "objektwerks"
 version := "0.1-SNAPSHOT"
 scalaVersion := "2.13.2"
