@@ -1,4 +1,4 @@
-package chart
+package objektwerks.chart
 
 import java.awt.Color
 
