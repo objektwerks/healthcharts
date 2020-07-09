@@ -1,6 +1,7 @@
-Glucose-Meds Chart
-------------------
->Glucose-Meds medical chart.
+MedCharts
+---------
+>Medical charts:
+1. Glucose-Meds
 
 Model
 -----
@@ -25,3 +26,9 @@ sbt clean test
 Run
 ---
 sbt run
+
+License
+-------
+>Copyright (c) 2020 Mike Funk
+
+>Published under GPL.v3
