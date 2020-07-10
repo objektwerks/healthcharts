@@ -3,8 +3,6 @@ package objektwerks.chart
 import org.jfree.data.time.Minute
 import scala.collection.immutable.SortedMap
 
-final case class Glucose(datetime: Minute, level: Int)
-
 object MedType extends Enumeration {
   val Insulin = Value(1, "Insulin")
   val Steroid = Value(2, "Steroid")
@@ -13,3 +11,5 @@ object MedType extends Enumeration {
 }
 
 final case class Med(datetime: Minute, medType: MedType.Value, dosage: Int)
+
+final case class Glucose(datetime: Minute, level: Int)
