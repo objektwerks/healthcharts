@@ -1,11 +1,15 @@
 package objektwerks.chart
 
-import java.time.LocalDateTime
+import org.jfree.data.time.Minute
+import scala.collection.immutable.SortedMap
 
-final case class Glucose(datetime: LocalDateTime, level: Int)
+final case class Glucose(datetime: Minute, level: Int)
 
-sealed trait MedType extends Product with Serializable
-final case object Insulin extends MedType
-final case object Steroid extends MedType
+object MedType extends Enumeration {
+  val Insulin = Value(1, "Insulin")
+  val Steroid = Value(2, "Steroid")
+  val map = SortedMap[Int, Value](Insulin.id -> Insulin, Steroid.id -> Steroid)
+  def validate(medType: MedType.Value): Boolean = values.contains(medType)
+}
 
-final case class Med(datetime: LocalDateTime, typeof: MedType, dosage: Int)
+final case class Med(datetime: Minute, medType: MedType.Value, dosage: Int)
