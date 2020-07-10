@@ -5,14 +5,25 @@ MedCharts
 
 Model
 -----
-1. Glucose: datetime, level (1)
-2. Med: datetime, type (2), dosage (3)
+1. Med: datetime, typeof (1), dosage (2)
+2. Glucose: datetime, level (3)
 
 Notes
 -----
-1. 0 - 300, 70 - 100 is normal
-2. insulin, steroids
-3. 1 - 100 
+1. insulin, steroids
+2. 1 - 100 
+3. 0 - 300, 70 - 100 is normal
+
+Med CSV
+-------
+1. datetime - yyyy-MM-ddThh:mm:ss ( 2020-07-04T10:04s:00 )
+2. typeof - 1, 2
+3. dosage - nnn
+
+Glucose CSV
+-----------
+1. datetime - yyyy-MM-ddThh:mm:ss ( 2020-07-04T10:04s:00 )
+2. level - nnn
 
 Chart
 -----

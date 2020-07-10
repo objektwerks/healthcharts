@@ -10,6 +10,6 @@ object MedType extends Enumeration {
   def validate(medType: MedType.Value): Boolean = values.contains(medType)
 }
 
-final case class Med(datetime: Minute, medType: MedType.Value, dosage: Int)
+final case class Med(datetime: Minute, typeof: MedType.Value, dosage: Int)
 
 final case class Glucose(datetime: Minute, level: Int)
