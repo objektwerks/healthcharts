@@ -17,13 +17,13 @@ Notes
 Med CSV
 -------
 1. datetime - yyyy-MM-ddThh:mm:ss ( 2020-07-04T10:04s:00 )
-2. typeof - 1, 2
-3. dosage - nnn
+2. typeof - 1 (Insultion), 2 (Steroid)
+3. dosage - nnn (1-100)
 
 Glucose CSV
 -----------
 1. datetime - yyyy-MM-ddThh:mm:ss ( 2020-07-04T10:04s:00 )
-2. level - nnn
+2. level - nnn (0-300)
 
 Chart
 -----
