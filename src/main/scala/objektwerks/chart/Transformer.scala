@@ -4,8 +4,8 @@ import java.time.LocalDateTime
 
 import org.jfree.data.time.Minute
 
-import scala.io.{Codec, Source}
 import scala.collection.mutable
+import scala.io.{Codec, Source}
 import scala.util.Try
 
 object Transformer {
@@ -38,11 +38,11 @@ object Transformer {
   def datetimeToMinute(datetime: String): Minute = {
     val localDateTime = LocalDateTime.parse(datetime)
     new Minute(
-        localDateTime.getMinute(),
-        localDateTime.getHour(),
-        localDateTime.getDayOfMonth(),
-        localDateTime.getMinute(),
-        localDateTime.getYear()
+      localDateTime.getMinute(),
+      localDateTime.getHour(),
+      localDateTime.getDayOfMonth(),
+      localDateTime.getMinute(),
+      localDateTime.getYear()
     )
   }
 }
