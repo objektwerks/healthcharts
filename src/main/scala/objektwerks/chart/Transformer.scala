@@ -18,7 +18,11 @@ object Transformer {
       for (line <- source.getLines) {
         println(line)
         val columns = line.split(",").map(_.trim)
-        buffer.addOne( Glucose( datetimeToMinute(columns(0)), columns(1).toInt) )
+        val glucose = Glucose(
+          datetime = datetimeToMinute(columns(0)),
+          level = columns(1).toInt
+        )
+        buffer.addOne( glucose )
       }
       buffer.toList
     }
@@ -30,7 +34,12 @@ object Transformer {
       for (line <- source.getLines) {
         println(line)
         val columns = line.split(",").map(_.trim)
-        buffer.addOne( Med( datetimeToMinute(columns(0)), MedType.map(columns(1).toInt), columns(2).toInt) )
+        val med = Med(
+          datetime = datetimeToMinute(columns(0)),
+          typeof = MedType.map(columns(1).toInt),
+          dosage = columns(2).toInt
+        )
+        buffer.addOne( med )
       }
       buffer.toList
     }
