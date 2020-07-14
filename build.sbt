@@ -7,7 +7,6 @@ scalaVersion := "2.13.2"
 libraryDependencies ++= {
   Seq(
     "org.jfree" % "jfreechart" % "1.5.0",
-    "com.nrinaudo" %% "kantan.csv" % "0.6.1",
     "org.scalatest" %% "scalatest" % "3.2.0" % Test
   )
 }

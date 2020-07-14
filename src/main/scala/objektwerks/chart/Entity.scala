@@ -1,6 +1,7 @@
 package objektwerks.chart
 
 import org.jfree.data.time.Minute
+
 import scala.collection.immutable.SortedMap
 
 object MedType extends Enumeration {
