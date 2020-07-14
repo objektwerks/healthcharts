@@ -50,7 +50,7 @@ object Transformer {
       localDateTime.getMinute(),
       localDateTime.getHour(),
       localDateTime.getDayOfMonth(),
-      localDateTime.getMinute(),
+      localDateTime.getMonthValue(),
       localDateTime.getYear()
     )
   }
