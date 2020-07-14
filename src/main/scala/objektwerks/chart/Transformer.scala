@@ -11,7 +11,7 @@ import scala.util.Try
 object Transformer {
   val utf8 = Codec.UTF8.name
 
-  def csvToGlucose(path: String): Try[List[Glucose]] = {
+  def csvToGlucose(path: String): Try[List[Glucose]] =
     Try {
       val buffer = mutable.ArrayBuffer[Glucose]()
       val source = Source.fromFile(path, utf8)
@@ -22,9 +22,8 @@ object Transformer {
       }
       buffer.toList
     }
-  }
 
-  def csvToMeds(path: String): Try[List[Med]] = {
+  def csvToMeds(path: String): Try[List[Med]] =
     Try {
       val buffer = mutable.ArrayBuffer[Med]()
       val source = Source.fromFile(path, utf8)
@@ -35,7 +34,6 @@ object Transformer {
       }
       buffer.toList
     }
-  }
 
   def datetimeToMinute(datetime: String): Minute = {
     val localDateTime = LocalDateTime.parse(datetime)
