@@ -11,37 +11,41 @@ import scala.util.Try
 object Transformer {
   val utf8 = Codec.UTF8.name
 
-  def csvToGlucose(path: String): Try[List[Glucose]] =
+  def csvToGlucose(path: String): Try[Array[Glucose]] =
     Try {
       val buffer = mutable.ArrayBuffer[Glucose]()
       val source = Source.fromFile(path, utf8)
       for (line <- source.getLines) {
-        println(line)
         val columns = line.split(",").map(_.trim)
-        val glucose = Glucose(
-          datetime = datetimeToMinute(columns(0)),
-          level = columns(1).toInt
-        )
-        buffer.addOne( glucose )
+        if (columns.length == 2) {
+          val glucose = Glucose(
+            datetime = datetimeToMinute(columns(0)),
+            level = columns(1).toInt
+          )
+          buffer.addOne( glucose )
+          println(line)
+        } else println(s"error: $line")
       }
-      buffer.toList
+      buffer.toArray
     }
 
-  def csvToMeds(path: String): Try[List[Med]] =
+  def csvToMeds(path: String): Try[Array[Med]] =
     Try {
       val buffer = mutable.ArrayBuffer[Med]()
       val source = Source.fromFile(path, utf8)
       for (line <- source.getLines) {
-        println(line)
         val columns = line.split(",").map(_.trim)
-        val med = Med(
-          datetime = datetimeToMinute(columns(0)),
-          typeof = MedType.map(columns(1).toInt),
-          dosage = columns(2).toInt
-        )
-        buffer.addOne( med )
+        if (columns.length == 3) {
+          val med = Med(
+            datetime = datetimeToMinute(columns(0)),
+            typeof = MedType.map(columns(1).toInt),
+            dosage = columns(2).toInt
+          )
+          buffer.addOne( med )
+          println(line)
+        } else println(s"error: $line")
       }
-      buffer.toList
+      buffer.toArray
     }
 
   def datetimeToMinute(datetime: String): Minute = {
