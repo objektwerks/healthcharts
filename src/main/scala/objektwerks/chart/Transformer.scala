@@ -22,7 +22,7 @@ object Transformer {
             datetime = datetimeToMinute(columns(0)),
             level = columns(1).toInt
           )
-          buffer.addOne( glucose )
+          buffer += glucose
           println(line)
         } else println(s"error: $line")
       }
@@ -41,7 +41,7 @@ object Transformer {
             typeof = MedType.map(columns(1).toInt),
             dosage = columns(2).toInt
           )
-          buffer.addOne( med )
+          buffer += med
           println(line)
         } else println(s"error: $line")
       }
