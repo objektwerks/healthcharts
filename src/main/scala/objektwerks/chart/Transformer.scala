@@ -3,14 +3,12 @@ package objektwerks.chart
 import java.time.LocalDateTime
 
 import org.jfree.data.time.Minute
-import org.slf4j.LoggerFactory
 
 import scala.collection.mutable
 import scala.io.{Codec, Source}
 import scala.util.Try
 
 object Transformer {
-  val logger = LoggerFactory.getLogger(this.getClass)
   val utf8 = Codec.UTF8.name
 
   def csvToGlucose(path: String): Try[(Array[Glucose], Array[InvalidLine])] =
@@ -18,7 +16,6 @@ object Transformer {
       val lines = mutable.ArrayBuffer[Glucose]()
       val errors = mutable.ArrayBuffer[InvalidLine]()
       val source = Source.fromFile(path, utf8)
-      logger.info(s"transforming: $path")
       for (line <- source.getLines) {
         val columns = line.split(",").map(_.trim)
         if (columns.length == 2) {
@@ -27,11 +24,7 @@ object Transformer {
             level = columns(1).toInt
           )
           lines += glucose
-          logger.info(line)
-        } else {
-          errors += InvalidLine(line)
-          logger.error(s"error: $line")
-        }
+        } else errors += InvalidLine(line)
       }
       (lines.toArray, errors.toArray)
     }
@@ -41,7 +34,6 @@ object Transformer {
       val lines = mutable.ArrayBuffer[Med]()
       val errors = mutable.ArrayBuffer[InvalidLine]()
       val source = Source.fromFile(path, utf8)
-      logger.info(s"transforming: $path")
       for (line <- source.getLines) {
         val columns = line.split(",").map(_.trim)
         if (columns.length == 3) {
@@ -51,11 +43,7 @@ object Transformer {
             dosage = columns(2).toInt
           )
           lines += med
-          logger.info(line)
-        } else {
-          errors += InvalidLine(line)
-          logger.error(s"error: $line")
-        }
+        } else errors += InvalidLine(line)
       }
       (lines.toArray, errors.toArray)
     }
