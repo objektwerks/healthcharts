@@ -4,6 +4,8 @@ import org.jfree.data.time.Minute
 
 import scala.collection.immutable.SortedMap
 
+final case class InvalidLine(line: String)
+
 object MedType extends Enumeration {
   val Insulin = Value(1, "Insulin")
   val Steroid = Value(2, "Steroid")

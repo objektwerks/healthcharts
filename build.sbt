@@ -7,6 +7,8 @@ scalaVersion := "2.13.2"
 libraryDependencies ++= {
   Seq(
     "org.jfree" % "jfreechart" % "1.5.0",
+    "com.typesafe" % "config" % "1.4.0",
+    "ch.qos.logback" % "logback-classic" % "1.2.3",
     "org.scalatest" %% "scalatest" % "3.2.0" % Test
   )
 }

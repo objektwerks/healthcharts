@@ -3,19 +3,22 @@ package objektwerks.chart
 import java.time.LocalDateTime
 
 import org.jfree.data.time.Minute
+import org.slf4j.LoggerFactory
 
 import scala.collection.mutable
 import scala.io.{Codec, Source}
 import scala.util.Try
 
 object Transformer {
+  val logger = LoggerFactory.getLogger(Transformer.getClass)
   val utf8 = Codec.UTF8.name
 
-  def csvToGlucose(path: String): Try[Array[Glucose]] =
+  def csvToGlucose(path: String): Try[(Array[Glucose], Array[InvalidLine])] =
     Try {
-      val buffer = mutable.ArrayBuffer[Glucose]()
+      val lines = mutable.ArrayBuffer[Glucose]()
+      val errors = mutable.ArrayBuffer[InvalidLine]()
       val source = Source.fromFile(path, utf8)
-      println(s"transforming: $path")
+      logger.info(s"transforming: $path")
       for (line <- source.getLines) {
         val columns = line.split(",").map(_.trim)
         if (columns.length == 2) {
@@ -23,18 +26,22 @@ object Transformer {
             datetime = datetimeToMinute(columns(0)),
             level = columns(1).toInt
           )
-          buffer += glucose
-          println(line)
-        } else println(s"error: $line")
+          lines += glucose
+          logger.info(line)
+        } else {
+          errors += InvalidLine(line)
+          logger.error(s"error: $line")
+        }
       }
-      buffer.toArray
+      (lines.toArray, errors.toArray)
     }
 
-  def csvToMeds(path: String): Try[Array[Med]] =
+  def csvToMeds(path: String): Try[(Array[Med], Array[InvalidLine])] =
     Try {
-      val buffer = mutable.ArrayBuffer[Med]()
+      val lines = mutable.ArrayBuffer[Med]()
+      val errors = mutable.ArrayBuffer[InvalidLine]()
       val source = Source.fromFile(path, utf8)
-      println(s"transforming: $path")
+      logger.info(s"transforming: $path")
       for (line <- source.getLines) {
         val columns = line.split(",").map(_.trim)
         if (columns.length == 3) {
@@ -43,11 +50,14 @@ object Transformer {
             typeof = MedType.map(columns(1).toInt),
             dosage = columns(2).toInt
           )
-          buffer += med
-          println(line)
-        } else println(s"error: $line")
+          lines += med
+          logger.info(line)
+        } else {
+          errors += InvalidLine(line)
+          logger.error(s"error: $line")
+        }
       }
-      buffer.toArray
+      (lines.toArray, errors.toArray)
     }
 
   def datetimeToMinute(datetime: String): Minute = {
