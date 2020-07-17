@@ -15,6 +15,7 @@ object Transformer {
     Try {
       val buffer = mutable.ArrayBuffer[Glucose]()
       val source = Source.fromFile(path, utf8)
+      println(s"transforming: $path")
       for (line <- source.getLines) {
         val columns = line.split(",").map(_.trim)
         if (columns.length == 2) {
@@ -33,6 +34,7 @@ object Transformer {
     Try {
       val buffer = mutable.ArrayBuffer[Med]()
       val source = Source.fromFile(path, utf8)
+      println(s"transforming: $path")
       for (line <- source.getLines) {
         val columns = line.split(",").map(_.trim)
         if (columns.length == 3) {
