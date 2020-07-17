@@ -10,7 +10,7 @@ import scala.io.{Codec, Source}
 import scala.util.Try
 
 object Transformer {
-  val logger = LoggerFactory.getLogger(Transformer.getClass)
+  val logger = LoggerFactory.getLogger(this.getClass)
   val utf8 = Codec.UTF8.name
 
   def csvToGlucose(path: String): Try[(Array[Glucose], Array[InvalidLine])] =
