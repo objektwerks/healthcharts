@@ -23,12 +23,12 @@ private object Common {
 final case class InvalidLine(line: String, error: Throwable)
 
 object MedType extends Enumeration {
-  val Insulin = Value(1, "Insulin")
-  val Steroid = Value(2, "Steroid")
-  val idToMedType = SortedMap[Int, Value](Insulin.id -> Insulin, Steroid.id -> Steroid)
+  val insulin = Value(1, "insulin")
+  val steroid = Value(2, "steroid")
+  val idToMedType = SortedMap[Int, Value](insulin.id -> insulin, steroid.id -> steroid)
 }
 
-final case class Med(datetime: Minute, medType: MedType.Value, dosage: Int)
+final case class Med(datetime: Minute, medtype: MedType.Value, dosage: Int)
 
 object Med {
   import Common._
