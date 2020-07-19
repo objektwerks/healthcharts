@@ -1,18 +1,21 @@
 package objektwerks.chart
 
-import scala.collection.mutable
+import scala.collection.mutable.ArrayBuilder
 import scala.io.{Codec, Source}
 import scala.util.Try
+
+final case class InvalidLine(line: String, error: Throwable)
 
 object Transformer {
   private val utf8 = Codec.UTF8.name
 
-  def csvToGlucose(path: String): Try[(Array[Glucose], Array[InvalidLine])] =
+  def csvToGlucose(path: String, delimiter: String = ","): Try[(Array[Glucose], Array[InvalidLine])] =
     Try {
-      val lines = mutable.ArrayBuilder.make[Glucose]
-      val errors = mutable.ArrayBuilder.make[InvalidLine]
-      for (line <- csvToLines(path)) {
-        Glucose.validate(line) match {
+      val lines = ArrayBuilder.make[Glucose]
+      val errors = ArrayBuilder.make[InvalidLine]
+      for (line <- Source.fromFile(path, utf8).getLines) {
+        val columns = line.split(delimiter).map(_.trim)
+        Glucose.validate(columns) match {
           case Left(error) => errors += InvalidLine(line, error)
           case Right(glucose) => lines += glucose
         }
@@ -20,18 +23,17 @@ object Transformer {
       (lines.result(), errors.result())
     }
 
-  def csvToMeds(path: String): Try[(Array[Med], Array[InvalidLine])] =
+  def csvToMeds(path: String, delimiter: String = ","): Try[(Array[Med], Array[InvalidLine])] =
     Try {
-      val lines = mutable.ArrayBuilder.make[Med]
-      val errors = mutable.ArrayBuilder.make[InvalidLine]
-      for (line <- csvToLines(path)) {
-        Med.validate(line) match {
+      val lines = ArrayBuilder.make[Med]
+      val errors = ArrayBuilder.make[InvalidLine]
+      for (line <- Source.fromFile(path, utf8).getLines) {
+        val columns = line.split(delimiter).map(_.trim)
+        Med.validate(columns) match {
           case Left(error) => errors += InvalidLine(line, error)
           case Right(med) => lines += med
         }
       }
       (lines.result(), errors.result())
     }
-
-  private def csvToLines(path: String): Iterator[String] = Source.fromFile(path, utf8).getLines
 }

@@ -7,7 +7,7 @@ import org.jfree.data.time.Minute
 import scala.collection.immutable.SortedMap
 import scala.util.Try
 
-private object Common {
+private object Converter {
   def datetimeToMinute(datetime: String): Minute = {
     val localDateTime = LocalDateTime.parse(datetime)
     new Minute(
@@ -18,15 +18,7 @@ private object Common {
       localDateTime.getYear()
     )
   }
-
-  def isLineValid(line: String, columnCount: Int): Array[String] = {
-    val columns = line.split(",").map(_.trim)
-    require(columns.length == columnCount, s"columns length != $columnCount")
-    columns
-  }
 }
-
-final case class InvalidLine(line: String, error: Throwable)
 
 object MedType extends Enumeration {
   val insulin = Value(1, "insulin")
@@ -37,32 +29,36 @@ object MedType extends Enumeration {
 final case class Med(datetime: Minute, medtype: MedType.Value, dosage: Int)
 
 object Med {
-  import Common._
+  import Converter._
   import MedType._
 
-  def validate(line: String): Either[Throwable, Med] =
+  val columnCount = 3
+
+  def validate(columns: Array[String]): Either[Throwable, Med] =
     Try {
-      val columns = isLineValid(line, 3)
+      require(columns.length == columnCount, s"column count != $columnCount")
 
       val datetime = datetimeToMinute(columns(0))
 
-      val medType = idToMedType(columns(1).toInt)
+      val medtype = idToMedType(columns(1).toInt)
 
       val dosage = columns(2).toInt
       require(dosage >= 1 && dosage <= 100)
 
-      Med(datetime, medType, dosage)
+      Med(datetime, medtype, dosage)
     }.toEither
 }
 
 final case class Glucose(datetime: Minute, level: Int)
 
 object Glucose {
-  import Common._
+  import Converter._
 
-  def validate(line: String): Either[Throwable, Glucose] =
+  val columnCount = 2
+
+  def validate(columns: Array[String]): Either[Throwable, Glucose] =
     Try {
-      val columns = isLineValid(line, 2)
+      require(columns.length == columnCount, s"column count != $columnCount")
 
       val datetime = datetimeToMinute(columns(0))
 
