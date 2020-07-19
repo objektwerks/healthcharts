@@ -24,7 +24,7 @@ object GlucoseMedsChart {
 
   private object Builder {
     def build(): ChartPanel = {
-      val chartTitle = "Line-Scatter Chart"
+      val chartTitle = "Glucose-Meds Chart"
       val xAxisLabel = "Domain"
       val yAxisLabel = "Range"
       val xySeries = buildXYSeriesCollection()
