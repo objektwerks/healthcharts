@@ -25,35 +25,44 @@ final case class InvalidLine(line: String, error: Throwable)
 object MedType extends Enumeration {
   val Insulin = Value(1, "Insulin")
   val Steroid = Value(2, "Steroid")
-  val map = SortedMap[Int, Value](Insulin.id -> Insulin, Steroid.id -> Steroid)
-  def validate(medType: MedType.Value): Boolean = values.contains(medType)
+  val idToMedType = SortedMap[Int, Value](Insulin.id -> Insulin, Steroid.id -> Steroid)
 }
 
-final case class Med(datetime: Minute, typeof: MedType.Value, dosage: Int)
+final case class Med(datetime: Minute, medType: MedType.Value, dosage: Int)
 
 object Med {
   import Common._
+  import MedType._
 
-  def validate(columns: Array[String]): Either[Throwable, Med] = Try {
-    require(columns.length == 3, "columns length != 3")
-    val datetime = datetimeToMinute(columns(0))
-    val typeof = MedType.map(columns(1).toInt)
-    val dosage = columns(2).toInt
-    require(dosage >= 1 && dosage <= 100)
-    Med(datetime, typeof, dosage)
-  }.toEither
+  def validate(columns: Array[String]): Either[Throwable, Med] =
+    Try {
+      require(columns.length == 3, "columns length != 3")
+
+      val datetime = datetimeToMinute(columns(0))
+
+      val medType = idToMedType(columns(1).toInt)
+
+      val dosage = columns(2).toInt
+      require(dosage >= 1 && dosage <= 100)
+
+      Med(datetime, medType, dosage)
+    }.toEither
 }
 
 final case class Glucose(datetime: Minute, level: Int)
 
 object Glucose {
   import Common._
-  
-  def validate(columns: Array[String]): Either[Throwable, Glucose] = Try {
-    require(columns.length == 2, "columns length != 2")
-    val datetime = datetimeToMinute(columns(0))
-    val level = columns(1).toInt
-    require(level >= 0 && level <= 300)
-    Glucose(datetime, level)
-  }.toEither
+
+  def validate(columns: Array[String]): Either[Throwable, Glucose] =
+    Try {
+      require(columns.length == 2, "columns length != 2")
+
+      val datetime = datetimeToMinute(columns(0))
+
+      val level = columns(1).toInt
+      require(level >= 0 && level <= 300)
+
+      Glucose(datetime, level)
+    }.toEither
 }
