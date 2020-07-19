@@ -7,7 +7,7 @@ import org.jfree.data.time.Minute
 import scala.collection.immutable.SortedMap
 import scala.util.Try
 
-trait Common {
+private object Common {
   def datetimeToMinute(datetime: String): Minute = {
     val localDateTime = LocalDateTime.parse(datetime)
     new Minute(
@@ -31,7 +31,9 @@ object MedType extends Enumeration {
 
 final case class Med(datetime: Minute, typeof: MedType.Value, dosage: Int)
 
-object Med extends Common {
+object Med {
+  import Common._
+
   def validate(columns: Array[String]): Either[Throwable, Med] = Try {
     require(columns.length == 3, "columns length != 3")
     val datetime = datetimeToMinute(columns(0))
@@ -44,7 +46,9 @@ object Med extends Common {
 
 final case class Glucose(datetime: Minute, level: Int)
 
-object Glucose extends Common {
+object Glucose {
+  import Common._
+  
   def validate(columns: Array[String]): Either[Throwable, Glucose] = Try {
     require(columns.length == 2, "columns length != 2")
     val datetime = datetimeToMinute(columns(0))
