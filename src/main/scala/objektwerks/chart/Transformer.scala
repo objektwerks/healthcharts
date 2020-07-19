@@ -12,8 +12,7 @@ object Transformer {
       val lines = mutable.ArrayBuilder.make[Glucose]
       val errors = mutable.ArrayBuilder.make[InvalidLine]
       for (line <- csvToLines(path)) {
-        val columns = line.split(",").map(_.trim)
-        Glucose.validate(columns) match {
+        Glucose.validate(line) match {
           case Left(error) => errors += InvalidLine(line, error)
           case Right(glucose) => lines += glucose
         }
@@ -26,8 +25,7 @@ object Transformer {
       val lines = mutable.ArrayBuilder.make[Med]
       val errors = mutable.ArrayBuilder.make[InvalidLine]
       for (line <- csvToLines(path)) {
-        val columns = line.split(",").map(_.trim)
-        Med.validate(columns) match {
+        Med.validate(line) match {
           case Left(error) => errors += InvalidLine(line, error)
           case Right(med) => lines += med
         }

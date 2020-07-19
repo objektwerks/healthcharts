@@ -18,6 +18,12 @@ private object Common {
       localDateTime.getYear()
     )
   }
+
+  def isLineValid(line: String, columnCount: Int): Array[String] = {
+    val columns = line.split(",").map(_.trim)
+    require(columns.length == columnCount, s"columns length != $columnCount")
+    columns
+  }
 }
 
 final case class InvalidLine(line: String, error: Throwable)
@@ -34,9 +40,9 @@ object Med {
   import Common._
   import MedType._
 
-  def validate(columns: Array[String]): Either[Throwable, Med] =
+  def validate(line: String): Either[Throwable, Med] =
     Try {
-      require(columns.length == 3, "columns length != 3")
+      val columns = isLineValid(line, 3)
 
       val datetime = datetimeToMinute(columns(0))
 
@@ -54,9 +60,9 @@ final case class Glucose(datetime: Minute, level: Int)
 object Glucose {
   import Common._
 
-  def validate(columns: Array[String]): Either[Throwable, Glucose] =
+  def validate(line: String): Either[Throwable, Glucose] =
     Try {
-      require(columns.length == 2, "columns length != 2")
+      val columns = isLineValid(line, 2)
 
       val datetime = datetimeToMinute(columns(0))
 
