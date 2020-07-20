@@ -34,7 +34,7 @@ object Glucose {
       val datetime = datetimeToMinute(columns(0))
 
       val level = columns(1).toInt
-      require(level >= 0 && level <= 300)
+      require(level >= 0 && level <= 300, s"level not >= 0 and <= 300")
 
       Glucose(datetime, level)
     }.toEither
@@ -63,7 +63,7 @@ object Med {
       val medtype = idToMedType(columns(1).toInt)
 
       val dosage = columns(2).toInt
-      require(dosage >= 1 && dosage <= 100)
+      require(dosage >= 1 && dosage <= 100, "dosage not >= 1 and <= 100")
 
       Med(datetime, medtype, dosage)
     }.toEither
