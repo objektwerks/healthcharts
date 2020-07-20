@@ -20,6 +20,26 @@ private object Converter {
   }
 }
 
+final case class Glucose(datetime: Minute, level: Int)
+
+object Glucose {
+  import Converter._
+
+  val columnCount = 2
+
+  def validate(columns: Array[String]): Either[Throwable, Glucose] =
+    Try {
+      require(columns.length == columnCount, s"column count != $columnCount")
+
+      val datetime = datetimeToMinute(columns(0))
+
+      val level = columns(1).toInt
+      require(level >= 0 && level <= 300)
+
+      Glucose(datetime, level)
+    }.toEither
+}
+
 object MedType extends Enumeration {
   val insulin = Value(1, "insulin")
   val steroid = Value(2, "steroid")
@@ -46,25 +66,5 @@ object Med {
       require(dosage >= 1 && dosage <= 100)
 
       Med(datetime, medtype, dosage)
-    }.toEither
-}
-
-final case class Glucose(datetime: Minute, level: Int)
-
-object Glucose {
-  import Converter._
-
-  val columnCount = 2
-
-  def validate(columns: Array[String]): Either[Throwable, Glucose] =
-    Try {
-      require(columns.length == columnCount, s"column count != $columnCount")
-
-      val datetime = datetimeToMinute(columns(0))
-
-      val level = columns(1).toInt
-      require(level >= 0 && level <= 300)
-
-      Glucose(datetime, level)
     }.toEither
 }
