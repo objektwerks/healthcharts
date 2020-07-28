@@ -12,6 +12,16 @@ import Transformer._
 class TransformerTest extends AnyFunSuite with Matchers {
   val logger = LoggerFactory.getLogger(this.getClass)
   
+  test("types") {
+    import scala.reflect._
+    def isTypeof[T: ClassTag](list: List[T]): ClassTag[T] = classTag[T] match {
+      case g if g === classTag[Glucose] => println(s"*** glucose: ${list.toString}"); g
+      case m if m === classTag[Med] => println(s"*** med: ${list.toString}"); m
+    }
+    isTypeof(List.empty[Glucose]) === classTag[Glucose] shouldBe true
+    isTypeof(List.empty[Med]) === classTag[Med] shouldBe true
+  }
+
   test("glucose") {
     csvToGlucoseTest("./data/glucose/glucose.txt", 23, 0)
     csvToGlucoseTest("./data/glucose/glucose-invalid.txt", 20, 3)
