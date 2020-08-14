@@ -9,12 +9,19 @@ import org.jfree.data.xy.XYSeries
 import org.jfree.data.xy.XYSeriesCollection
 import org.jfree.chart.plot.PlotOrientation
 
+final case class GlucoseMedsChart(glucose: (Array[Glucose], Array[InvalidLine]),
+                                  meds: (Array[Med], Array[InvalidLine]))
 // TODO: Refactor into overlaid chart!
 object GlucoseMedsChart {
   private val lineChart = 0
   private val scatterChart = 1
 
   def apply(): ChartPanel = Builder.build()
+
+  def apply(chart: GlucoseMedsChart): ChartPanel = {
+    println(chart)
+    Builder.build()
+  }
 
   def apply(glucose: Array[Glucose], meds: Array[Med]): ChartPanel = {
     println(glucose.toList.toString)
