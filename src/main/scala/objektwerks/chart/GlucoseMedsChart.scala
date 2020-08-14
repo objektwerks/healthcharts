@@ -23,12 +23,6 @@ object GlucoseMedsChart {
     Builder.build()
   }
 
-  def apply(glucose: Array[Glucose], meds: Array[Med]): ChartPanel = {
-    println(glucose.toList.toString)
-    println(meds.toList.toString)
-    Builder.build()
-  }
-
   private object Builder {
     def build(): ChartPanel = {
       val chartTitle = "Glucose-Meds Chart"
