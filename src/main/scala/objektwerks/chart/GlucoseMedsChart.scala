@@ -15,9 +15,8 @@ import scala.util.Failure
 
 import Transformer._
 
-// TODO: Refactor into overlaid chart!
 object GlucoseMedsChart {
-  private val logger = LoggerFactory.getLogger(GlucoseMedsChart.getClass())
+  private val logger = LoggerFactory.getLogger(GlucoseMedsChart.getClass)
   private val lineChart = 0
   private val scatterChart = 1
 
@@ -68,7 +67,7 @@ object GlucoseMedsChart {
         true,  // legend
         true,  // tooltips
         false) // urls
-      val plot = chart.getXYPlot()
+      val plot = chart.getXYPlot
       val renderer = new XYLineAndShapeRenderer()
       renderer.setSeriesLinesVisible(lineChart, true)
       renderer.setSeriesShapesVisible(lineChart, true)

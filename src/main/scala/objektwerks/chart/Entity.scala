@@ -27,7 +27,7 @@ object Glucose {
 
   val columnCount = 2
 
-  def validate(columns: Array[String]): Either[Throwable, Glucose] =
+  def validate(columns: Array[String]): Try[Glucose] =
     Try {
       require(columns.length == columnCount, s"column count != $columnCount")
 
@@ -37,7 +37,7 @@ object Glucose {
       require(level >= 0 && level <= 300, s"level not >= 0 and <= 300")
 
       Glucose(datetime, level)
-    }.toEither
+    }
 }
 
 object MedType extends Enumeration {
@@ -54,7 +54,7 @@ object Med {
 
   val columnCount = 3
 
-  def validate(columns: Array[String]): Either[Throwable, Med] =
+  def validate(columns: Array[String]): Try[Med] =
     Try {
       require(columns.length == columnCount, s"column count != $columnCount")
 
@@ -66,5 +66,5 @@ object Med {
       require(dosage >= 1 && dosage <= 100, "dosage not >= 1 and <= 100")
 
       Med(datetime, medtype, dosage)
-    }.toEither
+    }
 }

@@ -4,7 +4,7 @@ import org.slf4j.LoggerFactory
 
 import scala.collection.mutable
 import scala.io.{Codec, Source}
-import scala.util.Try
+import scala.util.{Failure, Success, Try}
 
 final case class InvalidLine(line: String, error: Throwable)
 
@@ -20,8 +20,8 @@ object Transformer {
       for (line <- source.getLines) {
         val columns = line.split(delimiter).map(_.trim)
         Glucose.validate(columns) match {
-          case Left(error) => errors += InvalidLine(line, error)
-          case Right(glucose) => lines += glucose
+          case Success(glucose) => lines += glucose
+          case Failure(error) => errors += InvalidLine(line, error)
         }
       }
       source.close()
@@ -36,8 +36,8 @@ object Transformer {
       for (line <- source.getLines) {
         val columns = line.split(delimiter).map(_.trim)
         Med.validate(columns) match {
-          case Left(error) => errors += InvalidLine(line, error)
-          case Right(med) => lines += med
+          case Success(med) => lines += med
+          case Failure(error) => errors += InvalidLine(line, error)
         }
       }
       source.close()
