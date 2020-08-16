@@ -8,7 +8,6 @@ import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer
 import org.jfree.data.xy.XYSeries
 import org.jfree.data.xy.XYSeriesCollection
 import org.jfree.chart.plot.PlotOrientation
-import org.slf4j.LoggerFactory
 
 import scala.util.Success
 import scala.util.Failure
@@ -16,7 +15,6 @@ import scala.util.Failure
 import Transformer._
 
 object GlucoseMedsChart {
-  private val logger = LoggerFactory.getLogger(GlucoseMedsChart.getClass)
   private val lineChart = 0
   private val scatterChart = 1
 
@@ -35,8 +33,8 @@ object GlucoseMedsChart {
       case Success((lines, errors)) =>
         logLinesAndErrors( (lines, errors) )
         (lines, errors)
-      case Failure(error) =>
-        logger.error(s"glucose csv failure: ${error.printStackTrace()}")
+      case Failure(failure) =>
+        logIOFailure(failure, path)
         (Array.empty[Glucose], Array.empty[InvalidLine])
     }
   }
@@ -46,8 +44,8 @@ object GlucoseMedsChart {
       case Success((lines, errors)) =>
         logLinesAndErrors( (lines, errors) )
         (lines, errors)
-      case Failure(error) =>
-        logger.error(s"meds csv failure: ${error.printStackTrace()}")
+      case Failure(failure) =>
+        logIOFailure(failure, path)
         (Array.empty[Med], Array.empty[InvalidLine])
     }
   }

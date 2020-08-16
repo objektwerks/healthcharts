@@ -49,4 +49,6 @@ object Transformer {
     logger.info(s"lines [${lines.length}]: ${lines.toList.map(g => "\n" + g.toString)}")
     logger.info(s"errors [${errors.length}]: ${errors.toList.map(g => "\n" + g.toString)}")
   }
+
+  def logIOFailure(failure: Throwable, path: String): Unit = logger.error(s"Failed to load $path: ${failure.getMessage}")
 }
