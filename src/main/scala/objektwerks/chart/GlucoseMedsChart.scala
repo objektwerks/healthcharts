@@ -8,19 +8,49 @@ import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer
 import org.jfree.data.xy.XYSeries
 import org.jfree.data.xy.XYSeriesCollection
 import org.jfree.chart.plot.PlotOrientation
+import org.slf4j.LoggerFactory
 
-final case class GlucoseMedsChart(glucose: (Array[Glucose], Array[InvalidLine]),
-                                  meds: (Array[Med], Array[InvalidLine]))
+import scala.util.Success
+import scala.util.Failure
+
+import Transformer._
+
 // TODO: Refactor into overlaid chart!
 object GlucoseMedsChart {
+  private val logger = LoggerFactory.getLogger(GlucoseMedsChart.getClass())
   private val lineChart = 0
   private val scatterChart = 1
 
   def apply(): ChartPanel = Builder.build()
 
-  def apply(chart: GlucoseMedsChart): ChartPanel = {
-    println(chart)
+  def apply(glucoseCsvPath: String, medsCsvPath: String): ChartPanel = {
+    val glucose = loadGlucoseCsv(glucoseCsvPath)
+    val meds = loadMedsCsv(medsCsvPath)
+    println(glucose)
+    println(meds)
     Builder.build()
+  }
+
+  private def loadGlucoseCsv(path: String): (Array[Glucose], Array[InvalidLine]) = {
+    csvToGlucose(path) match {
+      case Success((lines, errors)) =>
+        logLinesAndErrors( (lines, errors) )
+        (lines, errors)
+      case Failure(error) =>
+        logger.error(s"glucose csv failure: ${error.printStackTrace()}")
+        (Array.empty[Glucose], Array.empty[InvalidLine])
+    }
+  }
+
+  private def loadMedsCsv(path: String): (Array[Med], Array[InvalidLine]) = {
+    csvToMeds(path) match {
+      case Success((lines, errors)) =>
+        logLinesAndErrors( (lines, errors) )
+        (lines, errors)
+      case Failure(error) =>
+        logger.error(s"meds csv failure: ${error.printStackTrace()}")
+        (Array.empty[Med], Array.empty[InvalidLine])
+    }
   }
 
   private object Builder {
