@@ -68,3 +68,5 @@ object Med {
       Med(datetime, medtype, dosage)
     }
 }
+
+final case class InvalidLine(line: String, error: Throwable)

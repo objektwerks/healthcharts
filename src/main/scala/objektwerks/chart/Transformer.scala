@@ -6,8 +6,6 @@ import scala.collection.mutable
 import scala.io.{Codec, Source}
 import scala.util.{Failure, Success, Try}
 
-final case class InvalidLine(line: String, error: Throwable)
-
 object Transformer {
   private val logger = LoggerFactory.getLogger(GlucoseMedsChart.getClass)
   private val utf8 = Codec.UTF8.name
