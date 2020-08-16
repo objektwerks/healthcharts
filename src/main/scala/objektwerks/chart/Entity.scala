@@ -11,11 +11,11 @@ private object Converter {
   def datetimeToMinute(datetime: String): Minute = {
     val localDateTime = LocalDateTime.parse(datetime)
     new Minute(
-      localDateTime.getMinute(),
-      localDateTime.getHour(),
-      localDateTime.getDayOfMonth(),
-      localDateTime.getMonthValue(),
-      localDateTime.getYear()
+      localDateTime.getMinute,
+      localDateTime.getHour,
+      localDateTime.getDayOfMonth,
+      localDateTime.getMonthValue,
+      localDateTime.getYear
     )
   }
 }
