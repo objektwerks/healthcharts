@@ -30,9 +30,7 @@ object GlucoseMedsChart {
 
   private def loadGlucoseCsv(path: String): (Array[Glucose], Array[InvalidLine]) = {
     csvToGlucose(path) match {
-      case Success((lines, errors)) =>
-        logLinesAndErrors( (lines, errors) )
-        (lines, errors)
+      case Success((lines, invalidLines)) => (lines, invalidLines)
       case Failure(failure) =>
         logIOFailure(failure, path)
         (Array.empty[Glucose], Array.empty[InvalidLine])
@@ -41,9 +39,7 @@ object GlucoseMedsChart {
 
   private def loadMedsCsv(path: String): (Array[Med], Array[InvalidLine]) = {
     csvToMeds(path) match {
-      case Success((lines, errors)) =>
-        logLinesAndErrors( (lines, errors) )
-        (lines, errors)
+      case Success((lines, invalidLines)) => (lines, invalidLines)
       case Failure(failure) =>
         logIOFailure(failure, path)
         (Array.empty[Med], Array.empty[InvalidLine])

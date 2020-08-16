@@ -19,12 +19,11 @@ class TransformerTest extends AnyFunSuite with Matchers {
     csvToMedsTest("./data/meds/meds-invalid.txt", 20, 3)
   }
 
-  private def csvToGlucoseTest(path: String, linesCount: Int, errorsCount: Int): Unit = {
+  private def csvToGlucoseTest(path: String, linesCount: Int, invalidLinesCount: Int): Unit = {
     csvToGlucose(path) match {
-      case Success((lines, errors)) =>
-        logLinesAndErrors( (lines, errors) )
+      case Success((lines, errors)) => 
         lines.length shouldEqual linesCount
-        errors.length shouldEqual errorsCount
+        errors.length shouldEqual invalidLinesCount
       case Failure(failure) =>
         logIOFailure(failure, path)
         fail
@@ -32,12 +31,11 @@ class TransformerTest extends AnyFunSuite with Matchers {
     ()
   }
 
-  private def csvToMedsTest(path: String, linesCount: Int, errorsCount: Int): Unit = {
+  private def csvToMedsTest(path: String, linesCount: Int, invalidLinesCount: Int): Unit = {
     csvToMeds(path) match {
-      case Success((lines, errors)) =>
-        logLinesAndErrors( (lines, errors) )
+      case Success((lines, errors)) => 
         lines.length shouldEqual linesCount
-        errors.length shouldEqual errorsCount
+        errors.length shouldEqual invalidLinesCount
       case Failure(failure) =>
         logIOFailure(failure, path)
         fail
