@@ -29,7 +29,7 @@ class TransformerTest extends AnyFunSuite with Matchers {
         lines.length shouldEqual linesCount
         errors.length shouldEqual errorsCount
       case Failure(error) =>
-        logger.error(s"glucose test failure: ${error.printStackTrace()}")
+        logger.error(s"glucose test failure: ${error.getMessage}")
         fail
     }
     ()
@@ -42,7 +42,7 @@ class TransformerTest extends AnyFunSuite with Matchers {
         lines.length shouldEqual linesCount
         errors.length shouldEqual errorsCount
       case Failure(error) =>
-        logger.error(s"meds test failure: ${error.printStackTrace()}")
+        logger.error(s"meds test failure: ${error.getMessage}")
         fail
     }
     ()
