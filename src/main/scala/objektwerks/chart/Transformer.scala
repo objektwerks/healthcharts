@@ -5,6 +5,7 @@ import scala.io.{Codec, Source}
 import scala.util.{Failure, Success, Try}
 
 import Logger._
+import Validator._
 
 object Transformer {
   private val utf8 = Codec.UTF8.name
@@ -16,7 +17,7 @@ object Transformer {
       val source = Source.fromFile(path, utf8)
       for (line <- source.getLines) {
         val columns = line.split(delimiter).map(_.trim)
-        Glucose.validate(columns) match {
+        validate[Glucose](columns) match {
           case Success(glucose) => lines += glucose
           case Failure(invalidLine) => invalidLines += InvalidLine(line, invalidLine)
         }
@@ -34,7 +35,7 @@ object Transformer {
       val source = Source.fromFile(path, utf8)
       for (line <- source.getLines) {
         val columns = line.split(delimiter).map(_.trim)
-        Med.validate(columns) match {
+        validate[Med](columns) match {
           case Success(med) => lines += med
           case Failure(invalidLine) => invalidLines += InvalidLine(line, invalidLine)
         }
