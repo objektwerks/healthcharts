@@ -1,23 +1,12 @@
 package objektwerks.chart
 
-import org.slf4j.LoggerFactory
-
 import scala.collection.mutable
 import scala.io.{Codec, Source}
 import scala.util.{Failure, Success, Try}
 
-trait Transformer {
-  private val logger = LoggerFactory.getLogger(GlucoseMedsChart.getClass)
-  
-  def logLinesAndInvalidLines[L, IL](lines: Array[L], invalidLines: Array[IL]): Unit = {
-    logger.info(s"lines [${lines.length}]: ${lines.toList.map(g => "\n" + g.toString)}")
-    logger.info(s"errors [${invalidLines.length}]: ${invalidLines.toList.map(g => "\n" + g.toString)}")
-  }
+import Logger._
 
-  def logIOFailure(failure: Throwable, path: String): Unit = logger.error(s"Failed to load $path: ${failure.getMessage}")
-}
-
-object Transformer extends Transformer {
+object Transformer {
   private val utf8 = Codec.UTF8.name
 
   def csvToGlucose(path: String, delimiter: String = ","): Try[Glucoses] =

@@ -12,6 +12,7 @@ import org.jfree.chart.plot.PlotOrientation
 import scala.util.Success
 import scala.util.Failure
 
+import Logger._
 import Transformer._
 
 object GlucoseMedsChart {

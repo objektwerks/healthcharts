@@ -6,6 +6,7 @@ import org.scalatest.matchers.should.Matchers
 import scala.util.Success
 import scala.util.Failure
 
+import Logger._
 import Transformer._
 
 class TransformerTest extends AnyFunSuite with Matchers {
