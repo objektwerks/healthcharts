@@ -7,19 +7,6 @@ import org.jfree.data.time.Minute
 import scala.collection.immutable.SortedMap
 import scala.util.Try
 
-private object Converter {
-  def datetimeToMinute(datetime: String): Minute = {
-    val localDateTime = LocalDateTime.parse(datetime)
-    new Minute(
-      localDateTime.getMinute,
-      localDateTime.getHour,
-      localDateTime.getDayOfMonth,
-      localDateTime.getMonthValue,
-      localDateTime.getYear
-    )
-  }
-}
-
 final case class Glucose(datetime: Minute, level: Int)
 
 object Glucose {
@@ -82,3 +69,16 @@ object Meds {
 }
 
 final case class InvalidLine(line: String, error: Throwable)
+
+private object Converter {
+  def datetimeToMinute(datetime: String): Minute = {
+    val localDateTime = LocalDateTime.parse(datetime)
+    new Minute(
+      localDateTime.getMinute,
+      localDateTime.getHour,
+      localDateTime.getDayOfMonth,
+      localDateTime.getMonthValue,
+      localDateTime.getYear
+    )
+  }
+}
