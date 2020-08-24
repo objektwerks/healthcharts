@@ -19,26 +19,26 @@ object GlucoseMedsChart {
   private val scatterChart = 1
 
   def apply(glucoseCsvPath: String, medsCsvPath: String): ChartPanel = {
-    val glucoses = loadGlucoseCsv(glucoseCsvPath)
-    val meds = loadMedsCsv(medsCsvPath)
+    val glucoses = loadGlucose(glucoseCsvPath)
+    val meds = loadMeds(medsCsvPath)
     Builder.build(glucoses, meds)
   }
 
-  private def loadGlucoseCsv(path: String): Glucoses = {
+  private def loadGlucose(path: String): Glucoses = {
     csvToGlucose(path) match {
       case Success(glucoses) => glucoses
       case Failure(failure) =>
         logIOFailure(failure, path)
-        Glucoses(Array.empty[Glucose], Array.empty[InvalidLine])
+        Glucoses.empty
     }
   }
 
-  private def loadMedsCsv(path: String): Meds = {
+  private def loadMeds(path: String): Meds = {
     csvToMeds(path) match {
       case Success(meds) => meds
       case Failure(failure) =>
         logIOFailure(failure, path)
-        Meds(Array.empty[Med], Array.empty[InvalidLine])
+        Meds.empty
     }
   }
 

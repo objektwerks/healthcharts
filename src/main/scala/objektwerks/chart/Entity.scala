@@ -71,6 +71,14 @@ object Med {
 
 final case class Glucoses(lines: Array[Glucose], invalidLines: Array[InvalidLine])
 
+object Glucoses {
+  def empty: Glucoses = Glucoses(Array.empty[Glucose], Array.empty[InvalidLine])
+}
+
 final case class Meds(lines: Array[Med], invalidLines: Array[InvalidLine])
+
+object Meds {
+  def empty: Meds = Meds(Array.empty[Med], Array.empty[InvalidLine])
+}
 
 final case class InvalidLine(line: String, error: Throwable)
