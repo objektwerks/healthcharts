@@ -10,7 +10,7 @@ object Transformer {
   private val logger = LoggerFactory.getLogger(GlucoseMedsChart.getClass)
   private val utf8 = Codec.UTF8.name
 
-  def csvToGlucose(path: String, delimiter: String = ","): Try[(Array[Glucose], Array[InvalidLine])] =
+  def csvToGlucose(path: String, delimiter: String = ","): Try[Glucoses] =
     Try {
       val lines = mutable.ArrayBuilder.make[Glucose]
       val invalidLines = mutable.ArrayBuilder.make[InvalidLine]
@@ -23,12 +23,12 @@ object Transformer {
         }
       }
       source.close()
-      val linesAndInvalidLines = (lines.result(), invalidLines.result())
-      logLinesAndInvalidLines(linesAndInvalidLines)
-      linesAndInvalidLines
+      val (linesResult, invalidLinesResult) = (lines.result(), invalidLines.result())
+      logLinesAndInvalidLines(linesResult, invalidLinesResult)
+      Glucoses(linesResult, invalidLinesResult)
     }
 
-  def csvToMeds(path: String, delimiter: String = ","): Try[(Array[Med], Array[InvalidLine])] =
+  def csvToMeds(path: String, delimiter: String = ","): Try[Meds] =
     Try {
       val lines = mutable.ArrayBuilder.make[Med]
       val invalidLines = mutable.ArrayBuilder.make[InvalidLine]
@@ -41,13 +41,12 @@ object Transformer {
         }
       }
       source.close()
-      val linesAndInvalidLines = (lines.result(), invalidLines.result())
-      logLinesAndInvalidLines(linesAndInvalidLines)
-      linesAndInvalidLines
+      val (linesResult, invalidLinesResult) = (lines.result(), invalidLines.result())
+      logLinesAndInvalidLines(linesResult, invalidLinesResult)
+      Meds(linesResult, invalidLinesResult)
     }
 
-  def logLinesAndInvalidLines[L, IL](linesAndInvalidLines: (Array[L], Array[IL])): Unit = {
-    val (lines, invalidLines) = linesAndInvalidLines
+  def logLinesAndInvalidLines[L, IL](lines: Array[L], invalidLines: Array[IL]): Unit = {
     logger.info(s"lines [${lines.length}]: ${lines.toList.map(g => "\n" + g.toString)}")
     logger.info(s"errors [${invalidLines.length}]: ${invalidLines.toList.map(g => "\n" + g.toString)}")
   }

@@ -11,7 +11,8 @@ object App {
   def main(args: Array[String]): Unit = {
     EventQueue.invokeLater( new Runnable() {
       override def run(): Unit = {
-        val chart = GlucoseMedsChart() // TODO: Allow for chart selection.
+        val chart = GlucoseMedsChart(glucoseCsvPath = "./data/glucose/glucose.txt",
+                                     medsCsvPath = "./data/meds/meds.txt")
         val frame = new JFrame()
         frame.add(chart, BorderLayout.CENTER)
         frame.setTitle("MedCharts")

@@ -69,4 +69,8 @@ object Med {
     }
 }
 
+final case class Glucoses(lines: Array[Glucose], invalidLines: Array[InvalidLine])
+
+final case class Meds(lines: Array[Med], invalidLines: Array[InvalidLine])
+
 final case class InvalidLine(line: String, error: Throwable)

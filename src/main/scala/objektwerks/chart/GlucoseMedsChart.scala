@@ -18,36 +18,34 @@ object GlucoseMedsChart {
   private val lineChart = 0
   private val scatterChart = 1
 
-  def apply(): ChartPanel = Builder.build()
-
   def apply(glucoseCsvPath: String, medsCsvPath: String): ChartPanel = {
-    val glucose = loadGlucoseCsv(glucoseCsvPath)
+    val glucoses = loadGlucoseCsv(glucoseCsvPath)
     val meds = loadMedsCsv(medsCsvPath)
-    println(glucose)
-    println(meds)
-    Builder.build()
+    Builder.build(glucoses, meds)
   }
 
-  private def loadGlucoseCsv(path: String): (Array[Glucose], Array[InvalidLine]) = {
+  private def loadGlucoseCsv(path: String): Glucoses = {
     csvToGlucose(path) match {
-      case Success((lines, invalidLines)) => (lines, invalidLines)
+      case Success(glucoses) => glucoses
       case Failure(failure) =>
         logIOFailure(failure, path)
-        (Array.empty[Glucose], Array.empty[InvalidLine])
+        Glucoses(Array.empty[Glucose], Array.empty[InvalidLine])
     }
   }
 
-  private def loadMedsCsv(path: String): (Array[Med], Array[InvalidLine]) = {
+  private def loadMedsCsv(path: String): Meds = {
     csvToMeds(path) match {
-      case Success((lines, invalidLines)) => (lines, invalidLines)
+      case Success(meds) => meds
       case Failure(failure) =>
         logIOFailure(failure, path)
-        (Array.empty[Med], Array.empty[InvalidLine])
+        Meds(Array.empty[Med], Array.empty[InvalidLine])
     }
   }
 
   private object Builder {
-    def build(): ChartPanel = {
+    def build(glucoses: Glucoses, meds: Meds): ChartPanel = {
+      println(glucoses)
+      println(meds)
       val chartTitle = "Glucose-Meds Chart"
       val xAxisLabel = "Domain"
       val yAxisLabel = "Range"
