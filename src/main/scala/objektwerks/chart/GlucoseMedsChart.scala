@@ -51,14 +51,13 @@ object GlucoseMedsChart {
     val glucoseTimeSeries = buildGlucoseTimeSeries(glucoses)
     val glucoseRenderer = buildGlucoseRenderer()
 
+    val medTimeSeries = buildMedTimeSeries(meds)
+    val medRenderer = buildMedRenderer()
+
     val dateAxis = buildDateAxis()
     val valueAxis = buildValueAxis()
 
     val xyPlot = new XYPlot(glucoseTimeSeries, dateAxis, valueAxis, glucoseRenderer)
-
-    val medTimeSeries = buildMedTimeSeries(meds)
-    val medRenderer = buildMedRenderer()
-
     xyPlot.setDataset(1, medTimeSeries)
     xyPlot.setRenderer(1, medRenderer)
     xyPlot.setDatasetRenderingOrder(DatasetRenderingOrder.FORWARD)
