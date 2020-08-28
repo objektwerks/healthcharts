@@ -66,7 +66,7 @@ object GlucoseMedsChart {
     xyPlot.setRenderer(1, medRenderer)
     xyPlot.setDatasetRenderingOrder(DatasetRenderingOrder.FORWARD)
 
-    val chart = new JFreeChart("Glucose-Meds Chart", JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true);
+    val chart = new JFreeChart("Glucose-Meds Chart", JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
     val chartPanel = new ChartPanel(chart)
     chartPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15))
     chartPanel.setInitialDelay(100)
