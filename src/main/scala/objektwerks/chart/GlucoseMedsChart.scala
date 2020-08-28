@@ -23,6 +23,8 @@ import scala.util.Failure
 
 import Logger._
 import Transformer._
+import org.jfree.data.xy.IntervalXYDataset
+import org.jfree.data.xy.XYDataset
 
 object GlucoseMedsChart {
   def apply(glucoseCsvPath: String, medsCsvPath: String): ChartPanel = {
@@ -66,7 +68,7 @@ object GlucoseMedsChart {
     new ChartPanel(chart)
   }
 
-  private def buildGlucoseTimeSeries(glucoses: Glucoses): TimeSeriesCollection = {
+  private def buildGlucoseTimeSeries(glucoses: Glucoses): IntervalXYDataset = {
     val timeSeries = new TimeSeries("Glucose")
     glucoses.lines.foreach { glucose =>
       timeSeries.add( glucose.datetime, glucose.level.toDouble )
@@ -74,7 +76,7 @@ object GlucoseMedsChart {
     new TimeSeriesCollection(timeSeries)
   }
 
-  private def buildMedTimeSeries(meds: Meds): TimeSeriesCollection = {
+  private def buildMedTimeSeries(meds: Meds): XYDataset = {
     val timeSeries = new TimeSeries("Meds")
     meds.lines.foreach { med =>
       timeSeries.add( med.datetime, med.dosage.toDouble )
