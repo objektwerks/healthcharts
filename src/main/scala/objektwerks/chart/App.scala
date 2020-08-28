@@ -12,8 +12,8 @@ object App {
   def main(args: Array[String]): Unit = {
     EventQueue.invokeLater( new Runnable() {
       override def run(): Unit = {
-        val chart = GlucoseMedsChart(glucoseCsvPath = "./data/glucose/glucose.txt",
-                                     medsCsvPath = "./data/meds/meds.txt")
+        // TODO: Show file dialog for both paths.
+        val chart = GlucoseMedsChart(glucoseCsvPath = "./data/glucose/glucose.txt", medsCsvPath = "./data/meds/meds.txt")
         chart.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15))
         val frame = new JFrame()
         frame.getContentPane.add(chart, BorderLayout.CENTER)
