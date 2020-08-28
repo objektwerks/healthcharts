@@ -3,6 +3,8 @@ package objektwerks.chart
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 
+import javax.swing.BorderFactory
+
 import org.jfree.chart.ChartPanel
 import org.jfree.data.time.TimeSeries
 import org.jfree.data.time.TimeSeriesCollection
@@ -65,7 +67,9 @@ object GlucoseMedsChart {
     xyPlot.setDatasetRenderingOrder(DatasetRenderingOrder.FORWARD)
 
     val chart = new JFreeChart("Glucose-Meds Chart", JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true);
-    new ChartPanel(chart)
+    val chartPanel = new ChartPanel(chart)
+    chartPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15))
+    chartPanel
   }
 
   private def buildGlucoseTimeSeries(glucoses: Glucoses): IntervalXYDataset = {
