@@ -37,8 +37,9 @@ object GlucoseMedsChart {
 
   private def build(glucoses: Glucoses, meds: Meds): ChartPanel = {
     val glucoseTimeSeries = buildGlucosesTimeSeries(glucoses)
+    val medTimeSeries = buildMedsTimeSeries(meds)
     println(glucoseTimeSeries)
-    println(meds)
+    println(medTimeSeries)
     new ChartPanel(null)
   }
 
@@ -46,6 +47,14 @@ object GlucoseMedsChart {
     val timeSeries = new TimeSeries("Glucose")
     glucoses.lines.foreach { glucose =>
       timeSeries.add( glucose.datetime, glucose.level.toDouble )
+    }
+    new TimeSeriesCollection(timeSeries)
+  }
+
+  private def buildMedsTimeSeries(meds: Meds): TimeSeriesCollection = {
+    val timeSeries = new TimeSeries("Meds")
+    meds.lines.foreach { med =>
+      timeSeries.add( med.datetime, med.dosage.toDouble )
     }
     new TimeSeriesCollection(timeSeries)
   }
