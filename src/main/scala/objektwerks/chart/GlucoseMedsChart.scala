@@ -69,6 +69,7 @@ object GlucoseMedsChart {
     val chart = new JFreeChart("Glucose-Meds Chart", JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true);
     val chartPanel = new ChartPanel(chart)
     chartPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15))
+    chartPanel.setDisplayToolTips(true)
     chartPanel
   }
 
@@ -95,7 +96,7 @@ object GlucoseMedsChart {
         new SimpleDateFormat("HH:mm"),
         new DecimalFormat("0.00")
       )
-    renderer.setSeriesToolTipGenerator(0, tooltipGenerator)
+    renderer.setDefaultToolTipGenerator(tooltipGenerator)
     renderer
   }
 
@@ -106,7 +107,7 @@ object GlucoseMedsChart {
       new SimpleDateFormat("HH:mm"),
       new DecimalFormat("0.00")
     )
-    renderer.setSeriesToolTipGenerator(1, tooltipGenerator)
+    renderer.setDefaultToolTipGenerator(tooltipGenerator)
     renderer
   }
 
