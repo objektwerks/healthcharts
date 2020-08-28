@@ -17,23 +17,21 @@ object GlucoseMedsChart {
     build(glucoses, meds)
   }
 
-  private def transformGlucoses(path: String): Glucoses = {
+  private def transformGlucoses(path: String): Glucoses =
     transform[Glucoses](path) match {
       case Success(glucoses) => glucoses
       case Failure(failure) =>
         logIOFailure(failure, path)
         Glucoses.empty
     }
-  }
 
-  private def transformMeds(path: String): Meds = {
+  private def transformMeds(path: String): Meds =
     transform[Meds](path) match {
       case Success(meds) => meds
       case Failure(failure) =>
         logIOFailure(failure, path)
         Meds.empty
     }
-  }
 
   private def build(glucoses: Glucoses, meds: Meds): ChartPanel = {
     val glucoseTimeSeries = buildGlucosesTimeSeries(glucoses)
