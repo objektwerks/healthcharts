@@ -17,14 +17,14 @@ import org.jfree.chart.renderer.xy.XYItemRenderer
 import org.jfree.chart.renderer.xy.StandardXYItemRenderer
 import org.jfree.chart.plot.DatasetRenderingOrder
 import org.jfree.chart.JFreeChart
+import org.jfree.data.xy.IntervalXYDataset
+import org.jfree.data.xy.XYDataset
 
 import scala.util.Success
 import scala.util.Failure
 
 import Logger._
 import Transformer._
-import org.jfree.data.xy.IntervalXYDataset
-import org.jfree.data.xy.XYDataset
 
 object GlucoseMedsChart {
   def apply(glucoseCsvPath: String, medsCsvPath: String): ChartPanel = {
@@ -63,7 +63,7 @@ object GlucoseMedsChart {
     xyPlot.setDataset(1, medTimeSeries)
     xyPlot.setRenderer(1, medRenderer)
     xyPlot.setDatasetRenderingOrder(DatasetRenderingOrder.FORWARD)
-  
+
     val chart = new JFreeChart("Glucose-Meds Chart", JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true);
     new ChartPanel(chart)
   }
@@ -85,10 +85,10 @@ object GlucoseMedsChart {
   }
 
   private def buildGlucoseRenderer(): XYItemRenderer = {
-    val renderer = new XYBarRenderer(0.20)
+    val renderer = new XYBarRenderer(0.10)
     val tooltipGenerator = new StandardXYToolTipGenerator( 
         StandardXYToolTipGenerator.DEFAULT_TOOL_TIP_FORMAT,
-        new SimpleDateFormat("d-MMM-yyyy"),
+        new SimpleDateFormat("HH:mm"),
         new DecimalFormat("0.00")
       )
     renderer.setSeriesToolTipGenerator(0, tooltipGenerator)
@@ -99,7 +99,8 @@ object GlucoseMedsChart {
     val renderer = new StandardXYItemRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator(
       StandardXYToolTipGenerator.DEFAULT_TOOL_TIP_FORMAT,
-      new SimpleDateFormat("d-MMM-yyyy"), new DecimalFormat("0.00")
+      new SimpleDateFormat("HH:mm"),
+      new DecimalFormat("0.00")
     )
     renderer.setSeriesToolTipGenerator(1, tooltipGenerator)
     renderer
