@@ -1,6 +1,8 @@
 package objektwerks.chart
 
 import org.jfree.chart.ChartPanel
+import org.jfree.data.time.TimeSeries
+import org.jfree.data.time.TimeSeriesCollection
 
 import scala.util.Success
 import scala.util.Failure
@@ -34,8 +36,17 @@ object GlucoseMedsChart {
   }
 
   private def build(glucoses: Glucoses, meds: Meds): ChartPanel = {
-    println(glucoses)
+    val glucoseTimeSeries = buildGlucosesTimeSeries(glucoses)
+    println(glucoseTimeSeries)
     println(meds)
     new ChartPanel(null)
+  }
+
+  private def buildGlucosesTimeSeries(glucoses: Glucoses): TimeSeriesCollection = {
+    val timeSeries = new TimeSeries("Glucose")
+    glucoses.lines.foreach { glucose =>
+      timeSeries.add( glucose.datetime, glucose.level.toDouble )
+    }
+    new TimeSeriesCollection(timeSeries)
   }
 }
