@@ -11,7 +11,6 @@ import org.jfree.data.time.TimeSeriesCollection
 import org.jfree.chart.labels.StandardXYToolTipGenerator
 import org.jfree.chart.plot.XYPlot
 import org.jfree.chart.axis.DateAxis
-import org.jfree.chart.axis.DateTickMarkPosition
 import org.jfree.chart.axis.NumberAxis
 import org.jfree.chart.axis.ValueAxis
 import org.jfree.chart.renderer.xy.XYItemRenderer
@@ -113,11 +112,7 @@ object GlucoseMedsChart {
     renderer
   }
 
-  private def buildDateAxis(): DateAxis = {
-    val dateAxis = new DateAxis("Time")
-    dateAxis.setTickMarkPosition(DateTickMarkPosition.MIDDLE)
-    dateAxis
-  }
+  private def buildDateAxis(): DateAxis = new DateAxis("Time")
 
   private def buildValueAxis(): ValueAxis = new NumberAxis("Level / Dosage")
 }
