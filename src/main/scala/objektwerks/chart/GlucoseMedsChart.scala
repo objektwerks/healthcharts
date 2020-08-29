@@ -102,7 +102,7 @@ object GlucoseMedsChart {
         val values = dataset.getYValue(series, item).toString.split("\\.")
         val dosage = values(0)
         val medtype = values(1)
-        val med = MedType.idToMedType.getOrElse(medtype.toInt, "N/A")
+        val med = MedType.idToMedType.getOrElse(medtype.toInt, "n/a")
         s"Meds: ($time, $dosage, $med)"
       }
     }
