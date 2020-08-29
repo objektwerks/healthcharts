@@ -114,5 +114,5 @@ object GlucoseMedsChart {
 
   private def buildDateAxis(): DateAxis = new DateAxis("Time")
 
-  private def buildValueAxis(): ValueAxis = new NumberAxis("Level / Dosage.MedType")
+  private def buildValueAxis(): ValueAxis = new NumberAxis("Level / Dosage.Med")
 }
