@@ -8,12 +8,12 @@ import objektwerks.chart.Logger._
 import objektwerks.chart.Transformer._
 
 import org.jfree.chart.{ChartPanel, JFreeChart}
-import org.jfree.chart.axis.{DateAxis, NumberAxis, ValueAxis}
+import org.jfree.chart.axis.{DateAxis, NumberAxis}
 import org.jfree.chart.labels.StandardXYToolTipGenerator
 import org.jfree.chart.plot.{DatasetRenderingOrder, XYPlot}
 import org.jfree.chart.renderer.xy.{StandardXYItemRenderer, XYItemRenderer}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
-import org.jfree.data.xy.{IntervalXYDataset, XYDataset}
+import org.jfree.data.xy.IntervalXYDataset
 
 import scala.util.{Failure, Success}
 
@@ -47,8 +47,8 @@ object GlucoseMedsChart {
     val medTimeSeries = buildMedTimeSeries(meds)
     val medRenderer = buildMedRenderer()
 
-    val dateAxis = buildDateAxis()
-    val valueAxis = buildValueAxis()
+    val dateAxis = new DateAxis("Time")
+    val valueAxis = new NumberAxis("Level / Dosage.Med")
 
     val xyPlot = new XYPlot(glucoseTimeSeries, dateAxis, valueAxis, glucoseRenderer)
     xyPlot.setDataset(1, medTimeSeries)
@@ -71,7 +71,7 @@ object GlucoseMedsChart {
     new TimeSeriesCollection(timeSeries)
   }
 
-  private def buildMedTimeSeries(meds: Meds): XYDataset = {
+  private def buildMedTimeSeries(meds: Meds): IntervalXYDataset = {
     val timeSeries = new TimeSeries("Meds")
     meds.lines.foreach { med =>
       timeSeries.add( med.datetime, s"${med.dosage}.${med.medtype.id}".toDouble )
@@ -102,8 +102,4 @@ object GlucoseMedsChart {
     renderer.setBaseShapesVisible(true)
     renderer
   }
-
-  private def buildDateAxis(): DateAxis = new DateAxis("Time")
-
-  private def buildValueAxis(): ValueAxis = new NumberAxis("Level / Dosage.Med")
 }
