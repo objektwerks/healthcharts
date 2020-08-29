@@ -1,6 +1,7 @@
 package objektwerks.chart
 
 import java.text.{DecimalFormat, SimpleDateFormat}
+import java.{util => jdate}
 
 import javax.swing.BorderFactory
 
@@ -16,6 +17,7 @@ import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.IntervalXYDataset
 
 import scala.util.{Failure, Success}
+import org.jfree.data.xy.XYDataset
 
 object GlucoseMedsChart {
   def apply(glucoseCsvPath: String, medsCsvPath: String): ChartPanel = {
@@ -93,11 +95,17 @@ object GlucoseMedsChart {
 
   private def buildMedRenderer(): XYItemRenderer = {
     val renderer = new StandardXYItemRenderer()
-    val tooltipGenerator = new StandardXYToolTipGenerator(
-      StandardXYToolTipGenerator.DEFAULT_TOOL_TIP_FORMAT,
-      new SimpleDateFormat("k:m"),
-      new DecimalFormat("0.0")
-    )
+    val tooltipGenerator = new StandardXYToolTipGenerator() {
+      override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String = {
+        val formatter = new SimpleDateFormat("k:m")
+        val time = formatter.format( new jdate.Date(dataset.getXValue(series, item).toLong) )
+        val values = dataset.getYValue(series, item).toString.split("\\.")
+        val dosage = values(0)
+        val medtype = values(1)
+        val med = MedType.idToMedType.getOrElse(medtype.toInt, "N/A")
+        s"Meds: ($time, $dosage, $med)"
+      }
+    }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
     renderer.setBaseShapesVisible(true)
     renderer
