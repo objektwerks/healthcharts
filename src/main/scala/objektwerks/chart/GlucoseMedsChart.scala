@@ -83,7 +83,7 @@ object GlucoseMedsChart {
   private def buildMedTimeSeries(meds: Meds): XYDataset = {
     val timeSeries = new TimeSeries("Meds")
     meds.lines.foreach { med =>
-      timeSeries.add( med.datetime, med.dosage.toDouble ) // Need med type!
+      timeSeries.add( med.datetime, s"${med.dosage}.${med.medtype.id}".toDouble )
     }
     new TimeSeriesCollection(timeSeries)
   }
@@ -105,7 +105,7 @@ object GlucoseMedsChart {
     val tooltipGenerator = new StandardXYToolTipGenerator(
       StandardXYToolTipGenerator.DEFAULT_TOOL_TIP_FORMAT,
       new SimpleDateFormat("k:m"),
-      new DecimalFormat("0")
+      new DecimalFormat("0.0")
     )
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
     renderer.setBaseShapesVisible(true)
@@ -114,5 +114,5 @@ object GlucoseMedsChart {
 
   private def buildDateAxis(): DateAxis = new DateAxis("Time")
 
-  private def buildValueAxis(): ValueAxis = new NumberAxis("Level / Dosage")
+  private def buildValueAxis(): ValueAxis = new NumberAxis("Level / Dosage.MedType")
 }
