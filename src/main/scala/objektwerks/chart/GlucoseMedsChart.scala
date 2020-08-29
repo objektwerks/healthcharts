@@ -109,6 +109,7 @@ object GlucoseMedsChart {
       new DecimalFormat("0")
     )
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
+    renderer.setBaseShapesVisible(true)
     renderer
   }
 
