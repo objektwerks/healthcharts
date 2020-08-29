@@ -8,7 +8,6 @@ import javax.swing.BorderFactory
 import org.jfree.chart.ChartPanel
 import org.jfree.data.time.TimeSeries
 import org.jfree.data.time.TimeSeriesCollection
-import org.jfree.chart.renderer.xy.XYBarRenderer
 import org.jfree.chart.labels.StandardXYToolTipGenerator
 import org.jfree.chart.plot.XYPlot
 import org.jfree.chart.axis.DateAxis
@@ -91,13 +90,14 @@ object GlucoseMedsChart {
   }
 
   private def buildGlucoseRenderer(): XYItemRenderer = {
-    val renderer = new XYBarRenderer(0.10)
+    val renderer = new StandardXYItemRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator( 
         StandardXYToolTipGenerator.DEFAULT_TOOL_TIP_FORMAT,
         new SimpleDateFormat("HH:mm"),
         new DecimalFormat("0")
       )
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
+    renderer.setBaseShapesVisible(true)
     renderer
   }
 
@@ -114,10 +114,10 @@ object GlucoseMedsChart {
   }
 
   private def buildDateAxis(): DateAxis = {
-    val dateAxis = new DateAxis("Date")
+    val dateAxis = new DateAxis("Time")
     dateAxis.setTickMarkPosition(DateTickMarkPosition.MIDDLE)
     dateAxis
   }
 
-  private def buildValueAxis(): ValueAxis = new NumberAxis("Value")
+  private def buildValueAxis(): ValueAxis = new NumberAxis("Level / Dosage")
 }
