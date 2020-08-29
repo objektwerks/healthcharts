@@ -95,7 +95,7 @@ object GlucoseMedsChart {
     val tooltipGenerator = new StandardXYToolTipGenerator( 
         StandardXYToolTipGenerator.DEFAULT_TOOL_TIP_FORMAT,
         new SimpleDateFormat("HH:mm"),
-        new DecimalFormat("0.00")
+        new DecimalFormat("0")
       )
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
     renderer
@@ -106,7 +106,7 @@ object GlucoseMedsChart {
     val tooltipGenerator = new StandardXYToolTipGenerator(
       StandardXYToolTipGenerator.DEFAULT_TOOL_TIP_FORMAT,
       new SimpleDateFormat("HH:mm"),
-      new DecimalFormat("0.00")
+      new DecimalFormat("0")
     )
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
     renderer

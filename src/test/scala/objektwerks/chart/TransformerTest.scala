@@ -11,12 +11,12 @@ import Transformer._
 
 class TransformerTest extends AnyFunSuite with Matchers {
   test("glucose") {
-    testGlucosesTransformer("./data/glucose/glucose.txt", 23, 0)
+    testGlucosesTransformer("./data/glucose/glucose.txt", 12, 0)
     testGlucosesTransformer("./data/glucose/glucose-invalid.txt", 20, 3)
  }
 
   test("meds") {
-    testMedsTransformer("./data/meds/meds.txt", 23, 0)
+    testMedsTransformer("./data/meds/meds.txt", 12, 0)
     testMedsTransformer("./data/meds/meds-invalid.txt", 20, 3)
   }
 
