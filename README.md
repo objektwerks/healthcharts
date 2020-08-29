@@ -14,15 +14,27 @@ Notes
 2. 1 -> insulin, 2 -> steroids
 3. 1 - 100 
 
+Med
+---
+```scala
+final case class Med(datetime: Minute, medtype: MedType.Value, dosage: Int)
+```
+
 Med CSV
 -------
-1. datetime - yyyy-MM-ddThh:mm:ss ( 2020-07-04T10:04s:00 )
-2. typeof - 1 (Insultion), 2 (Steroid)
+1. datetime - yyyy-MM-ddThh:mm:ss ( 2020-07-04T10:04:00 )
+2. medtype - 1 (Insultion), 2 (Steroid)
 3. dosage - nnn (1-100)
+
+Glucose
+-------
+```scala
+final case class Glucose(datetime: Minute, level: Int)
+```
 
 Glucose CSV
 -----------
-1. datetime - yyyy-MM-ddThh:mm:ss ( 2020-07-04T10:04s:00 )
+1. datetime - yyyy-MM-ddThh:mm:ss ( 2020-07-04T10:04:00 )
 2. level - nnn (0-300)
 
 Chart
