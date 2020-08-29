@@ -1,30 +1,21 @@
 package objektwerks.chart
 
-import java.text.DecimalFormat
-import java.text.SimpleDateFormat
+import java.text.{DecimalFormat, SimpleDateFormat}
 
 import javax.swing.BorderFactory
 
-import org.jfree.chart.ChartPanel
-import org.jfree.data.time.TimeSeries
-import org.jfree.data.time.TimeSeriesCollection
+import objektwerks.chart.Logger._
+import objektwerks.chart.Transformer._
+
+import org.jfree.chart.{ChartPanel, JFreeChart}
+import org.jfree.chart.axis.{DateAxis, NumberAxis, ValueAxis}
 import org.jfree.chart.labels.StandardXYToolTipGenerator
-import org.jfree.chart.plot.XYPlot
-import org.jfree.chart.axis.DateAxis
-import org.jfree.chart.axis.NumberAxis
-import org.jfree.chart.axis.ValueAxis
-import org.jfree.chart.renderer.xy.XYItemRenderer
-import org.jfree.chart.renderer.xy.StandardXYItemRenderer
-import org.jfree.chart.plot.DatasetRenderingOrder
-import org.jfree.chart.JFreeChart
-import org.jfree.data.xy.IntervalXYDataset
-import org.jfree.data.xy.XYDataset
+import org.jfree.chart.plot.{DatasetRenderingOrder, XYPlot}
+import org.jfree.chart.renderer.xy.{StandardXYItemRenderer, XYItemRenderer}
+import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
+import org.jfree.data.xy.{IntervalXYDataset, XYDataset}
 
-import scala.util.Success
-import scala.util.Failure
-
-import Logger._
-import Transformer._
+import scala.util.{Failure, Success}
 
 object GlucoseMedsChart {
   def apply(glucoseCsvPath: String, medsCsvPath: String): ChartPanel = {

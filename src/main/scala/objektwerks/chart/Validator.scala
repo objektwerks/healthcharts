@@ -1,8 +1,8 @@
 package objektwerks.chart
 
-import scala.util.Try
+import objektwerks.chart.Converter._
 
-import Converter._
+import scala.util.Try
 
 trait Validator[E] {
   def validate(columns: Array[String]): Try[E]

@@ -1,13 +1,12 @@
 package objektwerks.chart
 
+import objektwerks.chart.Logger._
+import objektwerks.chart.Transformer._
+
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
-import scala.util.Success
-import scala.util.Failure
-
-import Logger._
-import Transformer._
+import scala.util.{Failure, Success}
 
 class TransformerTest extends AnyFunSuite with Matchers {
   test("glucose") {

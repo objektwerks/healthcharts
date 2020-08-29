@@ -1,11 +1,11 @@
 package objektwerks.chart
 
+import objektwerks.chart.Logger._
+import objektwerks.chart.Validator._
+
 import scala.collection.mutable
 import scala.io.{Codec, Source}
 import scala.util.{Failure, Success, Try}
-
-import Logger._
-import Validator._
 
 trait Transformer[E] {
   def transform(path: String, delimiter: String = ","): Try[E]

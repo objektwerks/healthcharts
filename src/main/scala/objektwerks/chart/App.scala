@@ -1,10 +1,8 @@
 package objektwerks.chart
 
-import java.awt.BorderLayout
-import java.awt.EventQueue
+import java.awt.{BorderLayout, EventQueue}
 
-import javax.swing.JFrame
-import javax.swing.WindowConstants
+import javax.swing.{JFrame, WindowConstants}
 
 object App {
   val centerWindow = null
