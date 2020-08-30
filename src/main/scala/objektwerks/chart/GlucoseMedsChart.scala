@@ -16,7 +16,7 @@ import org.jfree.chart.renderer.xy.{StandardXYItemRenderer, XYItemRenderer}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.IntervalXYDataset
 
-import scala.util.{Failure, Success}
+import scala.util.{Failure, Success, Try}
 import org.jfree.data.xy.XYDataset
 
 object GlucoseMedsChart {
@@ -100,9 +100,9 @@ object GlucoseMedsChart {
         val formatter = new SimpleDateFormat("k:m")
         val time = formatter.format( new jdate.Date(dataset.getXValue(series, item).toLong) )
         val values = dataset.getYValue(series, item).toString.split("\\.")
-        val dosage = values(0)
-        val medtype = values(1)
-        val med = MedType.idToMedType.getOrElse(medtype.toInt, "n/a")
+        val dosage = Try{ values(0).toInt }.getOrElse(-1)
+        val medtype = Try{ values(1).toInt }.getOrElse(-1)
+        val med = MedType.idToMedType.getOrElse(medtype, "n/a")
         s"Meds: ($time, $dosage, $med)"
       }
     }
