@@ -10,13 +10,13 @@ import scala.util.{Failure, Success}
 
 class TransformerTest extends AnyFunSuite with Matchers {
   test("glucose") {
-    testGlucosesTransformer("./data/glucose/glucose.txt", 12, 0)
-    testGlucosesTransformer("./data/glucose/glucose-invalid.txt", 10, 2)
+    testGlucosesTransformer("./data/glucose/glucose.txt", 13, 0)
+    testGlucosesTransformer("./data/glucose/glucose-invalid.txt", 11, 2)
  }
 
   test("meds") {
-    testMedsTransformer("./data/meds/meds.txt", 12, 0)
-    testMedsTransformer("./data/meds/meds-invalid.txt", 10, 2)
+    testMedsTransformer("./data/meds/meds.txt", 13, 0)
+    testMedsTransformer("./data/meds/meds-invalid.txt", 11, 2)
   }
 
   private def testGlucosesTransformer(path: String, linesCount: Int, invalidLinesCount: Int): Unit = {
