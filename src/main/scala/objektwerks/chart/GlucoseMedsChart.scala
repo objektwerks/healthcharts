@@ -85,7 +85,7 @@ object GlucoseMedsChart {
     val renderer = new StandardXYItemRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator( 
         StandardXYToolTipGenerator.DEFAULT_TOOL_TIP_FORMAT,
-        new SimpleDateFormat("k:m"),
+        new SimpleDateFormat("H:m"),
         new DecimalFormat("0")
       )
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
@@ -97,7 +97,7 @@ object GlucoseMedsChart {
     val renderer = new StandardXYItemRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String = {
-        val formatter = new SimpleDateFormat("k:m")
+        val formatter = new SimpleDateFormat("H:m")
         val time = formatter.format( new jdate.Date(dataset.getXValue(series, item).toLong) )
         val values = dataset.getYValue(series, item).toString.split("\\.")
         val dosage = Try{ values(0).toInt }.getOrElse(-1)
