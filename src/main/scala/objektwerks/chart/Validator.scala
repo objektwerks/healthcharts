@@ -33,7 +33,8 @@ object Validator {
       Try {
         require(columns.length == columnCount, s"column count != $columnCount")
         val datetime = datetimeToMinute(columns(0))
-        val medtype = idToMedType(columns(1).toInt)
+        val medTypeId = columns(1).toInt
+        val medtype = idToMedType(medTypeId)
         val dosage = columns(2).toInt
         require(dosage >= 1 && dosage <= 100, "dosage not >= 1 and <= 100")
         Med(datetime, medtype, dosage)
