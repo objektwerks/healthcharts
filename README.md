@@ -1,13 +1,14 @@
 MedCharts
 ---------
->Medical charts:
-1. Glucose-Meds
+>Medical charts.
 
 Glucose-Meds Chart
 ------------------
 >Composed of 2 Line charts, with:
-1. X-Axis : Time - k:m
-2. Y-Axis : Level / Dosage.Med - n / n.n
+1. X-Axis : Time ( k:m )
+2. Y-Axis : Level / Dosage.Med ( n )
+3. Glucose Tooltip ( Glucose: ( k:m, n ) )
+4. Meds Tooltip ( Meds: ( k:m, n, "med" ) )
 
 Model
 -----
@@ -30,7 +31,7 @@ Glucose CSV
 -----------
 >See data/glucose/glucose.txt
 1. datetime - yyyy-MM-ddThh:mm:ss ( 2020-07-04T10:04:00 )
-2. level - nnn (0-300)
+2. level - nnn ( 0-300 )
 
 Med
 ---
@@ -42,8 +43,8 @@ Med CSV
 -------
 >See data/meds/meds.txt
 1. datetime - yyyy-MM-ddThh:mm:ss ( 2020-07-04T10:04:00 )
-2. medtype - 1 (Insultion), 2 (Steroid)
-3. dosage - nnn (1-100)
+2. medtype - 1 ( insulin ), 2 ( steroid )
+3. dosage - nnn ( 1-100) 
 
 Test
 ----
