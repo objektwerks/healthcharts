@@ -51,18 +51,11 @@ object GlucoseMedsChart {
     xyPlot.setDataset(1, buildMedDataset(meds))
     xyPlot.setRenderer(1, buildMedRenderer())
 
-    val domainAxis = new DateAxis("Day, Time")
-    domainAxis.setDateFormatOverride(new SimpleDateFormat("d,H:mm"))
+    val domainAxis = new DateAxis("Time")
+    domainAxis.setDateFormatOverride(new SimpleDateFormat("H:mm"))
     xyPlot.setDomainAxis(0, domainAxis)
 
-    val levelRangeAxis = new NumberAxis("Glucose Level")
-    levelRangeAxis.setRange(0.0, 300.0)
-    xyPlot.setRangeAxis(0, levelRangeAxis)
-
-    val dosageRangeAxis = new NumberAxis("Dosage, Med")
-    dosageRangeAxis.setRange(0.0, 100.0)
-    xyPlot.setRangeAxis(1, dosageRangeAxis)
-    xyPlot.mapDatasetToRangeAxis(1, 1)
+    xyPlot.setRangeAxis(new NumberAxis("Level (Red) / Dosage (Blue)"))
 
     val chart = new JFreeChart("Glucose-Meds", JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
     val chartPanel = new ChartPanel(chart)
@@ -96,7 +89,7 @@ object GlucoseMedsChart {
         new DecimalFormat("0")
       )
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
-    renderer.setSeriesShapesVisible(0, true)
+    renderer.setDefaultShapesVisible(true)
     renderer
   }
 
@@ -114,7 +107,7 @@ object GlucoseMedsChart {
       }
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
-    renderer.setSeriesShapesVisible(1, true)
+    renderer.setDefaultShapesVisible(true)
     renderer
   }
 }
