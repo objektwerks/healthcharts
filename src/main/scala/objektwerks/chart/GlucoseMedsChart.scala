@@ -45,10 +45,10 @@ object GlucoseMedsChart {
     val xyPlot = new XYPlot()
     xyPlot.setDatasetRenderingOrder(DatasetRenderingOrder.FORWARD)
 
-    xyPlot.setDataset(0, buildGlucoseTimeSeries(glucoses))
+    xyPlot.setDataset(0, buildGlucoseDataset(glucoses))
     xyPlot.setRenderer(0, buildGlucoseRenderer())
 
-    xyPlot.setDataset(1, buildMedTimeSeries(meds))
+    xyPlot.setDataset(1, buildMedDataset(meds))
     xyPlot.setRenderer(1, buildMedRenderer())
 
     val domainAxis = new DateAxis("Day, Time")
@@ -72,7 +72,7 @@ object GlucoseMedsChart {
     chartPanel
   }
 
-  private def buildGlucoseTimeSeries(glucoses: Glucoses): IntervalXYDataset = {
+  private def buildGlucoseDataset(glucoses: Glucoses): IntervalXYDataset = {
     val timeSeries = new TimeSeries("Glucose")
     glucoses.lines.foreach { glucose =>
       timeSeries.add( glucose.datetime, glucose.level.toDouble )
@@ -80,7 +80,7 @@ object GlucoseMedsChart {
     new TimeSeriesCollection(timeSeries)
   }
 
-  private def buildMedTimeSeries(meds: Meds): IntervalXYDataset = {
+  private def buildMedDataset(meds: Meds): IntervalXYDataset = {
     val timeSeries = new TimeSeries("Meds")
     meds.lines.foreach { med =>
       timeSeries.add( med.datetime, s"${med.dosage}.${med.medtype.id}".toDouble )
