@@ -14,10 +14,9 @@ import org.jfree.chart.labels.StandardXYToolTipGenerator
 import org.jfree.chart.plot.{DatasetRenderingOrder, XYPlot}
 import org.jfree.chart.renderer.xy.{StandardXYItemRenderer, XYItemRenderer}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
-import org.jfree.data.xy.IntervalXYDataset
+import org.jfree.data.xy.{IntervalXYDataset, XYDataset}
 
 import scala.util.{Failure, Success, Try}
-import org.jfree.data.xy.XYDataset
 
 object GlucoseMedsChart {
   def apply(glucoseCsvPath: String, medsCsvPath: String): ChartPanel = {
@@ -52,8 +51,18 @@ object GlucoseMedsChart {
     xyPlot.setDataset(1, buildMedTimeSeries(meds))
     xyPlot.setRenderer(1, buildMedRenderer())
 
-    xyPlot.setDomainAxis(new DateAxis("Time"))
-    xyPlot.setRangeAxis(new NumberAxis("Level / Dosage.Med"))
+    val domainAxis = new DateAxis("Day, Time")
+    domainAxis.setDateFormatOverride(new SimpleDateFormat("d, H:mm"))
+    xyPlot.setDomainAxis(0, domainAxis)
+
+    val levelRangeAxis = new NumberAxis("Glucose Level")
+    levelRangeAxis.setRange(0.0, 300.0)
+    xyPlot.setRangeAxis(0, levelRangeAxis)
+
+    val dosageRangeAxis = new NumberAxis("Meds Dosage, Med")
+    dosageRangeAxis.setRange(0.0, 100.0)
+    xyPlot.setRangeAxis(1, dosageRangeAxis)
+    xyPlot.mapDatasetToRangeAxis(1, 1)
 
     val chart = new JFreeChart("Glucose-Meds", JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
     val chartPanel = new ChartPanel(chart)
