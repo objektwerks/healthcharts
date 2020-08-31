@@ -8,11 +8,11 @@ import javax.swing.BorderFactory
 import objektwerks.chart.Logger._
 import objektwerks.chart.Transformer._
 
-import org.jfree.chart.{ChartPanel, JFreeChart}
 import org.jfree.chart.axis.{DateAxis, NumberAxis}
 import org.jfree.chart.labels.StandardXYToolTipGenerator
 import org.jfree.chart.plot.{DatasetRenderingOrder, XYPlot}
-import org.jfree.chart.renderer.xy.{StandardXYItemRenderer, XYItemRenderer}
+import org.jfree.chart.renderer.xy.{XYItemRenderer, XYLineAndShapeRenderer}
+import org.jfree.chart.{ChartPanel, JFreeChart}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.{IntervalXYDataset, XYDataset}
 
@@ -89,19 +89,19 @@ object GlucoseMedsChart {
   }
 
   private def buildGlucoseRenderer(): XYItemRenderer = {
-    val renderer = new StandardXYItemRenderer()
+    val renderer = new XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator( 
         StandardXYToolTipGenerator.DEFAULT_TOOL_TIP_FORMAT,
         new SimpleDateFormat("H:m"),
         new DecimalFormat("0")
       )
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
-    renderer.setBaseShapesVisible(true)
+    renderer.setSeriesShapesVisible(0, true)
     renderer
   }
 
   private def buildMedRenderer(): XYItemRenderer = {
-    val renderer = new StandardXYItemRenderer()
+    val renderer = new XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String = {
         val formatter = new SimpleDateFormat("H:m")
@@ -114,7 +114,7 @@ object GlucoseMedsChart {
       }
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
-    renderer.setBaseShapesVisible(true)
+    renderer.setSeriesShapesVisible(1, true)
     renderer
   }
 }
