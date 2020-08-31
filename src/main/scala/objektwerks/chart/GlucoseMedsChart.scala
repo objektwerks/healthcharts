@@ -52,14 +52,14 @@ object GlucoseMedsChart {
     xyPlot.setRenderer(1, buildMedRenderer())
 
     val domainAxis = new DateAxis("Day, Time")
-    domainAxis.setDateFormatOverride(new SimpleDateFormat("d, H:mm"))
+    domainAxis.setDateFormatOverride(new SimpleDateFormat("d,H:mm"))
     xyPlot.setDomainAxis(0, domainAxis)
 
     val levelRangeAxis = new NumberAxis("Glucose Level")
     levelRangeAxis.setRange(0.0, 300.0)
     xyPlot.setRangeAxis(0, levelRangeAxis)
 
-    val dosageRangeAxis = new NumberAxis("Meds Dosage, Med")
+    val dosageRangeAxis = new NumberAxis("Dosage, Med")
     dosageRangeAxis.setRange(0.0, 100.0)
     xyPlot.setRangeAxis(1, dosageRangeAxis)
     xyPlot.mapDatasetToRangeAxis(1, 1)
