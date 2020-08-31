@@ -43,19 +43,17 @@ object GlucoseMedsChart {
     }
 
   private def build(glucoses: Glucoses, meds: Meds): ChartPanel = {
-    val glucoseTimeSeries = buildGlucoseTimeSeries(glucoses)
-    val glucoseRenderer = buildGlucoseRenderer()
-
-    val medTimeSeries = buildMedTimeSeries(meds)
-    val medRenderer = buildMedRenderer()
-
-    val dateAxis = new DateAxis("Time")
-    val valueAxis = new NumberAxis("Level / Dosage.Med")
-
-    val xyPlot = new XYPlot(glucoseTimeSeries, dateAxis, valueAxis, glucoseRenderer)
-    xyPlot.setDataset(1, medTimeSeries)
-    xyPlot.setRenderer(1, medRenderer)
+    val xyPlot = new XYPlot()
     xyPlot.setDatasetRenderingOrder(DatasetRenderingOrder.FORWARD)
+
+    xyPlot.setDataset(0, buildGlucoseTimeSeries(glucoses))
+    xyPlot.setRenderer(0, buildGlucoseRenderer())
+
+    xyPlot.setDataset(1, buildMedTimeSeries(meds))
+    xyPlot.setRenderer(1, buildMedRenderer())
+
+    xyPlot.setDomainAxis(new DateAxis("Time"))
+    xyPlot.setRangeAxis(new NumberAxis("Level / Dosage.Med"))
 
     val chart = new JFreeChart("Glucose-Meds", JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
     val chartPanel = new ChartPanel(chart)
