@@ -10,6 +10,7 @@ Glucose-Meds Chart
 3. Glucose Tooltip ( Glucose: ( d,H:m, n ) )
 4. Meds Tooltip ( Meds: ( d,H:m, n, "med" ) )
 5. Legend : Gluccose (Red), Meds (Blue)
+6. Title : Glucose-Meds : (y.m.d - y.m.d)
 
 Model
 -----
