@@ -1,6 +1,6 @@
 MedCharts
 ---------
->Medical charts.
+>Medcharts is an open source project, governed by GPL.V3.
 
 Glucose-Meds Chart
 ------------------
