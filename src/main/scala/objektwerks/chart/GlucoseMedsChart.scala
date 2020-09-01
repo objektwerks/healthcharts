@@ -51,11 +51,11 @@ object GlucoseMedsChart {
     xyPlot.setDataset(1, buildMedDataset(meds))
     xyPlot.setRenderer(1, buildMedRenderer())
 
-    val domainAxis = new DateAxis("Time")
-    domainAxis.setDateFormatOverride(new SimpleDateFormat("H:mm"))
+    val domainAxis = new DateAxis("Day,Hour")
+    domainAxis.setDateFormatOverride(new SimpleDateFormat("d,H"))
     xyPlot.setDomainAxis(0, domainAxis)
 
-    xyPlot.setRangeAxis(new NumberAxis("Level (Red) / Dosage (Blue)"))
+    xyPlot.setRangeAxis(new NumberAxis("Glucose Level (Red) / Med Dosage (Blue)"))
 
     val chart = new JFreeChart("Glucose-Meds", JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
     val chartPanel = new ChartPanel(chart)
@@ -85,7 +85,7 @@ object GlucoseMedsChart {
     val renderer = new XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator( 
         StandardXYToolTipGenerator.DEFAULT_TOOL_TIP_FORMAT,
-        new SimpleDateFormat("H:m"),
+        new SimpleDateFormat("d,H:m"),
         new DecimalFormat("0")
       )
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
@@ -97,7 +97,7 @@ object GlucoseMedsChart {
     val renderer = new XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String = {
-        val formatter = new SimpleDateFormat("H:m")
+        val formatter = new SimpleDateFormat("d,H:m")
         val time = formatter.format( new jdate.Date(dataset.getXValue(series, item).toLong) )
         val values = dataset.getYValue(series, item).toString.split("\\.")
         val dosage = Try{ values(0).toInt }.getOrElse(-1)
