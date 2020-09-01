@@ -5,10 +5,11 @@ MedCharts
 Glucose-Meds Chart
 ------------------
 >Composed of 2 Line charts, with:
-1. X-Axis : Time ( H:m )
-2. Y-Axis : Level / Dosage.Med ( n )
-3. Glucose Tooltip ( Glucose: ( H:m, n ) )
-4. Meds Tooltip ( Meds: ( H:m, n, "med" ) )
+1. X-Axis : Day,Hour ( d,H )
+2. Y-Axis : Glucose Level / Med Dosage ( n )
+3. Glucose Tooltip ( Glucose: ( d,H:m, n ) )
+4. Meds Tooltip ( Meds: ( d,H:m, n, "med" ) )
+5. Legend : Gluccose (Red), Meds (Blue)
 
 Model
 -----
