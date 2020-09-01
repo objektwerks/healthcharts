@@ -1,6 +1,7 @@
 MedCharts
 ---------
->Medcharts is an open source project, governed by GPL.V3.
+>Medcharts is an open source project governed by GPL.V3.
+>See license at ./GPL.V3
 
 Glucose-Meds Chart
 ------------------
