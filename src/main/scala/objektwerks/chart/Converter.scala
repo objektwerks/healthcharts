@@ -15,4 +15,12 @@ object Converter {
       localDateTime.getYear
     )
   }
+
+  def minuteToYearMonthDay(minute: Minute): String = {
+    val hour = minute.getHour
+    val year = hour.getYear
+    val month = hour.getMonth
+    val day = hour.getDayOfMonth
+    s"$year.$month.$day"
+  }
 }

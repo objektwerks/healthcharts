@@ -5,6 +5,7 @@ import java.{util => jdate}
 
 import javax.swing.BorderFactory
 
+import objektwerks.chart.Converter._
 import objektwerks.chart.Logger._
 import objektwerks.chart.Transformer._
 
@@ -57,12 +58,22 @@ object GlucoseMedsChart {
 
     xyPlot.setRangeAxis(new NumberAxis("Glucose Level (Red) / Med Dosage (Blue)"))
 
-    val chart = new JFreeChart("Glucose-Meds", JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
+    val title = buildTitle(glucoses.lines)
+    val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
+
     val chartPanel = new ChartPanel(chart)
     chartPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15))
     chartPanel.setInitialDelay(100)
     chartPanel.setReshowDelay(100)
     chartPanel
+  }
+
+  private def buildTitle(glucoses: Array[Glucose]): String = {
+    if (glucoses.length >= 2) {
+      val first = minuteToYearMonthDay(glucoses.head.datetime)
+      val last = minuteToYearMonthDay(glucoses.last.datetime)
+      s"Glucose-Meds : $first - $last"
+    } else "Glucose-Meds"
   }
 
   private def buildGlucoseDataset(glucoses: Glucoses): IntervalXYDataset = {
