@@ -68,14 +68,6 @@ object GlucoseMedsChart {
     chartPanel
   }
 
-  private def buildTitle(glucoses: Array[Glucose]): String = {
-    if (glucoses.length >= 2) {
-      val first = minuteToYearMonthDay(glucoses.head.datetime)
-      val last = minuteToYearMonthDay(glucoses.last.datetime)
-      s"Glucose-Meds : $first - $last"
-    } else "Glucose-Meds"
-  }
-
   private def buildGlucoseDataset(glucoses: Glucoses): IntervalXYDataset = {
     val timeSeries = new TimeSeries("Glucose")
     glucoses.lines.foreach { glucose =>
@@ -120,5 +112,13 @@ object GlucoseMedsChart {
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
     renderer.setDefaultShapesVisible(true)
     renderer
+  }
+
+  private def buildTitle(glucoses: Array[Glucose]): String = {
+    if (glucoses.length >= 2) {
+      val first = minuteToYearMonthDay(glucoses.head.datetime)
+      val last = minuteToYearMonthDay(glucoses.last.datetime)
+      s"Glucose-Meds : $first - $last"
+    } else "Glucose-Meds"
   }
 }
