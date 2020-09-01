@@ -2,13 +2,15 @@ package objektwerks.chart
 
 import java.awt.{BorderLayout, EventQueue}
 
-import javax.swing.{JFrame, JMenu, JMenuItem, JMenuBar, WindowConstants}
+import javax.swing.{JFrame, JMenu, JMenuItem, JMenuBar, UIManager, WindowConstants}
 
 object App {
   val centerWindow = null
   def main(args: Array[String]): Unit = {
     EventQueue.invokeLater( new Runnable() {
       override def run(): Unit = {
+        UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName())
+
         // TODO: Show file dialog for both paths.
         val chart = GlucoseMedsChart(glucoseCsvPath = "./data/glucose/glucose.txt", medsCsvPath = "./data/meds/meds.txt")
         
