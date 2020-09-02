@@ -69,7 +69,7 @@ object GlucoseMedsChart {
   }
 
   private def buildGlucoseDataset(glucoses: Glucoses): IntervalXYDataset = {
-    val timeSeries = new TimeSeries("Glucose")
+    val timeSeries = new TimeSeries("Glucose".asInstanceOf[Comparable[String]])
     glucoses.lines.foreach { glucose =>
       timeSeries.add( glucose.datetime, glucose.level.toDouble )
     }
@@ -77,7 +77,7 @@ object GlucoseMedsChart {
   }
 
   private def buildMedDataset(meds: Meds): IntervalXYDataset = {
-    val timeSeries = new TimeSeries("Meds")
+    val timeSeries = new TimeSeries("Meds".asInstanceOf[Comparable[String]])
     meds.lines.foreach { med =>
       timeSeries.add( med.datetime, s"${med.dosage}.${med.medtype.id}".toDouble )
     }
