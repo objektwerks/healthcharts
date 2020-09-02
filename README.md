@@ -17,8 +17,8 @@ Model
 1. Glucose: datetime, level (1)
 2. Med: datetime, medtype (2), dosage (3)
 
-Notes
------
+Model Notes
+-----------
 1. 0 - 300, 70 - 100 is normal
 2. 1 -> insulin, 2 -> steroids
 3. 1 - 100 
@@ -50,11 +50,12 @@ Med CSV
 
 Test
 ----
-sbt clean test
+1. sbt clean test
 
 Run
 ---
-sbt run
+1. sbt run
+2. The chart UI is still a work-in-progress. Mouseover line data points for tooltip details.
 
 Package
 -------
