@@ -16,4 +16,5 @@ object Conf {
 
   val glucoseMedsChartXAxisTitle = conf.getString("glucoseMedsChartXAxisTitle")
   val glucoseMedsChartYAxisTitle = conf.getString("glucoseMedsChartYAxisTitle")
+  val glucoseMedsDialogTitle = conf.getString("glucoseMedsDialogTitle")
 }
