@@ -6,6 +6,7 @@ import java.awt.event.{ActionEvent, ActionListener}
 
 import javax.swing.{JButton, JDialog, JFileChooser, JLabel, JPanel}
 import javax.swing.filechooser.FileSystemView
+import javax.swing.filechooser.FileNameExtensionFilter
 
 import net.miginfocom.swing.MigLayout
 
@@ -53,9 +54,7 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
   private def buildCancelButton(label: String): JButton = {
     val button = new JButton(label)
     button.addActionListener( new ActionListener() {
-      override def actionPerformed(event: ActionEvent): Unit = {
-        setVisible(false)
-      }
+      override def actionPerformed(event: ActionEvent): Unit = setVisible(false)
     })
     button
   }
@@ -63,15 +62,17 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
   private def buildSelectButton(label: String): JButton = {
     val button = new JButton(label)
     button.addActionListener( new ActionListener() {
-      override def actionPerformed(event: ActionEvent): Unit = {
-        setVisible(false)
-      }
+      override def actionPerformed(event: ActionEvent): Unit = setVisible(false)
     })
     button
   }
 
   private def selectFile: Option[String] = {
     val fileChooser = new JFileChooser(FileSystemView.getFileSystemView.getHomeDirectory)
+    fileChooser.setDialogTitle(Conf.glucoseMedsFileChooserTitle)
+    fileChooser.setAcceptAllFileFilterUsed(false)
+    val filter = new FileNameExtensionFilter(Conf.glucoseMedsFileExtensionFilter, "csv", "txt")
+    fileChooser.addChoosableFileFilter(filter)
     if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
       Some(fileChooser.getSelectedFile.getAbsolutePath)
     else None

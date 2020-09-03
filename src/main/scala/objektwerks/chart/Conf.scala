@@ -22,4 +22,6 @@ object Conf {
   val medsCsvLabel = conf.getString("medsCsvLabel")
   val glucoseMedsCancelLabel = conf.getString("glucoseMedsCancelLabel")
   val glucoseMedsSelectLabel = conf.getString("glucoseMedsSelectLabel")
+  val glucoseMedsFileChooserTitle = conf.getString("glucoseMedsFileChooserTitle")
+  val glucoseMedsFileExtensionFilter = conf.getString("glucoseMedsFileExtensionFilter")
 }
