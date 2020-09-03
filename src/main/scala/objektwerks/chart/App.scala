@@ -2,32 +2,21 @@ package objektwerks.chart
 
 import java.awt.{BorderLayout, EventQueue}
 
-import javax.swing.{JFrame, JMenu, JMenuItem, JMenuBar, UIManager, WindowConstants}
+import javax.swing.UIManager._
 
 object App {
-  val centerWindow = null
   def main(args: Array[String]): Unit = {
     EventQueue.invokeLater( new Runnable() {
       override def run(): Unit = {
-        UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName())
+        setLookAndFeel(getCrossPlatformLookAndFeelClassName())
+        
+        val frame = new Frame()
 
-        // TODO: Show file dialog for both paths.
+        // TODO: Show glucose.meds dialog.
         val chart = GlucoseMedsChart(glucoseCsvPath = "./data/glucose/glucose.txt", medsCsvPath = "./data/meds/meds.txt")
-        
-        val menubar = new JMenuBar()
-        val menu = new JMenu("Charts")
-        val menuItem = new JMenuItem("Glucose-Meds")
-        menu.add(menuItem)
-        menubar.add(menu)
-        
-        val frame = new JFrame()
-        frame.setJMenuBar(menubar)
-        frame.getContentPane.add(chart, BorderLayout.CENTER)
-        frame.setTitle("MedCharts")
-        frame.setSize(900, 600)
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
-        frame.setLocationRelativeTo(centerWindow)
-        frame.setVisible(true);
+        frame.getContentPane.add(chart, BorderLayout.CENTER) // Temporary!
+
+        frame.setVisible(true)
       }
     })
   }
