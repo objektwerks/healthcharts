@@ -1,13 +1,11 @@
 package objektwerks.chart
 
 import java.awt.BorderLayout
-
 import java.awt.event.{ActionEvent, ActionListener}
 
-import javax.swing.{JButton, JDialog, JFileChooser, JLabel, JPanel}
+import javax.swing.{JButton, JDialog, JFileChooser, JLabel, JOptionPane, JPanel}
 import javax.swing.filechooser.FileSystemView
 import javax.swing.filechooser.FileNameExtensionFilter
-
 import net.miginfocom.swing.MigLayout
 
 class GlucoseMedsDialog(frame: Frame) extends JDialog {
@@ -25,13 +23,13 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
   }
 
   private def buildSelectPanel(selectButtonLabel: String, cancelButtonLabel: String): JPanel = {
-    val panel = new JPanel(new MigLayout())
-    panel.add( new JLabel(Conf.glucoseCsvLabel) )
-    panel.add( buildGlucoseSelectButton(selectButtonLabel) )
-    panel.add( new JLabel(Conf.medsCsvLabel) )
-    panel.add( buildMedsSelectButton(selectButtonLabel) )
-    panel.add( buildCancelButton(cancelButtonLabel) )
-    panel.add( buildSelectButton(selectButtonLabel) )
+    val panel = new JPanel( new MigLayout() )
+    panel.add( new JLabel(Conf.glucoseCsvLabel), "align label" )
+    panel.add( buildGlucoseSelectButton(selectButtonLabel), "wrap" )
+    panel.add( new JLabel(Conf.medsCsvLabel), "align label" )
+    panel.add( buildMedsSelectButton(selectButtonLabel), "wrap" )
+    panel.add( buildCancelButton(cancelButtonLabel), "tag cancel, sizegroup bttn" )
+    panel.add( buildSelectButton(selectButtonLabel, this), "tag ok, sizegroup bttn" )
     panel
   }
 
@@ -59,10 +57,15 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
     button
   }
 
-  private def buildSelectButton(label: String): JButton = {
+  private def buildSelectButton(label: String, dialog: JDialog): JButton = {
     val button = new JButton(label)
     button.addActionListener( new ActionListener() {
-      override def actionPerformed(event: ActionEvent): Unit = setVisible(false)
+      override def actionPerformed(event: ActionEvent): Unit = {
+        if (pathToGlucoseCsv.isDefined && pathToMedsCsv.isDefined)
+          setVisible(false)
+        else if (pathToGlucoseCsv.isEmpty || pathToMedsCsv.isEmpty)
+          JOptionPane.showMessageDialog(dialog, Conf.glucoseMedsSelectMessage)
+      }
     })
     button
   }
