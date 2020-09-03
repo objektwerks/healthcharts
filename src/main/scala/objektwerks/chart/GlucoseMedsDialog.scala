@@ -9,12 +9,17 @@ import net.miginfocom.swing.MigLayout
 class GlucoseMedsDialog(frame: Frame) extends JDialog {
   setTitle(Conf.glucoseMedsDialogTitle)
 
+  val selectLabel = Conf.glucoseMedsDialogSelectButton
+  val glucoseCsvSelectButton = new JButton(selectLabel)
+  val medsCsvSelectButton = new JButton(selectLabel)
+  val selectButton = new JButton(selectLabel)
+
   val panel = new JPanel(new MigLayout())
   panel.add( new JLabel(Conf.glucoseCsvLabel) )
-  panel.add( new JButton(Conf.glucoseMedsDialogSelectButton) )
+  panel.add( glucoseCsvSelectButton )
   panel.add( new JLabel(Conf.medsCsvLabel) )
-  panel.add( new JButton(Conf.glucoseMedsDialogSelectButton) )
-  panel.add( new JButton(Conf.glucoseMedsDialogSelectButton) )
+  panel.add( medsCsvSelectButton )
+  panel.add( selectButton )
   add(panel, BorderLayout.CENTER)
 
   setModal(true)
