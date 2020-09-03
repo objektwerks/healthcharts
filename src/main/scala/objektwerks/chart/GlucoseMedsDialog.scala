@@ -9,16 +9,17 @@ import javax.swing.{JButton, JDialog, JLabel, JPanel}
 import net.miginfocom.swing.MigLayout
 
 class GlucoseMedsDialog(frame: Frame) extends JDialog {
-  val gluccoseFile = None
-  val medsFile = None
+  private val pathToGlucoseCsv = Option.empty[String]
+  private val pathToMedsCsv = Option.empty[String]
 
-  def view(): Unit = {
+  def view(): (Option[String], Option[String]) = {
     setTitle(Conf.glucoseMedsDialogTitle)
     add(buildSelectPanel(Conf.glucoseMedsSelectLabel), BorderLayout.CENTER)
     setModal(true)
     setLocationRelativeTo(frame)
     pack()
     setVisible(true)
+    (pathToGlucoseCsv, pathToMedsCsv)
   }
 
   private def buildSelectPanel(selectButtonLabel: String): JPanel = {
