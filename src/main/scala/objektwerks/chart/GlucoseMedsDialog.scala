@@ -6,6 +6,7 @@ import java.awt.event.{ActionEvent, ActionListener}
 import javax.swing.{JButton, JDialog, JFileChooser, JLabel, JOptionPane, JPanel, JTextField}
 import javax.swing.filechooser.FileSystemView
 import javax.swing.filechooser.FileNameExtensionFilter
+
 import net.miginfocom.swing.MigLayout
 
 class GlucoseMedsDialog(frame: Frame) extends JDialog {
