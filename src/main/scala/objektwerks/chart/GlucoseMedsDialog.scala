@@ -11,10 +11,10 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
 
   val panel = new JPanel(new MigLayout())
   panel.add( new JLabel(Conf.glucoseCsvLabel) )
-  panel.add( new JFileChooser() )
+  panel.add( new JButton(Conf.glucoseMedsDialogSelectButton) )
   panel.add( new JLabel(Conf.medsCsvLabel) )
-  panel.add( new JFileChooser() )
-  panel.add( new JButton(Conf.glucoseMedsDialogButton) )
+  panel.add( new JButton(Conf.glucoseMedsDialogSelectButton) )
+  panel.add( new JButton(Conf.glucoseMedsDialogSelectButton) )
   add(panel, BorderLayout.CENTER)
 
   setModal(true)
