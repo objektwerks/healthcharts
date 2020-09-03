@@ -4,13 +4,14 @@ import java.awt.BorderLayout
 
 import java.awt.event.{ActionEvent, ActionListener}
 
-import javax.swing.{JButton, JDialog, JLabel, JPanel}
+import javax.swing.{JButton, JDialog, JFileChooser, JLabel, JPanel}
+import javax.swing.filechooser.FileSystemView
 
 import net.miginfocom.swing.MigLayout
 
 class GlucoseMedsDialog(frame: Frame) extends JDialog {
-  private val pathToGlucoseCsv = Option.empty[String]
-  private val pathToMedsCsv = Option.empty[String]
+  private var pathToGlucoseCsv = Option.empty[String]
+  private var pathToMedsCsv = Option.empty[String]
 
   def view(): (Option[String], Option[String]) = {
     setTitle(Conf.glucoseMedsDialogTitle)
@@ -35,27 +36,23 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
 
   private def buildGlucoseSelectButton(label: String): JButton = {
     val button = new JButton(label)
-    button.addActionListener(new ActionListener() {
-      override def actionPerformed(event: ActionEvent): Unit = {
-        println(event) // JFileChooser code.
-      }
+    button.addActionListener( new ActionListener() {
+      override def actionPerformed(event: ActionEvent): Unit = pathToGlucoseCsv = selectFile
     })
     button
   }
 
   private def buildMedsSelectButton(label: String): JButton = {
     val button = new JButton(label)
-    button.addActionListener(new ActionListener() {
-      override def actionPerformed(event: ActionEvent): Unit = {
-        println(event) // JFileChooser code.
-      }
+    button.addActionListener( new ActionListener() {
+      override def actionPerformed(event: ActionEvent): Unit = pathToMedsCsv = selectFile
     })
     button
   }
 
   private def buildCancelButton(label: String): JButton = {
     val button = new JButton(label)
-    button.addActionListener(new ActionListener() {
+    button.addActionListener( new ActionListener() {
       override def actionPerformed(event: ActionEvent): Unit = {
         setVisible(false)
       }
@@ -65,11 +62,18 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
 
   private def buildSelectButton(label: String): JButton = {
     val button = new JButton(label)
-    button.addActionListener(new ActionListener() {
+    button.addActionListener( new ActionListener() {
       override def actionPerformed(event: ActionEvent): Unit = {
         setVisible(false)
       }
     })
     button
+  }
+
+  private def selectFile: Option[String] = {
+    val fileChooser = new JFileChooser(FileSystemView.getFileSystemView.getHomeDirectory)
+    if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
+      Some(fileChooser.getSelectedFile.getAbsolutePath)
+    else None
   }
 }
