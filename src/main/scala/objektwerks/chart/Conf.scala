@@ -11,5 +11,9 @@ object Conf {
 
   val menuBarTitle = conf.getString("menuBarTitle")
 
-  val actionGlucoseMeds = conf.getString("actionGlucoseMeds")
+  val glucoseMedsTitle = conf.getString("glucoseMedsTitle")
+  val medsTitle = conf.getString("medsTitle")
+
+  val glucoseMedsChartXAxisTitle = conf.getString("glucoseMedsChartXAxisTitle")
+  val glucoseMedsChartYAxisTitle = conf.getString("glucoseMedsChartYAxisTitle")
 }

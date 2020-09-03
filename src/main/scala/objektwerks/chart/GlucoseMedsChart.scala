@@ -52,11 +52,11 @@ object GlucoseMedsChart {
     xyPlot.setDataset(1, buildMedDataset(meds))
     xyPlot.setRenderer(1, buildMedRenderer())
 
-    val domainAxis = new DateAxis("Day,Hour")
+    val domainAxis = new DateAxis(Conf.glucoseMedsChartXAxisTitle)
     domainAxis.setDateFormatOverride(new SimpleDateFormat("d,H"))
     xyPlot.setDomainAxis(0, domainAxis)
 
-    xyPlot.setRangeAxis(new NumberAxis("Glucose Level (Red) / Med Dosage (Blue)"))
+    xyPlot.setRangeAxis(new NumberAxis(Conf.glucoseMedsChartYAxisTitle))
 
     val title = buildTitle(glucoses.lines)
     val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
@@ -106,7 +106,7 @@ object GlucoseMedsChart {
         val dosage = Try{ values(0).toInt }.getOrElse(-1)
         val medtype = Try{ values(1).toInt }.getOrElse(-1)
         val med = MedType.idToMedType.getOrElse(medtype, "n/a")
-        s"Meds: ($time, $dosage, $med)"
+        s"${Conf.medsTitle}: ($time, $dosage, $med)"
       }
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
@@ -118,7 +118,7 @@ object GlucoseMedsChart {
     if (glucoses.length >= 2) {
       val first = minuteToYearMonthDay(glucoses.head.datetime)
       val last = minuteToYearMonthDay(glucoses.last.datetime)
-      s"Glucose-Meds : $first - $last"
-    } else "Glucose-Meds"
+      s"${Conf.glucoseMedsTitle} : $first - $last"
+    } else Conf.glucoseMedsTitle
   }
 }
