@@ -3,30 +3,38 @@ package objektwerks.chart
 import java.awt.BorderLayout
 import java.awt.event.{ActionEvent, ActionListener}
 
-import javax.swing.{JButton, JDialog, JFileChooser, JLabel, JOptionPane, JPanel}
+import javax.swing.{JButton, JDialog, JFileChooser, JLabel, JOptionPane, JPanel, JTextField}
 import javax.swing.filechooser.FileSystemView
 import javax.swing.filechooser.FileNameExtensionFilter
 import net.miginfocom.swing.MigLayout
 
 class GlucoseMedsDialog(frame: Frame) extends JDialog {
-  private var pathToGlucoseCsv = Option.empty[String]
-  private var pathToMedsCsv = Option.empty[String]
+  private val pathToGlucoseCsvTextField = new JTextField()
+  private val pathToMedsCsvTextField = new JTextField()
 
-  def view(): (Option[String], Option[String]) = {
+  def view(): (String, String) = {
     setTitle(Conf.glucoseMedsDialogTitle)
-    add(buildSelectPanel(Conf.glucoseMedsSelectLabel, Conf.glucoseMedsCancelLabel), BorderLayout.CENTER)
+    add(buildSelectPanel(Conf.glucoseMedsSelectLabel,
+                         Conf.glucoseMedsCancelLabel,
+                         pathToGlucoseCsvTextField,
+                         pathToMedsCsvTextField), BorderLayout.CENTER)
     setModal(true)
     setLocationRelativeTo(frame)
     pack()
     setVisible(true)
-    (pathToGlucoseCsv, pathToMedsCsv)
+    (pathToGlucoseCsvTextField.getText, pathToMedsCsvTextField.getText)
   }
 
-  private def buildSelectPanel(selectButtonLabel: String, cancelButtonLabel: String): JPanel = {
+  private def buildSelectPanel(selectButtonLabel: String,
+                               cancelButtonLabel: String,
+                               pathToGlucoseCsvTextField: JTextField,
+                               pathToMedsCsvTextField: JTextField): JPanel = {
     val panel = new JPanel( new MigLayout() )
     panel.add( new JLabel(Conf.glucoseCsvLabel), "align label" )
+    panel.add( pathToGlucoseCsvTextField )
     panel.add( buildGlucoseSelectButton(selectButtonLabel), "wrap" )
     panel.add( new JLabel(Conf.medsCsvLabel), "align label" )
+    panel.add( pathToMedsCsvTextField )
     panel.add( buildMedsSelectButton(selectButtonLabel), "wrap" )
     panel.add( buildCancelButton(cancelButtonLabel), "tag cancel, sizegroup bttn" )
     panel.add( buildSelectButton(selectButtonLabel, this), "tag ok, sizegroup bttn" )
@@ -36,7 +44,9 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
   private def buildGlucoseSelectButton(label: String): JButton = {
     val button = new JButton(label)
     button.addActionListener( new ActionListener() {
-      override def actionPerformed(event: ActionEvent): Unit = pathToGlucoseCsv = selectFile
+      override def actionPerformed(event: ActionEvent): Unit = {
+        pathToGlucoseCsvTextField.setText( selectFile.getOrElse("") )
+      }
     })
     button
   }
@@ -44,7 +54,9 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
   private def buildMedsSelectButton(label: String): JButton = {
     val button = new JButton(label)
     button.addActionListener( new ActionListener() {
-      override def actionPerformed(event: ActionEvent): Unit = pathToMedsCsv = selectFile
+      override def actionPerformed(event: ActionEvent): Unit = {
+        pathToMedsCsvTextField.setText( selectFile.getOrElse("") )
+      }
     })
     button
   }
@@ -61,9 +73,9 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
     val button = new JButton(label)
     button.addActionListener( new ActionListener() {
       override def actionPerformed(event: ActionEvent): Unit = {
-        if (pathToGlucoseCsv.isDefined && pathToMedsCsv.isDefined)
+        if (pathToGlucoseCsvTextField.getText.nonEmpty && pathToMedsCsvTextField.getText.nonEmpty)
           setVisible(false)
-        else if (pathToGlucoseCsv.isEmpty || pathToMedsCsv.isEmpty)
+        else if (pathToGlucoseCsvTextField.getText.isEmpty || pathToMedsCsvTextField.getText.isEmpty)
           JOptionPane.showMessageDialog(dialog, Conf.glucoseMedsSelectMessage)
       }
     })
