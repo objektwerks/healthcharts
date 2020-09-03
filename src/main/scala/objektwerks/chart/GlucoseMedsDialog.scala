@@ -14,7 +14,7 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
 
   def view(): (Option[String], Option[String]) = {
     setTitle(Conf.glucoseMedsDialogTitle)
-    add(buildSelectPanel(Conf.glucoseMedsSelectLabel), BorderLayout.CENTER)
+    add(buildSelectPanel(Conf.glucoseMedsSelectLabel, Conf.glucoseMedsCancelLabel), BorderLayout.CENTER)
     setModal(true)
     setLocationRelativeTo(frame)
     pack()
@@ -22,12 +22,13 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
     (pathToGlucoseCsv, pathToMedsCsv)
   }
 
-  private def buildSelectPanel(selectButtonLabel: String): JPanel = {
+  private def buildSelectPanel(selectButtonLabel: String, cancelButtonLabel: String): JPanel = {
     val panel = new JPanel(new MigLayout())
     panel.add( new JLabel(Conf.glucoseCsvLabel) )
     panel.add( buildGlucoseSelectButton(selectButtonLabel) )
     panel.add( new JLabel(Conf.medsCsvLabel) )
     panel.add( buildMedsSelectButton(selectButtonLabel) )
+    panel.add( buildCancelButton(cancelButtonLabel) )
     panel.add( buildSelectButton(selectButtonLabel) )
     panel
   }
@@ -36,7 +37,7 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
     val button = new JButton(label)
     button.addActionListener(new ActionListener() {
       override def actionPerformed(event: ActionEvent): Unit = {
-        println(event)
+        println(event) // JFileChooser code.
       }
     })
     button
@@ -46,7 +47,17 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
     val button = new JButton(label)
     button.addActionListener(new ActionListener() {
       override def actionPerformed(event: ActionEvent): Unit = {
-        println(event)
+        println(event) // JFileChooser code.
+      }
+    })
+    button
+  }
+
+  private def buildCancelButton(label: String): JButton = {
+    val button = new JButton(label)
+    button.addActionListener(new ActionListener() {
+      override def actionPerformed(event: ActionEvent): Unit = {
+        setVisible(false)
       }
     })
     button
@@ -56,7 +67,7 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
     val button = new JButton(label)
     button.addActionListener(new ActionListener() {
       override def actionPerformed(event: ActionEvent): Unit = {
-        println(event)
+        setVisible(false)
       }
     })
     button
