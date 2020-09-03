@@ -11,8 +11,8 @@ import net.miginfocom.swing.MigLayout
 class GlucoseMedsDialog(frame: Frame) extends JDialog {
   setTitle(Conf.glucoseMedsDialogTitle)
 
-  val dialogPanel = buildDialogPanel(Conf.glucoseMedsDialogSelectButton)
-  add(dialogPanel, BorderLayout.CENTER)
+  val selectPanel = buildDialogPanel(Conf.glucoseMedsDialogSelectButton)
+  add(selectPanel, BorderLayout.CENTER)
 
   setModal(true)
   setLocationRelativeTo(frame)
