@@ -20,6 +20,5 @@ object Conf {
 
   val glucoseCsvLabel = conf.getString("glucoseCsvLabel")
   val medsCsvLabel = conf.getString("medsCsvLabel")
-
-  val glucoseMedsDialogSelectButton = conf.getString("glucoseMedsDialogSelectButton")
+  val glucoseMedsSelectLabel = conf.getString("glucoseMedsSelectLabel")
 }
