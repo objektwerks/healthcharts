@@ -10,7 +10,9 @@ import net.miginfocom.swing.MigLayout
 
 class GlucoseMedsDialog(frame: Frame) extends JDialog {
   private val pathToGlucoseCsvTextField = new JTextField()
+  pathToGlucoseCsvTextField.setEditable(false)
   private val pathToMedsCsvTextField = new JTextField()
+  pathToMedsCsvTextField.setEditable(false)
 
   def view(): (String, String) = {
     setTitle(Conf.glucoseMedsDialogTitle)
