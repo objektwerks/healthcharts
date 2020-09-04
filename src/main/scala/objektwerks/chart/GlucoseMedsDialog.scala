@@ -27,10 +27,10 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
   private def buildSelectPanel(selectLabel: String, cancelLabel: String): JPanel = {
     val panel = new JPanel( new MigLayout() )
     panel.add( new JLabel(Conf.glucoseCsvLabel), "align label" )
-    panel.add( glucoseCsvTextField )
+    panel.add( glucoseCsvTextField, "span" )
     panel.add( buildGlucoseSelectButton(selectLabel), "wrap" )
     panel.add( new JLabel(Conf.medsCsvLabel), "align label" )
-    panel.add( medsCsvTextField )
+    panel.add( medsCsvTextField, "span" )
     panel.add( buildMedsSelectButton(selectLabel), "wrap" )
     panel.add( buildCancelButton(cancelLabel), "tag cancel, sizegroup bttn" )
     panel.add( selectButton, "tag ok, sizegroup bttn" )
@@ -39,7 +39,7 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
 
   private def buildTextField: JTextField = {
     val textField = new JTextField()
-    textField.setEditable(false)
+    textField.setEnabled(false)
     textField
   }
 
