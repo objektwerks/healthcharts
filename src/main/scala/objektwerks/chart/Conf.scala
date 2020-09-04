@@ -24,5 +24,4 @@ object Conf {
   val glucoseMedsSelectLabel = conf.getString("glucoseMedsSelectLabel")
   val glucoseMedsFileChooserTitle = conf.getString("glucoseMedsFileChooserTitle")
   val glucoseMedsFileExtensionFilter = conf.getString("glucoseMedsFileExtensionFilter")
-  val glucoseMedsSelectMessage = conf.getString("glucoseMedsSelectMessage")
 }
