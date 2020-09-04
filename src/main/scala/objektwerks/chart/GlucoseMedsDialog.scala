@@ -19,8 +19,8 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
     setTitle(Conf.glucoseMedsDialogTitle)
     add(buildSelectPanel(Conf.cancelLabel), BorderLayout.CENTER)
     setModal(true)
-    setLocationRelativeTo(null)
     pack()
+    setLocationRelativeTo(frame)
     setVisible(true)
     (glucoseCsvTextField.getText, medsCsvTextField.getText)
   }
