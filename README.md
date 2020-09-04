@@ -14,7 +14,11 @@ Test
 Run
 ---
 1. sbt run
-2. The chart UI is still a work-in-progress. Mouseover line data points for tooltip details.
+2. Click Charts Menu
+3. Click Glucose-Meds
+4. Select Glucose and Meds Csv file paths in Dialog
+5. Click enabled Select Button
+6. View chart!
 
 Package
 -------
