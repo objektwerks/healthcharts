@@ -16,7 +16,7 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
 
   def view(): (String, String) = {
     setTitle(Conf.glucoseMedsDialogTitle)
-    add(buildSelectPanel(Conf.selectLabel, Conf.cancelLabel), BorderLayout.CENTER)
+    add(buildSelectPanel(Conf.cancelLabel), BorderLayout.CENTER)
     setModal(true)
     setLocationRelativeTo(frame)
     pack()
@@ -24,14 +24,14 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
     (glucoseCsvTextField.getText, medsCsvTextField.getText)
   }
 
-  private def buildSelectPanel(selectLabel: String, cancelLabel: String): JPanel = {
+  private def buildSelectPanel(cancelLabel: String): JPanel = {
     val panel = new JPanel( new MigLayout() )
     panel.add( new JLabel(Conf.glucoseCsvLabel), "align label" )
-    panel.add( glucoseCsvTextField, "span" )
-    panel.add( buildGlucoseSelectButton(selectLabel), "wrap" )
+    panel.add( glucoseCsvTextField, "grow" )
+    panel.add( buildGlucoseSelectButton("..."), "wrap" )
     panel.add( new JLabel(Conf.medsCsvLabel), "align label" )
-    panel.add( medsCsvTextField, "span" )
-    panel.add( buildMedsSelectButton(selectLabel), "wrap" )
+    panel.add( medsCsvTextField, "grow" )
+    panel.add( buildMedsSelectButton("..."), "wrap" )
     panel.add( buildCancelButton(cancelLabel), "tag cancel, sizegroup bttn" )
     panel.add( selectButton, "tag ok, sizegroup bttn" )
     panel
