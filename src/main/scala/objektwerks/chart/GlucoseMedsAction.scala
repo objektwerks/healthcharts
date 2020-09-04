@@ -13,5 +13,6 @@ class GlucoseMedsAction(name: String, frame: Frame) extends AbstractAction(name)
     println(s"*** action meds path: $pathToMedsCsv") // Todo
     val chart = GlucoseMedsChart(glucoseCsvPath = pathToGlucoseCsv, medsCsvPath = pathToMedsCsv)
     frame.add(chart, BorderLayout.CENTER)
+    frame.revalidate()
   }
 }
