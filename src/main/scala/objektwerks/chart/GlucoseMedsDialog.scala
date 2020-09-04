@@ -8,6 +8,7 @@ import javax.swing.filechooser.FileSystemView
 import javax.swing.filechooser.FileNameExtensionFilter
 
 import net.miginfocom.swing.MigLayout
+import java.awt.Dimension
 
 class GlucoseMedsDialog(frame: Frame) extends JDialog {
   private val glucoseCsvTextField = buildTextField
@@ -18,7 +19,7 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
     setTitle(Conf.glucoseMedsDialogTitle)
     add(buildSelectPanel(Conf.cancelLabel), BorderLayout.CENTER)
     setModal(true)
-    setLocationRelativeTo(frame)
+    setLocationRelativeTo(null)
     pack()
     setVisible(true)
     (glucoseCsvTextField.getText, medsCsvTextField.getText)
@@ -32,14 +33,15 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
     panel.add( new JLabel(Conf.medsCsvLabel), "align label" )
     panel.add( medsCsvTextField, "grow" )
     panel.add( buildMedsSelectButton("..."), "wrap" )
-    panel.add( buildCancelButton(cancelLabel), "tag cancel, sizegroup bttn" )
-    panel.add( selectButton, "tag ok, sizegroup bttn" )
+    panel.add( buildCancelButton(cancelLabel), "span, split 2, align right" )
+    panel.add( selectButton )
     panel
   }
 
   private def buildTextField: JTextField = {
     val textField = new JTextField()
-    textField.setEnabled(false)
+    textField.setEditable(false)
+    textField.setPreferredSize(new Dimension(300, 30))
     textField
   }
 
@@ -88,7 +90,7 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
     fileChooser.setAcceptAllFileFilterUsed(false)
     val filter = new FileNameExtensionFilter(Conf.glucoseMedsFileExtensionFilter, "csv", "txt")
     fileChooser.addChoosableFileFilter(filter)
-    if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
+    if (fileChooser.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION)
       Some(fileChooser.getSelectedFile.getAbsolutePath)
     else None
   }
