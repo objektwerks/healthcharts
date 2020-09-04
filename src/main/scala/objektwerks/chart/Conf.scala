@@ -14,14 +14,15 @@ object Conf {
   val glucoseMedsTitle = conf.getString("glucoseMedsTitle")
   val medsTitle = conf.getString("medsTitle")
 
+  val cancelLabel = conf.getString("cancelLabel")
+  val selectLabel = conf.getString("selectLabel")
+
   val glucoseMedsChartXAxisTitle = conf.getString("glucoseMedsChartXAxisTitle")
   val glucoseMedsChartYAxisTitle = conf.getString("glucoseMedsChartYAxisTitle")
   val glucoseMedsDialogTitle = conf.getString("glucoseMedsDialogTitle")
 
   val glucoseCsvLabel = conf.getString("glucoseCsvLabel")
   val medsCsvLabel = conf.getString("medsCsvLabel")
-  val glucoseMedsCancelLabel = conf.getString("glucoseMedsCancelLabel")
-  val glucoseMedsSelectLabel = conf.getString("glucoseMedsSelectLabel")
   val glucoseMedsFileChooserTitle = conf.getString("glucoseMedsFileChooserTitle")
   val glucoseMedsFileExtensionFilter = conf.getString("glucoseMedsFileExtensionFilter")
 }

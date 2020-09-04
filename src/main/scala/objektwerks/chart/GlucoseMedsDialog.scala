@@ -12,15 +12,11 @@ import net.miginfocom.swing.MigLayout
 class GlucoseMedsDialog(frame: Frame) extends JDialog {
   private val glucoseCsvTextField = buildTextField
   private val medsCsvTextField = buildTextField
-  private val selectButton = buildSelectButton(Conf.glucoseMedsSelectLabel, this)
+  private val selectButton = buildSelectButton(Conf.selectLabel)
 
   def view(): (String, String) = {
     setTitle(Conf.glucoseMedsDialogTitle)
-    add(buildSelectPanel(Conf.glucoseMedsSelectLabel,
-                         Conf.glucoseMedsCancelLabel,
-                         glucoseCsvTextField,
-                         medsCsvTextField,
-                         selectButton), BorderLayout.CENTER)
+    add(buildSelectPanel(Conf.selectLabel, Conf.cancelLabel), BorderLayout.CENTER)
     setModal(true)
     setLocationRelativeTo(frame)
     pack()
@@ -28,19 +24,15 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
     (glucoseCsvTextField.getText, medsCsvTextField.getText)
   }
 
-  private def buildSelectPanel(selectButtonLabel: String,
-                               cancelButtonLabel: String,
-                               pathToGlucoseCsvTextField: JTextField,
-                               pathToMedsCsvTextField: JTextField,
-                               selectButton: JButton): JPanel = {
+  private def buildSelectPanel(selectLabel: String, cancelLabel: String): JPanel = {
     val panel = new JPanel( new MigLayout() )
     panel.add( new JLabel(Conf.glucoseCsvLabel), "align label" )
-    panel.add( pathToGlucoseCsvTextField )
-    panel.add( buildGlucoseSelectButton(selectButtonLabel, pathToGlucoseCsvTextField), "wrap" )
+    panel.add( glucoseCsvTextField )
+    panel.add( buildGlucoseSelectButton(selectLabel), "wrap" )
     panel.add( new JLabel(Conf.medsCsvLabel), "align label" )
-    panel.add( pathToMedsCsvTextField )
-    panel.add( buildMedsSelectButton(selectButtonLabel, pathToMedsCsvTextField), "wrap" )
-    panel.add( buildCancelButton(cancelButtonLabel, this), "tag cancel, sizegroup bttn" )
+    panel.add( medsCsvTextField )
+    panel.add( buildMedsSelectButton(selectLabel), "wrap" )
+    panel.add( buildCancelButton(cancelLabel), "tag cancel, sizegroup bttn" )
     panel.add( selectButton, "tag ok, sizegroup bttn" )
     panel
   }
@@ -51,41 +43,41 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
     textField
   }
 
-  private def buildGlucoseSelectButton(label: String, textField: JTextField): JButton = {
+  private def buildGlucoseSelectButton(label: String): JButton = {
     val button = new JButton(label)
     button.addActionListener( new ActionListener() {
       override def actionPerformed(event: ActionEvent): Unit = {
-        textField.setText( selectFile.getOrElse("") )
+        glucoseCsvTextField.setText( selectFile.getOrElse("") )
         validateCsvTextFields()
       }
     })
     button
   }
 
-  private def buildMedsSelectButton(label: String, textField: JTextField): JButton = {
+  private def buildMedsSelectButton(label: String): JButton = {
     val button = new JButton(label)
     button.addActionListener( new ActionListener() {
       override def actionPerformed(event: ActionEvent): Unit = {
-        textField.setText( selectFile.getOrElse("") )
+        medsCsvTextField.setText( selectFile.getOrElse("") )
         validateCsvTextFields()
       }
     })
     button
   }
 
-  private def buildCancelButton(label: String, dialog: JDialog): JButton = {
+  private def buildCancelButton(label: String): JButton = {
     val button = new JButton(label)
     button.addActionListener( new ActionListener() {
-      override def actionPerformed(event: ActionEvent): Unit = dialog.setVisible(false)
+      override def actionPerformed(event: ActionEvent): Unit = setVisible(false)
     })
     button
   }
 
-  private def buildSelectButton(label: String, dialog: JDialog): JButton = {
+  private def buildSelectButton(label: String): JButton = {
     val button = new JButton(label)
     button.setEnabled(false)
     button.addActionListener( new ActionListener() {
-      override def actionPerformed(event: ActionEvent): Unit = dialog.setVisible(false)
+      override def actionPerformed(event: ActionEvent): Unit = setVisible(false)
     })
     button
   }
