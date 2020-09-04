@@ -41,7 +41,7 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
   private def buildTextField: JTextField = {
     val textField = new JTextField()
     textField.setEditable(false)
-    textField.setPreferredSize(new Dimension(300, 30))
+    textField.setPreferredSize(new Dimension(400, 30))
     textField
   }
 
