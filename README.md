@@ -18,11 +18,11 @@ Test
 Run
 ---
 1. sbt run
-2. Click Charts Menu
-3. Click Glucose-Meds
-4. Select Glucose and Meds Csv file paths in Dialog
-5. Click enabled Select Button
-6. View chart!
+2. click Charts menu
+3. click Glucose-Meds menu item
+4. select 1) glucose and 2) meds csv paths in Glucose-Meds dialog
+5. click freshly enabled select button
+6. view chart!
 
 Package
 -------
