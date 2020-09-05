@@ -3,14 +3,9 @@ MedCharts
 >Medcharts is an open source project governed by the GPL.V3 license. The project objective is
 >to build useful medical charts initially sourced by simple csv files.
 
-Ideas
------
-1. Rest service that accepts csv files for a target chart.
-
 Todo
 ----
-1. Close open chart.
-2. Open multiple charts.
+1. Close open tabbed chart.
 
 Charts
 ------
@@ -27,7 +22,7 @@ Run
 3. click Glucose-Meds menu item
 4. select 1) glucose and 2) meds csv paths in Glucose-Meds dialog
 5. click freshly enabled select button
-6. view chart! ( mousover line data points to view details )
+6. view tabbed chart! ( mouseover line data points to view details )
 
 Package
 -------
