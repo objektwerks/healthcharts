@@ -7,6 +7,11 @@ Ideas
 -----
 1. Rest service that accepts csv files for a target chart.
 
+Todo
+----
+1. Close open chart.
+2. Open multiple charts.
+
 Charts
 ------
 1. [Glucose-Meds Chart](glucose.meds.chart.md)
@@ -22,7 +27,7 @@ Run
 3. click Glucose-Meds menu item
 4. select 1) glucose and 2) meds csv paths in Glucose-Meds dialog
 5. click freshly enabled select button
-6. view chart!
+6. view chart! ( mousover line data points to view details )
 
 Package
 -------
