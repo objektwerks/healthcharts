@@ -1,11 +1,24 @@
 package objektwerks.chart
 
-import javax.swing.{JFrame, WindowConstants}
+import java.awt.BorderLayout
 
-class Frame() extends JFrame {  
+import javax.swing.{JFrame, JTabbedPane, WindowConstants}
+
+import org.jfree.chart.ChartPanel
+
+class Frame() extends JFrame {
+  val tabbedPane = new JTabbedPane()
+  add(tabbedPane, BorderLayout.CENTER)
+
   setJMenuBar( new MenuBar(this) )
   setTitle(Conf.title)
   setSize(Conf.width, Conf.height)
   setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
   setLocationRelativeTo(null)
+
+  def addChart(title: String, chart: ChartPanel): Unit = {
+    tabbedPane.addTab(title, chart)
+    tabbedPane.setSelectedIndex( tabbedPane.indexOfTab(title) )
+    revalidate()
+  }
 }
