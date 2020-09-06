@@ -2,12 +2,12 @@ package objektwerks.chart
 
 import java.awt.BorderLayout
 
-import javax.swing.{JFrame, JTabbedPane, WindowConstants}
+import javax.swing.{JFrame, WindowConstants}
 
 import org.jfree.chart.ChartPanel
 
 class Frame() extends JFrame {
-  val tabbedPane = new JTabbedPane()
+  val tabbedPane = new TabbedPane()
   add(tabbedPane, BorderLayout.CENTER)
 
   setJMenuBar( new MenuBar(this) )
@@ -17,8 +17,7 @@ class Frame() extends JFrame {
   setLocationRelativeTo(null)
 
   def addChart(title: String, chart: ChartPanel): Unit = {
-    tabbedPane.addTab(title, chart)
-    tabbedPane.setSelectedIndex( tabbedPane.indexOfTab(title) )
+    tabbedPane.addChart(title, chart)
     revalidate()
   }
 }

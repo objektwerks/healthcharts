@@ -14,7 +14,7 @@ class GlucoseMedsAction(name: String, frame: Frame) extends AbstractAction(name)
     val (pathToGlucoseCsv, pathToMedsCsv) = dialog.view()
     if (pathToGlucoseCsv.nonEmpty && pathToMedsCsv.nonEmpty) {
       val chart = GlucoseMedsChart(glucoseCsvPath = pathToGlucoseCsv, medsCsvPath = pathToMedsCsv)
-      frame.addChart(s"$title-${counter.getAndIncrement}", chart)
+      frame.addChart( s"$title-${counter.getAndIncrement}", chart )
     }
   }
 }
