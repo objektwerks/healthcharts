@@ -20,8 +20,7 @@ class CloseableTab(title: String, tabbedPane: JTabbedPane, panel: JPanel) extend
   val closeButton = new JButton("X")
   closeButton.addActionListener( new ActionListener() {
     override def actionPerformed(event: ActionEvent): Unit = {
-      val tabIndex = tabbedPane.indexOfComponent(panel)
-      tabbedPane.removeTabAt(tabIndex)
+      tabbedPane.removeTabAt( tabbedPane.indexOfComponent(panel) )
     }
   })
   setOpaque(false)
