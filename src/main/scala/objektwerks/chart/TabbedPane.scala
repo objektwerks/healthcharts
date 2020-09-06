@@ -16,8 +16,8 @@ class TabbedPane extends JTabbedPane {
 }
 
 class CloseableTab(title: String, tabbedPane: JTabbedPane, panel: JPanel) extends JPanel {
-  val closeLabel = new JLabel(title)
-  val closeButton = new JButton("X")
+  private val closeLabel = new JLabel(title)
+  private val closeButton = new JButton("X")
   closeButton.addActionListener( new ActionListener() {
     override def actionPerformed(event: ActionEvent): Unit = {
       tabbedPane.removeTabAt( tabbedPane.indexOfComponent(panel) )
