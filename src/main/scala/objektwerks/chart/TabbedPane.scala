@@ -11,7 +11,7 @@ class TabbedPane extends JTabbedPane {
   def addChart(title: String, chart: ChartPanel): Unit = {
     addTab(null, chart)
     setTabComponentAt( getTabCount - 1, new CloseableTab(title, this, chart) )
-    setSelectedIndex( indexOfTab(title) )
+    setSelectedIndex( indexOfComponent(chart) )
   }
 }
 
