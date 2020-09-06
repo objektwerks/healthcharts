@@ -1,6 +1,5 @@
 package objektwerks.chart
 
-import java.awt.BorderLayout
 import java.awt.event.{ActionEvent, ActionListener}
 
 import javax.swing._
@@ -17,13 +16,13 @@ class TabbedPane extends JTabbedPane {
 
 class CloseableTab(title: String, tabbedPane: JTabbedPane, panel: JPanel) extends JPanel {
   private val closeLabel = new JLabel(title)
-  private val closeButton = new JButton("X")
+  private val closeButton = new JButton("x")
   closeButton.addActionListener( new ActionListener() {
     override def actionPerformed(event: ActionEvent): Unit = {
       tabbedPane.removeTabAt( tabbedPane.indexOfComponent(panel) )
     }
   })
   setOpaque(false)
-  add(closeLabel, BorderLayout.WEST)
-  add(closeButton, BorderLayout.EAST)
+  add(closeLabel)
+  add(closeButton)
 }
