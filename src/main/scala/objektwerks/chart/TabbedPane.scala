@@ -16,7 +16,7 @@ class TabbedPane extends JTabbedPane {
 }
 
 class CloseableTab(title: String, tabbedPane: JTabbedPane, panel: JPanel) extends JPanel {
-  val label = new JLabel(title)
+  val closeLabel = new JLabel(title)
   val closeButton = new JButton("X")
   closeButton.addActionListener( new ActionListener() {
     override def actionPerformed(event: ActionEvent): Unit = {
@@ -25,6 +25,6 @@ class CloseableTab(title: String, tabbedPane: JTabbedPane, panel: JPanel) extend
     }
   })
   setOpaque(false)
-  add(label, BorderLayout.WEST)
+  add(closeLabel, BorderLayout.WEST)
   add(closeButton, BorderLayout.EAST)
 }
