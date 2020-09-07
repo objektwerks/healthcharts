@@ -5,7 +5,7 @@ MedCharts
 
 Todo
 ----
-1. Close open tabbed chart.
+1. None
 
 Charts
 ------
@@ -23,6 +23,7 @@ Run
 4. select 1) glucose and 2) meds csv paths in Glucose-Meds dialog
 5. click freshly enabled select button
 6. view tabbed chart! ( mouseover line data points to view details )
+>Note that tabs are closeable.
 
 Package
 -------
