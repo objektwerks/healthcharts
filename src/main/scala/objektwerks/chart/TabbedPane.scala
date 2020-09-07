@@ -1,6 +1,6 @@
 package objektwerks.chart
 
-import java.awt.event.{ActionEvent, ActionListener}
+import java.awt.event.{MouseAdapter, MouseEvent}
 
 import javax.swing._
 
@@ -16,13 +16,25 @@ class TabbedPane extends JTabbedPane {
 
 class CloseableTab(title: String, tabbedPane: JTabbedPane, panel: JPanel) extends JPanel {
   private val closeLabel = new JLabel(title)
-  private val closeButton = new JButton("x")
-  closeButton.addActionListener( new ActionListener() {
-    override def actionPerformed(event: ActionEvent): Unit = {
+  private val closeableLabel = new JLabel("x")
+
+  addMouseListener( new MouseAdapter() {
+    override def mouseEntered(event: MouseEvent): Unit = {
+      val color = closeableLabel.getBackground
+      closeableLabel.setBackground(closeableLabel.getForeground)
+      closeableLabel.setForeground(color)
+    }
+    override def mouseExited(event: MouseEvent): Unit = {
+      val color = closeableLabel.getBackground
+      closeableLabel.setBackground(closeableLabel.getForeground)
+      closeableLabel.setForeground(color)
+    }
+    override def mouseClicked(e: MouseEvent): Unit = {
       tabbedPane.removeTabAt( tabbedPane.indexOfComponent(panel) )
     }
   })
+
   setOpaque(false)
   add(closeLabel)
-  add(closeButton)
+  add(closeableLabel)
 }
