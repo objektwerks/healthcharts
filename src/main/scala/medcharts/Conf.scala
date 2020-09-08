@@ -11,21 +11,20 @@ object Conf {
   val appWidth = conf.getInt("app.width")
   val appHeight = conf.getInt("app.height")
 
-  val menuBarTitle = conf.getString("menuBarTitle")
-  val glucoseMedsTitle = conf.getString("glucoseMedsTitle")
-  val medsTitle = conf.getString("medsTitle")
+  val fileFilterExtensions = conf.getStringList("file.filterExtensions").asScala.toArray
+  val fileExtensionFilterDesc = conf.getString("file.extensionsFilterDesc")
 
-  val cancelLabel = conf.getString("cancelLabel")
-  val selectLabel = conf.getString("selectLabel")
-  val ellipsisLabel = conf.getString("ellipsisLabel")
+  val labelCancel = conf.getString("label.cancel")
+  val labelSelect = conf.getString("label.select")
+  val labelEllipsis = conf.getString("label.ellipsis")
+  val labelGlucoseCsv = conf.getString("label.glucoseCsv")
+  val labelMedsCsv = conf.getString("label.medsCsv")
 
-  val fileExtensions = conf.getStringList("fileExtensions").asScala.toArray
-  val fileChooserTitle = conf.getString("fileChooserTitle")
-  val fileExtensionFilterDesc = conf.getString("fileExtensionFilterDesc")
-
-  val glucoseMedsChartXAxisTitle = conf.getString("glucoseMedsChartXAxisTitle")
-  val glucoseMedsChartYAxisTitle = conf.getString("glucoseMedsChartYAxisTitle")
-  val glucoseMedsDialogTitle = conf.getString("glucoseMedsDialogTitle")
-  val glucoseCsvLabel = conf.getString("glucoseCsvLabel")
-  val medsCsvLabel = conf.getString("medsCsvLabel")
+  val titleFileChooser = conf.getString("title.fileChooser")
+  val titleMenuBar = conf.getString("title.menuBar")
+  val titleGlucoseMeds = conf.getString("title.glucoseMeds")
+  val titleMeds = conf.getString("title.meds")
+  val titleGlucoseMedsChartXAxis = conf.getString("title.glucoseMedsChartXAxis")
+  val titleGlucoseMedsChartYAxis = conf.getString("title.glucoseMedsChartYAxis")
+  val titleGlucoseMedsDialog = conf.getString("title.glucoseMedsDialog")
 }

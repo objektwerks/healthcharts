@@ -13,14 +13,14 @@ import net.miginfocom.swing.MigLayout
 class GlucoseMedsDialog(frame: Frame) extends JDialog {
   private val glucoseCsvTextField = buildTextField
   private val medsCsvTextField = buildTextField
-  private val selectButton = buildSelectButton(Conf.selectLabel)
-  private val fileChooserTitle = Conf.fileChooserTitle
+  private val selectButton = buildSelectButton(Conf.labelSelect)
+  private val fileChooserTitle = Conf.titleFileChooser
   private val fileExtensionFilterDesc = Conf.fileExtensionFilterDesc
-  private val fileExtensions = Conf.fileExtensions
+  private val fileExtensions = Conf.fileFilterExtensions
 
   def view(): (String, String) = {
-    setTitle(Conf.glucoseMedsDialogTitle)
-    add(buildSelectPanel(Conf.cancelLabel, Conf.ellipsisLabel), BorderLayout.CENTER)
+    setTitle(Conf.titleGlucoseMedsDialog)
+    add(buildSelectPanel(Conf.labelCancel, Conf.labelEllipsis), BorderLayout.CENTER)
     setModal(true)
     pack()
     setLocationRelativeTo(frame)
@@ -30,10 +30,10 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
 
   private def buildSelectPanel(cancelLabel: String, ellipsisLabel: String): JPanel = {
     val panel = new JPanel( new MigLayout() )
-    panel.add( new JLabel(Conf.glucoseCsvLabel), "align label" )
+    panel.add( new JLabel(Conf.labelGlucoseCsv), "align label" )
     panel.add( glucoseCsvTextField, "grow" )
     panel.add( buildGlucoseSelectButton(ellipsisLabel), "wrap" )
-    panel.add( new JLabel(Conf.medsCsvLabel), "align label" )
+    panel.add( new JLabel(Conf.labelMedsCsv), "align label" )
     panel.add( medsCsvTextField, "grow" )
     panel.add( buildMedsSelectButton(ellipsisLabel), "wrap" )
     panel.add( buildCancelButton(cancelLabel), "span, split 2, align right" )

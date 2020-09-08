@@ -9,7 +9,7 @@ import medcharts.Conf
 import medcharts.ui.Frame
 
 class GlucoseMedsAction(name: String, frame: Frame) extends AbstractAction(name) {
-  private val title = Conf.glucoseMedsTitle
+  private val title = Conf.titleGlucoseMeds
   private val counter = new AtomicInteger(1)
 
   def actionPerformed(event: ActionEvent): Unit = {
