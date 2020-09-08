@@ -5,7 +5,9 @@ import java.awt.event.{ActionEvent, ActionListener}
 
 import javax.swing.filechooser.{FileNameExtensionFilter, FileSystemView}
 import javax.swing._
+
 import medcharts.Conf
+
 import net.miginfocom.swing.MigLayout
 
 class GlucoseMedsDialog(frame: Frame) extends JDialog {

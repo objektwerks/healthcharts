@@ -3,7 +3,9 @@ package medcharts.ui
 import java.awt.BorderLayout
 
 import javax.swing.{JFrame, WindowConstants}
+
 import medcharts.Conf
+
 import org.jfree.chart.ChartPanel
 
 class Frame() extends JFrame {

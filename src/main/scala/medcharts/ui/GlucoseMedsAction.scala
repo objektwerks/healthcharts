@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent
 import java.util.concurrent.atomic.AtomicInteger
 
 import javax.swing.AbstractAction
+
 import medcharts.Conf
 
 class GlucoseMedsAction(name: String, frame: Frame) extends AbstractAction(name) {

@@ -1,10 +1,9 @@
 package medcharts.domain
 
-import medcharts.ui.GlucoseMedsChart
 import org.slf4j.LoggerFactory
 
 object Logger {
-  private val logger = LoggerFactory.getLogger(GlucoseMedsChart.getClass)
+  private val logger = LoggerFactory.getLogger(getClass)
   
   def logLinesAndInvalidLines[L, IL](lines: Array[L], invalidLines: Array[IL]): Unit = {
     logger.info(s"lines [${lines.length}]: ${lines.toList.map(g => "\n" + g.toString)}")

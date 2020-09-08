@@ -1,6 +1,7 @@
 package medcharts.ui
 
 import javax.swing.{JMenu, JMenuBar, JMenuItem}
+
 import medcharts.Conf
 
 class MenuBar(frame: Frame) extends JMenuBar() {
