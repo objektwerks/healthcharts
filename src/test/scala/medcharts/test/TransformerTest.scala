@@ -1,5 +1,6 @@
-package medcharts.domain
+package medcharts.test
 
+import medcharts.domain.{Glucoses, Meds}
 import medcharts.domain.Logger._
 import medcharts.domain.Transformer._
 
