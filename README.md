@@ -3,10 +3,6 @@ MedCharts
 >Medcharts is an open source project governed by the GPL.V3 license. The project objective is
 >to build useful medical charts initially sourced by simple csv files.
 
-Todo
-----
-1. None
-
 Charts
 ------
 1. [Glucose-Meds Chart](glucose.meds.chart.md)
