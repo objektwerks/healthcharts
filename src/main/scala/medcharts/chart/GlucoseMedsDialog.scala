@@ -14,8 +14,9 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
   private val glucoseCsvTextField = buildTextField
   private val medsCsvTextField = buildTextField
   private val selectButton = buildSelectButton(Conf.selectLabel)
-  private val glucoseMedsFileChooserTitle = Conf.glucoseMedsFileChooserTitle
-  private val glucoseMedsFileExtensionFilter = Conf.glucoseMedsFileExtensionFilter
+  private val fileChooserTitle = Conf.fileChooserTitle
+  private val fileExtensionFilterDesc = Conf.fileExtensionFilterDesc
+  private val fileExtensions = Conf.fileExtensions
 
   def view(): (String, String) = {
     setTitle(Conf.glucoseMedsDialogTitle)
@@ -87,7 +88,7 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
   }
 
   private def selectFile: Option[String] =
-    FileChooser.chooseFile(frame, glucoseMedsFileChooserTitle, glucoseMedsFileExtensionFilter)
+    FileChooser.chooseFile(frame, fileChooserTitle, fileExtensionFilterDesc, fileExtensions)
 
   private def validateCsvTextFields(): Unit =
     if (glucoseCsvTextField.getText.nonEmpty && medsCsvTextField.getText.nonEmpty) selectButton.setEnabled(true)
