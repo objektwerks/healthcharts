@@ -13,8 +13,8 @@ class Frame() extends JFrame {
   add(tabbedPane, BorderLayout.CENTER)
 
   setJMenuBar( new MenuBar(this) )
-  setTitle(Conf.title)
-  setSize(Conf.width, Conf.height)
+  setTitle(Conf.appTitle)
+  setSize(Conf.appWidth, Conf.appHeight)
   setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
   setLocationRelativeTo(null)
 
