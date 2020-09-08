@@ -1,4 +1,4 @@
-package objektwerks.chart
+package medcharts.chart
 
 import org.slf4j.LoggerFactory
 

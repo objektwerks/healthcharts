@@ -1,6 +1,6 @@
-package objektwerks.chart
+package medcharts.chart
 
-import objektwerks.chart.Converter._
+import medcharts.chart.Converter._
 
 import scala.util.Try
 

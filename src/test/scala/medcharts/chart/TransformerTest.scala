@@ -1,7 +1,7 @@
-package objektwerks.chart
+package medcharts.chart
 
-import objektwerks.chart.Logger._
-import objektwerks.chart.Transformer._
+import medcharts.chart.Logger._
+import medcharts.chart.Transformer._
 
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers

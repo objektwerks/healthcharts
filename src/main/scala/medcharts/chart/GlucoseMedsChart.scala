@@ -1,13 +1,13 @@
-package objektwerks.chart
+package medcharts.chart
 
 import java.text.{DecimalFormat, SimpleDateFormat}
 import java.{util => jdate}
 
 import javax.swing.BorderFactory
 
-import objektwerks.chart.Converter._
-import objektwerks.chart.Logger._
-import objektwerks.chart.Transformer._
+import medcharts.chart.Converter._
+import medcharts.chart.Logger._
+import medcharts.chart.Transformer._
 
 import org.jfree.chart.axis.{DateAxis, NumberAxis}
 import org.jfree.chart.labels.StandardXYToolTipGenerator

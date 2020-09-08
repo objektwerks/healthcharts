@@ -1,7 +1,7 @@
-package objektwerks.chart
+package medcharts.chart
 
-import objektwerks.chart.Logger._
-import objektwerks.chart.Validator._
+import medcharts.chart.Logger._
+import medcharts.chart.Validator._
 
 import scala.collection.mutable
 import scala.io.{Codec, Source}

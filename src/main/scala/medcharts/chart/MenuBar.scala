@@ -1,4 +1,4 @@
-package objektwerks.chart
+package medcharts.chart
 
 import javax.swing.{JMenuBar, JMenu, JMenuItem}
 

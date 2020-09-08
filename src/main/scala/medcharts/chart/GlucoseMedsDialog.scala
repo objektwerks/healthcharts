@@ -1,4 +1,4 @@
-package objektwerks.chart
+package medcharts.chart
 
 import java.awt.BorderLayout
 import java.awt.event.{ActionEvent, ActionListener}
