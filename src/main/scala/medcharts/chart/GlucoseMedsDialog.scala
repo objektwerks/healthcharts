@@ -4,10 +4,9 @@ import java.awt.event.{ActionEvent, ActionListener}
 import java.awt.{BorderLayout, Dimension}
 
 import javax.swing._
-import javax.swing.filechooser.{FileNameExtensionFilter, FileSystemView}
 
 import medcharts.Conf
-import medcharts.ui.Frame
+import medcharts.ui.{FileChooser, Frame}
 
 import net.miginfocom.swing.MigLayout
 
@@ -15,6 +14,8 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
   private val glucoseCsvTextField = buildTextField
   private val medsCsvTextField = buildTextField
   private val selectButton = buildSelectButton(Conf.selectLabel)
+  private val glucoseMedsFileChooserTitle = Conf.glucoseMedsFileChooserTitle
+  private val glucoseMedsFileExtensionFilter = Conf.glucoseMedsFileExtensionFilter
 
   def view(): (String, String) = {
     setTitle(Conf.glucoseMedsDialogTitle)
@@ -68,16 +69,16 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
     button
   }
 
-  private def buildCancelButton(label: String): JButton = {
-    val button = new JButton(label)
+  private def buildCancelButton(canceLabel: String): JButton = {
+    val button = new JButton(canceLabel)
     button.addActionListener( new ActionListener() {
       override def actionPerformed(event: ActionEvent): Unit = setVisible(false)
     })
     button
   }
 
-  private def buildSelectButton(label: String): JButton = {
-    val button = new JButton(label)
+  private def buildSelectButton(selectLabel: String): JButton = {
+    val button = new JButton(selectLabel)
     button.setEnabled(false)
     button.addActionListener( new ActionListener() {
       override def actionPerformed(event: ActionEvent): Unit = setVisible(false)
@@ -85,16 +86,8 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
     button
   }
 
-  private def selectFile: Option[String] = {
-    val fileChooser = new JFileChooser(FileSystemView.getFileSystemView.getHomeDirectory)
-    fileChooser.setDialogTitle(Conf.glucoseMedsFileChooserTitle)
-    fileChooser.setAcceptAllFileFilterUsed(false)
-    val filter = new FileNameExtensionFilter(Conf.glucoseMedsFileExtensionFilter, "csv", "txt")
-    fileChooser.addChoosableFileFilter(filter)
-    if (fileChooser.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION)
-      Some(fileChooser.getSelectedFile.getAbsolutePath)
-    else None
-  }
+  private def selectFile: Option[String] =
+    FileChooser.chooseFile(frame, glucoseMedsFileChooserTitle, glucoseMedsFileExtensionFilter)
 
   private def validateCsvTextFields(): Unit =
     if (glucoseCsvTextField.getText.nonEmpty && medsCsvTextField.getText.nonEmpty) selectButton.setEnabled(true)
