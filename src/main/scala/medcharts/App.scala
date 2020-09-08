@@ -1,8 +1,9 @@
-package medcharts.chart
+package medcharts
 
 import java.awt.EventQueue
 
 import javax.swing.UIManager._
+import medcharts.ui.Frame
 
 object App {
   def main(args: Array[String]): Unit = {

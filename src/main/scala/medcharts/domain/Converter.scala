@@ -1,4 +1,4 @@
-package medcharts.chart
+package medcharts.domain
 
 import java.time.LocalDateTime
 

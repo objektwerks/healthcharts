@@ -1,7 +1,7 @@
-package medcharts.chart
+package medcharts.domain
 
-import medcharts.chart.Logger._
-import medcharts.chart.Transformer._
+import medcharts.domain.Logger._
+import medcharts.domain.Transformer._
 
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers

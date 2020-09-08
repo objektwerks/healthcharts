@@ -1,7 +1,7 @@
-package medcharts.chart
+package medcharts.domain
 
-import medcharts.chart.Logger._
-import medcharts.chart.Validator._
+import medcharts.domain.Logger._
+import medcharts.domain.Validator._
 
 import scala.collection.mutable
 import scala.io.{Codec, Source}

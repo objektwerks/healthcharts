@@ -1,5 +1,6 @@
-package medcharts.chart
+package medcharts.domain
 
+import medcharts.ui.GlucoseMedsChart
 import org.slf4j.LoggerFactory
 
 object Logger {

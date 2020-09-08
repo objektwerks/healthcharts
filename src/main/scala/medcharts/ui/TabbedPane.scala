@@ -1,9 +1,8 @@
-package medcharts.chart
+package medcharts.ui
 
 import java.awt.event.{MouseAdapter, MouseEvent}
 
 import javax.swing._
-
 import org.jfree.chart.ChartPanel
 
 class TabbedPane extends JTabbedPane {

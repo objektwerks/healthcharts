@@ -1,14 +1,12 @@
-package medcharts.chart
+package medcharts.ui
 
-import java.awt.BorderLayout
+import java.awt.{BorderLayout, Dimension}
 import java.awt.event.{ActionEvent, ActionListener}
 
-import javax.swing.{JButton, JDialog, JFileChooser, JLabel, JPanel, JTextField}
-import javax.swing.filechooser.FileSystemView
-import javax.swing.filechooser.FileNameExtensionFilter
-
+import javax.swing.filechooser.{FileNameExtensionFilter, FileSystemView}
+import javax.swing._
+import medcharts.Conf
 import net.miginfocom.swing.MigLayout
-import java.awt.Dimension
 
 class GlucoseMedsDialog(frame: Frame) extends JDialog {
   private val glucoseCsvTextField = buildTextField

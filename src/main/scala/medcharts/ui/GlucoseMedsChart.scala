@@ -1,14 +1,14 @@
-package medcharts.chart
+package medcharts.ui
 
 import java.text.{DecimalFormat, SimpleDateFormat}
 import java.{util => jdate}
 
 import javax.swing.BorderFactory
-
-import medcharts.chart.Converter._
-import medcharts.chart.Logger._
-import medcharts.chart.Transformer._
-
+import medcharts.Conf
+import medcharts.domain.Converter._
+import medcharts.domain.Logger._
+import medcharts.domain.Transformer._
+import medcharts.domain._
 import org.jfree.chart.axis.{DateAxis, NumberAxis}
 import org.jfree.chart.labels.StandardXYToolTipGenerator
 import org.jfree.chart.plot.{DatasetRenderingOrder, XYPlot}

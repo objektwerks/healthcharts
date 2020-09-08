@@ -1,4 +1,4 @@
-package medcharts.chart
+package medcharts
 
 import com.typesafe.config.ConfigFactory
 
