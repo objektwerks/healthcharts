@@ -15,7 +15,8 @@ object Conf {
 
   val cancelLabel = conf.getString("cancelLabel")
   val selectLabel = conf.getString("selectLabel")
-
+  val ellipsisLabel = conf.getString("ellipsisLabel")
+  
   val glucoseMedsChartXAxisTitle = conf.getString("glucoseMedsChartXAxisTitle")
   val glucoseMedsChartYAxisTitle = conf.getString("glucoseMedsChartYAxisTitle")
   val glucoseMedsDialogTitle = conf.getString("glucoseMedsDialogTitle")

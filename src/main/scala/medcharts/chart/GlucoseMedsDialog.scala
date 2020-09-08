@@ -18,7 +18,7 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
 
   def view(): (String, String) = {
     setTitle(Conf.glucoseMedsDialogTitle)
-    add(buildSelectPanel(Conf.cancelLabel), BorderLayout.CENTER)
+    add(buildSelectPanel(Conf.cancelLabel, Conf.ellipsisLabel), BorderLayout.CENTER)
     setModal(true)
     pack()
     setLocationRelativeTo(frame)
@@ -26,14 +26,14 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
     (glucoseCsvTextField.getText, medsCsvTextField.getText)
   }
 
-  private def buildSelectPanel(cancelLabel: String): JPanel = {
+  private def buildSelectPanel(cancelLabel: String, ellipsisLabel: String): JPanel = {
     val panel = new JPanel( new MigLayout() )
     panel.add( new JLabel(Conf.glucoseCsvLabel), "align label" )
     panel.add( glucoseCsvTextField, "grow" )
-    panel.add( buildGlucoseSelectButton("..."), "wrap" )
+    panel.add( buildGlucoseSelectButton(ellipsisLabel), "wrap" )
     panel.add( new JLabel(Conf.medsCsvLabel), "align label" )
     panel.add( medsCsvTextField, "grow" )
-    panel.add( buildMedsSelectButton("..."), "wrap" )
+    panel.add( buildMedsSelectButton(ellipsisLabel), "wrap" )
     panel.add( buildCancelButton(cancelLabel), "span, split 2, align right" )
     panel.add( selectButton )
     panel
@@ -46,8 +46,8 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
     textField
   }
 
-  private def buildGlucoseSelectButton(label: String): JButton = {
-    val button = new JButton(label)
+  private def buildGlucoseSelectButton(ellipsisLabel: String): JButton = {
+    val button = new JButton(ellipsisLabel)
     button.addActionListener( new ActionListener() {
       override def actionPerformed(event: ActionEvent): Unit = {
         glucoseCsvTextField.setText( selectFile.getOrElse("") )
@@ -57,8 +57,8 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
     button
   }
 
-  private def buildMedsSelectButton(label: String): JButton = {
-    val button = new JButton(label)
+  private def buildMedsSelectButton(ellipsisLabel: String): JButton = {
+    val button = new JButton(ellipsisLabel)
     button.addActionListener( new ActionListener() {
       override def actionPerformed(event: ActionEvent): Unit = {
         medsCsvTextField.setText( selectFile.getOrElse("") )
