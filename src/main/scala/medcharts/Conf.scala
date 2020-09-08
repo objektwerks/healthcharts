@@ -5,7 +5,7 @@ import com.typesafe.config.ConfigFactory
 import scala.jdk.CollectionConverters._
 
 object Conf {
-  val conf = ConfigFactory.load("chart.conf")
+  val conf = ConfigFactory.load("app.conf")
 
   val appTitle = conf.getString("app.title")
   val appWidth = conf.getInt("app.width")
