@@ -10,7 +10,6 @@ object Conf {
   val height = conf.getInt("height")
 
   val menuBarTitle = conf.getString("menuBarTitle")
-
   val glucoseMedsTitle = conf.getString("glucoseMedsTitle")
   val medsTitle = conf.getString("medsTitle")
 
