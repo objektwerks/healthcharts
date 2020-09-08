@@ -1,4 +1,4 @@
-package medcharts.ui
+package medcharts.chart
 
 import java.awt.event.ActionEvent
 import java.util.concurrent.atomic.AtomicInteger
@@ -6,6 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger
 import javax.swing.AbstractAction
 
 import medcharts.Conf
+import medcharts.ui.Frame
 
 class GlucoseMedsAction(name: String, frame: Frame) extends AbstractAction(name) {
   private val title = Conf.glucoseMedsTitle

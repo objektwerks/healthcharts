@@ -1,12 +1,13 @@
-package medcharts.ui
+package medcharts.chart
 
-import java.awt.{BorderLayout, Dimension}
 import java.awt.event.{ActionEvent, ActionListener}
+import java.awt.{BorderLayout, Dimension}
 
-import javax.swing.filechooser.{FileNameExtensionFilter, FileSystemView}
 import javax.swing._
+import javax.swing.filechooser.{FileNameExtensionFilter, FileSystemView}
 
 import medcharts.Conf
+import medcharts.ui.Frame
 
 import net.miginfocom.swing.MigLayout
 

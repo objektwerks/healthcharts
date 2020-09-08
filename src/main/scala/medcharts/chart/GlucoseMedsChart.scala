@@ -1,4 +1,4 @@
-package medcharts.ui
+package medcharts.chart
 
 import java.text.{DecimalFormat, SimpleDateFormat}
 import java.{util => jdate}

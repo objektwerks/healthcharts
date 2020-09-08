@@ -3,6 +3,7 @@ package medcharts.ui
 import javax.swing.{JMenu, JMenuBar, JMenuItem}
 
 import medcharts.Conf
+import medcharts.chart.GlucoseMedsAction
 
 class MenuBar(frame: Frame) extends JMenuBar() {
   val menu = new JMenu(Conf.menuBarTitle)
