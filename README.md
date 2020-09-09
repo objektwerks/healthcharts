@@ -8,8 +8,9 @@ Charts
 - [x] [Glucose-Meds Chart](glucose.meds.chart.md)
 - [ ] Weight
 - [ ] Pulse
-- [ ] Blood Pressure
+- [ ] Pulse Oxygen
 - [ ] Respiration
+- [ ] Blood Pressure
 
 Test
 ----
