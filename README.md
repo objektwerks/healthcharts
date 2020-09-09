@@ -5,7 +5,11 @@ MedCharts
 
 Charts
 ------
-1. [Glucose-Meds Chart](glucose.meds.chart.md)
+- [x] [Glucose-Meds Chart](glucose.meds.chart.md)
+- [ ] Weight
+- [ ] Pulse
+- [ ] Blood Pressure
+- [ ] Respiration
 
 Test
 ----
