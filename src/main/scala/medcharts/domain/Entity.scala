@@ -21,6 +21,7 @@ object MedType extends Enumeration {
 final case class Med(datetime: Minute, medtype: MedType.Value, dosage: Int)
 
 final case class Meds(lines: Array[Med], invalidLines: Array[InvalidLine])
+
 object Meds {
   def empty: Meds = Meds(Array.empty[Med], Array.empty[InvalidLine])
 }
