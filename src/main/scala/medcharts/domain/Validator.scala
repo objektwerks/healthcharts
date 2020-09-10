@@ -58,4 +58,17 @@ object Validator {
         Pulse(datetime, beatsPerMinute)
       }
   }
+
+  implicit object PulseOxygenValidator extends Validator[PulseOxygen] {
+    def validate(columns: Array[String]): Try[PulseOxygen] =
+      Try {
+        validateColumnCount(columns.length, 3)
+        val datetime = datetimeToMinute(columns(0))
+        val beatsPerMinute = columns(1).toInt
+        val bloodOxygenPercentage = columns(2).toInt
+        require(beatsPerMinute >= 40 && beatsPerMinute <= 200, s"beats per minute not >= 40 and <= 200")
+        require(bloodOxygenPercentage >= 50 && bloodOxygenPercentage <= 100, s"blood oxygen percentage not >= 50 and <= 100")
+        PulseOxygen(datetime, beatsPerMinute, bloodOxygenPercentage)
+      }
+  }
 }
