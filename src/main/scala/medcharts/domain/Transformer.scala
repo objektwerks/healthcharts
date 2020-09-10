@@ -95,5 +95,25 @@ object Transformer {
         logLinesAndInvalidLines(linesResult, invalidLinesResult)
         Pulses(linesResult, invalidLinesResult)
       }
-  }  
+  }
+
+  implicit object PulseOxygensTransformer extends Transformer[PulseOxygens] {
+    def transform(path: String, delimiter: String = ","): Try[PulseOxygens] =
+      Try {
+        val lines = mutable.ArrayBuilder.make[PulseOxygen]
+        val invalidLines = mutable.ArrayBuilder.make[InvalidLine]
+        val source = Source.fromFile(path, utf8)
+        for (line <- source.getLines) {
+          val columns = line.split(delimiter).map(_.trim)
+          validate[PulseOxygen](columns) match {
+            case Success(pulseOxygen) => lines += pulseOxygen
+            case Failure(invalidLine) => invalidLines += InvalidLine(line, invalidLine)
+          }
+        }
+        source.close()
+        val (linesResult, invalidLinesResult) = (lines.result(), invalidLines.result())
+        logLinesAndInvalidLines(linesResult, invalidLinesResult)
+        PulseOxygens(linesResult, invalidLinesResult)
+      }
+  }
 }
