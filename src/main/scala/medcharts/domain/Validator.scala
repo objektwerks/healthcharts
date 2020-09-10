@@ -11,12 +11,12 @@ trait Validator[E] {
 object Validator {
   def validate[E](columns: Array[String])(implicit validator: Validator[E]): Try[E] = validator.validate(columns)
 
-  implicit object GlucoseValidator extends Validator[Glucose] {
-    private val columnCount = 2
+  def validateColumnCount(length: Int, count: Int): Unit = require(length == count, s"column count != $count")
 
+  implicit object GlucoseValidator extends Validator[Glucose] {
     def validate(columns: Array[String]): Try[Glucose] =
       Try {
-        require(columns.length == columnCount, s"column count != $columnCount")
+        validateColumnCount(columns.length, 2)
         val datetime = datetimeToMinute(columns(0))
         val level = columns(1).toInt
         require(level >= 0 && level <= 300, s"level not >= 0 and <= 300")
@@ -25,17 +25,26 @@ object Validator {
   }
 
   implicit object MedValidator extends Validator[Med] {
-    private val columnCount = 3
-
     def validate(columns: Array[String]): Try[Med] =
       Try {
-        require(columns.length == columnCount, s"column count != $columnCount")
+        validateColumnCount(columns.length, 3)
         val datetime = datetimeToMinute(columns(0))
         val medTypeId = columns(1).toInt
         val medtype = MedType.idToMedType(medTypeId)
         val dosage = columns(2).toInt
         require(dosage >= 1 && dosage <= 100, "dosage not >= 1 and <= 100")
         Med(datetime, medtype, dosage)
+      }
+  }
+
+  implicit object WeightValidator extends Validator[Weight] {
+    def validate(columns: Array[String]): Try[Weight] =
+      Try {
+        validateColumnCount(columns.length, 2)
+        val datetime = datetimeToMinute(columns(0))
+        val pounds = columns(1).toDouble
+        require(pounds > 0 && pounds <= 500, s"pounds not > 0 and < 500")
+        Weight(datetime, pounds)
       }
   }
 }
