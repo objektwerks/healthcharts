@@ -5,7 +5,7 @@ MedCharts
 
 Todo
 ----
-1. Unbuilt charts { chart, dialog, action, menu }
+1. Unbuilt charts { entities, chart, dialog, action, menu }
 
 Charts
 ------
