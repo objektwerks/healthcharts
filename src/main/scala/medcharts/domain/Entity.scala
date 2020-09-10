@@ -34,4 +34,12 @@ object Weights {
   def empty: Weights = Weights(Array.empty[Weight], Array.empty[InvalidLine])
 }
 
+final case class Pulse(datetime: Minute, bpm: Int)
+
+final case class Pulses(lines: Array[Pulse], invalidLines: Array[InvalidLine])
+
+object Pulses {
+  def empty: Pulses = Pulses(Array.empty[Pulse], Array.empty[InvalidLine])
+}
+
 final case class InvalidLine(line: String, error: Throwable)
