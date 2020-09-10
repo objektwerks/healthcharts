@@ -50,4 +50,12 @@ object PulseOxygens {
   def empty: PulseOxygens = PulseOxygens(Array.empty[PulseOxygen], Array.empty[InvalidLine])
 }
 
+final case class Respiration(datetime: Minute, bpm: Int)
+
+final case class Respirations(lines: Array[Respiration], invalidLines: Array[InvalidLine])
+
+object Respirations {
+  def empty: Respirations = Respirations(Array.empty[Respiration], Array.empty[InvalidLine])
+}
+
 final case class InvalidLine(line: String, error: Throwable)
