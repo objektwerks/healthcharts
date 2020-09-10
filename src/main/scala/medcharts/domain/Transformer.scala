@@ -156,4 +156,24 @@ object Transformer {
         Temperatures(linesResult, invalidLinesResult)
       }
   }
+
+  implicit object BloodPressuresTransformer extends Transformer[BloodPressures] {
+    def transform(path: String, delimiter: String = ","): Try[BloodPressures] =
+      Try {
+        val lines = mutable.ArrayBuilder.make[BloodPressure]
+        val invalidLines = mutable.ArrayBuilder.make[InvalidLine]
+        val source = Source.fromFile(path, utf8)
+        for (line <- source.getLines) {
+          val columns = line.split(delimiter).map(_.trim)
+          validate[BloodPressure](columns) match {
+            case Success(bloodPressure) => lines += bloodPressure
+            case Failure(invalidLine) => invalidLines += InvalidLine(line, invalidLine)
+          }
+        }
+        source.close()
+        val (linesResult, invalidLinesResult) = (lines.result(), invalidLines.result())
+        logLinesAndInvalidLines(linesResult, invalidLinesResult)
+        BloodPressures(linesResult, invalidLinesResult)
+      }
+  }
 }
