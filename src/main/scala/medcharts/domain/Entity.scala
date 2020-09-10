@@ -58,4 +58,12 @@ object Respirations {
   def empty: Respirations = Respirations(Array.empty[Respiration], Array.empty[InvalidLine])
 }
 
+final case class Temperature(datetime: Minute, temp: Double)
+
+final case class Temperatures(lines: Array[Temperature], invalidLines: Array[InvalidLine])
+
+object Temperatures {
+  def empty: Temperatures = Temperatures(Array.empty[Temperature], Array.empty[InvalidLine])
+}
+
 final case class InvalidLine(line: String, error: Throwable)
