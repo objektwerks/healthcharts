@@ -11,6 +11,7 @@ Charts
 - [ ] Pulse Oxygen
 - [ ] Respiration
 - [ ] Blood Pressure
+- [ ] Temperature
 
 Test
 ----
