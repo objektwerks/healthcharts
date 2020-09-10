@@ -56,4 +56,24 @@ object Transformer {
         Meds(linesResult, invalidLinesResult)
       }
   }
+
+  implicit object WeightsTransformer extends Transformer[Weights] {
+    def transform(path: String, delimiter: String = ","): Try[Weights] =
+      Try {
+        val lines = mutable.ArrayBuilder.make[Weight]
+        val invalidLines = mutable.ArrayBuilder.make[InvalidLine]
+        val source = Source.fromFile(path, utf8)
+        for (line <- source.getLines) {
+          val columns = line.split(delimiter).map(_.trim)
+          validate[Weight](columns) match {
+            case Success(weight) => lines += weight
+            case Failure(invalidLine) => invalidLines += InvalidLine(line, invalidLine)
+          }
+        }
+        source.close()
+        val (linesResult, invalidLinesResult) = (lines.result(), invalidLines.result())
+        logLinesAndInvalidLines(linesResult, invalidLinesResult)
+        Weights(linesResult, invalidLinesResult)
+      }
+  }  
 }
