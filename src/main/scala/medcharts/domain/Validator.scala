@@ -78,8 +78,19 @@ object Validator {
         validateColumnCount(columns.length, 2)
         val datetime = datetimeToMinute(columns(0))
         val breathesPerMinute = columns(1).toInt
-        require(breathesPerMinute >= 40 && breathesPerMinute <= 200, s"breathes per minute not >= 40 and <= 200")
+        require(breathesPerMinute >= 12 && breathesPerMinute <= 25, s"breathes per minute not >= 12 and <= 25")
         Respiration(datetime, breathesPerMinute)
+      }
+  }
+
+  implicit object TemperatureValidator extends Validator[Temperature] {
+    def validate(columns: Array[String]): Try[Temperature] =
+      Try {
+        validateColumnCount(columns.length, 2)
+        val datetime = datetimeToMinute(columns(0))
+        val degrees = columns(1).toDouble
+        require(degrees >= 95.0 && degrees <= 105.0, s"temperature, in degrees, not >= 95.0 and <= 105.0")
+        Temperature(datetime, degrees)
       }
   }
 }
