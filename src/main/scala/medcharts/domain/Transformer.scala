@@ -75,5 +75,25 @@ object Transformer {
         logLinesAndInvalidLines(linesResult, invalidLinesResult)
         Weights(linesResult, invalidLinesResult)
       }
+  }
+  
+  implicit object PulsesTransformer extends Transformer[Pulses] {
+    def transform(path: String, delimiter: String = ","): Try[Pulses] =
+      Try {
+        val lines = mutable.ArrayBuilder.make[Pulse]
+        val invalidLines = mutable.ArrayBuilder.make[InvalidLine]
+        val source = Source.fromFile(path, utf8)
+        for (line <- source.getLines) {
+          val columns = line.split(delimiter).map(_.trim)
+          validate[Pulse](columns) match {
+            case Success(pulse) => lines += pulse
+            case Failure(invalidLine) => invalidLines += InvalidLine(line, invalidLine)
+          }
+        }
+        source.close()
+        val (linesResult, invalidLinesResult) = (lines.result(), invalidLines.result())
+        logLinesAndInvalidLines(linesResult, invalidLinesResult)
+        Pulses(linesResult, invalidLinesResult)
+      }
   }  
 }
