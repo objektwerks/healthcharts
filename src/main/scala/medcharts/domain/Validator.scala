@@ -43,8 +43,19 @@ object Validator {
         validateColumnCount(columns.length, 2)
         val datetime = datetimeToMinute(columns(0))
         val pounds = columns(1).toDouble
-        require(pounds > 0 && pounds <= 500, s"pounds not > 0 and < 500")
+        require(pounds > 0 && pounds < 500, s"pounds not > 0 and < 500")
         Weight(datetime, pounds)
+      }
+  }
+
+  implicit object PulseValidator extends Validator[Pulse] {
+    def validate(columns: Array[String]): Try[Pulse] =
+      Try {
+        validateColumnCount(columns.length, 2)
+        val datetime = datetimeToMinute(columns(0))
+        val beatsPerMinute = columns(1).toInt
+        require(beatsPerMinute >= 40 && beatsPerMinute <= 200, s"beats per minute not >= 40 and <= 200")
+        Pulse(datetime, beatsPerMinute)
       }
   }
 }
