@@ -28,4 +28,10 @@ object Meds {
 
 final case class Weight(datetime: Minute, lbs: Double)
 
+final case class Weights(lines: Array[Weight], invalidLines: Array[InvalidLine])
+
+object Weights {
+  def empty: Weights = Weights(Array.empty[Weight], Array.empty[InvalidLine])
+}
+
 final case class InvalidLine(line: String, error: Throwable)
