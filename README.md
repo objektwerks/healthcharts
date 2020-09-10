@@ -5,7 +5,7 @@ MedCharts
 
 Todo
 ----
-1. Unbuilt charts { entities - x, validator - x, transformer, chart, dialog, action, menu, data, test }
+1. Unbuilt charts { entities-x, validators-x, transformers-x, charts, dialogs, actions, menus, data, tests }
 
 Charts
 ------
