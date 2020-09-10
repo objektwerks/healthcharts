@@ -12,7 +12,7 @@ object Validator {
   def validate[E](columns: Array[String])(implicit validator: Validator[E]): Try[E] = validator.validate(columns)
 
   implicit object GlucoseValidator extends Validator[Glucose] {
-    val columnCount = 2
+    private val columnCount = 2
 
     def validate(columns: Array[String]): Try[Glucose] =
       Try {
@@ -25,16 +25,14 @@ object Validator {
   }
 
   implicit object MedValidator extends Validator[Med] {
-    import MedType._
-
-    val columnCount = 3
+    private val columnCount = 3
 
     def validate(columns: Array[String]): Try[Med] =
       Try {
         require(columns.length == columnCount, s"column count != $columnCount")
         val datetime = datetimeToMinute(columns(0))
         val medTypeId = columns(1).toInt
-        val medtype = idToMedType(medTypeId)
+        val medtype = MedType.idToMedType(medTypeId)
         val dosage = columns(2).toInt
         require(dosage >= 1 && dosage <= 100, "dosage not >= 1 and <= 100")
         Med(datetime, medtype, dosage)
