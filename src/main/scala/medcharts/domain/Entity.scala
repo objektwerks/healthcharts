@@ -66,4 +66,12 @@ object Temperatures {
   def empty: Temperatures = Temperatures(Array.empty[Temperature], Array.empty[InvalidLine])
 }
 
+final case class BloodPressure(datetime: Minute, systolic: Int, diastolic: Int)
+
+final case class BloodPressures(lines: Array[BloodPressure], invalidLines: Array[InvalidLine])
+
+object BloodPressures {
+  def empty: BloodPressures = BloodPressures(Array.empty[BloodPressure], Array.empty[InvalidLine])
+}
+
 final case class InvalidLine(line: String, error: Throwable)
