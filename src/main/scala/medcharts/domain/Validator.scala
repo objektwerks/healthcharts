@@ -93,4 +93,17 @@ object Validator {
         Temperature(datetime, degrees)
       }
   }
+
+  implicit object BloodPressureValidator extends Validator[BloodPressure] {
+    def validate(columns: Array[String]): Try[BloodPressure] =
+      Try {
+        validateColumnCount(columns.length, 3)
+        val datetime = datetimeToMinute(columns(0))
+        val systolic = columns(1).toInt
+        val diastolic = columns(2).toInt
+        require(systolic >= 120 && systolic <= 200, s"systolic not >= 120 and <= 200")
+        require(diastolic >= 80 && diastolic <= 120, s"diastolic not >= 80 and <= 120")
+        BloodPressure(datetime, systolic, diastolic)
+      }
+  }
 }
