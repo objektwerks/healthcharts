@@ -1,61 +1,38 @@
 package medcharts.test
 
-import medcharts.domain.{BloodPressures, Glucoses, Meds}
-import medcharts.domain.Logger._
-import medcharts.domain.Transformer._
+import medcharts.domain.{BloodPressure, Glucose, Logger, Med, Transformer, Validator}
 
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
+import scala.reflect.ClassTag
 import scala.util.{Failure, Success}
 
 class TransformerTest extends AnyFunSuite with Matchers {
   test("blood pressure") {
-    testBloodPressureTransformer("./data/bloodpressure/blood-pressure.txt", 7, 0)
-    testBloodPressureTransformer("./data/bloodpressure/blood-pressure-invalid.txt", 5, 2)
+    testTransformer[BloodPressure]("./data/bloodpressure/blood-pressure.txt", 7, 0)
+    testTransformer[BloodPressure]("./data/bloodpressure/blood-pressure-invalid.txt", 5, 2)
   }
 
   test("glucose") {
-    testGlucosesTransformer("./data/glucose/glucose.txt", 18, 0)
-    testGlucosesTransformer("./data/glucose/glucose-invalid.txt", 16, 2)
+    testTransformer[Glucose]("./data/glucose/glucose.txt", 18, 0)
+    testTransformer[Glucose]("./data/glucose/glucose-invalid.txt", 16, 2)
   }
 
   test("meds") {
-    testMedsTransformer("./data/meds/meds.txt", 18, 0)
-    testMedsTransformer("./data/meds/meds-invalid.txt", 16, 2)
-  }  
-
-  private def testBloodPressureTransformer(path: String, linesCount: Int, invalidLinesCount: Int): Unit = {
-    transform[BloodPressures](path) match {
-      case Success(bloodPressures) => 
-        bloodPressures.lines.length shouldEqual linesCount
-        bloodPressures.invalidLines.length shouldEqual invalidLinesCount
-      case Failure(failure) =>
-        logIOFailure(failure, path)
-        fail
-    }
-    ()
+    testTransformer[Med]("./data/meds/meds.txt", 18, 0)
+    testTransformer[Med]("./data/meds/meds-invalid.txt", 16, 2)
   }
 
-  private def testGlucosesTransformer(path: String, linesCount: Int, invalidLinesCount: Int): Unit = {
-    transform[Glucoses](path) match {
-      case Success(glucoses) => 
-        glucoses.lines.length shouldEqual linesCount
-        glucoses.invalidLines.length shouldEqual invalidLinesCount
+  private def testTransformer[E: ClassTag](path: String,
+                                           linesCount: Int,
+                                           invalidLinesCount: Int)(implicit validator: Validator[E]): Unit = {
+    Transformer.transform[E](path) match {
+      case Success(entities) =>
+        entities.lines.length shouldEqual linesCount
+        entities.invalidLines.length shouldEqual invalidLinesCount
       case Failure(failure) =>
-        logIOFailure(failure, path)
-        fail
-    }
-    ()
-  }
-
-  private def testMedsTransformer(path: String, linesCount: Int, invalidLinesCount: Int): Unit = {
-    transform[Meds](path) match {
-      case Success(meds) => 
-        meds.lines.length shouldEqual linesCount
-        meds.invalidLines.length shouldEqual invalidLinesCount
-      case Failure(failure) =>
-        logIOFailure(failure, path)
+        Logger.logIOFailure(failure, path)
         fail
     }
     ()

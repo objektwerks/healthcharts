@@ -4,13 +4,11 @@ import java.text.{DecimalFormat, SimpleDateFormat}
 import java.{util => jdate}
 
 import javax.swing.BorderFactory
-
 import medcharts.Conf
 import medcharts.domain.Converter._
 import medcharts.domain.Logger._
 import medcharts.domain.Transformer._
 import medcharts.domain._
-
 import org.jfree.chart.axis.{DateAxis, NumberAxis}
 import org.jfree.chart.labels.StandardXYToolTipGenerator
 import org.jfree.chart.plot.{DatasetRenderingOrder, XYPlot}
@@ -19,32 +17,25 @@ import org.jfree.chart.{ChartPanel, JFreeChart}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.{IntervalXYDataset, XYDataset}
 
+import scala.reflect.ClassTag
 import scala.util.{Failure, Success, Try}
 
 object GlucoseMedsChart {
   def apply(glucoseCsvPath: String, medsCsvPath: String): ChartPanel = {
-    val glucoses = transformGlucoses(glucoseCsvPath)
-    val meds = transformMeds(medsCsvPath)
+    val glucoses = transformEntities[Glucose](glucoseCsvPath)
+    val meds = transformEntities[Med](medsCsvPath)
     build(glucoses, meds)
   }
 
-  private def transformGlucoses(path: String): Glucoses =
-    transform[Glucoses](path) match {
+  private def transformEntities[E: ClassTag](path: String)(implicit validator: Validator[E]): Entities[E] =
+    transform[E](path) match {
       case Success(glucoses) => glucoses
       case Failure(failure) =>
         logIOFailure(failure, path)
-        Glucoses.empty
+        Entities.empty
     }
 
-  private def transformMeds(path: String): Meds =
-    transform[Meds](path) match {
-      case Success(meds) => meds
-      case Failure(failure) =>
-        logIOFailure(failure, path)
-        Meds.empty
-    }
-
-  private def build(glucoses: Glucoses, meds: Meds): ChartPanel = {
+  private def build(glucoses: Entities[Glucose], meds: Entities[Med]): ChartPanel = {
     val xyPlot = new XYPlot()
     xyPlot.setDatasetRenderingOrder(DatasetRenderingOrder.FORWARD)
 
@@ -70,7 +61,7 @@ object GlucoseMedsChart {
     chartPanel
   }
 
-  private def buildGlucoseDataset(glucoses: Glucoses): IntervalXYDataset = {
+  private def buildGlucoseDataset(glucoses: Entities[Glucose]): IntervalXYDataset = {
     val timeSeries = new TimeSeries("Glucose".asInstanceOf[Comparable[String]])
     glucoses.lines.foreach { glucose =>
       timeSeries.add( glucose.datetime, glucose.level.toDouble )
@@ -78,7 +69,7 @@ object GlucoseMedsChart {
     new TimeSeriesCollection(timeSeries)
   }
 
-  private def buildMedDataset(meds: Meds): IntervalXYDataset = {
+  private def buildMedDataset(meds: Entities[Med]): IntervalXYDataset = {
     val timeSeries = new TimeSeries("Meds".asInstanceOf[Comparable[String]])
     meds.lines.foreach { med =>
       timeSeries.add( med.datetime, s"${med.dosage}.${med.medtype.id}".toDouble )
