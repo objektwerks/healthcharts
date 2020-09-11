@@ -17,6 +17,26 @@ object Transformer {
   def transform[E](path: String, delimiter: String = ",")(implicit transformer: Transformer[E]): Try[E] = 
     transformer.transform(path, delimiter)
 
+  implicit object BloodPressuresTransformer extends Transformer[BloodPressures] {
+    def transform(path: String, delimiter: String = ","): Try[BloodPressures] =
+      Try {
+        val lines = mutable.ArrayBuilder.make[BloodPressure]
+        val invalidLines = mutable.ArrayBuilder.make[InvalidLine]
+        val source = Source.fromFile(path, utf8)
+        for (line <- source.getLines) {
+          val columns = line.split(delimiter).map(_.trim)
+          validate[BloodPressure](columns) match {
+            case Success(bloodPressure) => lines += bloodPressure
+            case Failure(invalidLine) => invalidLines += InvalidLine(line, invalidLine)
+          }
+        }
+        source.close()
+        val (linesResult, invalidLinesResult) = (lines.result(), invalidLines.result())
+        logLinesAndInvalidLines(linesResult, invalidLinesResult)
+        BloodPressures(linesResult, invalidLinesResult)
+      }
+  }
+
   implicit object GlucosesTransformer extends Transformer[Glucoses] {
     def transform(path: String, delimiter: String = ","): Try[Glucoses] =
       Try {
@@ -54,26 +74,6 @@ object Transformer {
         val (linesResult, invalidLinesResult) = (lines.result(), invalidLines.result())
         logLinesAndInvalidLines(linesResult, invalidLinesResult)
         Meds(linesResult, invalidLinesResult)
-      }
-  }
-
-  implicit object WeightsTransformer extends Transformer[Weights] {
-    def transform(path: String, delimiter: String = ","): Try[Weights] =
-      Try {
-        val lines = mutable.ArrayBuilder.make[Weight]
-        val invalidLines = mutable.ArrayBuilder.make[InvalidLine]
-        val source = Source.fromFile(path, utf8)
-        for (line <- source.getLines) {
-          val columns = line.split(delimiter).map(_.trim)
-          validate[Weight](columns) match {
-            case Success(weight) => lines += weight
-            case Failure(invalidLine) => invalidLines += InvalidLine(line, invalidLine)
-          }
-        }
-        source.close()
-        val (linesResult, invalidLinesResult) = (lines.result(), invalidLines.result())
-        logLinesAndInvalidLines(linesResult, invalidLinesResult)
-        Weights(linesResult, invalidLinesResult)
       }
   }
   
@@ -157,23 +157,23 @@ object Transformer {
       }
   }
 
-  implicit object BloodPressuresTransformer extends Transformer[BloodPressures] {
-    def transform(path: String, delimiter: String = ","): Try[BloodPressures] =
+  implicit object WeightsTransformer extends Transformer[Weights] {
+    def transform(path: String, delimiter: String = ","): Try[Weights] =
       Try {
-        val lines = mutable.ArrayBuilder.make[BloodPressure]
+        val lines = mutable.ArrayBuilder.make[Weight]
         val invalidLines = mutable.ArrayBuilder.make[InvalidLine]
         val source = Source.fromFile(path, utf8)
         for (line <- source.getLines) {
           val columns = line.split(delimiter).map(_.trim)
-          validate[BloodPressure](columns) match {
-            case Success(bloodPressure) => lines += bloodPressure
+          validate[Weight](columns) match {
+            case Success(weight) => lines += weight
             case Failure(invalidLine) => invalidLines += InvalidLine(line, invalidLine)
           }
         }
         source.close()
         val (linesResult, invalidLinesResult) = (lines.result(), invalidLines.result())
         logLinesAndInvalidLines(linesResult, invalidLinesResult)
-        BloodPressures(linesResult, invalidLinesResult)
+        Weights(linesResult, invalidLinesResult)
       }
   }
 }
