@@ -9,7 +9,7 @@ Todo
 
 Charts
 ------
-- [x] [Glucose-Meds Chart](glucose.meds.chart.md)
+- [x] [Glucose-Meds Chart](./docs/glucose.meds.chart.md)
 - [ ] Weight
 - [ ] Pulse
 - [ ] Pulse Oxygen
