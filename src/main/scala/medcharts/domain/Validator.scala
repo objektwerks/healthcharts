@@ -13,6 +13,19 @@ object Validator {
 
   private def validateColumnCount(length: Int, count: Int): Unit = require(length == count, s"column count != $count")
 
+  implicit object BloodPressureValidator extends Validator[BloodPressure] {
+    def validate(columns: Array[String]): Try[BloodPressure] =
+      Try {
+        validateColumnCount(columns.length, 3)
+        val datetime = datetimeToMinute(columns(0))
+        val systolic = columns(1).toInt
+        val diastolic = columns(2).toInt
+        require(systolic >= 120 && systolic <= 200, s"systolic not >= 120 and <= 200")
+        require(diastolic >= 80 && diastolic <= 120, s"diastolic not >= 80 and <= 120")
+        BloodPressure(datetime, systolic, diastolic)
+      }
+  }
+
   implicit object GlucoseValidator extends Validator[Glucose] {
     def validate(columns: Array[String]): Try[Glucose] =
       Try {
@@ -34,17 +47,6 @@ object Validator {
         val dosage = columns(2).toInt
         require(dosage >= 1 && dosage <= 100, "dosage not >= 1 and <= 100")
         Med(datetime, medtype, dosage)
-      }
-  }
-
-  implicit object WeightValidator extends Validator[Weight] {
-    def validate(columns: Array[String]): Try[Weight] =
-      Try {
-        validateColumnCount(columns.length, 2)
-        val datetime = datetimeToMinute(columns(0))
-        val pounds = columns(1).toDouble
-        require(pounds > 0 && pounds < 500, s"pounds not > 0 and < 500")
-        Weight(datetime, pounds)
       }
   }
 
@@ -94,16 +96,14 @@ object Validator {
       }
   }
 
-  implicit object BloodPressureValidator extends Validator[BloodPressure] {
-    def validate(columns: Array[String]): Try[BloodPressure] =
+  implicit object WeightValidator extends Validator[Weight] {
+    def validate(columns: Array[String]): Try[Weight] =
       Try {
-        validateColumnCount(columns.length, 3)
+        validateColumnCount(columns.length, 2)
         val datetime = datetimeToMinute(columns(0))
-        val systolic = columns(1).toInt
-        val diastolic = columns(2).toInt
-        require(systolic >= 120 && systolic <= 200, s"systolic not >= 120 and <= 200")
-        require(diastolic >= 80 && diastolic <= 120, s"diastolic not >= 80 and <= 120")
-        BloodPressure(datetime, systolic, diastolic)
+        val pounds = columns(1).toDouble
+        require(pounds > 0 && pounds < 500, s"pounds not > 0 and < 500")
+        Weight(datetime, pounds)
       }
-  }
+  }  
 }
