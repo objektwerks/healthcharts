@@ -25,10 +25,11 @@ Run
 ---
 1. sbt run
 2. click Charts menu
-3. click Glucose-Meds menu item
-4. select 1) glucose and 2) meds csv paths in Glucose-Meds dialog
-5. click freshly enabled select button
-6. view tabbed chart! ( mouseover line data points to view details )
+3. click Chart menu item
+4. via the Chart Dialog, select *.csv / *.txt as requested
+5. click 'Select' button
+6. view tabbed chart ( mouseover line data points to view data details )
+7. close app via top-left 'x' icon
 >Note that tabs are closeable.
 
 Package
