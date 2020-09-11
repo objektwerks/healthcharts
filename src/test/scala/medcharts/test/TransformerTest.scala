@@ -9,6 +9,7 @@ import scala.reflect.ClassTag
 import scala.util.{Failure, Success}
 import medcharts.domain.PulseOxygen
 import medcharts.domain.Respiration
+import medcharts.domain.Temperature
 
 class TransformerTest extends AnyFunSuite with Matchers {
   test("blood pressure") {
@@ -39,7 +40,12 @@ class TransformerTest extends AnyFunSuite with Matchers {
   test("respiration") {
     testTransformer[Respiration]("./data/respiration/respiration.txt", 7, 0)
     testTransformer[Respiration]("./data/respiration/respiration-invalid.txt", 5, 2)
-  }  
+  }
+  
+  test("temperature") {
+    testTransformer[Temperature]("./data/temperature/temperature.txt", 7, 0)
+    testTransformer[Temperature]("./data/temperature/temperature-invalid.txt", 5, 2)
+  }   
 
   private def testTransformer[E: ClassTag](path: String,
                                            linesCount: Int,
