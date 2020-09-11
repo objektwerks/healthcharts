@@ -1,6 +1,6 @@
 package medcharts.test
 
-import medcharts.domain.{BloodPressure, Glucose, Logger, Med, Transformer, Validator}
+import medcharts.domain.{BloodPressure, Glucose, Logger, Med, Pulse, Transformer, Validator}
 
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
@@ -19,10 +19,15 @@ class TransformerTest extends AnyFunSuite with Matchers {
     testTransformer[Glucose]("./data/glucose/glucose-invalid.txt", 16, 2)
   }
 
-  test("meds") {
-    testTransformer[Med]("./data/meds/meds.txt", 18, 0)
-    testTransformer[Med]("./data/meds/meds-invalid.txt", 16, 2)
+  test("med") {
+    testTransformer[Med]("./data/med/med.txt", 18, 0)
+    testTransformer[Med]("./data/med/med-invalid.txt", 16, 2)
   }
+
+  test("pulse") {
+    testTransformer[Pulse]("./data/pulse/pulse.txt", 7, 0)
+    testTransformer[Pulse]("./data/pulse/pulse-invalid.txt", 5, 2)
+  }  
 
   private def testTransformer[E: ClassTag](path: String,
                                            linesCount: Int,
