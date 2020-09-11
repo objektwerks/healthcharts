@@ -7,6 +7,7 @@ import org.scalatest.matchers.should.Matchers
 
 import scala.reflect.ClassTag
 import scala.util.{Failure, Success}
+import medcharts.domain.PulseOxygen
 
 class TransformerTest extends AnyFunSuite with Matchers {
   test("blood pressure") {
@@ -27,6 +28,11 @@ class TransformerTest extends AnyFunSuite with Matchers {
   test("pulse") {
     testTransformer[Pulse]("./data/pulse/pulse.txt", 7, 0)
     testTransformer[Pulse]("./data/pulse/pulse-invalid.txt", 5, 2)
+  }
+  
+  test("pulse oxygen") {
+    testTransformer[PulseOxygen]("./data/pulseoxygen/pulse-oxygen.txt", 7, 0)
+    testTransformer[PulseOxygen]("./data/pulseoxygen/pulse-oxygen-invalid.txt", 5, 2)
   }  
 
   private def testTransformer[E: ClassTag](path: String,
