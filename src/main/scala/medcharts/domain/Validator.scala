@@ -102,7 +102,7 @@ object Validator {
         validateColumnCount(columns.length, 2)
         val datetime = datetimeToMinute(columns(0))
         val pounds = columns(1).toDouble
-        require(pounds > 0 && pounds < 500, s"pounds not > 0 and < 500")
+        require(pounds > 0.00 && pounds <= 500.00, s"pounds not > 0.00 and <= 500.00")
         Weight(datetime, pounds)
       }
   }  

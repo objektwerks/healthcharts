@@ -3,7 +3,7 @@ Chart
 >Composed of 2 Line charts, with:
 1. X-Axis : Day,Hour ( d,H )
 2. Y-Axis : Blood Pressure ( systolic )
-3. Glucose Tooltip ( systolic / diastolic )
+3. Tooltip ( systolic / diastolic )
 4. Legend : Blood Pressure (Red)
 5. Title : Blood Pressure : (y.m.d - y.m.d)
 
@@ -26,5 +26,5 @@ Blood Pressure CSV
 ------------------
 >See data/bloodpressure/blood-pressure.txt
 1. datetime - yyyy-MM-ddThh:mm:ss ( 2020-07-04T10:04:00 )
-2. systolic - 
-3. diastolic -
+2. systolic - nnn
+3. diastolic - nnn
