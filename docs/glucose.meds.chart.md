@@ -1,11 +1,11 @@
-Glucose-Meds Chart
-------------------
+Chart
+-----
 >Composed of 2 Line charts, with:
 1. X-Axis : Day,Hour ( d,H )
 2. Y-Axis : Glucose Level / Med Dosage ( n )
 3. Glucose Tooltip ( Glucose: ( d,H:m, n ) )
 4. Meds Tooltip ( Meds: ( d,H:m, n, "med" ) )
-5. Legend : Gluccose (Red), Meds (Blue)
+5. Legend : Glucose (Red), Meds (Blue)
 6. Title : Glucose-Meds : (y.m.d - y.m.d)
 
 Model
@@ -13,7 +13,7 @@ Model
 1. Glucose: datetime, level (1)
 2. Med: datetime, medtype (2), dosage (3)
 
-Model Notes
+Constraints
 -----------
 1. 0 - 300, 70 - 100 is normal
 2. 1 -> insulin, 2 -> steroids
