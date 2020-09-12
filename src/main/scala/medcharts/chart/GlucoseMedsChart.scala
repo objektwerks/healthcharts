@@ -7,8 +7,6 @@ import javax.swing.BorderFactory
 
 import medcharts.Conf
 import medcharts.entity.Converter._
-import medcharts.entity.Logger._
-import medcharts.entity.Transformer._
 import medcharts.entity._
 
 import org.jfree.chart.axis.{DateAxis, NumberAxis}
@@ -30,10 +28,10 @@ object GlucoseMedsChart {
   }
 
   private def transformEntities[E: ClassTag](path: String)(implicit validator: Validator[E]): Entities[E] =
-    transform[E](path) match {
+    Transformer.transform[E](path) match {
       case Success(entities) => entities
       case Failure(failure) =>
-        logIOFailure(failure, path)
+        Logger.logIOFailure(failure, path)
         Entities.empty
     }
 
