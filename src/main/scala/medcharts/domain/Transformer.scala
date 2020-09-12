@@ -21,7 +21,7 @@ object Transformer {
         val columns = line.split(delimiter).map(_.trim)
         validate[E](columns) match {
           case Success(entity) => lines += entity
-          case Failure(invalidLine) => invalidLines += InvalidLine(line, invalidLine)
+          case Failure(error) => invalidLines += InvalidLine(line, error)
         }
       }
       source.close()
