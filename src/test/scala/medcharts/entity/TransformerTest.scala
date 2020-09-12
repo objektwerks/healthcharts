@@ -1,9 +1,4 @@
-package medcharts.test
-
-import medcharts.domain.{BloodPressure, Glucose, Logger, Med, Pulse, Transformer, Validator, Weight}
-import medcharts.domain.PulseOxygen
-import medcharts.domain.Respiration
-import medcharts.domain.Temperature
+package medcharts.entity
 
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers

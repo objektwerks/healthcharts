@@ -1,4 +1,4 @@
-package medcharts.domain
+package medcharts.entity
 
 import org.jfree.data.time.Minute
 

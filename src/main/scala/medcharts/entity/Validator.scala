@@ -1,6 +1,6 @@
-package medcharts.domain
+package medcharts.entity
 
-import medcharts.domain.Converter._
+import medcharts.entity.Converter._
 
 import scala.util.Try
 
