@@ -11,7 +11,8 @@ import scala.util.{Failure, Success, Try}
 object Transformer {
   private val utf8 = Codec.UTF8.name
 
-  def transform[E: ClassTag](path: String, delimiter: String = ",")(implicit validator: Validator[E]): Try[Entities[E]] =
+  def transform[E: ClassTag](path: String,
+                             delimiter: String = ",")(implicit validator: Validator[E]): Try[Entities[E]] =
     Try {
       val lines = mutable.ArrayBuilder.make[E]
       val invalidLines = mutable.ArrayBuilder.make[InvalidLine]
@@ -19,7 +20,7 @@ object Transformer {
       for (line <- source.getLines) {
         val columns = line.split(delimiter).map(_.trim)
         validate[E](columns) match {
-          case Success(e) => lines += e
+          case Success(entity) => lines += entity
           case Failure(invalidLine) => invalidLines += InvalidLine(line, invalidLine)
         }
       }
