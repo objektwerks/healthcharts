@@ -1,15 +1,15 @@
 package medcharts.test
 
 import medcharts.domain.{BloodPressure, Glucose, Logger, Med, Pulse, Transformer, Validator, Weight}
+import medcharts.domain.PulseOxygen
+import medcharts.domain.Respiration
+import medcharts.domain.Temperature
 
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
 import scala.reflect.ClassTag
 import scala.util.{Failure, Success}
-import medcharts.domain.PulseOxygen
-import medcharts.domain.Respiration
-import medcharts.domain.Temperature
 
 class TransformerTest extends AnyFunSuite with Matchers {
   test("blood pressure") {
@@ -53,11 +53,11 @@ class TransformerTest extends AnyFunSuite with Matchers {
   }  
 
   private def testTransformer[E: ClassTag](path: String,
-                                           linesCount: Int,
+                                           entitiesCount: Int,
                                            invalidLinesCount: Int)(implicit validator: Validator[E]): Unit = {
     Transformer.transform[E](path) match {
       case Success(entities) =>
-        entities.lines.length shouldEqual linesCount
+        entities.entities.length shouldEqual entitiesCount
         entities.invalidLines.length shouldEqual invalidLinesCount
       case Failure(failure) =>
         Logger.logIOFailure(failure, path)

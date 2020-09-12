@@ -4,11 +4,13 @@ import java.text.{DecimalFormat, SimpleDateFormat}
 import java.{util => jdate}
 
 import javax.swing.BorderFactory
+
 import medcharts.Conf
 import medcharts.domain.Converter._
 import medcharts.domain.Logger._
 import medcharts.domain.Transformer._
 import medcharts.domain._
+
 import org.jfree.chart.axis.{DateAxis, NumberAxis}
 import org.jfree.chart.labels.StandardXYToolTipGenerator
 import org.jfree.chart.plot.{DatasetRenderingOrder, XYPlot}
@@ -29,7 +31,7 @@ object GlucoseMedsChart {
 
   private def transformEntities[E: ClassTag](path: String)(implicit validator: Validator[E]): Entities[E] =
     transform[E](path) match {
-      case Success(glucoses) => glucoses
+      case Success(entities) => entities
       case Failure(failure) =>
         logIOFailure(failure, path)
         Entities.empty
@@ -51,7 +53,7 @@ object GlucoseMedsChart {
 
     xyPlot.setRangeAxis(new NumberAxis(Conf.titleGlucoseMedsChartYAxis))
 
-    val title = buildTitle(glucoses.lines)
+    val title = buildTitle(glucoses.entities)
     val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
 
     val chartPanel = new ChartPanel(chart)
@@ -63,7 +65,7 @@ object GlucoseMedsChart {
 
   private def buildGlucoseDataset(glucoses: Entities[Glucose]): IntervalXYDataset = {
     val timeSeries = new TimeSeries("Glucose".asInstanceOf[Comparable[String]])
-    glucoses.lines.foreach { glucose =>
+    glucoses.entities.foreach { glucose =>
       timeSeries.add( glucose.datetime, glucose.level.toDouble )
     }
     new TimeSeriesCollection(timeSeries)
@@ -71,7 +73,7 @@ object GlucoseMedsChart {
 
   private def buildMedDataset(meds: Entities[Med]): IntervalXYDataset = {
     val timeSeries = new TimeSeries("Meds".asInstanceOf[Comparable[String]])
-    meds.lines.foreach { med =>
+    meds.entities.foreach { med =>
       timeSeries.add( med.datetime, s"${med.dosage}.${med.medtype.id}".toDouble )
     }
     new TimeSeriesCollection(timeSeries)

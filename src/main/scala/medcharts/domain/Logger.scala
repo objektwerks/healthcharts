@@ -5,10 +5,10 @@ import org.slf4j.LoggerFactory
 object Logger {
   private val logger = LoggerFactory.getLogger(getClass)
   
-  def logLinesAndInvalidLines[L, IL](lines: Array[L], invalidLines: Array[IL]): Unit = {
-    logger.info(s"lines [${lines.length}]: ${lines.toList.map(g => "\n" + g.toString)}")
-    logger.info(s"errors [${invalidLines.length}]: ${invalidLines.toList.map(g => "\n" + g.toString)}")
+  def logEntitiesAndInvalidLines[E, IL](entities: Array[E], invalidLines: Array[IL]): Unit = {
+    logger.info(s"entities [${entities.length}]: ${entities.toList.map(g => "\n" + g.toString)}")
+    logger.info(s"invalid lines [${invalidLines.length}]: ${invalidLines.toList.map(g => "\n" + g.toString)}")
   }
 
-  def logIOFailure(failure: Throwable, path: String): Unit = logger.error(s"Failed to load $path: ${failure.getMessage}")
+  def logIOFailure(failure: Throwable, path: String): Unit = logger.error(s"IO failure at: $path -> ${failure.getMessage}")
 }
