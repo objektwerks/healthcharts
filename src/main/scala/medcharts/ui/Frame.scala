@@ -8,7 +8,7 @@ import medcharts.Conf
 
 import org.jfree.chart.ChartPanel
 
-class Frame() extends JFrame {
+class Frame extends JFrame {
   val tabbedPane = new TabbedPane()
   add(tabbedPane, BorderLayout.CENTER)
 
