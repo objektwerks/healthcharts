@@ -1,22 +1,21 @@
 package medcharts.chart
 
 import java.awt.event.ActionEvent
-import java.util.concurrent.atomic.AtomicInteger
-
-import javax.swing.AbstractAction
 
 import medcharts.Conf
+import medcharts.entity._
 import medcharts.ui.Frame
 
-class GlucoseMedsAction(name: String, frame: Frame) extends AbstractAction(name) {
+class GlucoseMedsAction(name: String, frame: Frame) extends ChartAction(name) {
   private val title = Conf.titleGlucoseMeds
-  private val counter = new AtomicInteger(1)
 
   def actionPerformed(event: ActionEvent): Unit = {
-    val dialog = new GlucoseMedsDialog(frame)
-    val (pathToGlucoseCsv, pathToMedsCsv) = dialog.view()
-    if (pathToGlucoseCsv.nonEmpty && pathToMedsCsv.nonEmpty) {
-      val chart = GlucoseMedsChart(glucoseCsvPath = pathToGlucoseCsv, medsCsvPath = pathToMedsCsv)
+    val (glucoseCsvPath, medsCsvPath) = new GlucoseMedsDialog(frame).view()
+    val glucoses = transformEntities[Glucose](glucoseCsvPath)
+    val meds = transformEntities[Med](medsCsvPath)
+
+    if (glucoses.nonEmpty && meds.nonEmpty) {
+      val chart = GlucoseMedsChart.build(glucoses, meds)
       frame.addChart( s"$title-${counter.getAndIncrement}", chart )
     }
   }

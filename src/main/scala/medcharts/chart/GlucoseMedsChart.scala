@@ -4,11 +4,9 @@ import java.text.{DecimalFormat, SimpleDateFormat}
 import java.{util => jdate}
 
 import javax.swing.BorderFactory
-
 import medcharts.Conf
 import medcharts.entity.Converter._
 import medcharts.entity._
-
 import org.jfree.chart.axis.{DateAxis, NumberAxis}
 import org.jfree.chart.labels.StandardXYToolTipGenerator
 import org.jfree.chart.plot.{DatasetRenderingOrder, XYPlot}
@@ -17,25 +15,10 @@ import org.jfree.chart.{ChartPanel, JFreeChart}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.{IntervalXYDataset, XYDataset}
 
-import scala.reflect.ClassTag
-import scala.util.{Failure, Success, Try}
+import scala.util.Try
 
 object GlucoseMedsChart {
-  def apply(glucoseCsvPath: String, medsCsvPath: String): ChartPanel = {
-    val glucoses = transformEntities[Glucose](glucoseCsvPath)
-    val meds = transformEntities[Med](medsCsvPath)
-    build(glucoses, meds)
-  }
-
-  private def transformEntities[E: ClassTag](path: String)(implicit validator: Validator[E]): Entities[E] =
-    Transformer.transform[E](path) match {
-      case Success(entities) => entities
-      case Failure(failure) =>
-        Logger.logIOFailure(failure, path)
-        Entities.empty
-    }
-
-  private def build(glucoses: Entities[Glucose], meds: Entities[Med]): ChartPanel = {
+  def build(glucoses: Entities[Glucose], meds: Entities[Med]): ChartPanel = {
     val xyPlot = new XYPlot()
     xyPlot.setDatasetRenderingOrder(DatasetRenderingOrder.FORWARD)
 
