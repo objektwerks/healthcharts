@@ -6,7 +6,7 @@ import medcharts.Conf
 import medcharts.entity._
 import medcharts.ui.Frame
 
-class GlucoseMedsAction(name: String, frame: Frame) extends ChartAction(name) {
+class GlucoseMedsAction(name: String, frame: Frame) extends ChartAction(name, frame) {
   private val title = Conf.titleGlucoseMeds
 
   def actionPerformed(event: ActionEvent): Unit = {
@@ -17,6 +17,9 @@ class GlucoseMedsAction(name: String, frame: Frame) extends ChartAction(name) {
     if (glucoses.nonEmpty && meds.nonEmpty) {
       val chart = GlucoseMedsChart.build(glucoses, meds)
       frame.addChart( s"$title-${counter.getAndIncrement}", chart )
+    } else {
+      val message = s"Glucoses = ${glucoses.entities.length} : Meds = ${meds.entities.length}"
+      showEntitiesErrorDialog(message)
     }
   }
 }
