@@ -3,6 +3,7 @@ package medcharts.chart
 import java.util.concurrent.atomic.AtomicInteger
 
 import javax.swing.{AbstractAction, JOptionPane}
+
 import medcharts.Conf
 import medcharts.entity._
 import medcharts.ui.Frame

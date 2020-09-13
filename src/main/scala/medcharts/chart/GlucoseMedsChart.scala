@@ -4,9 +4,11 @@ import java.text.{DecimalFormat, SimpleDateFormat}
 import java.{util => jdate}
 
 import javax.swing.BorderFactory
+
 import medcharts.Conf
 import medcharts.entity.Converter._
 import medcharts.entity._
+
 import org.jfree.chart.axis.{DateAxis, NumberAxis}
 import org.jfree.chart.labels.StandardXYToolTipGenerator
 import org.jfree.chart.plot.{DatasetRenderingOrder, XYPlot}
