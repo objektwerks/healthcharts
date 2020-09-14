@@ -22,10 +22,11 @@ object Conf {
 
   val titleFileChooser = conf.getString("title.fileChooser")
   val titleMenuBar = conf.getString("title.menuBar")
+  val titlePathDialog = conf.getString("title.pathDialog")
+  val titlePathsDialog = conf.getString("title.pathsDialog")
   val titleGlucoseMeds = conf.getString("title.glucoseMeds")
   val titleMeds = conf.getString("title.meds")
   val titleGlucoseMedsChartXAxis = conf.getString("title.glucoseMedsChartXAxis")
   val titleGlucoseMedsChartYAxis = conf.getString("title.glucoseMedsChartYAxis")
-  val titleGlucoseMedsDialog = conf.getString("title.glucoseMedsDialog")
   val titleCsvFilesEmpty = conf.getString("title.csvFilesEmpty")
 }

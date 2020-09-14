@@ -10,60 +10,63 @@ import medcharts.ui.{FileChooser, Frame}
 
 import net.miginfocom.swing.MigLayout
 
-class GlucoseMedsDialog(frame: Frame) extends JDialog {
-  private val glucoseCsvTextField = buildTextField
-  private val medsCsvTextField = buildTextField
+class PathsDialog(frame: Frame, labelFirstPath: String, labelSecondPath: String) extends JDialog {
+  private val firstPathTextField = buildPathTextField
+  private val secondPathTextField = buildPathTextField
   private val selectButton = buildSelectButton(Conf.labelSelect)
   private val fileChooserTitle = Conf.titleFileChooser
   private val fileExtensionFilterDesc = Conf.fileExtensionFilterDesc
   private val fileExtensions = Conf.fileFilterExtensions
 
-  def view(): (String, String) = {
-    setTitle(Conf.titleGlucoseMedsDialog)
-    add(buildSelectPanel(Conf.labelCancel, Conf.labelEllipsis), BorderLayout.CENTER)
+  def view: (String, String) = {
+    setTitle(Conf.titlePathsDialog)
+    add(buildDialogPanel(labelFirstPath, labelSecondPath, Conf.labelCancel, Conf.labelEllipsis), BorderLayout.CENTER)
     setModal(true)
     pack()
     setLocationRelativeTo(frame)
     setVisible(true)
-    (glucoseCsvTextField.getText, medsCsvTextField.getText)
+    (firstPathTextField.getText, secondPathTextField.getText)
   }
 
-  private def buildSelectPanel(cancelLabel: String, ellipsisLabel: String): JPanel = {
+  private def buildDialogPanel(labelFirstPath: String,
+                               labelSecondPath: String,
+                               labelCancel: String,
+                               labelEllipsis: String): JPanel = {
     val panel = new JPanel( new MigLayout() )
-    panel.add( new JLabel(Conf.labelGlucoseCsv), "align label" )
-    panel.add( glucoseCsvTextField, "grow" )
-    panel.add( buildGlucoseSelectButton(ellipsisLabel), "wrap" )
-    panel.add( new JLabel(Conf.labelMedsCsv), "align label" )
-    panel.add( medsCsvTextField, "grow" )
-    panel.add( buildMedsSelectButton(ellipsisLabel), "wrap" )
-    panel.add( buildCancelButton(cancelLabel), "span, split 2, align right" )
+    panel.add( new JLabel(labelFirstPath), "align label" )
+    panel.add( firstPathTextField, "grow" )
+    panel.add( buildFirstPathSelectButton(labelEllipsis), "wrap" )
+    panel.add( new JLabel(labelSecondPath), "align label" )
+    panel.add( secondPathTextField, "grow" )
+    panel.add( buildSecondPathSelectButton(labelEllipsis), "wrap" )
+    panel.add( buildCancelButton(labelCancel), "span, split 2, align right" )
     panel.add( selectButton )
     panel
   }
 
-  private def buildTextField: JTextField = {
+  private def buildPathTextField: JTextField = {
     val textField = new JTextField()
     textField.setEditable(false)
     textField.setPreferredSize(new Dimension(400, 30))
     textField
   }
 
-  private def buildGlucoseSelectButton(ellipsisLabel: String): JButton = {
+  private def buildFirstPathSelectButton(ellipsisLabel: String): JButton = {
     val button = new JButton(ellipsisLabel)
     button.addActionListener( new ActionListener() {
       override def actionPerformed(event: ActionEvent): Unit = {
-        glucoseCsvTextField.setText( selectFile.getOrElse("") )
+        firstPathTextField.setText( selectFile.getOrElse("") )
         validateCsvTextFields()
       }
     })
     button
   }
 
-  private def buildMedsSelectButton(ellipsisLabel: String): JButton = {
+  private def buildSecondPathSelectButton(ellipsisLabel: String): JButton = {
     val button = new JButton(ellipsisLabel)
     button.addActionListener( new ActionListener() {
       override def actionPerformed(event: ActionEvent): Unit = {
-        medsCsvTextField.setText( selectFile.getOrElse("") )
+        secondPathTextField.setText( selectFile.getOrElse("") )
         validateCsvTextFields()
       }
     })
@@ -91,5 +94,5 @@ class GlucoseMedsDialog(frame: Frame) extends JDialog {
     FileChooser.chooseFile(frame, fileChooserTitle, fileExtensionFilterDesc, fileExtensions)
 
   private def validateCsvTextFields(): Unit =
-    if (glucoseCsvTextField.getText.nonEmpty && medsCsvTextField.getText.nonEmpty) selectButton.setEnabled(true)
+    if (firstPathTextField.getText.nonEmpty && secondPathTextField.getText.nonEmpty) selectButton.setEnabled(true)
 }

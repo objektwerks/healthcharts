@@ -10,7 +10,7 @@ class GlucoseMedsAction(name: String, frame: Frame) extends ChartAction(name, fr
   private val title = Conf.titleGlucoseMeds
 
   def actionPerformed(event: ActionEvent): Unit = {
-    val (glucoseCsvPath, medsCsvPath) = new GlucoseMedsDialog(frame).view()
+    val (glucoseCsvPath, medsCsvPath) = new PathsDialog(frame, Conf.labelGlucoseCsv, Conf.labelMedsCsv).view
     val glucoses = transformEntities[Glucose](glucoseCsvPath)
     val meds = transformEntities[Med](medsCsvPath)
 
