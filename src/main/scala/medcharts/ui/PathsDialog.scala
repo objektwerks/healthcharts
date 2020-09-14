@@ -1,4 +1,4 @@
-package medcharts.chart
+package medcharts.ui
 
 import java.awt.event.{ActionEvent, ActionListener}
 import java.awt.{BorderLayout, Dimension}
@@ -6,7 +6,6 @@ import java.awt.{BorderLayout, Dimension}
 import javax.swing._
 
 import medcharts.Conf
-import medcharts.ui.{FileChooser, Frame}
 
 import net.miginfocom.swing.MigLayout
 

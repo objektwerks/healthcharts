@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent
 
 import medcharts.Conf
 import medcharts.entity._
-import medcharts.ui.Frame
+import medcharts.ui.{Frame, PathsDialog}
 
 class GlucoseMedsAction(name: String, frame: Frame) extends ChartAction(name, frame) {
   private val title = Conf.titleGlucoseMeds
