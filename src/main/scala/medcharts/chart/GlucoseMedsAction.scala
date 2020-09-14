@@ -10,14 +10,14 @@ class GlucoseMedsAction(name: String, frame: Frame) extends ChartAction(name, fr
   private val title = Conf.titleGlucoseMeds
 
   def actionPerformed(event: ActionEvent): Unit = {
-    val (glucoseCsvPath, medsCsvPath) = new PathsDialog(frame, Conf.labelGlucoseCsv, Conf.labelMedsCsv).view
+    val (wasNotCancelled, glucoseCsvPath, medsCsvPath) = new PathsDialog(frame, Conf.labelGlucoseCsv, Conf.labelMedsCsv).view
     val glucoses = transformEntities[Glucose](glucoseCsvPath)
     val meds = transformEntities[Med](medsCsvPath)
 
-    if (glucoses.nonEmpty && meds.nonEmpty) {
+    if (wasNotCancelled && glucoses.nonEmpty && meds.nonEmpty) {
       val chart = GlucoseMedsChart.build(glucoses, meds)
       frame.addChart( s"$title-${counter.getAndIncrement}", chart )
-    } else {
+    } else if (wasNotCancelled) {
       val message = s"Glucoses = ${glucoses.entities.length} : Meds = ${meds.entities.length}"
       showEntitiesErrorDialog(message)
     }

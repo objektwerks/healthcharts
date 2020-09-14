@@ -15,15 +15,16 @@ class PathDialog(frame: Frame, labelPath: String) extends JDialog {
   private val fileChooserTitle = Conf.titleFileChooser
   private val fileExtensionFilterDesc = Conf.fileExtensionFilterDesc
   private val fileExtensions = Conf.fileFilterExtensions
+  private var wasNotCancelled = true
 
-  def view: String = {
+  def view: (Boolean, String) = {
     setTitle(Conf.titlePathsDialog)
     add(buildDialogPanel(labelPath, Conf.labelCancel, Conf.labelEllipsis), BorderLayout.CENTER)
     setModal(true)
     pack()
     setLocationRelativeTo(frame)
     setVisible(true)
-    pathTextField.getText
+    (wasNotCancelled, pathTextField.getText)
   }
 
   private def buildDialogPanel(labelPath: String,
@@ -59,7 +60,10 @@ class PathDialog(frame: Frame, labelPath: String) extends JDialog {
   private def buildCancelButton(canceLabel: String): JButton = {
     val button = new JButton(canceLabel)
     button.addActionListener( new ActionListener() {
-      override def actionPerformed(event: ActionEvent): Unit = setVisible(false)
+      override def actionPerformed(event: ActionEvent): Unit = {
+        wasNotCancelled = false
+        setVisible(false)
+      }
     })
     button
   }
