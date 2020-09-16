@@ -9,13 +9,13 @@ Todo
 
 Charts
 ------
-- [ ] [Blood Pressure Chart](./docs/blood.pressure.chart.md)
-- [x] [Glucose-Meds Chart](./docs/glucose.meds.chart.md)
-- [ ] [Pulse Chart](./docs/pulse.chart.md)
-- [ ] [Pulse Oxygen Chart](./docs/pulse.oxygen.chart.md)
-- [ ] [Respiration Chart](./docs/respiration.chart.md)
-- [ ] [Temperature Chart](./docs/temperature.chart.md)
-- [ ] [Weight Chart](./docs/weight.chart.md)
+- [ ] [Blood Pressure](./docs/blood.pressure.chart.md)
+- [x] [Glucose Meds](./docs/glucose.meds.chart.md)
+- [ ] [Pulse](./docs/pulse.chart.md)
+- [ ] [Pulse Oxygen](./docs/pulse.oxygen.chart.md)
+- [ ] [Respiration](./docs/respiration.chart.md)
+- [ ] [Temperature](./docs/temperature.chart.md)
+- [ ] [Weight](./docs/weight.chart.md)
 
 Test
 ----
