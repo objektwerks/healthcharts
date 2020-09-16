@@ -27,6 +27,7 @@ object Conf {
   val titleGlucoseMeds = conf.getString("title.glucoseMeds")
   val titleGlucose = conf.getString("title.glucose")
   val titleMeds = conf.getString("title.meds")
+  val titleWeight = conf.getString("title.weight")
   val titleGlucoseMedsChartXAxis = conf.getString("title.glucoseMedsChartXAxis")
   val titleGlucoseMedsChartYAxis = conf.getString("title.glucoseMedsChartYAxis")
   val titleCsvFilesEmpty = conf.getString("title.csvFilesEmpty")
