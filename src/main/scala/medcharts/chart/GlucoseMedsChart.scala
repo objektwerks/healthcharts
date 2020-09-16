@@ -19,7 +19,7 @@ import org.jfree.data.xy.{IntervalXYDataset, XYDataset}
 
 import scala.util.Try
 
-object GlucoseMedsChart {
+object GlucoseMedsChart extends Chart {
   def build(glucoses: Entities[Glucose], meds: Entities[Med]): ChartPanel = {
     val xyPlot = new XYPlot()
     xyPlot.setDatasetRenderingOrder(DatasetRenderingOrder.FORWARD)
