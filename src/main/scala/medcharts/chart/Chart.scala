@@ -6,7 +6,7 @@ import scala.math.abs
 
 abstract class Chart {
   def calculateDelta(dataset: XYDataset, series: Int, item: Int): Int = {
-    val datasetLastIndex = dataset.getSeriesCount - 1
+    val datasetLastIndex = dataset.getItemCount(series) - 1
     val previousItemIndex = item - 1
     val datasetIndexRange = Range.inclusive(0, datasetLastIndex)
     if ( datasetIndexRange.contains( previousItemIndex ) ) {
