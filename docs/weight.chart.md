@@ -3,7 +3,7 @@ Chart
 >Composed of 2 Line charts, with:
 1. X-Axis : Day,Hour ( d,H )
 2. Y-Axis : Weight ( pounds )
-3. Tooltip ( pounds )
+3. Tooltip ( pounds, delta )
 4. Legend : Weight (Red)
 5. Title : Weight : (y.m.d - y.m.d)
 

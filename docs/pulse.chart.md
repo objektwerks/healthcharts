@@ -3,7 +3,7 @@ Chart
 >Composed of 2 Line charts, with:
 1. X-Axis : Day,Hour ( d,H )
 2. Y-Axis : Pulse ( beatsPerMinute )
-3. Tooltip ( beatsPerMinute )
+3. Tooltip ( beatsPerMinute, delta )
 4. Legend : Pulse (Red)
 5. Title : Pulse : (y.m.d - y.m.d)
 

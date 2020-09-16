@@ -3,7 +3,7 @@ Chart
 >Composed of 2 Line charts, with:
 1. X-Axis : Day,Hour ( d,H )
 2. Y-Axis : Pulse Oxygen ( beatsPerMinute )
-3. Tooltip ( beatsPerMinute / bloodOxygenPercentage )
+3. Tooltip ( beatsPerMinute, bloodOxygenPercentage, beatsPerMinuteDelta, bloodOxygenPercentageDelta )
 4. Legend : Pulse Oxygen (Red)
 5. Title : Pulse Oxygen : (y.m.d - y.m.d)
 

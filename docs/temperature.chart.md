@@ -3,7 +3,7 @@ Chart
 >Composed of 2 Line charts, with:
 1. X-Axis : Day,Hour ( d,H )
 2. Y-Axis : Temperature ( degrees )
-3. Tooltip ( degrees )
+3. Tooltip ( degrees, delta )
 4. Legend : Temperature (Red)
 5. Title : Temperature : (y.m.d - y.m.d)
 

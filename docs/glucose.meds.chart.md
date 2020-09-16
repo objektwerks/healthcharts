@@ -3,8 +3,8 @@ Chart
 >Composed of 2 Line charts, with:
 1. X-Axis : Day,Hour ( d,H )
 2. Y-Axis : Glucose Level / Med Dosage ( n )
-3. Glucose Tooltip ( Glucose: ( d,H:m, n ) )
-4. Meds Tooltip ( Meds: ( d,H:m, n, "med" ) )
+3. Glucose Tooltip ( Glucose: ( dayHourMinute, level, delta ) )
+4. Meds Tooltip ( Meds: ( dayHourMinute, dosage, med, delta ) )
 5. Legend : Glucose (Red), Meds (Blue)
 6. Title : Glucose-Meds : (y.m.d - y.m.d)
 
