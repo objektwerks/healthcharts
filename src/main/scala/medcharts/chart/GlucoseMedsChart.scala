@@ -68,10 +68,10 @@ object GlucoseMedsChart extends Chart {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String = {
         val xValue = dataset.getXValue(series, item)
         val yValue = dataset.getYValue(series, item)
-        val dateTime = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
+        val dayHourMinute = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
         val level = new DecimalFormat("0").format( yValue )
         val delta = calculateDelta(dataset, series, item)
-        s"${Conf.titleGlucose}: ($dateTime, $level, $delta%)"
+        s"${Conf.titleGlucose}: ($dayHourMinute, $level, $delta%)"
       }
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
@@ -86,12 +86,12 @@ object GlucoseMedsChart extends Chart {
         val xValue = dataset.getXValue(series, item)
         val yValue = dataset.getYValue(series, item)
         val yValues = yValue.toString.split("\\.")
-        val dateTime = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
+        val dayHourMinute = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
         val dosage = Try{ yValues(0).toInt }.getOrElse(-1)
         val medtype = Try{ yValues(1).toInt }.getOrElse(-1)
         val med = MedType.idToMedType.getOrElse(medtype, "n/a")
         val delta = calculateDelta(dataset, series, item)
-        s"${Conf.titleMeds}: ($dateTime, $dosage, $med, $delta%)"
+        s"${Conf.titleMeds}: ($dayHourMinute, $dosage, $med, $delta%)"
       }
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
