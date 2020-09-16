@@ -12,10 +12,10 @@ abstract class Chart {
     if ( datasetIndexRange.contains( previousItemIndex ) ) {
       val yCurrentValue = dataset.getYValue(series, item)
       val yPreviousValue = dataset.getYValue(series, previousItemIndex)
-      val yTopValue = yCurrentValue - yPreviousValue
-      val yBottomValue = ( yCurrentValue + yPreviousValue ) / 2
-      val delta = abs( yTopValue / yBottomValue ) * 100
-      delta.round.toInt
+      val yDividendValue = yCurrentValue - yPreviousValue
+      val yDivisorValue = ( yCurrentValue + yPreviousValue ) / 2
+      val yValueDelta = abs( yDividendValue / yDivisorValue ) * 100
+      yValueDelta.round.toInt
     } else 0
   }
 }
