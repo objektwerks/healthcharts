@@ -30,11 +30,12 @@ object GlucoseMedsChart extends Chart {
     xyPlot.setDataset(1, buildMedDataset(meds))
     xyPlot.setRenderer(1, buildMedRenderer())
 
-    val domainAxis = new DateAxis(Conf.titleGlucoseMedsChartXAxis)
-    domainAxis.setDateFormatOverride(new SimpleDateFormat("d,H"))
-    xyPlot.setDomainAxis(0, domainAxis)
+    val xAxis = new DateAxis(Conf.titleGlucoseMedsChartXAxis)
+    xAxis.setDateFormatOverride(new SimpleDateFormat("d,H"))
+    xyPlot.setDomainAxis(0, xAxis)
 
-    xyPlot.setRangeAxis(new NumberAxis(Conf.titleGlucoseMedsChartYAxis))
+    val yAxis = new NumberAxis(Conf.titleGlucoseMedsChartYAxis)
+    xyPlot.setRangeAxis(yAxis)
 
     val title = buildTitle(glucoses.entities)
     val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
