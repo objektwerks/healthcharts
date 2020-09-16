@@ -5,7 +5,7 @@ MedCharts
 
 Todo
 ----
-1. Unbuilt charts { entities-x, validators-x, transformers-x, dialogs-x, charts, actions, menus, data-x, tests-x, md-x }
+1. Charts { entities-x, validators-x, transformers-x, dialogs-x, charts, actions, menus, data-x, tests-x, md-x }
 
 Charts
 ------
@@ -38,6 +38,4 @@ Package
 
 License
 -------
->Copyright (c) 2020 Mike Funk
-
->Published under GPL.V3
+>Copyright (c) 2020, Mike Funk, Published under GPL.V3
