@@ -3,8 +3,6 @@ package medcharts.chart
 import java.text.{DecimalFormat, SimpleDateFormat}
 import java.{util => jdate}
 
-import javax.swing.BorderFactory
-
 import medcharts.Conf
 import medcharts.entity.Converter._
 import medcharts.entity._
@@ -13,14 +11,14 @@ import org.jfree.chart.axis.{DateAxis, NumberAxis}
 import org.jfree.chart.labels.StandardXYToolTipGenerator
 import org.jfree.chart.plot.{DatasetRenderingOrder, XYPlot}
 import org.jfree.chart.renderer.xy.{XYItemRenderer, XYLineAndShapeRenderer}
-import org.jfree.chart.{ChartPanel, JFreeChart}
+import org.jfree.chart.JFreeChart
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.{IntervalXYDataset, XYDataset}
 
 import scala.util.Try
 
 object GlucoseMedsChart extends Chart {
-  def build(glucoses: Entities[Glucose], meds: Entities[Med]): ChartPanel = {
+  def build(glucoses: Entities[Glucose], meds: Entities[Med]): JFreeChart = {
     val xyPlot = new XYPlot()
     xyPlot.setDatasetRenderingOrder(DatasetRenderingOrder.FORWARD)
 
@@ -31,21 +29,14 @@ object GlucoseMedsChart extends Chart {
     xyPlot.setRenderer(1, buildMedRenderer())
 
     val xAxis = new DateAxis(Conf.titleGlucoseMedsChartXAxis)
-    xAxis.setDateFormatOverride(new SimpleDateFormat("d,H"))
+    xAxis.setDateFormatOverride( new SimpleDateFormat("d,H") )
     xyPlot.setDomainAxis(0, xAxis)
 
     val yAxis = new NumberAxis(Conf.titleGlucoseMedsChartYAxis)
     xyPlot.setRangeAxis(yAxis)
 
     val title = buildTitle(glucoses.entities)
-    val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
-
-    val chartPanel = new ChartPanel(chart)
-    chartPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15))
-    chartPanel.setInitialDelay(100)
-    chartPanel.setReshowDelay(100)
-    chartPanel.setDismissDelay(10000)
-    chartPanel
+    new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
   }
 
   private def buildGlucoseDataset(glucoses: Entities[Glucose]): IntervalXYDataset = {

@@ -16,7 +16,8 @@ class GlucoseMedsAction(name: String, frame: Frame) extends ChartAction(name, fr
 
     if (wasNotCancelled && glucoses.nonEmpty && meds.nonEmpty) {
       val chart = GlucoseMedsChart.build(glucoses, meds)
-      frame.addChart( s"$title-${counter.getAndIncrement}", chart )
+      val chartPanel = buildChartPanel(chart)
+      frame.addChart( s"$title-${counter.getAndIncrement}", chartPanel )
     } else if (wasNotCancelled) {
       val message = s"Glucoses = ${glucoses.entities.length} : Meds = ${meds.entities.length}"
       showEntitiesErrorDialog(message)
