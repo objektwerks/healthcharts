@@ -21,9 +21,9 @@ class GlucoseMedAction(name: String, frame: Frame) extends ChartAction(name, fra
       val chartPanel = buildChartPanel(chart)
       frame.addChart( s"$title-${counter.getAndIncrement}", chartPanel )
     } else if (wasNotCancelled) {
-      val glucosesCount = transformEntities[Glucose](glucoseCsvPath).count
-      val medsCount = transformEntities[Med](medCsvPath).count
-      val message = s"Glucoses count = $glucosesCount : Meds count = $medsCount"
+      val glucoseCount = transformEntities[Glucose](glucoseCsvPath).count
+      val medCount = transformEntities[Med](medCsvPath).count
+      val message = s"Glucose count = $glucoseCount : Med count = $medCount"
       showEntitiesErrorDialog(message)
     }
   }
