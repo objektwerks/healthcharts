@@ -44,6 +44,7 @@ object GlucoseMedsChart extends Chart {
     chartPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15))
     chartPanel.setInitialDelay(100)
     chartPanel.setReshowDelay(100)
+    chartPanel.setDismissDelay(10000)
     chartPanel
   }
 
