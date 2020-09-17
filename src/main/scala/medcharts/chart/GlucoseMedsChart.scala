@@ -18,6 +18,9 @@ import org.jfree.data.xy.{IntervalXYDataset, XYDataset}
 import scala.util.Try
 
 object GlucoseMedsChart extends Chart {
+  private val titleGlucose = Conf.titleGlucose
+  private val titleMed = Conf.titleMed
+
   def build(glucoses: Entities[Glucose], meds: Entities[Med]): JFreeChart = {
     val xyPlot = new XYPlot()
     xyPlot.setDatasetRenderingOrder(DatasetRenderingOrder.FORWARD)
@@ -28,11 +31,11 @@ object GlucoseMedsChart extends Chart {
     xyPlot.setDataset(1, buildMedDataset(meds))
     xyPlot.setRenderer(1, buildMedRenderer())
 
-    val xAxis = new DateAxis(Conf.titleGlucoseMedsChartXAxis)
+    val xAxis = new DateAxis(Conf.titleGlucoseMedChartXAxis)
     xAxis.setDateFormatOverride( new SimpleDateFormat("d,H") )
     xyPlot.setDomainAxis(0, xAxis)
 
-    val yAxis = new NumberAxis(Conf.titleGlucoseMedsChartYAxis)
+    val yAxis = new NumberAxis(Conf.titleGlucoseMedChartYAxis)
     xyPlot.setRangeAxis(yAxis)
 
     val title = buildTitle(glucoses.entities)
@@ -40,7 +43,7 @@ object GlucoseMedsChart extends Chart {
   }
 
   private def buildGlucoseDataset(glucoses: Entities[Glucose]): IntervalXYDataset = {
-    val timeSeries = new TimeSeries("Glucose".asInstanceOf[Comparable[String]])
+    val timeSeries = new TimeSeries(titleGlucose)
     glucoses.entities.foreach { glucose =>
       timeSeries.add( glucose.datetime, glucose.level.toDouble )
     }
@@ -48,7 +51,7 @@ object GlucoseMedsChart extends Chart {
   }
 
   private def buildMedDataset(meds: Entities[Med]): IntervalXYDataset = {
-    val timeSeries = new TimeSeries("Meds".asInstanceOf[Comparable[String]])
+    val timeSeries = new TimeSeries(titleMed)
     meds.entities.foreach { med =>
       timeSeries.add( med.datetime, s"${med.dosage}.${med.medtype.id}".toDouble )
     }
@@ -84,7 +87,7 @@ object GlucoseMedsChart extends Chart {
         val medtype = Try{ yValues(1).toInt }.getOrElse(-1)
         val med = MedType.idToMedType.getOrElse(medtype, "n/a")
         val delta = calculateDelta(dataset, series, item)
-        s"${Conf.titleMeds}: ($dayHourMinute, $dosage, $med, $delta%)"
+        s"${Conf.titleMed}: ($dayHourMinute, $dosage, $med, $delta%)"
       }
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
@@ -96,7 +99,7 @@ object GlucoseMedsChart extends Chart {
     if (glucoses.length >= 2) {
       val first = minuteToYearMonthDay(glucoses.head.datetime)
       val last = minuteToYearMonthDay(glucoses.last.datetime)
-      s"${Conf.titleGlucoseMeds} : $first - $last"
-    } else Conf.titleGlucoseMeds
+      s"${Conf.titleGlucoseMed} : $first - $last"
+    } else Conf.titleGlucoseMed
   }
 }

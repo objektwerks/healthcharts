@@ -7,7 +7,7 @@ import medcharts.chart.GlucoseMedsAction
 
 class MenuBar(frame: Frame) extends JMenuBar() {
   val menu = new JMenu(Conf.titleMenuBar)
-  val menuItem = new JMenuItem( new GlucoseMedsAction(Conf.titleGlucoseMeds, frame) )
+  val menuItem = new JMenuItem( new GlucoseMedsAction(Conf.titleGlucoseMed, frame) )
   menu.add(menuItem)
   add(menu)
 }
