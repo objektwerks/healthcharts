@@ -7,6 +7,8 @@ import scala.reflect.ClassTag
 
 final case class Entities[E](entities: Array[E], invalidLines: Array[InvalidLine]) {
   def nonEmpty: Boolean = entities.nonEmpty
+
+  def count: Int = entities.length
 }
 
 object Entities {
