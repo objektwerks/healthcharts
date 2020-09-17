@@ -6,7 +6,7 @@ import medcharts.Conf
 import medcharts.entity._
 import medcharts.ui.{Frame, PathsDialog}
 
-class GlucoseMedsAction(name: String, frame: Frame) extends ChartAction(name, frame) {
+class GlucoseMedAction(name: String, frame: Frame) extends ChartAction(name, frame) {
   private val title = Conf.titleGlucoseMed
   private val labelGlucoseCsv = Conf.labelGlucoseCsv
   private val labelMedCsv = Conf.labelMedCsv
@@ -17,7 +17,7 @@ class GlucoseMedsAction(name: String, frame: Frame) extends ChartAction(name, fr
     if (wasNotCancelled && glucoseCsvPath.nonEmpty && medCsvPath.nonEmpty) {
       val glucoses = transformEntities[Glucose](glucoseCsvPath)
       val meds = transformEntities[Med](medCsvPath)
-      val chart = GlucoseMedsChart.build(glucoses, meds)
+      val chart = GlucoseMedChart.build(glucoses, meds)
       val chartPanel = buildChartPanel(chart)
       frame.addChart( s"$title-${counter.getAndIncrement}", chartPanel )
     } else if (wasNotCancelled) {

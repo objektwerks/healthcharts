@@ -17,7 +17,7 @@ import org.jfree.data.xy.{IntervalXYDataset, XYDataset}
 
 import scala.util.Try
 
-object GlucoseMedsChart extends Chart {
+object GlucoseMedChart extends Chart {
   private val titleGlucose = Conf.titleGlucose
   private val titleMed = Conf.titleMed
 

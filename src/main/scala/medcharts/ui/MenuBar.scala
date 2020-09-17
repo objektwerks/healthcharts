@@ -3,11 +3,11 @@ package medcharts.ui
 import javax.swing.{JMenu, JMenuBar, JMenuItem}
 
 import medcharts.Conf
-import medcharts.chart.GlucoseMedsAction
+import medcharts.chart.GlucoseMedAction
 
 class MenuBar(frame: Frame) extends JMenuBar() {
   val menu = new JMenu(Conf.titleMenuBar)
-  val menuItem = new JMenuItem( new GlucoseMedsAction(Conf.titleGlucoseMed, frame) )
+  val menuItem = new JMenuItem( new GlucoseMedAction(Conf.titleGlucoseMed, frame) )
   menu.add(menuItem)
   add(menu)
 }
