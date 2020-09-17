@@ -30,5 +30,4 @@ object Conf {
   val titleWeight = conf.getString("title.weight")
   val titleGlucoseMedChartXAxis = conf.getString("title.glucoseMedChartXAxis")
   val titleGlucoseMedChartYAxis = conf.getString("title.glucoseMedChartYAxis")
-  val titleCsvFilesEmpty = conf.getString("title.csvFilesEmpty")
 }

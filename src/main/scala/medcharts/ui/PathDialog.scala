@@ -17,14 +17,15 @@ class PathDialog(frame: Frame, labelPath: String) extends JDialog {
   private val fileExtensions = Conf.fileFilterExtensions
   private var wasNotCancelled = true
 
-  def view: (Boolean, String) = {
+  def view: Option[String] = {
     setTitle(Conf.titlePathsDialog)
     add(buildDialogPanel(labelPath, Conf.labelCancel, Conf.labelEllipsis), BorderLayout.CENTER)
     setModal(true)
     pack()
     setLocationRelativeTo(frame)
     setVisible(true)
-    (wasNotCancelled, pathTextField.getText)
+    val path = pathTextField.getText
+    if (wasNotCancelled && path.nonEmpty) Some(path) else None
   }
 
   private def buildDialogPanel(labelPath: String,

@@ -18,14 +18,16 @@ class PathsDialog(frame: Frame, labelFirstPath: String, labelSecondPath: String)
   private val fileExtensions = Conf.fileFilterExtensions
   private var wasNotCancelled = true
 
-  def view: (Boolean, String, String) = {
+  def view: Option[(String, String)] = {
     setTitle(Conf.titlePathsDialog)
     add(buildDialogPanel(labelFirstPath, labelSecondPath, Conf.labelCancel, Conf.labelEllipsis), BorderLayout.CENTER)
     setModal(true)
     pack()
     setLocationRelativeTo(frame)
     setVisible(true)
-    (wasNotCancelled, firstPathTextField.getText, secondPathTextField.getText)
+    val firstPath = firstPathTextField.getText
+    val secondPath = secondPathTextField.getText
+    if (wasNotCancelled && firstPath.nonEmpty && secondPath.nonEmpty) Some( (firstPath, secondPath) ) else None
   }
 
   private def buildDialogPanel(labelFirstPath: String,
