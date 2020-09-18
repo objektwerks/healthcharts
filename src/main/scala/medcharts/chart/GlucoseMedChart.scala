@@ -18,9 +18,6 @@ import org.jfree.data.xy.{IntervalXYDataset, XYDataset}
 import scala.util.Try
 
 object GlucoseMedChart extends Chart {
-  private val titleGlucose = Conf.titleGlucose
-  private val titleMed = Conf.titleMed
-
   def build(glucoses: Entities[Glucose], meds: Entities[Med]): JFreeChart = {
     val xyPlot = new XYPlot()
     xyPlot.setDatasetRenderingOrder(DatasetRenderingOrder.FORWARD)
@@ -43,7 +40,7 @@ object GlucoseMedChart extends Chart {
   }
 
   private def buildGlucoseDataset(glucoses: Entities[Glucose]): IntervalXYDataset = {
-    val timeSeries = new TimeSeries(titleGlucose)
+    val timeSeries = new TimeSeries(Conf.titleGlucose)
     glucoses.entities.foreach { glucose =>
       timeSeries.add( glucose.datetime, glucose.level.toDouble )
     }
@@ -51,7 +48,7 @@ object GlucoseMedChart extends Chart {
   }
 
   private def buildMedDataset(meds: Entities[Med]): IntervalXYDataset = {
-    val timeSeries = new TimeSeries(titleMed)
+    val timeSeries = new TimeSeries(Conf.titleMed)
     meds.entities.foreach { med =>
       timeSeries.add( med.datetime, s"${med.dosage}.${med.medtype.id}".toDouble )
     }
