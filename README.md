@@ -30,7 +30,7 @@ Run
 5. click 'Select' button
 6. view tabbed chart ( mouseover line data points to view data details )
 7. close app via top-left 'x' icon
->Note that tabs are closeable.
+>Tabs are typed, numbered and closeable.
 
 Package
 -------
