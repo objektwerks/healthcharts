@@ -18,7 +18,7 @@ class PathDialog(frame: Frame, labelPath: String) extends JDialog {
   private var wasNotCancelled = true
 
   def view: Option[String] = {
-    setTitle(Conf.titlePathsDialog)
+    setTitle(Conf.titlePathDialog)
     add(buildDialogPanel(labelPath, Conf.labelCancel, Conf.labelEllipsis), BorderLayout.CENTER)
     setModal(true)
     pack()
