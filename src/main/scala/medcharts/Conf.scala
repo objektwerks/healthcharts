@@ -19,6 +19,7 @@ object Conf {
   val labelEllipsis = conf.getString("label.ellipsis")
   val labelGlucoseCsv = conf.getString("label.glucoseCsv")
   val labelMedCsv = conf.getString("label.medCsv")
+  val labelWeightCsv = conf.getString("label.weightCsv")
 
   val titleFileChooser = conf.getString("title.fileChooser")
   val titleMenuBar = conf.getString("title.menuBar")
@@ -27,7 +28,9 @@ object Conf {
   val titleGlucoseMed = conf.getString("title.glucoseMed")
   val titleGlucose = conf.getString("title.glucose")
   val titleMed = conf.getString("title.med")
-  val titleWeight = conf.getString("title.weight")
   val titleGlucoseMedChartXAxis = conf.getString("title.glucoseMedChartXAxis")
   val titleGlucoseMedChartYAxis = conf.getString("title.glucoseMedChartYAxis")
+  val titleWeight = conf.getString("title.weight")
+  val titleWeightChartXAxis = conf.getString("title.weightChartXAxis")
+  val titleWeightChartYAxis = conf.getString("title.weightChartYAxis")
 }
