@@ -28,7 +28,7 @@ object GlucoseMedChart extends Chart {
     xyPlot.setDataset(1, buildMedDataset(meds))
     xyPlot.setRenderer(1, buildMedRenderer())
 
-    val xAxis = new DateAxis(Conf.titleGlucoseMedChartXAxis)
+    val xAxis = new DateAxis(Conf.titleDayHourChartXAxis)
     xAxis.setDateFormatOverride( new SimpleDateFormat("d,H") )
     xyPlot.setDomainAxis(0, xAxis)
 

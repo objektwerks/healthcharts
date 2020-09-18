@@ -21,7 +21,7 @@ object WeightChart extends Chart {
     xyPlot.setDataset( buildWeightDataset(weights) )
     xyPlot.setRenderer( buildWeightRenderer() )
 
-    val xAxis = new DateAxis(Conf.titleWeightChartXAxis)
+    val xAxis = new DateAxis(Conf.titleDayHourChartXAxis)
     xAxis.setDateFormatOverride( new SimpleDateFormat("d,H") )
     xyPlot.setDomainAxis(xAxis)
 

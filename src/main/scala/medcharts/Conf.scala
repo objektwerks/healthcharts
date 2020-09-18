@@ -25,12 +25,11 @@ object Conf {
   val titleMenuBar = conf.getString("title.menuBar")
   val titlePathDialog = conf.getString("title.pathDialog")
   val titlePathsDialog = conf.getString("title.pathsDialog")
+  val titleDayHourChartXAxis = conf.getString("title.dayHourChartXAxis")
   val titleGlucoseMed = conf.getString("title.glucoseMed")
   val titleGlucose = conf.getString("title.glucose")
   val titleMed = conf.getString("title.med")
-  val titleGlucoseMedChartXAxis = conf.getString("title.glucoseMedChartXAxis")
   val titleGlucoseMedChartYAxis = conf.getString("title.glucoseMedChartYAxis")
   val titleWeight = conf.getString("title.weight")
-  val titleWeightChartXAxis = conf.getString("title.weightChartXAxis")
   val titleWeightChartYAxis = conf.getString("title.weightChartYAxis")
 }
