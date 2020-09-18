@@ -15,7 +15,7 @@ Charts
 - [ ] [Pulse Oxygen](./docs/pulse.oxygen.chart.md)
 - [ ] [Respiration](./docs/respiration.chart.md)
 - [ ] [Temperature](./docs/temperature.chart.md)
-- [ ] [Weight](./docs/weight.chart.md)
+- [x] [Weight](./docs/weight.chart.md)
 
 Test
 ----
