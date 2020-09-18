@@ -1,8 +1,11 @@
 package medcharts.ui
 
 import javax.swing.{JMenu, JMenuBar, JMenuItem, JSeparator}
+
 import medcharts.Conf
-import medcharts.chart.{GlucoseMedAction, TemperatureAction, WeightAction}
+import medcharts.chart.glucosemed.GlucoseMedAction
+import medcharts.chart.temperature.TemperatureAction
+import medcharts.chart.weight.WeightAction
 
 class MenuBar(frame: Frame) extends JMenuBar() {
   val menu = new JMenu(Conf.titleMenuBar)

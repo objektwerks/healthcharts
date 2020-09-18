@@ -1,8 +1,9 @@
-package medcharts.chart
+package medcharts.chart.temperature
 
 import java.awt.event.ActionEvent
 
 import medcharts.Conf
+import medcharts.chart.ChartAction
 import medcharts.entity._
 import medcharts.ui.{Frame, PathDialog}
 

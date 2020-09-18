@@ -1,17 +1,18 @@
-package medcharts.chart
+package medcharts.chart.glucosemed
 
 import java.text.{DecimalFormat, SimpleDateFormat}
 import java.{util => jdate}
 
 import medcharts.Conf
+import medcharts.chart.Chart
 import medcharts.entity.Converter._
 import medcharts.entity._
 
+import org.jfree.chart.JFreeChart
 import org.jfree.chart.axis.{DateAxis, NumberAxis}
 import org.jfree.chart.labels.StandardXYToolTipGenerator
 import org.jfree.chart.plot.{DatasetRenderingOrder, XYPlot}
 import org.jfree.chart.renderer.xy.{XYItemRenderer, XYLineAndShapeRenderer}
-import org.jfree.chart.JFreeChart
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.{IntervalXYDataset, XYDataset}
 
