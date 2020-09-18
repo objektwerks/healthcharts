@@ -30,6 +30,8 @@ object Conf {
   val titleGlucose = conf.getString("title.glucose")
   val titleMed = conf.getString("title.med")
   val titleGlucoseMedChartYAxis = conf.getString("title.glucoseMedChartYAxis")
+  val titleTemperature = conf.getString("title.temperature")
+  val titleTemperatureChartYAxis = conf.getString("title.temperatureChartYAxis")
   val titleWeight = conf.getString("title.weight")
   val titleWeightChartYAxis = conf.getString("title.weightChartYAxis")
 }
