@@ -19,6 +19,7 @@ object Conf {
   val labelEllipsis = conf.getString("label.ellipsis")
   val labelGlucoseCsv = conf.getString("label.glucoseCsv")
   val labelMedCsv = conf.getString("label.medCsv")
+  val labelTemperatureCsv = conf.getString("label.temperatureCsv")
   val labelWeightCsv = conf.getString("label.weightCsv")
 
   val titleFileChooser = conf.getString("title.fileChooser")
