@@ -5,7 +5,7 @@ import org.jfree.data.xy.XYDataset
 import scala.math.abs
 
 abstract class Chart {
-  def calculateDelta(dataset: XYDataset, series: Int, item: Int): Int = {
+  def calculateDeltaAsPercentage(dataset: XYDataset, series: Int, item: Int): Int = {
     val datasetLastIndex = dataset.getItemCount(series) - 1
     val previousItemIndex = item - 1
     val datasetIndexRange = Range.inclusive(0, datasetLastIndex)
