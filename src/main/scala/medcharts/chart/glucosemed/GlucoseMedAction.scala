@@ -16,7 +16,7 @@ class GlucoseMedAction(name: String, frame: Frame) extends ChartAction(name) {
         val meds = transformEntities[Med](medCsvPath)
         val chart = GlucoseMedChart.build(glucoses, meds)
         val chartPanel = buildChartPanel(chart)
-        frame.addChart(s"${Conf.titleGlucoseMed}-${counter.getAndIncrement}", chartPanel)
+        frame.addChartPanel(s"${Conf.titleGlucoseMed}-${counter.getAndIncrement}", chartPanel)
       case None =>
     }
   }

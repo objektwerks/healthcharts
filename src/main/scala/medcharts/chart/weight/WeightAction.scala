@@ -15,7 +15,7 @@ class WeightAction(name: String, frame: Frame) extends ChartAction(name) {
         val weights = transformEntities[Weight](weightCsvPath)
         val chart = WeightChart.build(weights)
         val chartPanel = buildChartPanel(chart)
-        frame.addChart(s"${Conf.titleWeight}-${counter.getAndIncrement}", chartPanel)
+        frame.addChartPanel(s"${Conf.titleWeight}-${counter.getAndIncrement}", chartPanel)
       case None =>
     }
   }

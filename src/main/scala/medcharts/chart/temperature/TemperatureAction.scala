@@ -15,7 +15,7 @@ class TemperatureAction(name: String, frame: Frame) extends ChartAction(name) {
         val temperatures = transformEntities[Temperature](temperatureCsvPath)
         val chart = TemperatureChart.build(temperatures)
         val chartPanel = buildChartPanel(chart)
-        frame.addChart(s"${Conf.titleTemperature}-${counter.getAndIncrement}", chartPanel)
+        frame.addChartPanel(s"${Conf.titleTemperature}-${counter.getAndIncrement}", chartPanel)
       case None =>
     }
   }
