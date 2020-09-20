@@ -50,7 +50,7 @@ object WeightChart extends Chart {
         val dayHourMinute = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
         val pounds = new DecimalFormat("0.0").format( yValue )
         val delta = calculateDeltaAsPercentage(dataset, series, item)
-        s"${Conf.titleWeight}: ($dayHourMinute, $pounds), $delta"
+        s"($dayHourMinute, $pounds, $delta%)"
       }
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
