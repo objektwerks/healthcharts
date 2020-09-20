@@ -65,7 +65,7 @@ object GlucoseMedChart extends Chart {
         val dayHourMinute = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
         val level = new DecimalFormat("0").format( yValue )
         val delta = calculateDeltaAsPercentage(dataset, series, item)
-        s"${Conf.titleGlucose}: ($dayHourMinute, $level, $delta%)"
+        s"${Conf.titleGlucose}: ($dayHourMinute, $level), $delta"
       }
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
@@ -85,7 +85,7 @@ object GlucoseMedChart extends Chart {
         val medtype = Try{ yValues(1).toInt }.getOrElse(-1)
         val med = MedType.idToMedType.getOrElse(medtype, "n/a")
         val delta = calculateDeltaAsPercentage(dataset, series, item)
-        s"${Conf.titleMed}: ($dayHourMinute, $dosage, $med, $delta%)"
+        s"${Conf.titleMed}: ($dayHourMinute, $dosage, $med), $delta"
       }
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)

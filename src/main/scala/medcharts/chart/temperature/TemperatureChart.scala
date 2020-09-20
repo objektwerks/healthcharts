@@ -50,7 +50,7 @@ object TemperatureChart extends Chart {
         val dayHourMinute = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
         val degrees = new DecimalFormat("0").format( yValue )
         val delta = calculateDeltaAsPercentage(dataset, series, item)
-        s"${Conf.titleTemperature}: ($dayHourMinute, $degrees, $delta%)"
+        s"${Conf.titleTemperature}: ($dayHourMinute, $degrees), $delta"
       }
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
