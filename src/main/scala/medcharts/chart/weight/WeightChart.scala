@@ -48,7 +48,7 @@ object WeightChart extends Chart {
         val xValue = dataset.getXValue(series, item)
         val yValue = dataset.getYValue(series, item)
         val dayHourMinute = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
-        val pounds = new DecimalFormat("0").format( yValue )
+        val pounds = new DecimalFormat("0.0").format( yValue )
         val delta = calculateDeltaAsPercentage(dataset, series, item)
         s"${Conf.titleWeight}: ($dayHourMinute, $pounds), $delta"
       }

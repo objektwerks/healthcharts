@@ -21,7 +21,7 @@ abstract class Chart {
       val current = formatter.format(yCurrentValue)
       val previous = formatter.format(yPreviousValue)
       val delta = formatter.format(yValueDelta)
-      s"[$current - $previous = $delta%]"
+      s"[$current-$previous=$delta%]"
     } else "0%"
   }
 }

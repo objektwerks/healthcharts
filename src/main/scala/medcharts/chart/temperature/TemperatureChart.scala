@@ -48,7 +48,7 @@ object TemperatureChart extends Chart {
         val xValue = dataset.getXValue(series, item)
         val yValue = dataset.getYValue(series, item)
         val dayHourMinute = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
-        val degrees = new DecimalFormat("0").format( yValue )
+        val degrees = new DecimalFormat("0.0").format( yValue )
         val delta = calculateDeltaAsPercentage(dataset, series, item)
         s"${Conf.titleTemperature}: ($dayHourMinute, $degrees), $delta"
       }
