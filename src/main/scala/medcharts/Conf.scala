@@ -20,6 +20,7 @@ object Conf {
   val labelGlucoseCsv = conf.getString("label.glucoseCsv")
   val labelMedCsv = conf.getString("label.medCsv")
   val labelPulseCsv = conf.getString("label.pulseCsv")
+  val labelRespirationCsv = conf.getString("label.respirationCsv")
   val labelTemperatureCsv = conf.getString("label.temperatureCsv")
   val labelWeightCsv = conf.getString("label.weightCsv")
 
@@ -34,6 +35,8 @@ object Conf {
   val titleGlucoseMedChartYAxis = conf.getString("title.glucoseMedChartYAxis")
   val titlePulse = conf.getString("title.pulse")
   val titlePulseChartYAxis = conf.getString("title.pulseChartYAxis")
+  val titleRespiration = conf.getString("title.respiration")
+  val titleRespirationChartYAxis = conf.getString("title.respirationChartYAxis")
   val titleTemperature = conf.getString("title.temperature")
   val titleTemperatureChartYAxis = conf.getString("title.temperatureChartYAxis")
   val titleWeight = conf.getString("title.weight")

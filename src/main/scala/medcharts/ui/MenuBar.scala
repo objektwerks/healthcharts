@@ -5,12 +5,14 @@ import javax.swing.{JMenu, JMenuBar, JMenuItem, JSeparator}
 import medcharts.Conf
 import medcharts.chart.glucosemed.GlucoseMedAction
 import medcharts.chart.pulse.PulseAction
+import medcharts.chart.respiration.RespirationAction
 import medcharts.chart.temperature.TemperatureAction
 import medcharts.chart.weight.WeightAction
 
 class MenuBar(frame: Frame) extends JMenuBar() {
   val menu = new JMenu(Conf.titleMenuBar)
   menu.add( new JMenuItem( new PulseAction(Conf.titlePulse, frame) ) )
+  menu.add( new JMenuItem( new RespirationAction(Conf.titleRespiration, frame) ) )
   menu.add( new JMenuItem( new TemperatureAction(Conf.titleTemperature, frame) ) )
   menu.add( new JMenuItem( new WeightAction(Conf.titleWeight, frame) ) )
   menu.add( new JSeparator() )

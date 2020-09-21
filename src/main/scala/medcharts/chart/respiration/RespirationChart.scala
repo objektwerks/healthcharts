@@ -1,4 +1,4 @@
-package medcharts.chart.pulse
+package medcharts.chart.respiration
 
 import java.text.{DecimalFormat, SimpleDateFormat}
 import java.{util => jdate}
@@ -16,41 +16,41 @@ import org.jfree.chart.renderer.xy.{XYItemRenderer, XYLineAndShapeRenderer}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.{IntervalXYDataset, XYDataset}
 
-object PulseChart extends Chart {
-  def build(pulses: Entities[Pulse]): JFreeChart = {
+object RespirationChart extends Chart {
+  def build(respirations: Entities[Respiration]): JFreeChart = {
     val xyPlot = new XYPlot()
-    xyPlot.setDataset( buildPulseDataset(pulses) )
-    xyPlot.setRenderer( buildPulseRenderer() )
+    xyPlot.setDataset( buildRespirationDataset(respirations) )
+    xyPlot.setRenderer( buildRespirationRenderer() )
 
     val xAxis = new DateAxis(Conf.titleDayHourChartXAxis)
     xAxis.setDateFormatOverride( new SimpleDateFormat("d,H") )
     xyPlot.setDomainAxis(xAxis)
 
-    val yAxis = new NumberAxis(Conf.titlePulseChartYAxis)
+    val yAxis = new NumberAxis(Conf.titleRespirationChartYAxis)
     xyPlot.setRangeAxis(yAxis)
 
-    val title = buildTitle(pulses.entities)
+    val title = buildTitle(respirations.entities)
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
   }
 
-  private def buildPulseDataset(pulses: Entities[Pulse]): IntervalXYDataset = {
-    val timeSeries = new TimeSeries(Conf.titlePulse)
-    pulses.entities.foreach { pulse =>
-      timeSeries.add( pulse.datetime, pulse.beatsPerMinute.toDouble )
+  private def buildRespirationDataset(respirations: Entities[Respiration]): IntervalXYDataset = {
+    val timeSeries = new TimeSeries(Conf.titleRespiration)
+    respirations.entities.foreach { respiration =>
+      timeSeries.add( respiration.datetime, respiration.breathesPerMinute.toDouble )
     }
     new TimeSeriesCollection(timeSeries)
   }
 
-  private def buildPulseRenderer(): XYItemRenderer = {
+  private def buildRespirationRenderer(): XYItemRenderer = {
     val renderer = new XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String = {
         val xValue = dataset.getXValue(series, item)
         val yValue = dataset.getYValue(series, item)
         val dayHourMinute = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
-        val beatsPerMinute = new DecimalFormat("0").format( yValue )
+        val breathesPerMinute = new DecimalFormat("0").format( yValue )
         val delta = calculateDeltaAsPercentage(dataset, series, item)
-        s"($dayHourMinute, $beatsPerMinute, $delta%)"
+        s"($dayHourMinute, $breathesPerMinute, $delta%)"
       }
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
@@ -58,11 +58,11 @@ object PulseChart extends Chart {
     renderer
   }
 
-  private def buildTitle(pulses: Array[Pulse]): String = {
-    if (pulses.length >= 2) {
-      val first = minuteToYearMonthDay(pulses.head.datetime)
-      val last = minuteToYearMonthDay(pulses.last.datetime)
-      s"${Conf.titlePulse} : $first - $last"
-    } else Conf.titlePulse
+  private def buildTitle(respirations: Array[Respiration]): String = {
+    if (respirations.length >= 2) {
+      val first = minuteToYearMonthDay(respirations.head.datetime)
+      val last = minuteToYearMonthDay(respirations.last.datetime)
+      s"${Conf.titleRespiration} : $first - $last"
+    } else Conf.titleRespiration
   }
 }
