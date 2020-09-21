@@ -11,9 +11,9 @@ Charts
 ------
 - [ ] [Blood Pressure](./docs/blood.pressure.chart.md)
 - [x] [Glucose Meds](./docs/glucose.meds.chart.md)
-- [ ] [Pulse](./docs/pulse.chart.md)
-- [x] [Pulse Oxygen](./docs/pulse.oxygen.chart.md)
-- [ ] [Respiration](./docs/respiration.chart.md)
+- [x] [Pulse](./docs/pulse.chart.md)
+- [ ] [Pulse Oxygen](./docs/pulse.oxygen.chart.md)
+- [x] [Respiration](./docs/respiration.chart.md)
 - [x] [Temperature](./docs/temperature.chart.md)
 - [x] [Weight](./docs/weight.chart.md)
 
