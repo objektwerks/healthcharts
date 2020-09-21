@@ -31,7 +31,7 @@ final case class Med(datetime: Minute, medtype: MedType.Value, dosage: Int)
 
 final case class Pulse(datetime: Minute, beatsPerMinute: Int)
 
-final case class PulseOxygen(datetime: Minute, beatsPerMinute: Int, bloodOxygenPercentage: Int)
+final case class PulseOxygen(datetime: Minute, bloodOxygenPercentage: Int, beatsPerMinute: Int)
 
 final case class Respiration(datetime: Minute, breathesPerMinute: Int)
 
