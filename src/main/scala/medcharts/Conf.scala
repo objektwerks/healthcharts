@@ -33,6 +33,8 @@ object Conf {
   val titleDayHourChartXAxis = conf.getString("title.dayHourChartXAxis")
   val titleBloodPressure = conf.getString("title.bloodPressure")
   val titleBloodPressureChartYAxis = conf.getString("title.bloodPressureChartYAxis")
+  val titleSystolic = conf.getString("title.systolic")
+  val titleDiastolic = conf.getString("title.diastolic")
   val titleGlucoseMed = conf.getString("title.glucoseMed")
   val titleGlucose = conf.getString("title.glucose")
   val titleMed = conf.getString("title.med")
