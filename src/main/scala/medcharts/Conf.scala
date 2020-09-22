@@ -17,7 +17,7 @@ object Conf {
   val labelCancel = conf.getString("label.cancel")
   val labelSelect = conf.getString("label.select")
   val labelEllipsis = conf.getString("label.ellipsis")
-  val labelBloodPressure = conf.getString("label.bloodPressureCsv")
+  val labelBloodPressureCsv = conf.getString("label.bloodPressureCsv")
   val labelGlucoseCsv = conf.getString("label.glucoseCsv")
   val labelMedCsv = conf.getString("label.medCsv")
   val labelPulseCsv = conf.getString("label.pulseCsv")
