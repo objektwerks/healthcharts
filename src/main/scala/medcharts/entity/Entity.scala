@@ -5,11 +5,7 @@ import org.jfree.data.time.Minute
 import scala.collection.immutable.SortedMap
 import scala.reflect.ClassTag
 
-final case class Entities[E](entities: Array[E], invalidLines: Array[InvalidLine]) {
-  def nonEmpty: Boolean = entities.nonEmpty
-
-  def count: Int = entities.length
-}
+final case class Entities[E](entities: Array[E], invalidLines: Array[InvalidLine])
 
 object Entities {
   def apply[E: ClassTag](entities: Array[E], invalidLines: Array[InvalidLine]): Entities[E] = new Entities[E]( entities, invalidLines )
