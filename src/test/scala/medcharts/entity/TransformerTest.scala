@@ -42,6 +42,11 @@ class TransformerTest extends AnyFunSuite with Matchers {
     testTransformer[Temperature]("./data/temperature/temperature-invalid.txt", 5, 2)
   }
 
+  test("vitals") {
+    testTransformer[Vitals]("./data/vitals/vitals.txt", 12, 0)
+    testTransformer[Vitals]("./data/vitals/vitals-invalid.txt", 10, 2)
+  }
+
   test("weight") {
     testTransformer[Weight]("./data/weight/weight.txt", 7, 0)
     testTransformer[Weight]("./data/weight/weight-invalid.txt", 5, 2)

@@ -96,6 +96,44 @@ object Validator {
       }
   }
 
+  /*
+  final case class Vitals(datetime: Minute,
+                        temperature: Double,
+                        respiration: Int,
+                        pulse: Int,
+                        oxygen: Int,
+                        systolic: Int,
+                        diastolic: Int)
+  */
+
+  implicit object VitalsValidator extends Validator[Vitals] {
+    def validate(columns: Array[String]): Try[Vitals] =
+      Try {
+        validateColumnCount(columns.length, 7)
+        val datetime = datetimeToMinute(columns(0))
+
+        val temperature = columns(1).toDouble
+        require(temperature >= 95.0 && temperature <= 105.0, s"temperature, in degrees, not >= 95.0 and <= 105.0")
+
+        val respiration = columns(2).toInt
+        require(respiration >= 12 && respiration <= 25, s"breathes per minute not >= 12 and <= 25")
+
+        val pulse = columns(3).toInt
+        require(pulse >= 40 && pulse <= 200, s"beats per minute not >= 40 and <= 200")
+
+        val oxygen = columns(4).toInt
+        require(oxygen >= 50 && oxygen <= 100, s"blood oxygen percentage not >= 50 and <= 100")
+
+        val systolic = columns(5).toInt
+        require(systolic >= 120 && systolic <= 200, s"systolic not >= 120 and <= 200")
+
+        val diastolic = columns(6).toInt
+        require(diastolic >= 80 && diastolic <= 120, s"diastolic not >= 80 and <= 120")
+
+        Vitals(datetime, temperature, respiration, pulse, oxygen, systolic, diastolic)
+      }
+  }
+
   implicit object WeightValidator extends Validator[Weight] {
     def validate(columns: Array[String]): Try[Weight] =
       Try {
