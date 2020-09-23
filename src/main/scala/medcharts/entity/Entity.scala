@@ -33,6 +33,14 @@ final case class Respiration(datetime: Minute, breathesPerMinute: Int)
 
 final case class Temperature(datetime: Minute, degrees: Double)
 
+final case class Vitals(datetime: Minute,
+                        temperature: Double,
+                        breathesPerMinute: Int,
+                        beatsPerMinute: Int,
+                        bloodOxygenPercentage: Int,
+                        systolic: Int,
+                        diastolic: Int)
+
 final case class Weight(datetime: Minute, pounds: Double)
 
 final case class InvalidLine(line: String, error: Throwable)
