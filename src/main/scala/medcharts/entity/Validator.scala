@@ -11,16 +11,19 @@ trait Validator[E] {
 object Validator {
   def validate[E](columns: Array[String])(implicit validator: Validator[E]): Try[E] = validator.validate(columns)
 
-  private def validateColumnCount(length: Int, count: Int): Unit = require(length == count, s"column count != $count")
+  private def validateColumnCount(length: Int, count: Int): Unit =
+    require(length == count, s"column count != $count")
 
-  def validateBloodPressure(systolic: Int, diastolic: Int): Unit = {
+  private def validateBloodPressure(systolic: Int, diastolic: Int): Unit = {
     require(systolic >= 120 && systolic <= 200, s"systolic not >= 120 and <= 200")
     require(diastolic >= 80 && diastolic <= 120, s"diastolic not >= 80 and <= 120")
   }
 
-  private def validateGlucose(level: Int): Unit = require(level >= 0 && level <= 300, s"level not >= 0 and <= 300")
+  private def validateGlucose(level: Int): Unit =
+    require(level >= 0 && level <= 300, s"level not >= 0 and <= 300")
 
-  private def validateMed(dosage: Int): Unit = require(dosage >= 1 && dosage <= 100, "dosage not >= 1 and <= 100")
+  private def validateMed(dosage: Int): Unit =
+    require(dosage >= 1 && dosage <= 100, "dosage not >= 1 and <= 100")
 
   private def validatePulse(beatsPerMinute: Int): Unit =
     require(beatsPerMinute >= 40 && beatsPerMinute <= 200, s"beats per minute not >= 40 and <= 200")
@@ -36,7 +39,8 @@ object Validator {
   private def validateTemperature(degrees: Double): Unit =
     require(degrees >= 95.0 && degrees <= 105.0, s"temperature, in degrees, not >= 95.0 and <= 105.0")
 
-  private def validateWeight(pounds: Double): Unit = require(pounds > 0.00 && pounds <= 500.00, s"pounds not > 0.00 and <= 500.00")
+  private def validateWeight(pounds: Double): Unit =
+    require(pounds > 0.00 && pounds <= 500.00, s"pounds not > 0.00 and <= 500.00")
 
   implicit object BloodPressureValidator extends Validator[BloodPressure] {
     def validate(columns: Array[String]): Try[BloodPressure] =
