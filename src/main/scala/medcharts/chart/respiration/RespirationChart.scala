@@ -5,7 +5,6 @@ import java.{util => jdate}
 
 import medcharts.Conf
 import medcharts.chart.Chart
-import medcharts.entity.Converter._
 import medcharts.entity._
 
 import org.jfree.chart.JFreeChart
@@ -29,7 +28,7 @@ object RespirationChart extends Chart {
     val yAxis = new NumberAxis(Conf.titleRespirationChartYAxis)
     xyPlot.setRangeAxis(yAxis)
 
-    val title = buildTitle(respirations.entities)
+    val title = buildTitle(Conf.titleRespiration, respirations.toEntity)
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
   }
 
@@ -56,13 +55,5 @@ object RespirationChart extends Chart {
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
     renderer.setDefaultShapesVisible(true)
     renderer
-  }
-
-  private def buildTitle(respirations: Array[Respiration]): String = {
-    if (respirations.length >= 2) {
-      val first = minuteToYearMonthDay(respirations.head.datetime)
-      val last = minuteToYearMonthDay(respirations.last.datetime)
-      s"${Conf.titleRespiration} : $first - $last"
-    } else Conf.titleRespiration
   }
 }

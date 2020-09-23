@@ -5,8 +5,8 @@ import java.{util => jdate}
 
 import medcharts.Conf
 import medcharts.chart.Chart
-import medcharts.entity.Converter.minuteToYearMonthDay
 import medcharts.entity.{Entities, PulseOxygen}
+
 import org.jfree.chart.JFreeChart
 import org.jfree.chart.axis.{DateAxis, NumberAxis}
 import org.jfree.chart.labels.StandardXYToolTipGenerator
@@ -33,7 +33,7 @@ object PulseOxygenChart extends Chart {
     val yAxis = new NumberAxis(Conf.titlePulseOxygenChartYAxis)
     xyPlot.setRangeAxis(yAxis)
 
-    val title = buildTitle(pulseoxygens.entities)
+    val title = buildTitle(Conf.titlePulseOxygen, pulseoxygens.toEntity)
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
   }
 
@@ -85,13 +85,5 @@ object PulseOxygenChart extends Chart {
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
     renderer.setDefaultShapesVisible(true)
     renderer
-  }
-
-  private def buildTitle(pulseoxygens: Array[PulseOxygen]): String = {
-    if (pulseoxygens.length >= 2) {
-      val first = minuteToYearMonthDay(pulseoxygens.head.datetime)
-      val last = minuteToYearMonthDay(pulseoxygens.last.datetime)
-      s"${Conf.titlePulseOxygen} : $first - $last"
-    } else Conf.titlePulseOxygen
   }
 }

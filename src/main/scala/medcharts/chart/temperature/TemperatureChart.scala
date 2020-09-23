@@ -5,7 +5,6 @@ import java.{util => jdate}
 
 import medcharts.Conf
 import medcharts.chart.Chart
-import medcharts.entity.Converter._
 import medcharts.entity._
 
 import org.jfree.chart.JFreeChart
@@ -29,7 +28,7 @@ object TemperatureChart extends Chart {
     val yAxis = new NumberAxis(Conf.titleTemperatureChartYAxis)
     xyPlot.setRangeAxis(yAxis)
 
-    val title = buildTitle(temperatures.entities)
+    val title = buildTitle(Conf.titleTemperature, temperatures.toEntity)
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
   }
 
@@ -56,13 +55,5 @@ object TemperatureChart extends Chart {
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
     renderer.setDefaultShapesVisible(true)
     renderer
-  }
-
-  private def buildTitle(temperatures: Array[Temperature]): String = {
-    if (temperatures.length >= 2) {
-      val first = minuteToYearMonthDay(temperatures.head.datetime)
-      val last = minuteToYearMonthDay(temperatures.last.datetime)
-      s"${Conf.titleTemperature} : $first - $last"
-    } else Conf.titleTemperature
   }
 }

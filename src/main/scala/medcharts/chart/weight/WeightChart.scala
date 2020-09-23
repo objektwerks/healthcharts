@@ -5,7 +5,6 @@ import java.{util => jdate}
 
 import medcharts.Conf
 import medcharts.chart.Chart
-import medcharts.entity.Converter._
 import medcharts.entity._
 
 import org.jfree.chart.JFreeChart
@@ -29,7 +28,7 @@ object WeightChart extends Chart {
     val yAxis = new NumberAxis(Conf.titleWeightChartYAxis)
     xyPlot.setRangeAxis(yAxis)
 
-    val title = buildTitle(weights.entities)
+    val title = buildTitle(Conf.titleWeight, weights.toEntity)
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
   }
 
@@ -56,13 +55,5 @@ object WeightChart extends Chart {
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
     renderer.setDefaultShapesVisible(true)
     renderer
-  }
-
-  private def buildTitle(weights: Array[Weight]): String = {
-    if (weights.length >= 2) {
-      val first = minuteToYearMonthDay(weights.head.datetime)
-      val last = minuteToYearMonthDay(weights.last.datetime)
-      s"${Conf.titleWeight} : $first - $last"
-    } else Conf.titleWeight
   }
 }

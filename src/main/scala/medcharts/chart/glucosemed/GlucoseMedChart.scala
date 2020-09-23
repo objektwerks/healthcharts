@@ -5,7 +5,6 @@ import java.{util => jdate}
 
 import medcharts.Conf
 import medcharts.chart.Chart
-import medcharts.entity.Converter._
 import medcharts.entity._
 
 import org.jfree.chart.JFreeChart
@@ -36,7 +35,7 @@ object GlucoseMedChart extends Chart {
     val yAxis = new NumberAxis(Conf.titleGlucoseMedChartYAxis)
     xyPlot.setRangeAxis(yAxis)
 
-    val title = buildTitle(glucoses.entities)
+    val title = buildTitle(Conf.titleGlucoseMed, glucoses.toEntity)
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
   }
 
@@ -91,13 +90,5 @@ object GlucoseMedChart extends Chart {
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
     renderer.setDefaultShapesVisible(true)
     renderer
-  }
-
-  private def buildTitle(glucoses: Array[Glucose]): String = {
-    if (glucoses.length >= 2) {
-      val first = minuteToYearMonthDay(glucoses.head.datetime)
-      val last = minuteToYearMonthDay(glucoses.last.datetime)
-      s"${Conf.titleGlucoseMed} : $first - $last"
-    } else Conf.titleGlucoseMed
   }
 }

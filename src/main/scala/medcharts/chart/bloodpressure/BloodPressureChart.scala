@@ -5,7 +5,6 @@ import java.{util => jdate}
 
 import medcharts.Conf
 import medcharts.chart.Chart
-import medcharts.entity.Converter.minuteToYearMonthDay
 import medcharts.entity.{BloodPressure, Entities}
 
 import org.jfree.chart.JFreeChart
@@ -34,7 +33,7 @@ object BloodPressureChart extends Chart {
     val yAxis = new NumberAxis(Conf.titleBloodPressureChartYAxis)
     xyPlot.setRangeAxis(yAxis)
 
-    val title = buildTitle(bloodpressures.entities)
+    val title = buildTitle(Conf.titleBloodPressure, bloodpressures.toEntity)
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
   }
 
@@ -86,13 +85,5 @@ object BloodPressureChart extends Chart {
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
     renderer.setDefaultShapesVisible(true)
     renderer
-  }
-
-  private def buildTitle(bloodpressures: Array[BloodPressure]): String = {
-    if (bloodpressures.length >= 2) {
-      val first = minuteToYearMonthDay(bloodpressures.head.datetime)
-      val last = minuteToYearMonthDay(bloodpressures.last.datetime)
-      s"${Conf.titleBloodPressure} : $first - $last"
-    } else Conf.titleBloodPressure
   }
 }
