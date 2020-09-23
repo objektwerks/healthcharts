@@ -35,9 +35,9 @@ final case class Temperature(datetime: Minute, degrees: Double)
 
 final case class Vitals(datetime: Minute,
                         temperature: Double,
-                        breathesPerMinute: Int,
-                        beatsPerMinute: Int,
-                        bloodOxygenPercentage: Int,
+                        respiration: Int,
+                        pulse: Int,
+                        oxygen: Int,
                         systolic: Int,
                         diastolic: Int)
 
