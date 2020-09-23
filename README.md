@@ -6,7 +6,6 @@ MedCharts
 Todo
 ----
 1. Build Vitals chart, action, menu item.
-2. Refactor Validator.
 
 Charts
 ------
