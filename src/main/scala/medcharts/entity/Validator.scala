@@ -6,6 +6,33 @@ import scala.util.Try
 
 trait Validator[E] {
   def validate(columns: Array[String]): Try[E]
+
+  def validateBloodPressure(systolic: Int, diastolic: Int): Unit = {
+    require(systolic >= 120 && systolic <= 200, s"systolic not >= 120 and <= 200")
+    require(diastolic >= 80 && diastolic <= 120, s"diastolic not >= 80 and <= 120")
+  }
+
+  def validateDiastolic(diastolic: Int): Unit = require(diastolic >= 80 && diastolic <= 120, s"diastolic not >= 80 and <= 120")
+
+  def validateGlucose(level: Int): Unit = require(level >= 0 && level <= 300, s"level not >= 0 and <= 300")
+
+  def validateMed(dosage: Int): Unit = require(dosage >= 1 && dosage <= 100, "dosage not >= 1 and <= 100")
+
+  def validatePulse(beatsPerMinute: Int): Unit = 
+    require(beatsPerMinute >= 40 && beatsPerMinute <= 200, s"beats per minute not >= 40 and <= 200")
+
+  def validatePulseOxygen(beatsPerMinute: Int, bloodOxygenPercentage: Int): Unit = {
+    validatePulse(beatsPerMinute)
+    require(bloodOxygenPercentage >= 50 && bloodOxygenPercentage <= 100, s"blood oxygen percentage not >= 50 and <= 100")
+  }
+
+  def validateRespiration(breathesPerMinute: Int): Unit = 
+    require(breathesPerMinute >= 12 && breathesPerMinute <= 25, s"breathes per minute not >= 12 and <= 25")
+
+  def validateTemperature(degrees: Double): Unit = 
+    require(degrees >= 95.0 && degrees <= 105.0, s"temperature, in degrees, not >= 95.0 and <= 105.0")
+
+  def validateWeight(pounds: Double): Unit = require(pounds > 0.00 && pounds <= 500.00, s"pounds not > 0.00 and <= 500.00")
 }
 
 object Validator {
@@ -20,8 +47,7 @@ object Validator {
         val datetime = datetimeToMinute(columns(0))
         val systolic = columns(1).toInt
         val diastolic = columns(2).toInt
-        require(systolic >= 120 && systolic <= 200, s"systolic not >= 120 and <= 200")
-        require(diastolic >= 80 && diastolic <= 120, s"diastolic not >= 80 and <= 120")
+        validateBloodPressure(systolic, diastolic)
         BloodPressure(datetime, systolic, diastolic)
       }
   }
@@ -32,7 +58,7 @@ object Validator {
         validateColumnCount(columns.length, 2)
         val datetime = datetimeToMinute(columns(0))
         val level = columns(1).toInt
-        require(level >= 0 && level <= 300, s"level not >= 0 and <= 300")
+        validateGlucose(level)
         Glucose(datetime, level)
       }
   }
@@ -45,7 +71,7 @@ object Validator {
         val medTypeId = columns(1).toInt
         val medtype = MedType.idToMedType(medTypeId)
         val dosage = columns(2).toInt
-        require(dosage >= 1 && dosage <= 100, "dosage not >= 1 and <= 100")
+        validateMed(dosage)
         Med(datetime, medtype, dosage)
       }
   }
@@ -56,7 +82,7 @@ object Validator {
         validateColumnCount(columns.length, 2)
         val datetime = datetimeToMinute(columns(0))
         val beatsPerMinute = columns(1).toInt
-        require(beatsPerMinute >= 40 && beatsPerMinute <= 200, s"beats per minute not >= 40 and <= 200")
+        validatePulse(beatsPerMinute)
         Pulse(datetime, beatsPerMinute)
       }
   }
@@ -68,8 +94,7 @@ object Validator {
         val datetime = datetimeToMinute(columns(0))
         val beatsPerMinute = columns(1).toInt
         val bloodOxygenPercentage = columns(2).toInt
-        require(beatsPerMinute >= 40 && beatsPerMinute <= 200, s"beats per minute not >= 40 and <= 200")
-        require(bloodOxygenPercentage >= 50 && bloodOxygenPercentage <= 100, s"blood oxygen percentage not >= 50 and <= 100")
+        validatePulseOxygen(beatsPerMinute, bloodOxygenPercentage)
         PulseOxygen(datetime, beatsPerMinute, bloodOxygenPercentage)
       }
   }
@@ -80,7 +105,7 @@ object Validator {
         validateColumnCount(columns.length, 2)
         val datetime = datetimeToMinute(columns(0))
         val breathesPerMinute = columns(1).toInt
-        require(breathesPerMinute >= 12 && breathesPerMinute <= 25, s"breathes per minute not >= 12 and <= 25")
+        validateRespiration(breathesPerMinute)
         Respiration(datetime, breathesPerMinute)
       }
   }
@@ -91,7 +116,7 @@ object Validator {
         validateColumnCount(columns.length, 2)
         val datetime = datetimeToMinute(columns(0))
         val degrees = columns(1).toDouble
-        require(degrees >= 95.0 && degrees <= 105.0, s"temperature, in degrees, not >= 95.0 and <= 105.0")
+        validateTemperature(degrees)
         Temperature(datetime, degrees)
       }
   }
@@ -101,25 +126,17 @@ object Validator {
       Try {
         validateColumnCount(columns.length, 7)
         val datetime = datetimeToMinute(columns(0))
-
         val temperature = columns(1).toDouble
-        require(temperature >= 95.0 && temperature <= 105.0, s"temperature, in degrees, not >= 95.0 and <= 105.0")
-
         val respiration = columns(2).toInt
-        require(respiration >= 12 && respiration <= 25, s"breathes per minute not >= 12 and <= 25")
-
         val pulse = columns(3).toInt
-        require(pulse >= 40 && pulse <= 200, s"beats per minute not >= 40 and <= 200")
-
         val oxygen = columns(4).toInt
-        require(oxygen >= 50 && oxygen <= 100, s"blood oxygen percentage not >= 50 and <= 100")
-
         val systolic = columns(5).toInt
-        require(systolic >= 120 && systolic <= 200, s"systolic not >= 120 and <= 200")
-
         val diastolic = columns(6).toInt
-        require(diastolic >= 80 && diastolic <= 120, s"diastolic not >= 80 and <= 120")
-
+        validateTemperature(temperature)
+        validateRespiration(respiration)
+        validatePulse(pulse)
+        validatePulseOxygen(pulse, oxygen)
+        validateBloodPressure(systolic, diastolic)
         Vitals(datetime, temperature, respiration, pulse, oxygen, systolic, diastolic)
       }
   }
@@ -130,7 +147,7 @@ object Validator {
         validateColumnCount(columns.length, 2)
         val datetime = datetimeToMinute(columns(0))
         val pounds = columns(1).toDouble
-        require(pounds > 0.00 && pounds <= 500.00, s"pounds not > 0.00 and <= 500.00")
+        validateWeight(pounds)
         Weight(datetime, pounds)
       }
   }  
