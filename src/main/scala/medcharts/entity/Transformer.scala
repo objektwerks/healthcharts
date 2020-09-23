@@ -17,12 +17,14 @@ object Transformer {
       val entitiesBuilder = mutable.ArrayBuilder.make[E]
       val invalidLinesBuilder = mutable.ArrayBuilder.make[InvalidLine]
       val source = Source.fromFile(path, utf8)
+      var number = 1
       for (line <- source.getLines) {
         val columns = line.split(delimiter).map(_.trim)
         validate[E](columns) match {
           case Success(entity) => entitiesBuilder += entity
-          case Failure(error) => invalidLinesBuilder += InvalidLine(line, error)
+          case Failure(error) => invalidLinesBuilder += InvalidLine(number, line, error)
         }
+        number = number + 1
       }
       source.close()
       val (entities, invalidLines) = (entitiesBuilder.result(), invalidLinesBuilder.result())

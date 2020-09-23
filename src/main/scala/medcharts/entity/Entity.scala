@@ -49,4 +49,4 @@ final case class Vitals(datetime: Minute,
 
 final case class Weight(datetime: Minute, pounds: Double) extends Entity
 
-final case class InvalidLine(line: String, error: Throwable) extends Product with Serializable
+final case class InvalidLine(number: Int, line: String, error: Throwable) extends Product with Serializable
