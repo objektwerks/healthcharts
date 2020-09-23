@@ -23,6 +23,7 @@ object Conf {
   val labelPulseCsv = conf.getString("label.pulseCsv")
   val labelPulseOxygenCsv = conf.getString("label.pulseOxygenCsv")
   val labelRespirationCsv = conf.getString("label.respirationCsv")
+  val labelVitalsCsv = conf.getString("label.vitalsCsv")
   val labelTemperatureCsv = conf.getString("label.temperatureCsv")
   val labelWeightCsv = conf.getString("label.weightCsv")
 
