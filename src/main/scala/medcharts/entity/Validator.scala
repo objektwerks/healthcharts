@@ -12,8 +12,6 @@ trait Validator[E] {
     require(diastolic >= 80 && diastolic <= 120, s"diastolic not >= 80 and <= 120")
   }
 
-  def validateDiastolic(diastolic: Int): Unit = require(diastolic >= 80 && diastolic <= 120, s"diastolic not >= 80 and <= 120")
-
   def validateGlucose(level: Int): Unit = require(level >= 0 && level <= 300, s"level not >= 0 and <= 300")
 
   def validateMed(dosage: Int): Unit = require(dosage >= 1 && dosage <= 100, "dosage not >= 1 and <= 100")
