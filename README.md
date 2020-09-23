@@ -5,7 +5,7 @@ MedCharts
 
 Todo
 ----
-1. Build Vitals chart ( Temperature, Respiration, Pulse Oxygen, Blood Pressure )
+1. Build Vitals chart.
 
 Charts
 ------

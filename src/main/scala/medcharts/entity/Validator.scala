@@ -96,16 +96,6 @@ object Validator {
       }
   }
 
-  /*
-  final case class Vitals(datetime: Minute,
-                        temperature: Double,
-                        respiration: Int,
-                        pulse: Int,
-                        oxygen: Int,
-                        systolic: Int,
-                        diastolic: Int)
-  */
-
   implicit object VitalsValidator extends Validator[Vitals] {
     def validate(columns: Array[String]): Try[Vitals] =
       Try {
