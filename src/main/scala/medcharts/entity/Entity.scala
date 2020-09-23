@@ -9,7 +9,7 @@ sealed trait Entity extends Product with Serializable {
   val datetime: Minute
 }
 
-final case class Entities[E](entities: Array[E], invalidLines: Array[InvalidLine]) {
+final case class Entities[E](entities: Array[E], invalidLines: Array[InvalidLine]) extends Product with Serializable {
   def toEntity: Array[Entity] = entities.asInstanceOf[Array[Entity]]
 }
 
@@ -49,4 +49,4 @@ final case class Vitals(datetime: Minute,
 
 final case class Weight(datetime: Minute, pounds: Double) extends Entity
 
-final case class InvalidLine(line: String, error: Throwable)
+final case class InvalidLine(line: String, error: Throwable) extends Product with Serializable
