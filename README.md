@@ -5,7 +5,7 @@ MedCharts
 
 Todo
 ----
-1. Build Vitals chart.
+1. Build Vitals chart, action, menu item.
 
 Charts
 ------
@@ -15,6 +15,7 @@ Charts
 - [x] [Pulse Oxygen](./docs/pulse.oxygen.chart.md)
 - [x] [Respiration](./docs/respiration.chart.md)
 - [x] [Temperature](./docs/temperature.chart.md)
+- [ ] [Vitals](./docs/vitals.chart.md)
 - [x] [Weight](./docs/weight.chart.md)
 
 Test
