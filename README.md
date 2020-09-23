@@ -3,6 +3,10 @@ MedCharts
 >Medcharts is an open source project governed by the GPL.V3 license. The project objective is
 >to build useful medical charts initially sourced by simple csv files.
 
+Todo
+----
+1. Build Vitals chart ( Temperature, Respiration, Pulse Oxygen, Blood Pressure )
+
 Charts
 ------
 - [x] [Blood Pressure](./docs/blood.pressure.chart.md)
