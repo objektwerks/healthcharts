@@ -3,8 +3,12 @@ package medcharts.chart
 import java.text.SimpleDateFormat
 
 import medcharts.Conf
+import medcharts.chart.BloodPressureChart._
+import medcharts.chart.PulseChart._
+import medcharts.chart.PulseOxygenChart._
+import medcharts.chart.RespirationChart._
+import medcharts.chart.TemperatureChart._
 import medcharts.entity.{Entities, Vitals}
-import medcharts.renderer.Renderers._
 
 import org.jfree.chart.JFreeChart
 import org.jfree.chart.axis.{DateAxis, NumberAxis}
@@ -18,16 +22,16 @@ object VitalsChart extends Chart {
     xyPlot.setDatasetRenderingOrder(DatasetRenderingOrder.FORWARD)
 
     xyPlot.setDataset(0, buildTemperatureDataset(vitals))
-    xyPlot.setRenderer(0, TemperatureChart.buildTemperatureRenderer())
+    xyPlot.setRenderer(0, buildTemperatureRenderer())
 
     xyPlot.setDataset(1, buildRespirationDataset(vitals))
-    xyPlot.setRenderer(1, RespirationChart.buildRespirationRenderer())
+    xyPlot.setRenderer(1, buildRespirationRenderer())
 
     xyPlot.setDataset(2, buildPulseDataset(vitals))
-    xyPlot.setRenderer(2, PulseChart.buildPulseRenderer())
+    xyPlot.setRenderer(2, buildPulseRenderer())
 
     xyPlot.setDataset(3, buildOxygenDataset(vitals))
-    xyPlot.setRenderer(3, PulseOxygenChart.buildOxygenRenderer())
+    xyPlot.setRenderer(3, buildOxygenRenderer())
 
     xyPlot.setDataset(4, buildSystolicDataset(vitals))
     xyPlot.setRenderer(4, buildSystolicRenderer())
