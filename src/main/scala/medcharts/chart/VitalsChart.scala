@@ -1,14 +1,8 @@
-package medcharts.chart.vitals
+package medcharts.chart
 
 import java.text.SimpleDateFormat
 
 import medcharts.Conf
-import medcharts.chart.Chart
-import medcharts.chart.bloodpressure.BloodPressureChart
-import medcharts.chart.pulse.PulseChart
-import medcharts.chart.pulseoxygen.PulseOxygenChart
-import medcharts.chart.respiration.RespirationChart
-import medcharts.chart.temperature.TemperatureChart
 import medcharts.entity.{Entities, Vitals}
 
 import org.jfree.chart.JFreeChart

@@ -1,10 +1,9 @@
-package medcharts.chart.respiration
+package medcharts.chart
 
 import java.text.{DecimalFormat, SimpleDateFormat}
 import java.{util => jdate}
 
 import medcharts.Conf
-import medcharts.chart.Chart
 import medcharts.entity._
 
 import org.jfree.chart.JFreeChart

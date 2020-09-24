@@ -3,14 +3,7 @@ package medcharts.ui
 import javax.swing.{JMenu, JMenuBar, JMenuItem, JSeparator}
 
 import medcharts.Conf
-import medcharts.chart.bloodpressure.BloodPressureAction
-import medcharts.chart.glucosemed.GlucoseMedAction
-import medcharts.chart.pulse.PulseAction
-import medcharts.chart.pulseoxygen.PulseOxygenAction
-import medcharts.chart.respiration.RespirationAction
-import medcharts.chart.temperature.TemperatureAction
-import medcharts.chart.vitals.VitalsAction
-import medcharts.chart.weight.WeightAction
+import medcharts.chart._
 
 class MenuBar(frame: Frame) extends JMenuBar() {
   val menu = new JMenu(Conf.titleMenuBar)

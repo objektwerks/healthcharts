@@ -1,12 +1,10 @@
-package medcharts.chart.temperature
+package medcharts.chart
 
 import java.text.{DecimalFormat, SimpleDateFormat}
 import java.{util => jdate}
 
 import medcharts.Conf
-import medcharts.chart.Chart
 import medcharts.entity._
-
 import org.jfree.chart.JFreeChart
 import org.jfree.chart.axis.{DateAxis, NumberAxis}
 import org.jfree.chart.labels.StandardXYToolTipGenerator
@@ -15,41 +13,41 @@ import org.jfree.chart.renderer.xy.{XYItemRenderer, XYLineAndShapeRenderer}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.{IntervalXYDataset, XYDataset}
 
-object TemperatureChart extends Chart {
-  def build(temperatures: Entities[Temperature]): JFreeChart = {
+object PulseChart extends Chart {
+  def build(pulses: Entities[Pulse]): JFreeChart = {
     val xyPlot = new XYPlot()
-    xyPlot.setDataset( buildTemperatureDataset(temperatures) )
-    xyPlot.setRenderer( buildTemperatureRenderer() )
+    xyPlot.setDataset( buildPulseDataset(pulses) )
+    xyPlot.setRenderer( buildPulseRenderer() )
 
     val xAxis = new DateAxis(Conf.titleDayHourChartXAxis)
     xAxis.setDateFormatOverride( new SimpleDateFormat("d,H") )
     xyPlot.setDomainAxis(xAxis)
 
-    val yAxis = new NumberAxis(Conf.titleTemperatureChartYAxis)
+    val yAxis = new NumberAxis(Conf.titlePulseChartYAxis)
     xyPlot.setRangeAxis(yAxis)
 
-    val title = buildTitle(Conf.titleTemperature, temperatures.toEntity)
+    val title = buildTitle(Conf.titlePulse, pulses.toEntity)
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
   }
 
-  def buildTemperatureDataset(temperatures: Entities[Temperature]): IntervalXYDataset = {
-    val timeSeries = new TimeSeries(Conf.titleTemperature)
-    temperatures.entities.foreach { weight =>
-      timeSeries.add( weight.datetime, weight.degrees )
+  def buildPulseDataset(pulses: Entities[Pulse]): IntervalXYDataset = {
+    val timeSeries = new TimeSeries(Conf.titlePulse)
+    pulses.entities.foreach { pulse =>
+      timeSeries.add( pulse.datetime, pulse.beatsPerMinute.toDouble )
     }
     new TimeSeriesCollection(timeSeries)
   }
 
-  def buildTemperatureRenderer(): XYItemRenderer = {
+  def buildPulseRenderer(): XYItemRenderer = {
     val renderer = new XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String = {
         val xValue = dataset.getXValue(series, item)
         val yValue = dataset.getYValue(series, item)
         val dayHourMinute = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
-        val degrees = new DecimalFormat("0.0").format( yValue )
+        val beatsPerMinute = new DecimalFormat("0").format( yValue )
         val delta = calculateDeltaAsPercentage(dataset, series, item)
-        s"${Conf.titleTemperature}: ($dayHourMinute, $degrees, $delta%)"
+        s"${Conf.titlePulse}: ($dayHourMinute, $beatsPerMinute, $delta%)"
       }
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)

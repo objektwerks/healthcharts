@@ -1,10 +1,9 @@
-package medcharts.chart.weight
+package medcharts.chart
 
 import java.text.{DecimalFormat, SimpleDateFormat}
 import java.{util => jdate}
 
 import medcharts.Conf
-import medcharts.chart.Chart
 import medcharts.entity._
 
 import org.jfree.chart.JFreeChart
@@ -15,41 +14,41 @@ import org.jfree.chart.renderer.xy.{XYItemRenderer, XYLineAndShapeRenderer}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.{IntervalXYDataset, XYDataset}
 
-object WeightChart extends Chart {
-  def build(weights: Entities[Weight]): JFreeChart = {
+object TemperatureChart extends Chart {
+  def build(temperatures: Entities[Temperature]): JFreeChart = {
     val xyPlot = new XYPlot()
-    xyPlot.setDataset( buildWeightDataset(weights) )
-    xyPlot.setRenderer( buildWeightRenderer() )
+    xyPlot.setDataset( buildTemperatureDataset(temperatures) )
+    xyPlot.setRenderer( buildTemperatureRenderer() )
 
     val xAxis = new DateAxis(Conf.titleDayHourChartXAxis)
     xAxis.setDateFormatOverride( new SimpleDateFormat("d,H") )
     xyPlot.setDomainAxis(xAxis)
 
-    val yAxis = new NumberAxis(Conf.titleWeightChartYAxis)
+    val yAxis = new NumberAxis(Conf.titleTemperatureChartYAxis)
     xyPlot.setRangeAxis(yAxis)
 
-    val title = buildTitle(Conf.titleWeight, weights.toEntity)
+    val title = buildTitle(Conf.titleTemperature, temperatures.toEntity)
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
   }
 
-  private def buildWeightDataset(weights: Entities[Weight]): IntervalXYDataset = {
-    val timeSeries = new TimeSeries(Conf.titleWeight)
-    weights.entities.foreach { weight =>
-      timeSeries.add( weight.datetime, weight.pounds )
+  def buildTemperatureDataset(temperatures: Entities[Temperature]): IntervalXYDataset = {
+    val timeSeries = new TimeSeries(Conf.titleTemperature)
+    temperatures.entities.foreach { weight =>
+      timeSeries.add( weight.datetime, weight.degrees )
     }
     new TimeSeriesCollection(timeSeries)
   }
 
-  private def buildWeightRenderer(): XYItemRenderer = {
+  def buildTemperatureRenderer(): XYItemRenderer = {
     val renderer = new XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String = {
         val xValue = dataset.getXValue(series, item)
         val yValue = dataset.getYValue(series, item)
         val dayHourMinute = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
-        val pounds = new DecimalFormat("0.0").format( yValue )
+        val degrees = new DecimalFormat("0.0").format( yValue )
         val delta = calculateDeltaAsPercentage(dataset, series, item)
-        s"($dayHourMinute, $pounds, $delta%)"
+        s"${Conf.titleTemperature}: ($dayHourMinute, $degrees, $delta%)"
       }
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)

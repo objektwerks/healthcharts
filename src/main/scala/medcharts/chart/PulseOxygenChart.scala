@@ -1,11 +1,9 @@
-package medcharts.chart.pulseoxygen
+package medcharts.chart
 
 import java.text.{DecimalFormat, SimpleDateFormat}
 import java.{util => jdate}
 
 import medcharts.Conf
-import medcharts.chart.Chart
-import medcharts.chart.pulse.PulseChart
 import medcharts.entity.{Entities, PulseOxygen}
 
 import org.jfree.chart.JFreeChart

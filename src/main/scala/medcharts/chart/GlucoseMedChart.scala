@@ -1,12 +1,10 @@
-package medcharts.chart.bloodpressure
+package medcharts.chart
 
 import java.text.{DecimalFormat, SimpleDateFormat}
 import java.{util => jdate}
 
 import medcharts.Conf
-import medcharts.chart.Chart
-import medcharts.entity.{BloodPressure, Entities}
-
+import medcharts.entity._
 import org.jfree.chart.JFreeChart
 import org.jfree.chart.axis.{DateAxis, NumberAxis}
 import org.jfree.chart.labels.StandardXYToolTipGenerator
@@ -15,54 +13,56 @@ import org.jfree.chart.renderer.xy.{XYItemRenderer, XYLineAndShapeRenderer}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.{IntervalXYDataset, XYDataset}
 
-object BloodPressureChart extends Chart {
-  def build(bloodpressures: Entities[BloodPressure]): JFreeChart = {
+import scala.util.Try
+
+object GlucoseMedChart extends Chart {
+  def build(glucoses: Entities[Glucose], meds: Entities[Med]): JFreeChart = {
     val xyPlot = new XYPlot()
     xyPlot.setDatasetRenderingOrder(DatasetRenderingOrder.FORWARD)
 
-    xyPlot.setDataset(0, buildSystolicDataset(bloodpressures))
-    xyPlot.setRenderer(0, buildSystolicRenderer())
+    xyPlot.setDataset(0, buildGlucoseDataset(glucoses))
+    xyPlot.setRenderer(0, buildGlucoseRenderer())
 
-    xyPlot.setDataset(1, buildDiastolicDataset(bloodpressures))
-    xyPlot.setRenderer(1, buildDiastolicRenderer())
+    xyPlot.setDataset(1, buildMedDataset(meds))
+    xyPlot.setRenderer(1, buildMedRenderer())
 
     val xAxis = new DateAxis(Conf.titleDayHourChartXAxis)
     xAxis.setDateFormatOverride( new SimpleDateFormat("d,H") )
     xyPlot.setDomainAxis(0, xAxis)
 
-    val yAxis = new NumberAxis(Conf.titleBloodPressureChartYAxis)
+    val yAxis = new NumberAxis(Conf.titleGlucoseMedChartYAxis)
     xyPlot.setRangeAxis(yAxis)
 
-    val title = buildTitle(Conf.titleBloodPressure, bloodpressures.toEntity)
+    val title = buildTitle(Conf.titleGlucoseMed, glucoses.toEntity)
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
   }
 
-  def buildSystolicDataset(bloodpressures: Entities[BloodPressure]): IntervalXYDataset = {
-    val timeSeries = new TimeSeries(Conf.titleSystolic)
-    bloodpressures.entities.foreach { pulseoxygen =>
-      timeSeries.add( pulseoxygen.datetime, pulseoxygen.systolic.toDouble )
+  def buildGlucoseDataset(glucoses: Entities[Glucose]): IntervalXYDataset = {
+    val timeSeries = new TimeSeries(Conf.titleGlucose)
+    glucoses.entities.foreach { glucose =>
+      timeSeries.add( glucose.datetime, glucose.level.toDouble )
     }
     new TimeSeriesCollection(timeSeries)
   }
 
-  def buildDiastolicDataset(bloodpressures: Entities[BloodPressure]): IntervalXYDataset = {
-    val timeSeries = new TimeSeries(Conf.titleDiastolic)
-    bloodpressures.entities.foreach { pulseoxygen =>
-      timeSeries.add( pulseoxygen.datetime, pulseoxygen.diastolic.toDouble )
+  def buildMedDataset(meds: Entities[Med]): IntervalXYDataset = {
+    val timeSeries = new TimeSeries(Conf.titleMed)
+    meds.entities.foreach { med =>
+      timeSeries.add( med.datetime, s"${med.dosage}.${med.medtype.id}".toDouble )
     }
     new TimeSeriesCollection(timeSeries)
   }
 
-  def buildSystolicRenderer(): XYItemRenderer = {
+  def buildGlucoseRenderer(): XYItemRenderer = {
     val renderer = new XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String = {
         val xValue = dataset.getXValue(series, item)
         val yValue = dataset.getYValue(series, item)
         val dayHourMinute = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
-        val systolic = new DecimalFormat("0").format( yValue )
+        val level = new DecimalFormat("0").format( yValue )
         val delta = calculateDeltaAsPercentage(dataset, series, item)
-        s"${Conf.titleSystolic}: ($dayHourMinute, $systolic, $delta%)"
+        s"${Conf.titleGlucose}: ($dayHourMinute, $level, $delta%)"
       }
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
@@ -70,16 +70,19 @@ object BloodPressureChart extends Chart {
     renderer
   }
 
-  def buildDiastolicRenderer(): XYItemRenderer = {
+  def buildMedRenderer(): XYItemRenderer = {
     val renderer = new XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String = {
         val xValue = dataset.getXValue(series, item)
         val yValue = dataset.getYValue(series, item)
+        val yValues = yValue.toString.split("\\.")
         val dayHourMinute = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
-        val diastolic = new DecimalFormat("0").format( yValue )
+        val dosage = Try{ yValues(0).toInt }.getOrElse(-1)
+        val medtype = Try{ yValues(1).toInt }.getOrElse(-1)
+        val med = MedType.idToMedType.getOrElse(medtype, "n/a")
         val delta = calculateDeltaAsPercentage(dataset, series, item)
-        s"${Conf.titleDiastolic}: ($dayHourMinute, $diastolic, $delta%)"
+        s"${Conf.titleMed}: ($dayHourMinute, $dosage, $med, $delta%)"
       }
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
