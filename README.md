@@ -5,8 +5,7 @@ MedCharts
 
 Todo
 ----
-1. Build Vitals chart, action, menu item.
-2. Integrate InvalidLine(s) into UI.
+1. Integrate InvalidLine(s) into UI.
 
 Charts
 ------
