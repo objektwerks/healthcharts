@@ -1,5 +1,6 @@
 package medcharts.action
 
+import java.awt.Color
 import java.util.concurrent.atomic.AtomicInteger
 
 import javax.swing.{AbstractAction, BorderFactory}
@@ -23,6 +24,7 @@ abstract class ChartAction(name: String) extends AbstractAction(name) {
     }
 
   protected def buildChartPanel(chart: JFreeChart): ChartPanel = {
+    chart.getPlot.setBackgroundPaint(Color.LIGHT_GRAY)
     val chartPanel = new ChartPanel(chart)
     chartPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15))
     chartPanel.setInitialDelay(100)
