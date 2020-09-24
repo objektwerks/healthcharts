@@ -44,6 +44,7 @@ class TransformerTest extends AnyFunSuite with Matchers {
 
   test("vitals") {
     testTransformer[Vitals]("./data/vitals/vitals.txt", 12, 0)
+    testTransformer[Vitals]("./data/vitals/vitals-empty.txt", 0, 0)
     testTransformer[Vitals]("./data/vitals/vitals-invalid.txt", 10, 2)
   }
 
