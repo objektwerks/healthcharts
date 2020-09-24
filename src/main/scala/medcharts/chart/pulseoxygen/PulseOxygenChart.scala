@@ -5,6 +5,7 @@ import java.{util => jdate}
 
 import medcharts.Conf
 import medcharts.chart.Chart
+import medcharts.chart.pulse.PulseChart
 import medcharts.entity.{Entities, PulseOxygen}
 
 import org.jfree.chart.JFreeChart
@@ -21,7 +22,7 @@ object PulseOxygenChart extends Chart {
     xyPlot.setDatasetRenderingOrder(DatasetRenderingOrder.FORWARD)
 
     xyPlot.setDataset(0, buildPulseDataset(pulseoxygens))
-    xyPlot.setRenderer(0, buildPulseRenderer())
+    xyPlot.setRenderer(0, PulseChart.buildPulseRenderer())
 
     xyPlot.setDataset(1, buildOxygenDataset(pulseoxygens))
     xyPlot.setRenderer(1, buildOxygenRenderer())
@@ -51,23 +52,6 @@ object PulseOxygenChart extends Chart {
       timeSeries.add( pulseoxygen.datetime, pulseoxygen.bloodOxygenPercentage.toDouble )
     }
     new TimeSeriesCollection(timeSeries)
-  }
-
-  def buildPulseRenderer(): XYItemRenderer = {
-    val renderer = new XYLineAndShapeRenderer()
-    val tooltipGenerator = new StandardXYToolTipGenerator() {
-      override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String = {
-        val xValue = dataset.getXValue(series, item)
-        val yValue = dataset.getYValue(series, item)
-        val dayHourMinute = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
-        val beatsPerMinute = new DecimalFormat("0").format( yValue )
-        val delta = calculateDeltaAsPercentage(dataset, series, item)
-        s"($dayHourMinute, $beatsPerMinute, $delta%)"
-      }
-    }
-    renderer.setDefaultToolTipGenerator(tooltipGenerator)
-    renderer.setDefaultShapesVisible(true)
-    renderer
   }
 
   def buildOxygenRenderer(): XYItemRenderer = {
