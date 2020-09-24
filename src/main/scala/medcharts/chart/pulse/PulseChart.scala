@@ -49,7 +49,7 @@ object PulseChart extends Chart {
         val dayHourMinute = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
         val beatsPerMinute = new DecimalFormat("0").format( yValue )
         val delta = calculateDeltaAsPercentage(dataset, series, item)
-        s"($dayHourMinute, $beatsPerMinute, $delta%)"
+        s"${Conf.titlePulse}: ($dayHourMinute, $beatsPerMinute, $delta%)"
       }
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)

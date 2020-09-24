@@ -63,7 +63,7 @@ object PulseOxygenChart extends Chart {
         val dayHourMinute = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
         val bloodOxygenPercentage = new DecimalFormat("0").format( yValue )
         val delta = calculateDeltaAsPercentage(dataset, series, item)
-        s"($dayHourMinute, $bloodOxygenPercentage, $delta%)"
+        s"${Conf.titleOxygen}: ($dayHourMinute, $bloodOxygenPercentage, $delta%)"
       }
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)

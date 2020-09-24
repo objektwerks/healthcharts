@@ -49,7 +49,7 @@ object RespirationChart extends Chart {
         val dayHourMinute = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
         val breathesPerMinute = new DecimalFormat("0").format( yValue )
         val delta = calculateDeltaAsPercentage(dataset, series, item)
-        s"($dayHourMinute, $breathesPerMinute, $delta%)"
+        s"${Conf.titleRespiration}: ($dayHourMinute, $breathesPerMinute, $delta%)"
       }
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)

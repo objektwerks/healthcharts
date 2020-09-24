@@ -62,7 +62,7 @@ object BloodPressureChart extends Chart {
         val dayHourMinute = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
         val systolic = new DecimalFormat("0").format( yValue )
         val delta = calculateDeltaAsPercentage(dataset, series, item)
-        s"($dayHourMinute, $systolic, $delta%)"
+        s"${Conf.titleSystolic}: ($dayHourMinute, $systolic, $delta%)"
       }
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
@@ -79,7 +79,7 @@ object BloodPressureChart extends Chart {
         val dayHourMinute = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
         val diastolic = new DecimalFormat("0").format( yValue )
         val delta = calculateDeltaAsPercentage(dataset, series, item)
-        s"($dayHourMinute, $diastolic, $delta%)"
+        s"${Conf.titleDiastolic}: ($dayHourMinute, $diastolic, $delta%)"
       }
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
