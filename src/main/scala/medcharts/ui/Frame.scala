@@ -19,7 +19,7 @@ class Frame extends JFrame {
   setLocationRelativeTo(null)
 
   def addChartPanel(title: String, chartPanel: ChartPanel): Unit = {
-    tabbedPane.addChart(title, chartPanel)
+    tabbedPane.addChartPanel(title, chartPanel)
     revalidate()
   }
 }
