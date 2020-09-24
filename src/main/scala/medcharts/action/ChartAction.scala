@@ -1,13 +1,10 @@
-package medcharts.chart
+package medcharts.action
 
 import java.util.concurrent.atomic.AtomicInteger
 
 import javax.swing.{AbstractAction, BorderFactory}
-
 import medcharts.entity._
-
-import org.jfree.chart.JFreeChart
-import org.jfree.chart.ChartPanel
+import org.jfree.chart.{ChartPanel, JFreeChart}
 
 import scala.reflect.ClassTag
 import scala.util.{Failure, Success}

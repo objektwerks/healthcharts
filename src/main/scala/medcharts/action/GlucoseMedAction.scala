@@ -1,8 +1,9 @@
-package medcharts.chart
+package medcharts.action
 
 import java.awt.event.ActionEvent
 
 import medcharts.Conf
+import medcharts.chart.GlucoseMedChart
 import medcharts.entity._
 import medcharts.ui.{Frame, PathsDialog}
 

@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat
 
 import medcharts.Conf
 import medcharts.entity.{Entities, Vitals}
+import medcharts.renderer.Renderers._
 
 import org.jfree.chart.JFreeChart
 import org.jfree.chart.axis.{DateAxis, NumberAxis}
@@ -29,10 +30,10 @@ object VitalsChart extends Chart {
     xyPlot.setRenderer(3, PulseOxygenChart.buildOxygenRenderer())
 
     xyPlot.setDataset(4, buildSystolicDataset(vitals))
-    xyPlot.setRenderer(4, BloodPressureChart.buildSystolicRenderer())
+    xyPlot.setRenderer(4, buildSystolicRenderer())
 
     xyPlot.setDataset(5, buildDiastolicDataset(vitals))
-    xyPlot.setRenderer(5, BloodPressureChart.buildDiastolicRenderer())
+    xyPlot.setRenderer(5, buildDiastolicRenderer())
 
     val xAxis = new DateAxis(Conf.titleDayHourChartXAxis)
     xAxis.setDateFormatOverride( new SimpleDateFormat("d,H") )
