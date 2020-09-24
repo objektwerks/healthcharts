@@ -5,6 +5,7 @@ import java.{util => jdate}
 
 import medcharts.Conf
 import medcharts.entity._
+
 import org.jfree.chart.JFreeChart
 import org.jfree.chart.axis.{DateAxis, NumberAxis}
 import org.jfree.chart.labels.StandardXYToolTipGenerator
