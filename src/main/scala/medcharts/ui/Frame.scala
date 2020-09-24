@@ -18,8 +18,8 @@ class Frame extends JFrame {
   setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
   setLocationRelativeTo(null)
 
-  def addChartPanel(title: String, chart: ChartPanel): Unit = {
-    tabbedPane.addChart(title, chart)
+  def addChartPanel(title: String, chartPanel: ChartPanel): Unit = {
+    tabbedPane.addChart(title, chartPanel)
     revalidate()
   }
 }
