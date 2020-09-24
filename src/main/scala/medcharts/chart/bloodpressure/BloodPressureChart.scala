@@ -37,7 +37,7 @@ object BloodPressureChart extends Chart {
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
   }
 
-  private def buildSystolicDataset(bloodpressures: Entities[BloodPressure]): IntervalXYDataset = {
+  def buildSystolicDataset(bloodpressures: Entities[BloodPressure]): IntervalXYDataset = {
     val timeSeries = new TimeSeries(Conf.titleSystolic)
     bloodpressures.entities.foreach { pulseoxygen =>
       timeSeries.add( pulseoxygen.datetime, pulseoxygen.systolic.toDouble )
@@ -45,7 +45,7 @@ object BloodPressureChart extends Chart {
     new TimeSeriesCollection(timeSeries)
   }
 
-  private def buildDiastolicDataset(bloodpressures: Entities[BloodPressure]): IntervalXYDataset = {
+  def buildDiastolicDataset(bloodpressures: Entities[BloodPressure]): IntervalXYDataset = {
     val timeSeries = new TimeSeries(Conf.titleDiastolic)
     bloodpressures.entities.foreach { pulseoxygen =>
       timeSeries.add( pulseoxygen.datetime, pulseoxygen.diastolic.toDouble )
@@ -53,7 +53,7 @@ object BloodPressureChart extends Chart {
     new TimeSeriesCollection(timeSeries)
   }
 
-  private def buildSystolicRenderer(): XYItemRenderer = {
+  def buildSystolicRenderer(): XYItemRenderer = {
     val renderer = new XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String = {
@@ -70,7 +70,7 @@ object BloodPressureChart extends Chart {
     renderer
   }
 
-  private def buildDiastolicRenderer(): XYItemRenderer = {
+  def buildDiastolicRenderer(): XYItemRenderer = {
     val renderer = new XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String = {

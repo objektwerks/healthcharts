@@ -32,7 +32,7 @@ object TemperatureChart extends Chart {
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
   }
 
-  private def buildTemperatureDataset(temperatures: Entities[Temperature]): IntervalXYDataset = {
+  def buildTemperatureDataset(temperatures: Entities[Temperature]): IntervalXYDataset = {
     val timeSeries = new TimeSeries(Conf.titleTemperature)
     temperatures.entities.foreach { weight =>
       timeSeries.add( weight.datetime, weight.degrees )
@@ -40,7 +40,7 @@ object TemperatureChart extends Chart {
     new TimeSeriesCollection(timeSeries)
   }
 
-  private def buildTemperatureRenderer(): XYItemRenderer = {
+  def buildTemperatureRenderer(): XYItemRenderer = {
     val renderer = new XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String = {

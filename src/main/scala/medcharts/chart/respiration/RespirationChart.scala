@@ -32,7 +32,7 @@ object RespirationChart extends Chart {
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
   }
 
-  private def buildRespirationDataset(respirations: Entities[Respiration]): IntervalXYDataset = {
+  def buildRespirationDataset(respirations: Entities[Respiration]): IntervalXYDataset = {
     val timeSeries = new TimeSeries(Conf.titleRespiration)
     respirations.entities.foreach { respiration =>
       timeSeries.add( respiration.datetime, respiration.breathesPerMinute.toDouble )
@@ -40,7 +40,7 @@ object RespirationChart extends Chart {
     new TimeSeriesCollection(timeSeries)
   }
 
-  private def buildRespirationRenderer(): XYItemRenderer = {
+  def buildRespirationRenderer(): XYItemRenderer = {
     val renderer = new XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String = {

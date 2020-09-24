@@ -39,7 +39,7 @@ object GlucoseMedChart extends Chart {
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
   }
 
-  private def buildGlucoseDataset(glucoses: Entities[Glucose]): IntervalXYDataset = {
+  def buildGlucoseDataset(glucoses: Entities[Glucose]): IntervalXYDataset = {
     val timeSeries = new TimeSeries(Conf.titleGlucose)
     glucoses.entities.foreach { glucose =>
       timeSeries.add( glucose.datetime, glucose.level.toDouble )
@@ -47,7 +47,7 @@ object GlucoseMedChart extends Chart {
     new TimeSeriesCollection(timeSeries)
   }
 
-  private def buildMedDataset(meds: Entities[Med]): IntervalXYDataset = {
+  def buildMedDataset(meds: Entities[Med]): IntervalXYDataset = {
     val timeSeries = new TimeSeries(Conf.titleMed)
     meds.entities.foreach { med =>
       timeSeries.add( med.datetime, s"${med.dosage}.${med.medtype.id}".toDouble )
@@ -55,7 +55,7 @@ object GlucoseMedChart extends Chart {
     new TimeSeriesCollection(timeSeries)
   }
 
-  private def buildGlucoseRenderer(): XYItemRenderer = {
+  def buildGlucoseRenderer(): XYItemRenderer = {
     val renderer = new XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String = {
@@ -72,7 +72,7 @@ object GlucoseMedChart extends Chart {
     renderer
   }
 
-  private def buildMedRenderer(): XYItemRenderer = {
+  def buildMedRenderer(): XYItemRenderer = {
     val renderer = new XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String = {

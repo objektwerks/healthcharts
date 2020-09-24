@@ -37,7 +37,7 @@ object PulseOxygenChart extends Chart {
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
   }
 
-  private def buildPulseDataset(pulseoxygens: Entities[PulseOxygen]): IntervalXYDataset = {
+  def buildPulseDataset(pulseoxygens: Entities[PulseOxygen]): IntervalXYDataset = {
     val timeSeries = new TimeSeries(Conf.titlePulse)
     pulseoxygens.entities.foreach { pulseoxygen =>
       timeSeries.add( pulseoxygen.datetime, pulseoxygen.beatsPerMinute.toDouble )
@@ -45,7 +45,7 @@ object PulseOxygenChart extends Chart {
     new TimeSeriesCollection(timeSeries)
   }
 
-  private def buildOxygenDataset(pulseoxygens: Entities[PulseOxygen]): IntervalXYDataset = {
+  def buildOxygenDataset(pulseoxygens: Entities[PulseOxygen]): IntervalXYDataset = {
     val timeSeries = new TimeSeries(Conf.titleOxygen)
     pulseoxygens.entities.foreach { pulseoxygen =>
       timeSeries.add( pulseoxygen.datetime, pulseoxygen.bloodOxygenPercentage.toDouble )
@@ -53,7 +53,7 @@ object PulseOxygenChart extends Chart {
     new TimeSeriesCollection(timeSeries)
   }
 
-  private def buildPulseRenderer(): XYItemRenderer = {
+  def buildPulseRenderer(): XYItemRenderer = {
     val renderer = new XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String = {
@@ -70,7 +70,7 @@ object PulseOxygenChart extends Chart {
     renderer
   }
 
-  private def buildOxygenRenderer(): XYItemRenderer = {
+  def buildOxygenRenderer(): XYItemRenderer = {
     val renderer = new XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String = {
