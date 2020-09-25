@@ -36,19 +36,19 @@ object ChartPanelBuilder {
   }
 
   def buildEntitiesPanel[E: ClassTag](entities: Array[E]): JPanel = {
-    val panel = new JPanel( new BorderLayout() )
     val textArea = new JTextArea()
     textArea.setEditable(false)
-    for ( entity <- entities) textArea.append( s"${entity.toString}\n" )
+    for ( entity <- entities ) textArea.append( s"${entity.toString}\n" )
+    val panel = new JPanel( new BorderLayout() )
     panel.add(textArea, BorderLayout.CENTER )
     panel
   }
 
   def buildInvalidLinesPanel(invalidLines: Array[InvalidLine]): JPanel = {
-    val panel = new JPanel( new BorderLayout() )
     val textArea = new JTextArea()
     textArea.setEditable(false)
-    for ( line <- invalidLines) textArea.append( s"${line.toString}\n" )
+    for ( line <- invalidLines ) textArea.append( s"${line.toString}\n" )
+    val panel = new JPanel( new BorderLayout() )
     panel.add(textArea, BorderLayout.CENTER )
     panel
   }
