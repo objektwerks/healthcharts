@@ -4,9 +4,8 @@ import java.awt.Color
 import java.util.concurrent.atomic.AtomicInteger
 
 import javax.swing.{AbstractAction, BorderFactory}
-
+import medcharts.Logger
 import medcharts.entity._
-
 import org.jfree.chart.{ChartPanel, JFreeChart}
 
 import scala.reflect.ClassTag
@@ -19,7 +18,7 @@ abstract class ChartAction(name: String) extends AbstractAction(name) {
     Transformer.transform[E](path) match {
       case Success(entities) => entities
       case Failure(failure) =>
-        Logger.logIOFailure(failure, path)
+        Logger.logFileIOFailure(path, failure)
         Entities.empty
     }
 

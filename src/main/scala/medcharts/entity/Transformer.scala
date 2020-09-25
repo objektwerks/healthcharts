@@ -1,6 +1,6 @@
 package medcharts.entity
 
-import medcharts.entity.Logger._
+import medcharts.Logger._
 import medcharts.entity.Validator._
 
 import scala.collection.mutable

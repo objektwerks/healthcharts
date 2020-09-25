@@ -1,5 +1,6 @@
 package medcharts.entity
 
+import medcharts.Logger
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
@@ -64,7 +65,7 @@ class TransformerTest extends AnyFunSuite with Matchers {
         entities.entities.length shouldEqual entitiesCount
         entities.invalidLines.length shouldEqual invalidLinesCount
       case Failure(failure) =>
-        Logger.logIOFailure(failure, path)
+        Logger.logFileIOFailure(path, failure)
         fail
     }
     ()
