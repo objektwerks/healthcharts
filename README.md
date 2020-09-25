@@ -5,7 +5,7 @@ MedCharts
 
 Todo
 ----
-1. Integrate InvalidLine(s) into UI.
+1. Integrate InvalidLine(s) into UI. JPanel <>---> JSplitPane <>---> ChartPanel | EntitiesPanel
 
 Charts
 ------
