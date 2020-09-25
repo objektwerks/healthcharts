@@ -6,6 +6,8 @@ MedCharts
 Todo
 ----
 1. Build composite chart panel: JPanel <>---> JTabbedPane <>---> ChartPanel | EntitiesPanel | InvalidLinesPanel
+   * ChartAction -> buildCharPanel | buildEntitiesPanel | buildInvalidLinesPanel
+   * ChartAction -> buildCompositeChartPanel
 
 Charts
 ------
