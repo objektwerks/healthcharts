@@ -3,6 +3,7 @@ package medcharts.chart
 import java.text.{DecimalFormat, SimpleDateFormat}
 import java.{util => jdate}
 
+import medcharts.chart.PulseChart._
 import medcharts.Conf
 import medcharts.entity.{Entities, PulseOxygen}
 
@@ -20,7 +21,7 @@ object PulseOxygenChart extends Chart {
     xyPlot.setDatasetRenderingOrder(DatasetRenderingOrder.FORWARD)
 
     xyPlot.setDataset(0, buildPulseDataset(pulseoxygens))
-    xyPlot.setRenderer(0, PulseChart.buildPulseRenderer())
+    xyPlot.setRenderer(0, buildPulseRenderer())
 
     xyPlot.setDataset(1, buildOxygenDataset(pulseoxygens))
     xyPlot.setRenderer(1, buildOxygenRenderer())
