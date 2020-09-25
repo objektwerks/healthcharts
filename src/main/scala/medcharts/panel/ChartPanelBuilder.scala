@@ -2,7 +2,7 @@ package medcharts.panel
 
 import java.awt.{BorderLayout, Color}
 
-import javax.swing.{BorderFactory, JPanel, JTabbedPane, JTextArea, SwingConstants}
+import javax.swing.{BorderFactory, JPanel, JScrollPane, JTabbedPane, JTextArea, SwingConstants}
 import medcharts.entity.Entities
 import medcharts.entity.InvalidLine
 import org.jfree.chart.{ChartPanel, JFreeChart}
@@ -40,8 +40,9 @@ object ChartPanelBuilder {
     textArea.setBackground(Color.lightGray)
     textArea.setEditable(false)
     for ( entity <- entities ) textArea.append( s"${entity.toString}\n" )
+    val scrollPane = new JScrollPane(textArea)
     val panel = new JPanel( new BorderLayout() )
-    panel.add(textArea, BorderLayout.CENTER )
+    panel.add(scrollPane, BorderLayout.CENTER )
     panel
   }
 
@@ -50,8 +51,9 @@ object ChartPanelBuilder {
     textArea.setBackground(Color.lightGray)
     textArea.setEditable(false)
     for ( line <- invalidLines ) textArea.append( s"${line.toString}\n" )
+    val scrollPane = new JScrollPane(textArea)
     val panel = new JPanel( new BorderLayout() )
-    panel.add(textArea, BorderLayout.CENTER )
+    panel.add(scrollPane, BorderLayout.CENTER )
     panel
   }
 }
