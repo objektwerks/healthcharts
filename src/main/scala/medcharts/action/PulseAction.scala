@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent
 import medcharts.Conf
 import medcharts.chart.PulseChart
 import medcharts.entity._
+import medcharts.entity.Transformer._
 import medcharts.ui.{Frame, PathDialog}
 
 class PulseAction(name: String, frame: Frame) extends ChartAction(name) {

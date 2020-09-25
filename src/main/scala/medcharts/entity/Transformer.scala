@@ -1,5 +1,6 @@
 package medcharts.entity
 
+import medcharts.Logger
 import medcharts.Logger._
 import medcharts.entity.Validator._
 
@@ -30,5 +31,13 @@ object Transformer {
       val (entities, invalidLines) = (entitiesBuilder.result(), invalidLinesBuilder.result())
       logEntitiesAndInvalidLines(entities, invalidLines)
       new Entities[E](entities, invalidLines)
+    }
+
+  def transformEntities[E: ClassTag](path: String)(implicit validator: Validator[E]): Entities[E] =
+    Transformer.transform[E](path) match {
+      case Success(entities) => entities
+      case Failure(failure) =>
+        Logger.logFileIOFailure(path, failure)
+        Entities.empty
     }
 }
