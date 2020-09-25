@@ -2,11 +2,8 @@ package medcharts.ui
 
 import java.awt.BorderLayout
 
-import javax.swing.{JFrame, WindowConstants}
-
+import javax.swing.{JFrame, JPanel, WindowConstants}
 import medcharts.Conf
-
-import org.jfree.chart.ChartPanel
 
 class Frame extends JFrame {
   val tabbedPane = new TabbedPane()
@@ -18,8 +15,8 @@ class Frame extends JFrame {
   setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
   setLocationRelativeTo(null)
 
-  def addChartPanel(title: String, chartPanel: ChartPanel): Unit = {
-    tabbedPane.addChartPanel(title, chartPanel)
+  def addCompositeChartPanel(title: String, chartPanel: JPanel): Unit = {
+    tabbedPane.addCompositeChartPanel(title, chartPanel)
     revalidate()
   }
 }

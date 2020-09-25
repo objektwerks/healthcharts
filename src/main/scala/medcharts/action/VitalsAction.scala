@@ -6,6 +6,7 @@ import medcharts.Conf
 import medcharts.chart.VitalsChart
 import medcharts.entity._
 import medcharts.entity.Transformer._
+import medcharts.panel.ChartPanelBuilder
 import medcharts.ui.{Frame, PathDialog}
 
 class VitalsAction(name: String, frame: Frame) extends ChartAction(name) {
@@ -15,8 +16,8 @@ class VitalsAction(name: String, frame: Frame) extends ChartAction(name) {
       case Some( vitalsCsvPath ) =>
         val vitals = transformEntities[Vitals](vitalsCsvPath)
         val chart = VitalsChart.build(vitals)
-        val chartPanel = buildChartPanel(chart)
-        frame.addChartPanel(s"${Conf.titleVitals}-${counter.getAndIncrement}", chartPanel)
+        val chartPanel = ChartPanelBuilder.build(chart, vitals)
+        frame.addCompositeChartPanel(s"${Conf.titleVitals}-${counter.getAndIncrement}", chartPanel)
       case None =>
     }
   }

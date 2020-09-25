@@ -4,10 +4,8 @@ import java.awt.event.{MouseAdapter, MouseEvent}
 
 import javax.swing._
 
-import org.jfree.chart.ChartPanel
-
 class TabbedPane extends JTabbedPane {
-  def addChartPanel(title: String, chartPanel: ChartPanel): Unit = {
+  def addCompositeChartPanel(title: String, chartPanel: JPanel): Unit = {
     addTab(null, chartPanel)
     setTabComponentAt( getTabCount - 1, new CloseableTab(title, this, chartPanel) )
     setSelectedIndex( indexOfComponent(chartPanel) )

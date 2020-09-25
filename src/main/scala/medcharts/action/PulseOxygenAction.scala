@@ -6,6 +6,7 @@ import medcharts.Conf
 import medcharts.chart.PulseOxygenChart
 import medcharts.entity._
 import medcharts.entity.Transformer._
+import medcharts.panel.ChartPanelBuilder
 import medcharts.ui.{Frame, PathDialog}
 
 class PulseOxygenAction(name: String, frame: Frame) extends ChartAction(name) {
@@ -15,8 +16,8 @@ class PulseOxygenAction(name: String, frame: Frame) extends ChartAction(name) {
       case Some( pulseOxygenCsvPath ) =>
         val pulseoxygens = transformEntities[PulseOxygen](pulseOxygenCsvPath)
         val chart = PulseOxygenChart.build(pulseoxygens)
-        val chartPanel = buildChartPanel(chart)
-        frame.addChartPanel(s"${Conf.titlePulseOxygen}-${counter.getAndIncrement}", chartPanel)
+        val chartPanel = ChartPanelBuilder.build(chart, pulseoxygens)
+        frame.addCompositeChartPanel(s"${Conf.titlePulseOxygen}-${counter.getAndIncrement}", chartPanel)
       case None =>
     }
   }

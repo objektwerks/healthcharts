@@ -6,6 +6,7 @@ import medcharts.Conf
 import medcharts.chart.TemperatureChart
 import medcharts.entity._
 import medcharts.entity.Transformer._
+import medcharts.panel.ChartPanelBuilder
 import medcharts.ui.{Frame, PathDialog}
 
 class TemperatureAction(name: String, frame: Frame) extends ChartAction(name) {
@@ -15,8 +16,8 @@ class TemperatureAction(name: String, frame: Frame) extends ChartAction(name) {
       case Some( temperatureCsvPath ) =>
         val temperatures = transformEntities[Temperature](temperatureCsvPath)
         val chart = TemperatureChart.build(temperatures)
-        val chartPanel = buildChartPanel(chart)
-        frame.addChartPanel(s"${Conf.titleTemperature}-${counter.getAndIncrement}", chartPanel)
+        val chartPanel = ChartPanelBuilder.build(chart, temperatures)
+        frame.addCompositeChartPanel(s"${Conf.titleTemperature}-${counter.getAndIncrement}", chartPanel)
       case None =>
     }
   }

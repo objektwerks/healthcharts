@@ -6,6 +6,7 @@ import medcharts.Conf
 import medcharts.chart.PulseChart
 import medcharts.entity._
 import medcharts.entity.Transformer._
+import medcharts.panel.ChartPanelBuilder
 import medcharts.ui.{Frame, PathDialog}
 
 class PulseAction(name: String, frame: Frame) extends ChartAction(name) {
@@ -15,8 +16,8 @@ class PulseAction(name: String, frame: Frame) extends ChartAction(name) {
       case Some( pulseCsvPath ) =>
         val pulses = transformEntities[Pulse](pulseCsvPath)
         val chart = PulseChart.build(pulses)
-        val chartPanel = buildChartPanel(chart)
-        frame.addChartPanel(s"${Conf.titlePulse}-${counter.getAndIncrement}", chartPanel)
+        val chartPanel = ChartPanelBuilder.build(chart, pulses)
+        frame.addCompositeChartPanel(s"${Conf.titlePulse}-${counter.getAndIncrement}", chartPanel)
       case None =>
     }
   }

@@ -6,6 +6,7 @@ import medcharts.Conf
 import medcharts.chart.WeightChart
 import medcharts.entity._
 import medcharts.entity.Transformer._
+import medcharts.panel.ChartPanelBuilder
 import medcharts.ui.{Frame, PathDialog}
 
 class WeightAction(name: String, frame: Frame) extends ChartAction(name) {
@@ -15,8 +16,8 @@ class WeightAction(name: String, frame: Frame) extends ChartAction(name) {
       case Some( weightCsvPath ) =>
         val weights = transformEntities[Weight](weightCsvPath)
         val chart = WeightChart.build(weights)
-        val chartPanel = buildChartPanel(chart)
-        frame.addChartPanel(s"${Conf.titleWeight}-${counter.getAndIncrement}", chartPanel)
+        val chartPanel = ChartPanelBuilder.build(chart, weights)
+        frame.addCompositeChartPanel(s"${Conf.titleWeight}-${counter.getAndIncrement}", chartPanel)
       case None =>
     }
   }

@@ -6,6 +6,7 @@ import medcharts.Conf
 import medcharts.chart.BloodPressureChart
 import medcharts.entity._
 import medcharts.entity.Transformer._
+import medcharts.panel.ChartPanelBuilder
 import medcharts.ui.{Frame, PathDialog}
 
 class BloodPressureAction(name: String, frame: Frame) extends ChartAction(name) {
@@ -15,8 +16,8 @@ class BloodPressureAction(name: String, frame: Frame) extends ChartAction(name) 
       case Some( bloodPressureCsvPath ) =>
         val bloodpressures = transformEntities[BloodPressure](bloodPressureCsvPath)
         val chart = BloodPressureChart.build(bloodpressures)
-        val chartPanel = buildChartPanel(chart)
-        frame.addChartPanel(s"${Conf.titleBloodPressure}-${counter.getAndIncrement}", chartPanel)
+        val chartPanel = ChartPanelBuilder.build(chart, bloodpressures)
+        frame.addCompositeChartPanel(s"${Conf.titleBloodPressure}-${counter.getAndIncrement}", chartPanel)
       case None =>
     }
   }

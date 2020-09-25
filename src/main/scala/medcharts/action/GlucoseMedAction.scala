@@ -6,6 +6,7 @@ import medcharts.Conf
 import medcharts.chart.GlucoseMedChart
 import medcharts.entity._
 import medcharts.entity.Transformer._
+import medcharts.panel.ChartPanelBuilder
 import medcharts.ui.{Frame, PathsDialog}
 
 class GlucoseMedAction(name: String, frame: Frame) extends ChartAction(name) {
@@ -16,8 +17,8 @@ class GlucoseMedAction(name: String, frame: Frame) extends ChartAction(name) {
         val glucoses = transformEntities[Glucose](glucoseCsvPath)
         val meds = transformEntities[Med](medCsvPath)
         val chart = GlucoseMedChart.build(glucoses, meds)
-        val chartPanel = buildChartPanel(chart)
-        frame.addChartPanel(s"${Conf.titleGlucoseMed}-${counter.getAndIncrement}", chartPanel)
+        val chartPanel = ChartPanelBuilder.build(chart, glucoses) // TODO add meds!
+        frame.addCompositeChartPanel(s"${Conf.titleGlucoseMed}-${counter.getAndIncrement}", chartPanel)
       case None =>
     }
   }

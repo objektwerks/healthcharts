@@ -6,6 +6,7 @@ import medcharts.Conf
 import medcharts.chart.RespirationChart
 import medcharts.entity._
 import medcharts.entity.Transformer._
+import medcharts.panel.ChartPanelBuilder
 import medcharts.ui.{Frame, PathDialog}
 
 class RespirationAction(name: String, frame: Frame) extends ChartAction(name) {
@@ -15,8 +16,8 @@ class RespirationAction(name: String, frame: Frame) extends ChartAction(name) {
       case Some( respirationCsvPath ) =>
         val respirations = transformEntities[Respiration](respirationCsvPath)
         val chart = RespirationChart.build(respirations)
-        val chartPanel = buildChartPanel(chart)
-        frame.addChartPanel(s"${Conf.titleRespiration}-${counter.getAndIncrement}", chartPanel)
+        val chartPanel = ChartPanelBuilder.build(chart, respirations)
+        frame.addCompositeChartPanel(s"${Conf.titleRespiration}-${counter.getAndIncrement}", chartPanel)
       case None =>
     }
   }
