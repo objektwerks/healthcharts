@@ -51,4 +51,6 @@ final case class Vitals(number: Int,
 
 final case class Weight(number: Int, datetime: Minute, pounds: Double) extends Entity
 
-final case class InvalidLine(number: Int, line: String, error: Throwable) extends Product with Serializable
+final case class InvalidLine(number: Int, line: String, error: Throwable) extends Product with Serializable {
+  override def toString: String = s"$number, ${error.getMessage}, $line"
+}
