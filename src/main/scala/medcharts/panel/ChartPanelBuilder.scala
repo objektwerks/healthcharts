@@ -2,7 +2,7 @@ package medcharts.panel
 
 import java.awt.{BorderLayout, Color}
 
-import javax.swing.{BorderFactory, JPanel, JScrollPane, JTabbedPane, JTextArea, SwingConstants}
+import javax.swing.{BorderFactory, JPanel, JTabbedPane, JTextArea, SwingConstants}
 import medcharts.entity.Entities
 import medcharts.entity.InvalidLine
 import org.jfree.chart.{ChartPanel, JFreeChart}
@@ -37,23 +37,19 @@ object ChartPanelBuilder {
 
   def buildEntitiesPanel[E: ClassTag](entities: Array[E]): JPanel = {
     val panel = new JPanel( new BorderLayout() )
-    val textArea = new JTextArea("")
+    val textArea = new JTextArea()
     textArea.setEditable(false)
-    for ( entity <- entities) textArea.append( entity.toString)
-    val scrollPane = new JScrollPane(textArea)
-    scrollPane.add(textArea)
-    panel.add(scrollPane, BorderLayout.CENTER)
+    for ( entity <- entities) textArea.append( s"${entity.toString}\n" )
+    panel.add(textArea, BorderLayout.CENTER )
     panel
   }
 
   def buildInvalidLinesPanel(invalidLines: Array[InvalidLine]): JPanel = {
     val panel = new JPanel( new BorderLayout() )
-    val textArea = new JTextArea("")
+    val textArea = new JTextArea()
     textArea.setEditable(false)
-    for ( line <- invalidLines) textArea.append( line.toString)
-    val scrollPane = new JScrollPane(textArea)
-    scrollPane.add(textArea)
-    panel.add(scrollPane, BorderLayout.CENTER)
+    for ( line <- invalidLines) textArea.append( s"${line.toString}\n" )
+    panel.add(textArea, BorderLayout.CENTER )
     panel
   }
 }
