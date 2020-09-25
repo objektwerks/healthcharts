@@ -5,10 +5,7 @@ MedCharts
 
 Todo
 ----
-1. Build composite chart panel: JPanel <>---> JTabbedPane <>---> ChartPanel | EntitiesPanel | InvalidLinesPanel
-   * ChartAction -> buildChartPanel | buildEntitiesPanel | buildInvalidLinesPanel
-   * ChartAction -> buildCompositeChartPanel
-   * ChartAction -> compositeChartPanel -> Frame -> TabbedPane
+1. Merge Glucose and Med entities into GlucoseMed with a single csv source.
 
 Charts
 ------
