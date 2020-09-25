@@ -22,7 +22,7 @@ class GlucoseMedAction(name: String, frame: Frame) extends AbstractAction(name) 
         val glucoses = transformEntities[Glucose](glucoseCsvPath)
         val meds = transformEntities[Med](medCsvPath)
         val chart = GlucoseMedChart.build(glucoses, meds)
-        val chartPanel = ChartPanelBuilder.build(chart, glucoses) // TODO add meds!
+        val chartPanel = ChartPanelBuilder.build(chart, glucoses) // TODO: combine glucoses and meds!
         frame.addCompositeChartPanel(s"${Conf.titleGlucoseMed}-${counter.getAndIncrement}", chartPanel)
       case None =>
     }
