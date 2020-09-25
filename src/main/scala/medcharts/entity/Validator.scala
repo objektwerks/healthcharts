@@ -5,11 +5,11 @@ import medcharts.entity.Converter._
 import scala.util.Try
 
 trait Validator[E] {
-  def validate(columns: Array[String]): Try[E]
+  def validate(number: Int, columns: Array[String]): Try[E]
 }
 
 object Validator {
-  def validate[E](columns: Array[String])(implicit validator: Validator[E]): Try[E] = validator.validate(columns)
+  def validate[E](number: Int, columns: Array[String])(implicit validator: Validator[E]): Try[E] = validator.validate(number, columns)
 
   private def validateColumnCount(length: Int, count: Int): Unit =
     require(length == count, s"column count != $count")
@@ -43,30 +43,30 @@ object Validator {
     require(pounds > 0.00 && pounds <= 500.00, s"pounds not > 0.00 and <= 500.00")
 
   implicit object BloodPressureValidator extends Validator[BloodPressure] {
-    def validate(columns: Array[String]): Try[BloodPressure] =
+    def validate(number: Int, columns: Array[String]): Try[BloodPressure] =
       Try {
         validateColumnCount(columns.length, 3)
         val datetime = datetimeToMinute(columns(0))
         val systolic = columns(1).toInt
         val diastolic = columns(2).toInt
         validateBloodPressure(systolic, diastolic)
-        BloodPressure(datetime, systolic, diastolic)
+        BloodPressure(number, datetime, systolic, diastolic)
       }
   }
 
   implicit object GlucoseValidator extends Validator[Glucose] {
-    def validate(columns: Array[String]): Try[Glucose] =
+    def validate(number: Int, columns: Array[String]): Try[Glucose] =
       Try {
         validateColumnCount(columns.length, 2)
         val datetime = datetimeToMinute(columns(0))
         val level = columns(1).toInt
         validateGlucose(level)
-        Glucose(datetime, level)
+        Glucose(number, datetime, level)
       }
   }
 
   implicit object MedValidator extends Validator[Med] {
-    def validate(columns: Array[String]): Try[Med] =
+    def validate(number: Int, columns: Array[String]): Try[Med] =
       Try {
         validateColumnCount(columns.length, 3)
         val datetime = datetimeToMinute(columns(0))
@@ -74,57 +74,57 @@ object Validator {
         val medtype = MedType.idToMedType(medTypeId)
         val dosage = columns(2).toInt
         validateMed(dosage)
-        Med(datetime, medtype, dosage)
+        Med(number, datetime, medtype, dosage)
       }
   }
 
   implicit object PulseValidator extends Validator[Pulse] {
-    def validate(columns: Array[String]): Try[Pulse] =
+    def validate(number: Int, columns: Array[String]): Try[Pulse] =
       Try {
         validateColumnCount(columns.length, 2)
         val datetime = datetimeToMinute(columns(0))
         val beatsPerMinute = columns(1).toInt
         validatePulse(beatsPerMinute)
-        Pulse(datetime, beatsPerMinute)
+        Pulse(number, datetime, beatsPerMinute)
       }
   }
 
   implicit object PulseOxygenValidator extends Validator[PulseOxygen] {
-    def validate(columns: Array[String]): Try[PulseOxygen] =
+    def validate(number: Int, columns: Array[String]): Try[PulseOxygen] =
       Try {
         validateColumnCount(columns.length, 3)
         val datetime = datetimeToMinute(columns(0))
         val beatsPerMinute = columns(1).toInt
         val bloodOxygenPercentage = columns(2).toInt
         validatePulseOxygen(beatsPerMinute, bloodOxygenPercentage)
-        PulseOxygen(datetime, beatsPerMinute, bloodOxygenPercentage)
+        PulseOxygen(number, datetime, beatsPerMinute, bloodOxygenPercentage)
       }
   }
 
   implicit object RespirationValidator extends Validator[Respiration] {
-    def validate(columns: Array[String]): Try[Respiration] =
+    def validate(number: Int, columns: Array[String]): Try[Respiration] =
       Try {
         validateColumnCount(columns.length, 2)
         val datetime = datetimeToMinute(columns(0))
         val breathesPerMinute = columns(1).toInt
         validateRespiration(breathesPerMinute)
-        Respiration(datetime, breathesPerMinute)
+        Respiration(number, datetime, breathesPerMinute)
       }
   }
 
   implicit object TemperatureValidator extends Validator[Temperature] {
-    def validate(columns: Array[String]): Try[Temperature] =
+    def validate(number: Int, columns: Array[String]): Try[Temperature] =
       Try {
         validateColumnCount(columns.length, 2)
         val datetime = datetimeToMinute(columns(0))
         val degrees = columns(1).toDouble
         validateTemperature(degrees)
-        Temperature(datetime, degrees)
+        Temperature(number, datetime, degrees)
       }
   }
 
   implicit object VitalsValidator extends Validator[Vitals] {
-    def validate(columns: Array[String]): Try[Vitals] =
+    def validate(number: Int, columns: Array[String]): Try[Vitals] =
       Try {
         validateColumnCount(columns.length, 7)
         val datetime = datetimeToMinute(columns(0))
@@ -139,18 +139,18 @@ object Validator {
         validatePulse(pulse)
         validatePulseOxygen(pulse, oxygen)
         validateBloodPressure(systolic, diastolic)
-        Vitals(datetime, temperature, respiration, pulse, oxygen, systolic, diastolic)
+        Vitals(number, datetime, temperature, respiration, pulse, oxygen, systolic, diastolic)
       }
   }
 
   implicit object WeightValidator extends Validator[Weight] {
-    def validate(columns: Array[String]): Try[Weight] =
+    def validate(number: Int, columns: Array[String]): Try[Weight] =
       Try {
         validateColumnCount(columns.length, 2)
         val datetime = datetimeToMinute(columns(0))
         val pounds = columns(1).toDouble
         validateWeight(pounds)
-        Weight(datetime, pounds)
+        Weight(number, datetime, pounds)
       }
   }  
 }

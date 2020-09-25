@@ -20,7 +20,7 @@ object Transformer {
       var number = 1
       for (line <- source.getLines) {
         val columns = line.split(delimiter).map(_.trim)
-        validate[E](columns) match {
+        validate[E](number, columns) match {
           case Success(entity) => entitiesBuilder += entity
           case Failure(error) => invalidLinesBuilder += InvalidLine(number, line, error)
         }
