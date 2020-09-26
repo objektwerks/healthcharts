@@ -3,6 +3,7 @@ package medcharts.panel
 import java.awt.{BorderLayout, Color}
 
 import javax.swing.{BorderFactory, JPanel, JScrollPane, JTabbedPane, JTextArea, SwingConstants}
+import medcharts.Conf
 import medcharts.entity.Entities
 import medcharts.entity.InvalidLine
 import org.jfree.chart.{ChartPanel, JFreeChart}
@@ -19,9 +20,9 @@ object ChartPanelBuilder {
   def buildTabbedPane[E: ClassTag](chart: JFreeChart, entities: Entities[E]): JTabbedPane = {
     val tabbedPane = new JTabbedPane()
     tabbedPane.setTabPlacement( SwingConstants.BOTTOM )
-    tabbedPane.addTab( "Chart", buildChartPanel(chart) )
-    tabbedPane.addTab( "Entities", buildEntitiesPanel(entities.entities) )
-    tabbedPane.addTab( "InvalidLines", buildInvalidLinesPanel(entities.invalidLines) )
+    tabbedPane.addTab( Conf.tabChart, buildChartPanel(chart) )
+    tabbedPane.addTab( Conf.tabEntities, buildEntitiesPanel(entities.entities) )
+    tabbedPane.addTab( Conf.tabInvalidLines, buildInvalidLinesPanel(entities.invalidLines) )
     tabbedPane
   }
 

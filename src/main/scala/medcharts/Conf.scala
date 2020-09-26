@@ -27,6 +27,10 @@ object Conf {
   val labelTemperatureCsv = conf.getString("label.temperatureCsv")
   val labelWeightCsv = conf.getString("label.weightCsv")
 
+  val tabChart = conf.getString("tab.chart")
+  val tabEntities = conf.getString("tab.entities")
+  val tabInvalidLines = conf.getString("tab.invalidlines")
+
   val titleFileChooser = conf.getString("title.fileChooser")
   val titleMenuBar = conf.getString("title.menuBar")
   val titlePathDialog = conf.getString("title.pathDialog")
