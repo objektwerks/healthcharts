@@ -5,7 +5,7 @@ MedCharts
 
 Todo
 ----
-1. Merge Glucose and Med entities into GlucoseMed with a single csv source.
+1. Sort out Glucose, Med and GlucoseMed validators, charts, actions, menu items and docs.
 
 Charts
 ------
