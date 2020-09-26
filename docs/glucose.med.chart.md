@@ -6,7 +6,7 @@ Chart
 3. Glucose Tooltip ( Glucose: ( dayHourMinute, level, delta ) )
 4. Meds Tooltip ( Meds: ( dayHourMinute, dosage, med, delta ) )
 5. Legend : Glucose (Red), Meds (Blue)
-6. Title : Glucose-Meds : (y.m.d - y.m.d)
+6. Title : Glucose-Med : (y.m.d - y.m.d)
 
 Model
 -----
