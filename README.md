@@ -10,7 +10,7 @@ Todo
 Charts
 ------
 - [x] [Blood Pressure](./docs/blood.pressure.chart.md)
-- [x] [Glucose Meds](./docs/glucose.meds.chart.md)
+- [x] [Glucose Med](docs/glucose.med.chart.md)
 - [x] [Pulse](./docs/pulse.chart.md)
 - [x] [Pulse Oxygen](./docs/pulse.oxygen.chart.md)
 - [x] [Respiration](./docs/respiration.chart.md)
