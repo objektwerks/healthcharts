@@ -9,7 +9,7 @@ import org.jfree.chart.JFreeChart
 import org.jfree.chart.axis.{DateAxis, NumberAxis}
 import org.jfree.chart.plot.{DatasetRenderingOrder, XYPlot}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
-import org.jfree.data.xy.IntervalXYDataset
+import org.jfree.data.xy.XYDataset
 
 object GlucoseMedChart extends Chart {
   def build(glucosemeds: Entities[GlucoseMed]): JFreeChart = {
@@ -33,7 +33,7 @@ object GlucoseMedChart extends Chart {
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
   }
 
-  def buildGlucoseDataset(glucosemeds: Entities[GlucoseMed]): IntervalXYDataset = {
+  def buildGlucoseDataset(glucosemeds: Entities[GlucoseMed]): XYDataset = {
     val timeSeries = new TimeSeries(Conf.titleGlucose)
     glucosemeds.entities.foreach { glucosemed =>
       timeSeries.add( glucosemed.datetime, glucosemed.level.toDouble )
@@ -41,7 +41,7 @@ object GlucoseMedChart extends Chart {
     new TimeSeriesCollection(timeSeries)
   }
 
-  def buildMedDataset(glucosemeds: Entities[GlucoseMed]): IntervalXYDataset = {
+  def buildMedDataset(glucosemeds: Entities[GlucoseMed]): XYDataset = {
     val timeSeries = new TimeSeries(Conf.titleMed)
     glucosemeds.entities.foreach { glucosemed =>
       timeSeries.add( glucosemed.datetime, s"${glucosemed.dosage}.${glucosemed.medtype.id}".toDouble )

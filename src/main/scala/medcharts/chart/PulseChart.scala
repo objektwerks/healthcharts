@@ -12,7 +12,7 @@ import org.jfree.chart.labels.StandardXYToolTipGenerator
 import org.jfree.chart.plot.XYPlot
 import org.jfree.chart.renderer.xy.{XYItemRenderer, XYLineAndShapeRenderer}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
-import org.jfree.data.xy.{IntervalXYDataset, XYDataset}
+import org.jfree.data.xy.XYDataset
 
 object PulseChart extends Chart {
   def build(pulses: Entities[Pulse]): JFreeChart = {
@@ -31,7 +31,7 @@ object PulseChart extends Chart {
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
   }
 
-  def buildPulseDataset(pulses: Entities[Pulse]): IntervalXYDataset = {
+  def buildPulseDataset(pulses: Entities[Pulse]): XYDataset = {
     val timeSeries = new TimeSeries(Conf.titlePulse)
     pulses.entities.foreach { pulse =>
       timeSeries.add( pulse.datetime, pulse.beatsPerMinute.toDouble )

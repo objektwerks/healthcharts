@@ -14,7 +14,7 @@ import org.jfree.chart.JFreeChart
 import org.jfree.chart.axis.{DateAxis, NumberAxis}
 import org.jfree.chart.plot.{DatasetRenderingOrder, XYPlot}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
-import org.jfree.data.xy.IntervalXYDataset
+import org.jfree.data.xy.XYDataset
 
 object VitalsChart extends Chart {
   def build(vitals: Entities[Vitals]): JFreeChart = {
@@ -50,7 +50,7 @@ object VitalsChart extends Chart {
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
   }
 
-  def buildTemperatureDataset(vitals: Entities[Vitals]): IntervalXYDataset = {
+  def buildTemperatureDataset(vitals: Entities[Vitals]): XYDataset = {
     val timeSeries = new TimeSeries(Conf.titleTemperature)
     vitals.entities.foreach { vital =>
       timeSeries.add( vital.datetime, vital.temperature )
@@ -58,7 +58,7 @@ object VitalsChart extends Chart {
     new TimeSeriesCollection(timeSeries)
   }
 
-  def buildRespirationDataset(vitals: Entities[Vitals]): IntervalXYDataset = {
+  def buildRespirationDataset(vitals: Entities[Vitals]): XYDataset = {
     val timeSeries = new TimeSeries(Conf.titleRespiration)
     vitals.entities.foreach { vital =>
       timeSeries.add( vital.datetime, vital.respiration.toDouble )
@@ -66,7 +66,7 @@ object VitalsChart extends Chart {
     new TimeSeriesCollection(timeSeries)
   }
 
-  def buildPulseDataset(vitals: Entities[Vitals]): IntervalXYDataset = {
+  def buildPulseDataset(vitals: Entities[Vitals]): XYDataset = {
     val timeSeries = new TimeSeries(Conf.titlePulse)
     vitals.entities.foreach { vital =>
       timeSeries.add( vital.datetime, vital.pulse.toDouble )
@@ -74,7 +74,7 @@ object VitalsChart extends Chart {
     new TimeSeriesCollection(timeSeries)
   }
 
-  def buildOxygenDataset(vitals: Entities[Vitals]): IntervalXYDataset = {
+  def buildOxygenDataset(vitals: Entities[Vitals]): XYDataset = {
     val timeSeries = new TimeSeries(Conf.titleOxygen)
     vitals.entities.foreach { vital =>
       timeSeries.add( vital.datetime, vital.oxygen.toDouble )
@@ -82,7 +82,7 @@ object VitalsChart extends Chart {
     new TimeSeriesCollection(timeSeries)
   }
 
-  def buildSystolicDataset(vitals: Entities[Vitals]): IntervalXYDataset = {
+  def buildSystolicDataset(vitals: Entities[Vitals]): XYDataset = {
     val timeSeries = new TimeSeries(Conf.titleSystolic)
     vitals.entities.foreach { vital =>
       timeSeries.add( vital.datetime, vital.systolic.toDouble )
@@ -90,7 +90,7 @@ object VitalsChart extends Chart {
     new TimeSeriesCollection(timeSeries)
   }
 
-  def buildDiastolicDataset(vitals: Entities[Vitals]): IntervalXYDataset = {
+  def buildDiastolicDataset(vitals: Entities[Vitals]): XYDataset = {
     val timeSeries = new TimeSeries(Conf.titleDiastolic)
     vitals.entities.foreach { vital =>
       timeSeries.add( vital.datetime, vital.diastolic.toDouble )

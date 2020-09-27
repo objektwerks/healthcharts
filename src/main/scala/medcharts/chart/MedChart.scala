@@ -12,7 +12,7 @@ import org.jfree.chart.labels.StandardXYToolTipGenerator
 import org.jfree.chart.plot.XYPlot
 import org.jfree.chart.renderer.xy.{XYItemRenderer, XYLineAndShapeRenderer}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
-import org.jfree.data.xy.{IntervalXYDataset, XYDataset}
+import org.jfree.data.xy.XYDataset
 
 import scala.util.Try
 
@@ -34,7 +34,7 @@ object MedChart extends Chart {
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
   }
 
-  def buildMedDataset(meds: Entities[Med]): IntervalXYDataset = {
+  def buildMedDataset(meds: Entities[Med]): XYDataset = {
     val timeSeries = new TimeSeries(Conf.titleMed)
     meds.entities.foreach { med =>
       timeSeries.add( med.datetime, s"${med.dosage}.${med.medtype.id}".toDouble )

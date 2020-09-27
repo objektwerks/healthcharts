@@ -12,7 +12,7 @@ import org.jfree.chart.labels.StandardXYToolTipGenerator
 import org.jfree.chart.plot.XYPlot
 import org.jfree.chart.renderer.xy.{XYItemRenderer, XYLineAndShapeRenderer}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
-import org.jfree.data.xy.{IntervalXYDataset, XYDataset}
+import org.jfree.data.xy.XYDataset
 
 object RespirationChart extends Chart {
   def build(respirations: Entities[Respiration]): JFreeChart = {
@@ -31,7 +31,7 @@ object RespirationChart extends Chart {
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
   }
 
-  def buildRespirationDataset(respirations: Entities[Respiration]): IntervalXYDataset = {
+  def buildRespirationDataset(respirations: Entities[Respiration]): XYDataset = {
     val timeSeries = new TimeSeries(Conf.titleRespiration)
     respirations.entities.foreach { respiration =>
       timeSeries.add( respiration.datetime, respiration.breathesPerMinute.toDouble )

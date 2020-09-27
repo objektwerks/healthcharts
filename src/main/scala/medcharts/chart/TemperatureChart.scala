@@ -12,7 +12,7 @@ import org.jfree.chart.labels.StandardXYToolTipGenerator
 import org.jfree.chart.plot.XYPlot
 import org.jfree.chart.renderer.xy.{XYItemRenderer, XYLineAndShapeRenderer}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
-import org.jfree.data.xy.{IntervalXYDataset, XYDataset}
+import org.jfree.data.xy.XYDataset
 
 object TemperatureChart extends Chart {
   def build(temperatures: Entities[Temperature]): JFreeChart = {
@@ -31,7 +31,7 @@ object TemperatureChart extends Chart {
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
   }
 
-  def buildTemperatureDataset(temperatures: Entities[Temperature]): IntervalXYDataset = {
+  def buildTemperatureDataset(temperatures: Entities[Temperature]): XYDataset = {
     val timeSeries = new TimeSeries(Conf.titleTemperature)
     temperatures.entities.foreach { weight =>
       timeSeries.add( weight.datetime, weight.degrees )

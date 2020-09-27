@@ -13,7 +13,7 @@ import org.jfree.chart.labels.StandardXYToolTipGenerator
 import org.jfree.chart.plot.{DatasetRenderingOrder, XYPlot}
 import org.jfree.chart.renderer.xy.{XYItemRenderer, XYLineAndShapeRenderer}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
-import org.jfree.data.xy.{IntervalXYDataset, XYDataset}
+import org.jfree.data.xy.XYDataset
 
 object PulseOxygenChart extends Chart {
   def build(pulseoxygens: Entities[PulseOxygen]): JFreeChart = {
@@ -37,7 +37,7 @@ object PulseOxygenChart extends Chart {
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
   }
 
-  def buildPulseDataset(pulseoxygens: Entities[PulseOxygen]): IntervalXYDataset = {
+  def buildPulseDataset(pulseoxygens: Entities[PulseOxygen]): XYDataset = {
     val timeSeries = new TimeSeries(Conf.titlePulse)
     pulseoxygens.entities.foreach { pulseoxygen =>
       timeSeries.add( pulseoxygen.datetime, pulseoxygen.beatsPerMinute.toDouble )
@@ -45,7 +45,7 @@ object PulseOxygenChart extends Chart {
     new TimeSeriesCollection(timeSeries)
   }
 
-  def buildOxygenDataset(pulseoxygens: Entities[PulseOxygen]): IntervalXYDataset = {
+  def buildOxygenDataset(pulseoxygens: Entities[PulseOxygen]): XYDataset = {
     val timeSeries = new TimeSeries(Conf.titleOxygen)
     pulseoxygens.entities.foreach { pulseoxygen =>
       timeSeries.add( pulseoxygen.datetime, pulseoxygen.bloodOxygenPercentage.toDouble )

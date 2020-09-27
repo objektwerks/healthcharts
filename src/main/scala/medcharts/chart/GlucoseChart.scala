@@ -12,7 +12,7 @@ import org.jfree.chart.labels.StandardXYToolTipGenerator
 import org.jfree.chart.plot.XYPlot
 import org.jfree.chart.renderer.xy.{XYItemRenderer, XYLineAndShapeRenderer}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
-import org.jfree.data.xy.{IntervalXYDataset, XYDataset}
+import org.jfree.data.xy.XYDataset
 
 object GlucoseChart extends Chart {
   def build(glucoses: Entities[Glucose]): JFreeChart = {
@@ -32,7 +32,7 @@ object GlucoseChart extends Chart {
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
   }
 
-  def buildGlucoseDataset(glucoses: Entities[Glucose]): IntervalXYDataset = {
+  def buildGlucoseDataset(glucoses: Entities[Glucose]): XYDataset = {
     val timeSeries = new TimeSeries(Conf.titleGlucose)
     glucoses.entities.foreach { glucose =>
       timeSeries.add( glucose.datetime, glucose.level.toDouble )

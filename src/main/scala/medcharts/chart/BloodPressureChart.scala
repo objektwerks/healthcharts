@@ -12,7 +12,7 @@ import org.jfree.chart.labels.StandardXYToolTipGenerator
 import org.jfree.chart.plot.{DatasetRenderingOrder, XYPlot}
 import org.jfree.chart.renderer.xy.{XYItemRenderer, XYLineAndShapeRenderer}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
-import org.jfree.data.xy.{IntervalXYDataset, XYDataset}
+import org.jfree.data.xy.XYDataset
 
 object BloodPressureChart extends Chart {
   def build(bloodpressures: Entities[BloodPressure]): JFreeChart = {
@@ -36,7 +36,7 @@ object BloodPressureChart extends Chart {
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
   }
 
-  def buildSystolicDataset(bloodpressures: Entities[BloodPressure]): IntervalXYDataset = {
+  def buildSystolicDataset(bloodpressures: Entities[BloodPressure]): XYDataset = {
     val timeSeries = new TimeSeries(Conf.titleSystolic)
     bloodpressures.entities.foreach { pulseoxygen =>
       timeSeries.add( pulseoxygen.datetime, pulseoxygen.systolic.toDouble )
@@ -44,7 +44,7 @@ object BloodPressureChart extends Chart {
     new TimeSeriesCollection(timeSeries)
   }
 
-  def buildDiastolicDataset(bloodpressures: Entities[BloodPressure]): IntervalXYDataset = {
+  def buildDiastolicDataset(bloodpressures: Entities[BloodPressure]): XYDataset = {
     val timeSeries = new TimeSeries(Conf.titleDiastolic)
     bloodpressures.entities.foreach { pulseoxygen =>
       timeSeries.add( pulseoxygen.datetime, pulseoxygen.diastolic.toDouble )
