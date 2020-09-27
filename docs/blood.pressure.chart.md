@@ -1,10 +1,9 @@
 Chart
 -----
->Composed of 2 Line charts, with:
 1. X-Axis : Day,Hour ( d,H )
 2. Y-Axis : Blood Pressure ( systolic )
 3. Tooltip ( systolic / diastolic, deltaSystolic / deltaDiastolic )
-4. Legend : Blood Pressure (Red)
+4. Legend : Blood Pressure
 5. Title : Blood Pressure : (y.m.d - y.m.d)
 
 Model

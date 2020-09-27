@@ -1,10 +1,9 @@
 Chart
 -----
->Composed of 2 Line charts, with:
 1. X-Axis : Day,Hour ( d,H )
 2. Y-Axis : Respiration ( breathesPerMinute )
 3. Tooltip ( breathesPerMinute, delta )
-4. Legend : Respiration (Red)
+4. Legend : Respiration
 5. Title : Respiration : (y.m.d - y.m.d)
 
 Model

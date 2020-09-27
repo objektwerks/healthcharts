@@ -1,6 +1,5 @@
 Chart
 -----
->Composed of 6 Line charts, with:
 1. X-Axis : Day,Hour ( d,H )
 2. Y-Axis : Vitals ( temperature, respiration, pulse, oxygen, systolic, diastolic )
 3. Tooltip ( vital, delta )
@@ -20,8 +19,8 @@ Constraints
 5. >= 120 <= 200
 6. >= 80 <= 120
 
-Temperature
------------
+Vitals
+------
 ```scala
 final case class Vitals(datetime: Minute,
                         temperature: Double,
@@ -32,9 +31,9 @@ final case class Vitals(datetime: Minute,
                         diastolic: Int)
 ```
 
-Temperature CSV
----------------
->See data/temperature/temperature.txt
+Vitals CSV
+----------
+>See data/vitals/vitals.txt
 1. datetime - yyyy-MM-ddThh:mm:ss ( 2020-07-04T10:04:00 )
 2. temperature - nnn.nn
 3. respiration - nn
