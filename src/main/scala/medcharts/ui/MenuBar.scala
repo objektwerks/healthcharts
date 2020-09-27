@@ -17,6 +17,7 @@ class MenuBar(frame: Frame) extends JMenuBar() {
   menu.add( new JMenuItem( new WeightAction(Conf.titleWeight, frame) ) )
   menu.add( new JSeparator() )
   menu.add( new JMenuItem( new GlucoseAction(Conf.titleGlucose, frame) ) )
+  menu.add( new JMenuItem( new MedAction(Conf.titleMed, frame) ) )
   menu.add( new JMenuItem( new GlucoseMedAction(Conf.titleGlucoseMed, frame) ) )
   add(menu)
 }

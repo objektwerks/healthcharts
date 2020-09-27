@@ -17,7 +17,7 @@ import org.jfree.data.xy.{IntervalXYDataset, XYDataset}
 import scala.util.Try
 
 object MedChart extends Chart {
-  def build(glucoses: Entities[Glucose], meds: Entities[Med]): JFreeChart = {
+  def build(meds: Entities[Med]): JFreeChart = {
     val xyPlot = new XYPlot()
 
     xyPlot.setDataset(1, buildMedDataset(meds))
@@ -30,7 +30,7 @@ object MedChart extends Chart {
     val yAxis = new NumberAxis(Conf.titleGlucoseMedChartYAxis)
     xyPlot.setRangeAxis(yAxis)
 
-    val title = buildTitle(Conf.titleMed, glucoses.toEntity)
+    val title = buildTitle(Conf.titleMed, meds.toEntity)
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
   }
 
