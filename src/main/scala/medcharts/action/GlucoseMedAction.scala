@@ -10,19 +10,18 @@ import medcharts.chart.GlucoseMedChart
 import medcharts.entity._
 import medcharts.entity.Transformer._
 import medcharts.panel.ChartPanelBuilder
-import medcharts.ui.{Frame, PathsDialog}
+import medcharts.ui.{Frame, PathDialog}
 
 class GlucoseMedAction(name: String, frame: Frame) extends AbstractAction(name) {
   protected val counter = new AtomicInteger(1)
 
   def actionPerformed(event: ActionEvent): Unit = {
-    val paths = new PathsDialog(frame, Conf.labelGlucoseCsv, Conf.labelMedCsv).view
-    paths match {
-      case Some( (glucoseCsvPath, medCsvPath) ) =>
-        val glucoses = transformEntities[Glucose](glucoseCsvPath)
-        val meds = transformEntities[Med](medCsvPath)
-        val chart = GlucoseMedChart.build(glucoses, meds)
-        val chartPanel = ChartPanelBuilder.build(chart, glucoses) // TODO: combine glucoses and meds!
+    val path = new PathDialog(frame, Conf.labelGlucoseMedCsv).view
+    path match {
+      case Some( glucosemedCsvPath ) =>
+        val glucosemeds = transformEntities[GlucoseMed](glucosemedCsvPath)
+        val chart = GlucoseMedChart.build(glucosemeds)
+        val chartPanel = ChartPanelBuilder.build(chart, glucosemeds)
         frame.addCompositeChartPanel(s"${Conf.titleGlucoseMed}-${counter.getAndIncrement}", chartPanel)
       case None =>
     }

@@ -20,6 +20,7 @@ object Conf {
   val labelBloodPressureCsv = conf.getString("label.bloodPressureCsv")
   val labelGlucoseCsv = conf.getString("label.glucoseCsv")
   val labelMedCsv = conf.getString("label.medCsv")
+  val labelGlucoseMedCsv = conf.getString("lable.glucoseMedCsv")
   val labelPulseCsv = conf.getString("label.pulseCsv")
   val labelPulseOxygenCsv = conf.getString("label.pulseOxygenCsv")
   val labelRespirationCsv = conf.getString("label.respirationCsv")
