@@ -5,14 +5,13 @@ import java.{util => jdate}
 
 import medcharts.Conf
 import medcharts.entity._
-
 import org.jfree.chart.JFreeChart
 import org.jfree.chart.axis.{DateAxis, NumberAxis}
-import org.jfree.chart.labels.StandardXYToolTipGenerator
+import org.jfree.chart.labels.{StandardXYItemLabelGenerator, StandardXYToolTipGenerator}
 import org.jfree.chart.plot.XYPlot
 import org.jfree.chart.renderer.xy.{XYItemRenderer, XYLineAndShapeRenderer}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
-import org.jfree.data.xy.{IntervalXYDataset, XYDataset}
+import org.jfree.data.xy.XYDataset
 
 object WeightChart extends Chart {
   def build(weights: Entities[Weight]): JFreeChart = {
@@ -31,7 +30,7 @@ object WeightChart extends Chart {
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
   }
 
-  private def buildWeightDataset(weights: Entities[Weight]): IntervalXYDataset = {
+  private def buildWeightDataset(weights: Entities[Weight]): XYDataset = {
     val timeSeries = new TimeSeries(Conf.titleWeight)
     weights.entities.foreach { weight =>
       timeSeries.add( weight.datetime, weight.pounds )
@@ -51,7 +50,15 @@ object WeightChart extends Chart {
         s"($dayHourMinute, $pounds, $delta%)"
       }
     }
+    val itemLabelGenerator = new StandardXYItemLabelGenerator() {
+      override def generateLabel(dataset: XYDataset, series: Int, item: Int): String = {
+        val yValue = dataset.getYValue(series, item)
+        new DecimalFormat("0").format( yValue )
+      }
+    }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
+    renderer.setDefaultItemLabelGenerator(itemLabelGenerator)
+    renderer.setDefaultItemLabelsVisible(true)
     renderer.setDefaultShapesVisible(true)
     renderer
   }
