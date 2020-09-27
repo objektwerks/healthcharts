@@ -3,16 +3,12 @@ MedCharts
 >Medcharts is an open source project governed by the GPL.V3 license. The project objective is
 >to build useful medical charts initially sourced by simple csv files.
 
-Todo
-----
-1. Sort out Glucose, Med and GlucoseMed charts, actions, menu items and docs.
-
 Charts
 ------
 - [x] [Blood Pressure](./docs/blood.pressure.chart.md)
-- [ ] [Glucose](docs/glucose.chart.md)
-- [ ] [Glucose Med](docs/glucose.med.chart.md)
-- [ ] [Med](docs/med.chart.md)
+- [x] [Glucose](docs/glucose.chart.md)
+- [x] [Glucose Med](docs/glucose.med.chart.md)
+- [x] [Med](docs/med.chart.md)
 - [x] [Pulse](./docs/pulse.chart.md)
 - [x] [Pulse Oxygen](./docs/pulse.oxygen.chart.md)
 - [x] [Respiration](./docs/respiration.chart.md)
