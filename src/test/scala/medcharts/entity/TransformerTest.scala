@@ -23,6 +23,11 @@ class TransformerTest extends AnyFunSuite with Matchers {
     testTransformer[Med]("./data/med/med-invalid.txt", 16, 2)
   }
 
+  test("glucose med") {
+    testTransformer[GlucoseMed]("./data/glucosemed/glucosemed.txt", 18, 0)
+    testTransformer[GlucoseMed]("./data/glucosemed/glucosemed-invalid.txt", 16, 2)
+  }
+
   test("pulse") {
     testTransformer[Pulse]("./data/pulse/pulse.txt", 7, 0)
     testTransformer[Pulse]("./data/pulse/pulse-invalid.txt", 5, 2)
