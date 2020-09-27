@@ -38,6 +38,10 @@ final case class Med(number: Int, datetime: Minute, medtype: MedType.Value, dosa
   override def toString: String = s"$number, $datetime, $medtype, $dosage"
 }
 
+final case class GlucoseMed(number: Int, datetime: Minute, level: Int, medtype: MedType.Value, dosage: Int) extends Entity {
+  override def toString: String = s"$number, $datetime, $level, $medtype, $dosage"
+}
+
 final case class Pulse(number: Int, datetime: Minute, beatsPerMinute: Int) extends Entity {
   override def toString: String = s"$number, $datetime, $beatsPerMinute"
 }
