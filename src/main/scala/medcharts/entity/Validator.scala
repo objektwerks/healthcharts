@@ -25,6 +25,11 @@ object Validator {
   private def validateMed(dosage: Int): Unit =
     require(dosage >= 1 && dosage <= 100, "dosage not >= 1 and <= 100")
 
+  private def validateGlucoseMed(level: Int, dosage:Int): Unit = {
+    validateGlucose(level)
+    validateMed(dosage)
+  }
+
   private def validatePulse(beatsPerMinute: Int): Unit =
     require(beatsPerMinute >= 40 && beatsPerMinute <= 200, s"beats per minute not >= 40 and <= 200")
 
@@ -75,6 +80,20 @@ object Validator {
         val dosage = columns(2).toInt
         validateMed(dosage)
         Med(number, datetime, medtype, dosage)
+      }
+  }
+
+  implicit object GlucoseMedValidator extends Validator[GlucoseMed] {
+    def validate(number: Int, columns: Array[String]): Try[GlucoseMed] =
+      Try {
+        validateColumnCount(columns.length, 4)
+        val datetime = datetimeToMinute(columns(0))
+        val level = columns(1).toInt
+        val medTypeId = columns(2).toInt
+        val medtype = MedType.idToMedType(medTypeId)
+        val dosage = columns(3).toInt
+        validateGlucoseMed(level, dosage)
+        GlucoseMed(number, datetime, level, medtype, dosage)
       }
   }
 
