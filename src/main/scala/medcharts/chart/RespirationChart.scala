@@ -53,6 +53,8 @@ object RespirationChart extends Chart {
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
     renderer.setDefaultShapesVisible(true)
+    renderer.setDefaultItemLabelGenerator( buildItemLabelGenerator("0") )
+    renderer.setDefaultItemLabelsVisible(true)
     renderer
   }
 }
