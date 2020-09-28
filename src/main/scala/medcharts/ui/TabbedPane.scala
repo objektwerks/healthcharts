@@ -16,7 +16,7 @@ class CloseableTab(title: String, tabbedPane: JTabbedPane, panel: JPanel) extend
   private val closeLabel = new JLabel(title)
   private val closeableLabel = new JLabel("x")
 
-  addMouseListener( new MouseAdapter() {
+  closeableLabel.addMouseListener( new MouseAdapter() {
     override def mouseEntered(event: MouseEvent): Unit = {
       val color = closeableLabel.getBackground
       closeableLabel.setBackground(closeableLabel.getForeground)
@@ -27,7 +27,7 @@ class CloseableTab(title: String, tabbedPane: JTabbedPane, panel: JPanel) extend
       closeableLabel.setBackground(closeableLabel.getForeground)
       closeableLabel.setForeground(color)
     }
-    override def mouseClicked(e: MouseEvent): Unit = {
+    override def mouseClicked(event: MouseEvent): Unit = {
       tabbedPane.removeTabAt( tabbedPane.indexOfComponent(panel) )
     }
   })
