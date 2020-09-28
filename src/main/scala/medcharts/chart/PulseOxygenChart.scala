@@ -3,8 +3,8 @@ package medcharts.chart
 import java.text.{DecimalFormat, SimpleDateFormat}
 import java.{util => jdate}
 
-import medcharts.chart.PulseChart._
 import medcharts.Conf
+import medcharts.chart.PulseChart._
 import medcharts.entity.{Entities, PulseOxygen}
 
 import org.jfree.chart.JFreeChart
@@ -67,6 +67,8 @@ object PulseOxygenChart extends Chart {
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
     renderer.setDefaultShapesVisible(true)
+    renderer.setDefaultItemLabelGenerator( buildItemLabelGenerator("0") )
+    renderer.setDefaultItemLabelsVisible(true)
     renderer
   }
 }
