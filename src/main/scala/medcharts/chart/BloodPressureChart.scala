@@ -66,6 +66,8 @@ object BloodPressureChart extends Chart {
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
     renderer.setDefaultShapesVisible(true)
+    renderer.setDefaultItemLabelGenerator( buildItemLabelGenerator("0") )
+    renderer.setDefaultItemLabelsVisible(true)
     renderer
   }
 
@@ -83,6 +85,8 @@ object BloodPressureChart extends Chart {
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
     renderer.setDefaultShapesVisible(true)
+    renderer.setDefaultItemLabelGenerator( buildItemLabelGenerator("0") )
+    renderer.setDefaultItemLabelsVisible(true)
     renderer
   }
 }
