@@ -1,8 +1,10 @@
 package medcharts.chart
 
+import java.text.DecimalFormat
+
 import medcharts.entity.Converter.minuteToYearMonthDay
 import medcharts.entity.Entity
-
+import org.jfree.chart.labels.{StandardXYItemLabelGenerator, XYItemLabelGenerator}
 import org.jfree.data.xy.XYDataset
 
 import scala.math.abs
@@ -14,6 +16,13 @@ abstract class Chart {
       val last = minuteToYearMonthDay(entities.last.datetime)
       s"$title : $first - $last"
     } else title
+  }
+
+  def buildItemLabelGenerator(decimalFormat: String): XYItemLabelGenerator = new StandardXYItemLabelGenerator() {
+    override def generateLabel(dataset: XYDataset, series: Int, item: Int): String = {
+      val yValue = dataset.getYValue(series, item)
+      new DecimalFormat(decimalFormat).format( yValue )
+    }
   }
 
   def calculateDeltaAsPercentage(dataset: XYDataset, series: Int, item: Int): Long = {

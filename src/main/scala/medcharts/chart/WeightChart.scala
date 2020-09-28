@@ -5,9 +5,10 @@ import java.{util => jdate}
 
 import medcharts.Conf
 import medcharts.entity._
+
 import org.jfree.chart.JFreeChart
 import org.jfree.chart.axis.{DateAxis, NumberAxis}
-import org.jfree.chart.labels.{StandardXYItemLabelGenerator, StandardXYToolTipGenerator}
+import org.jfree.chart.labels.StandardXYToolTipGenerator
 import org.jfree.chart.plot.XYPlot
 import org.jfree.chart.renderer.xy.{XYItemRenderer, XYLineAndShapeRenderer}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
@@ -50,16 +51,10 @@ object WeightChart extends Chart {
         s"($dayHourMinute, $pounds, $delta%)"
       }
     }
-    val itemLabelGenerator = new StandardXYItemLabelGenerator() {
-      override def generateLabel(dataset: XYDataset, series: Int, item: Int): String = {
-        val yValue = dataset.getYValue(series, item)
-        new DecimalFormat("0").format( yValue )
-      }
-    }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
-    renderer.setDefaultItemLabelGenerator(itemLabelGenerator)
-    renderer.setDefaultItemLabelsVisible(true)
     renderer.setDefaultShapesVisible(true)
+    renderer.setDefaultItemLabelGenerator( buildItemLabelGenerator("0.0") )
+    renderer.setDefaultItemLabelsVisible(true)
     renderer
   }
 }
