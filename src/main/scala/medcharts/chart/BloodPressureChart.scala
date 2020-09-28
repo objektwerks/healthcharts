@@ -38,16 +38,16 @@ object BloodPressureChart extends Chart {
 
   def buildSystolicDataset(bloodpressures: Entities[BloodPressure]): XYDataset = {
     val timeSeries = new TimeSeries(Conf.titleSystolic)
-    bloodpressures.entities.foreach { pulseoxygen =>
-      timeSeries.add( pulseoxygen.datetime, pulseoxygen.systolic.toDouble )
+    bloodpressures.entities.foreach { bloodpressure =>
+      timeSeries.add( bloodpressure.datetime, bloodpressure.systolic.toDouble )
     }
     new TimeSeriesCollection(timeSeries)
   }
 
   def buildDiastolicDataset(bloodpressures: Entities[BloodPressure]): XYDataset = {
     val timeSeries = new TimeSeries(Conf.titleDiastolic)
-    bloodpressures.entities.foreach { pulseoxygen =>
-      timeSeries.add( pulseoxygen.datetime, pulseoxygen.diastolic.toDouble )
+    bloodpressures.entities.foreach { bloodpressure =>
+      timeSeries.add( bloodpressure.datetime, bloodpressure.diastolic.toDouble )
     }
     new TimeSeriesCollection(timeSeries)
   }
