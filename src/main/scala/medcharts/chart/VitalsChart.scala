@@ -33,11 +33,8 @@ object VitalsChart extends Chart {
     xyPlot.setDataset(3, buildOxygenDataset(vitals))
     xyPlot.setRenderer(3, buildOxygenRenderer())
 
-    xyPlot.setDataset(4, buildSystolicDataset(vitals))
-    xyPlot.setRenderer(4, buildSystolicRenderer())
-
-    xyPlot.setDataset(5, buildDiastolicDataset(vitals))
-    xyPlot.setRenderer(5, buildDiastolicRenderer())
+    xyPlot.setDataset(4, buildBloodPressureDataset(vitals))
+    xyPlot.setRenderer(4, buildBloodPressureRenderer())
 
     val xAxis = new DateAxis(Conf.titleDayHourChartXAxis)
     xAxis.setDateFormatOverride( new SimpleDateFormat("d,H") )
@@ -82,18 +79,10 @@ object VitalsChart extends Chart {
     new TimeSeriesCollection(timeSeries)
   }
 
-  def buildSystolicDataset(vitals: Entities[Vitals]): XYDataset = {
+  def buildBloodPressureDataset(vitals: Entities[Vitals]): XYDataset = {
     val timeSeries = new TimeSeries(Conf.titleSystolic)
     vitals.entities.foreach { vital =>
-      timeSeries.add( vital.datetime, vital.systolic.toDouble )
-    }
-    new TimeSeriesCollection(timeSeries)
-  }
-
-  def buildDiastolicDataset(vitals: Entities[Vitals]): XYDataset = {
-    val timeSeries = new TimeSeries(Conf.titleDiastolic)
-    vitals.entities.foreach { vital =>
-      timeSeries.add( vital.datetime, vital.diastolic.toDouble )
+      timeSeries.add( vital.datetime, s"${vital.systolic}.${vital.diastolic}".toDouble )
     }
     new TimeSeriesCollection(timeSeries)
   }

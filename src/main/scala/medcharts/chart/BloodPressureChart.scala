@@ -1,14 +1,13 @@
 package medcharts.chart
 
-import java.text.{DecimalFormat, SimpleDateFormat}
+import java.text.SimpleDateFormat
 import java.{util => jdate}
 
 import medcharts.Conf
 import medcharts.entity.{BloodPressure, Entities}
-
 import org.jfree.chart.JFreeChart
 import org.jfree.chart.axis.{DateAxis, NumberAxis}
-import org.jfree.chart.labels.StandardXYToolTipGenerator
+import org.jfree.chart.labels.{StandardXYItemLabelGenerator, StandardXYToolTipGenerator}
 import org.jfree.chart.plot.{DatasetRenderingOrder, XYPlot}
 import org.jfree.chart.renderer.xy.{XYItemRenderer, XYLineAndShapeRenderer}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
@@ -19,11 +18,8 @@ object BloodPressureChart extends Chart {
     val xyPlot = new XYPlot()
     xyPlot.setDatasetRenderingOrder(DatasetRenderingOrder.FORWARD)
 
-    xyPlot.setDataset(0, buildSystolicDataset(bloodpressures))
-    xyPlot.setRenderer(0, buildSystolicRenderer())
-
-    xyPlot.setDataset(1, buildDiastolicDataset(bloodpressures))
-    xyPlot.setRenderer(1, buildDiastolicRenderer())
+    xyPlot.setDataset(0, buildBloodPressureDataset(bloodpressures))
+    xyPlot.setRenderer(0, buildBloodPressureRenderer())
 
     val xAxis = new DateAxis(Conf.titleDayHourChartXAxis)
     xAxis.setDateFormatOverride( new SimpleDateFormat("d,H") )
@@ -36,56 +32,43 @@ object BloodPressureChart extends Chart {
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
   }
 
-  def buildSystolicDataset(bloodpressures: Entities[BloodPressure]): XYDataset = {
+  def buildBloodPressureDataset(bloodpressures: Entities[BloodPressure]): XYDataset = {
     val timeSeries = new TimeSeries(Conf.titleSystolic)
     bloodpressures.entities.foreach { bloodpressure =>
-      timeSeries.add( bloodpressure.datetime, bloodpressure.systolic.toDouble )
+      timeSeries.add( bloodpressure.datetime, s"${bloodpressure.systolic}.${bloodpressure.diastolic }".toDouble )
     }
     new TimeSeriesCollection(timeSeries)
   }
 
-  def buildDiastolicDataset(bloodpressures: Entities[BloodPressure]): XYDataset = {
-    val timeSeries = new TimeSeries(Conf.titleDiastolic)
-    bloodpressures.entities.foreach { bloodpressure =>
-      timeSeries.add( bloodpressure.datetime, bloodpressure.diastolic.toDouble )
-    }
-    new TimeSeriesCollection(timeSeries)
-  }
-
-  def buildSystolicRenderer(): XYItemRenderer = {
+  def buildBloodPressureRenderer(): XYItemRenderer = {
     val renderer = new XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String = {
         val xValue = dataset.getXValue(series, item)
         val yValue = dataset.getYValue(series, item)
+        val yValues = yValue.toString.split("\\.")
         val dayHourMinute = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
-        val systolic = new DecimalFormat("0").format( yValue )
+        val systolic = yValues(0)
+        var diastolic = yValues(1)
+        if (diastolic.length == 1) diastolic = diastolic + 0  // Hack! DecimalFormat dropping trailing zero!
+        val bloodpressure = s"$systolic/$diastolic"
         val delta = calculateDeltaAsPercentage(dataset, series, item)
-        s"${Conf.titleSystolic}: ($dayHourMinute, $systolic, $delta%)"
+        s"${Conf.titleBloodPressure}: ($dayHourMinute, $bloodpressure, $delta%)"
       }
     }
-    renderer.setDefaultToolTipGenerator(tooltipGenerator)
-    renderer.setDefaultShapesVisible(true)
-    renderer.setDefaultItemLabelGenerator( buildItemLabelGenerator("0") )
-    renderer.setDefaultItemLabelsVisible(true)
-    renderer
-  }
-
-  def buildDiastolicRenderer(): XYItemRenderer = {
-    val renderer = new XYLineAndShapeRenderer()
-    val tooltipGenerator = new StandardXYToolTipGenerator() {
-      override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String = {
-        val xValue = dataset.getXValue(series, item)
+    val itemLabelGenerator = new StandardXYItemLabelGenerator() {
+      override def generateLabel(dataset: XYDataset, series: Int, item: Int): String = {
         val yValue = dataset.getYValue(series, item)
-        val dayHourMinute = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
-        val diastolic = new DecimalFormat("0").format( yValue )
-        val delta = calculateDeltaAsPercentage(dataset, series, item)
-        s"${Conf.titleDiastolic}: ($dayHourMinute, $diastolic, $delta%)"
+        val yValues = yValue.toString.split("\\.")
+        val systolic = yValues(0)
+        var diastolic = yValues(1)
+        if (diastolic.length == 1) diastolic = diastolic + 0  // Hack! DecimalFormat dropping trailing zero!
+        s"$systolic/$diastolic"
       }
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
     renderer.setDefaultShapesVisible(true)
-    renderer.setDefaultItemLabelGenerator( buildItemLabelGenerator("0") )
+    renderer.setDefaultItemLabelGenerator( itemLabelGenerator )
     renderer.setDefaultItemLabelsVisible(true)
     renderer
   }
