@@ -1,5 +1,6 @@
 package medcharts.chart
 
+import java.awt.Color
 import java.text.SimpleDateFormat
 
 import medcharts.Conf
@@ -15,24 +16,29 @@ import org.jfree.chart.axis.{DateAxis, NumberAxis}
 import org.jfree.chart.plot.{CombinedDomainXYPlot, PlotOrientation, XYPlot}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.XYDataset
-import java.awt.Color
 
 object VitalsChart extends Chart {
   def build(vitals: Entities[Vitals]): JFreeChart = {
-    val topXYPlot = buildTopXYPlot(vitals)
-    val bottomXYPlot = buildBottomXYPlot(vitals)
-
     val xAxis = new DateAxis(Conf.titleDayHourChartXAxis)
     xAxis.setDateFormatOverride( new SimpleDateFormat("d,H") )
 
+    val topXYPlot = buildTopXYPlot(vitals)
+    val bottomXYPlot = buildBottomXYPlot(vitals)
+    val combinedXYPlot = buildCombindedXYPlot(xAxis, topXYPlot, bottomXYPlot)
+
+    val title = buildTitle(Conf.titleVitals, vitals.toEntity)
+    new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, combinedXYPlot, true)
+  }
+
+  def buildCombindedXYPlot(xAxis: DateAxis,
+                           topXYPlot: XYPlot, 
+                           bottomXYPlot: XYPlot): CombinedDomainXYPlot = {
     val combinedXYPlot = new CombinedDomainXYPlot(xAxis)
     combinedXYPlot.setGap(3.0)
     combinedXYPlot.add(topXYPlot, 1)
     combinedXYPlot.add(bottomXYPlot, 1)
     combinedXYPlot.setOrientation(PlotOrientation.VERTICAL)
-
-    val title = buildTitle(Conf.titleVitals, vitals.toEntity)
-    new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, combinedXYPlot, true)
+    combinedXYPlot
   }
 
   def buildTopXYPlot(vitals: Entities[Vitals]): XYPlot = {
