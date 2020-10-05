@@ -12,39 +12,68 @@ import medcharts.entity.{Entities, Vitals}
 
 import org.jfree.chart.JFreeChart
 import org.jfree.chart.axis.{DateAxis, NumberAxis}
-import org.jfree.chart.plot.{DatasetRenderingOrder, XYPlot}
+import org.jfree.chart.plot.{CombinedDomainXYPlot, PlotOrientation, XYPlot}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.XYDataset
+import java.awt.Color
 
 object VitalsChart extends Chart {
   def build(vitals: Entities[Vitals]): JFreeChart = {
-    val xyPlot = new XYPlot()
-    xyPlot.setDatasetRenderingOrder(DatasetRenderingOrder.FORWARD)
-
-    xyPlot.setDataset(0, buildTemperatureDataset(vitals))
-    xyPlot.setRenderer(0, buildTemperatureRenderer())
-
-    xyPlot.setDataset(1, buildRespirationDataset(vitals))
-    xyPlot.setRenderer(1, buildRespirationRenderer())
-
-    xyPlot.setDataset(2, buildPulseDataset(vitals))
-    xyPlot.setRenderer(2, buildPulseRenderer())
-
-    xyPlot.setDataset(3, buildOxygenDataset(vitals))
-    xyPlot.setRenderer(3, buildOxygenRenderer())
-
-    xyPlot.setDataset(4, buildBloodPressureDataset(vitals))
-    xyPlot.setRenderer(4, buildBloodPressureRenderer())
+    val topXYPlot = buildTopXYPlot(vitals)
+    val bottomXYPlot = buildBottomXYPlot(vitals)
 
     val xAxis = new DateAxis(Conf.titleDayHourChartXAxis)
     xAxis.setDateFormatOverride( new SimpleDateFormat("d,H") )
-    xyPlot.setDomainAxis(0, xAxis)
 
-    val yAxis = new NumberAxis(Conf.titleVitalsChartYAxis)
-    xyPlot.setRangeAxis(yAxis)
+    val combinedXYPlot = new CombinedDomainXYPlot(xAxis)
+    combinedXYPlot.setGap(3.0)
+    combinedXYPlot.add(topXYPlot, 1)
+    combinedXYPlot.add(bottomXYPlot, 1)
+    combinedXYPlot.setOrientation(PlotOrientation.VERTICAL)
 
     val title = buildTitle(Conf.titleVitals, vitals.toEntity)
-    new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
+    new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, combinedXYPlot, true)
+  }
+
+  def buildTopXYPlot(vitals: Entities[Vitals]): XYPlot = {
+    val xyPlot = new XYPlot()
+    xyPlot.setBackgroundPaint(Color.LIGHT_GRAY)
+
+    val yAxis = new NumberAxis("BP / Temp")
+    yAxis.setAutoRangeIncludesZero(false)
+    yAxis.setAutoRange(true)
+
+    xyPlot.setRangeAxis(yAxis)
+    xyPlot.getRangeAxis.setUpperMargin(xyPlot.getRangeAxis.getUpperMargin + 0.10)
+
+    xyPlot.setDataset(0, buildBloodPressureDataset(vitals))
+    xyPlot.setRenderer(0, buildBloodPressureRenderer())
+    
+    xyPlot.setDataset(1, buildTemperatureDataset(vitals))
+    xyPlot.setRenderer(1, buildTemperatureRenderer())
+    xyPlot
+  }
+
+  def buildBottomXYPlot(vitals: Entities[Vitals]): XYPlot = {
+    val xyPlot = new XYPlot()
+    xyPlot.setBackgroundPaint(Color.LIGHT_GRAY)
+
+    val yAxis = new NumberAxis("Resp / HR / Oxy")
+    yAxis.setAutoRangeIncludesZero(false)
+    yAxis.setAutoRange(true)
+
+    xyPlot.setRangeAxis(yAxis)
+    xyPlot.getRangeAxis.setUpperMargin(xyPlot.getRangeAxis.getUpperMargin + 0.10)
+
+    xyPlot.setDataset(0, buildRespirationDataset(vitals))
+    xyPlot.setRenderer(0, buildRespirationRenderer())
+
+    xyPlot.setDataset(1, buildPulseDataset(vitals))
+    xyPlot.setRenderer(1, buildPulseRenderer())
+
+    xyPlot.setDataset(2, buildOxygenDataset(vitals))
+    xyPlot.setRenderer(2, buildOxygenRenderer())
+    xyPlot
   }
 
   def buildTemperatureDataset(vitals: Entities[Vitals]): XYDataset = {
