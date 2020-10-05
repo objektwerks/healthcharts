@@ -39,7 +39,7 @@ object VitalsChart extends Chart {
     val xyPlot = new XYPlot()
     xyPlot.setBackgroundPaint(Color.LIGHT_GRAY)
 
-    val yAxis = new NumberAxis("BP / Temp")
+    val yAxis = new NumberAxis(Conf.titleVitalsChartTopYAxis)
     yAxis.setAutoRangeIncludesZero(false)
     yAxis.setAutoRange(true)
 
@@ -58,7 +58,7 @@ object VitalsChart extends Chart {
     val xyPlot = new XYPlot()
     xyPlot.setBackgroundPaint(Color.LIGHT_GRAY)
 
-    val yAxis = new NumberAxis("Resp / HR / Oxy")
+    val yAxis = new NumberAxis(Conf.titleVitalsChartBottomYAxis)
     yAxis.setAutoRangeIncludesZero(false)
     yAxis.setAutoRange(true)
 

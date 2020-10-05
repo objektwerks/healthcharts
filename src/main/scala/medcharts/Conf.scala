@@ -55,7 +55,8 @@ object Conf {
   val titleTemperature = conf.getString("title.temperature")
   val titleTemperatureChartYAxis = conf.getString("title.temperatureChartYAxis")
   val titleVitals = conf.getString("title.vitals")
-  val titleVitalsChartYAxis = conf.getString("title.vitalsChartYAxis")
+  val titleVitalsChartTopYAxis = conf.getString("title.vitalsChartTopYAxis")
+  val titleVitalsChartBottomYAxis = conf.getString("title.vitalsChartBottomYAxis")
   val titleWeight = conf.getString("title.weight")
   val titleWeightChartYAxis = conf.getString("title.weightChartYAxis")
 }
