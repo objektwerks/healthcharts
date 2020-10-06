@@ -1,6 +1,6 @@
 enablePlugins(JlinkPlugin)
 
-name := "medcharts"
+name := "healthcharts"
 organization := "objektwerks"
 version := "0.4-SNAPSHOT"
 scalaVersion := "2.13.2"
