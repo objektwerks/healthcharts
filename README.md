@@ -1,7 +1,7 @@
 HealthCharts
 ------------
->Healthcharts is an open source project governed by the GPL.V3 license. The project objective is
->to build useful health charts initially sourced by simple csv/txt files.
+>Healthcharts is an open source project, governed by the GPL.V3 license, with the
+>singular objective of providing useful health charts sourced by simple csv/txt files.
 
 Charts
 ------
