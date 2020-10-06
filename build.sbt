@@ -2,7 +2,7 @@ enablePlugins(JlinkPlugin)
 
 name := "medcharts"
 organization := "objektwerks"
-version := "0.3-SNAPSHOT"
+version := "0.3"
 scalaVersion := "2.13.2"
 libraryDependencies ++= {
   Seq(
