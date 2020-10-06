@@ -25,7 +25,7 @@ Run
 1. sbt run
 2. click Charts menu
 3. click Chart menu item
-4. via the Chart Dialog, select *.csv / *.txt file(s)
+4. via the Chart Dialog, select *.csv / *.txt file
 5. click 'Select' button
 6. view tabbed chart ( mouseover line data points to view details )
 7. close app via top-left 'x' icon
