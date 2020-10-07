@@ -1,8 +1,5 @@
-.bloop
-.bsp
-.metals
-.idea
-.vscode
+.*
+!/.gitignore
 project/.bloop
 project/metals.sbt
 project/project/
