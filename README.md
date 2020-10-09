@@ -5,17 +5,17 @@ HealthCharts
 
 Charts
 ------
-- [x] [Blood Pressure](./docs/blood.pressure.chart.md)
-- [x] [Calories Weight](docs/calories.weight.chart.md)
-- [x] [Glucose](docs/glucose.chart.md)
-- [x] [Glucose Med](docs/glucose.med.chart.md)
-- [x] [Med](docs/med.chart.md)
-- [x] [Pulse](./docs/pulse.chart.md)
-- [x] [Pulse Oxygen](./docs/pulse.oxygen.chart.md)
-- [x] [Respiration](./docs/respiration.chart.md)
-- [x] [Temperature](./docs/temperature.chart.md)
-- [x] [Vitals](./docs/vitals.chart.md)
-- [x] [Weight](./docs/weight.chart.md)
+- [Blood Pressure](./docs/blood.pressure.chart.md)
+- [Calories Weight](docs/calories.weight.chart.md)
+- [Glucose](docs/glucose.chart.md)
+- [Glucose Med](docs/glucose.med.chart.md)
+- [Med](docs/med.chart.md)
+- [Pulse](./docs/pulse.chart.md)
+- [Pulse Oxygen](./docs/pulse.oxygen.chart.md)
+- [Respiration](./docs/respiration.chart.md)
+- [Temperature](./docs/temperature.chart.md)
+- [Vitals](./docs/vitals.chart.md)
+- [Weight](./docs/weight.chart.md)
 
 Test
 ----
