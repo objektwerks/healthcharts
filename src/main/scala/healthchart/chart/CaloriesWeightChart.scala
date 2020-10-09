@@ -100,7 +100,7 @@ object CaloriesWeightChart extends Chart {
     new TimeSeriesCollection(timeSeries)
   }
 
-  private def buildCaloriesRenderer(): XYItemRenderer = {
+  def buildCaloriesRenderer(): XYItemRenderer = {
     val renderer = new XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String = {

@@ -22,7 +22,7 @@ class CaloriesWeightAction(name: String, frame: Frame) extends AbstractAction(na
         val caloriesWeights = transformEntities[CaloriesWeight](caloriesWeightCsvPath)
         val chart = CaloriesWeightChart.build(caloriesWeights)
         val chartPanel = ChartPanelBuilder.build(chart, caloriesWeights)
-        frame.addCompositeChartPanel(s"${Conf.titleVitals}-${counter.getAndIncrement}", chartPanel)
+        frame.addCompositeChartPanel(s"${Conf.titleCaloriesWeight}-${counter.getAndIncrement}", chartPanel)
       case None =>
     }
   }
