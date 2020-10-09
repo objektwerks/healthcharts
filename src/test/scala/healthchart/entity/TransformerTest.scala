@@ -10,13 +10,13 @@ import scala.util.{Failure, Success}
 
 class TransformerTest extends AnyFunSuite with Matchers {
   test("blood pressure") {
-    testTransformer[BloodPressure]("./data/bloodpressure/blood-pressure.txt", 7, 0)
-    testTransformer[BloodPressure]("./data/bloodpressure/blood-pressure-invalid.txt", 5, 2)
+    testTransformer[BloodPressure]("./data/blood-pressure/blood-pressure.txt", 7, 0)
+    testTransformer[BloodPressure]("./data/blood-pressure/blood-pressure-invalid.txt", 5, 2)
   }
 
   test("calories weight") {
-    testTransformer[CaloriesWeight]("./data/caloriesweight/caloriesweight.txt", 7, 0)
-    testTransformer[CaloriesWeight]("./data/caloriesweight/caloriesweight-invalid.txt", 5, 2)
+    testTransformer[CaloriesWeight]("./data/calories-weight/calories-weight.txt", 7, 0)
+    testTransformer[CaloriesWeight]("./data/calories-weight/calories-weight-invalid.txt", 5, 2)
   }
 
   test("glucose") {
@@ -30,8 +30,8 @@ class TransformerTest extends AnyFunSuite with Matchers {
   }
 
   test("glucose med") {
-    testTransformer[GlucoseMed]("./data/glucosemed/glucosemed.txt", 18, 0)
-    testTransformer[GlucoseMed]("./data/glucosemed/glucosemed-invalid.txt", 16, 2)
+    testTransformer[GlucoseMed]("./data/glucose-med/glucose-med.txt", 18, 0)
+    testTransformer[GlucoseMed]("./data/glucose-med/glucose-med-invalid.txt", 16, 2)
   }
 
   test("pulse") {
@@ -40,8 +40,8 @@ class TransformerTest extends AnyFunSuite with Matchers {
   }
   
   test("pulse oxygen") {
-    testTransformer[PulseOxygen]("./data/pulseoxygen/pulse-oxygen.txt", 7, 0)
-    testTransformer[PulseOxygen]("./data/pulseoxygen/pulse-oxygen-invalid.txt", 5, 2)
+    testTransformer[PulseOxygen]("./data/pulse-oxygen/pulse-oxygen.txt", 7, 0)
+    testTransformer[PulseOxygen]("./data/pulse-oxygen/pulse-oxygen-invalid.txt", 5, 2)
   }
   
   test("respiration") {
