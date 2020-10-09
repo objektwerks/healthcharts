@@ -11,6 +11,12 @@ trait Validator[E] {
 object Validator {
   def validate[E](number: Int, columns: Array[String])(implicit validator: Validator[E]): Try[E] = validator.validate(number, columns)
 
+  private def validateCaloriesWeight(in: Int, out: Int, weight: Double): Unit = {
+    require(in >= 0 && in <= 9999, s"calorie in not >= 0 and <= 9999")
+    require(out >= 0 && out <= 9999, s"calorie out not >= 0 and <= 9999")
+    validateWeight(weight)
+  }
+
   private def validateColumnCount(length: Int, count: Int): Unit =
     require(length == count, s"column count != $count")
 
@@ -56,6 +62,19 @@ object Validator {
         val diastolic = columns(2).toInt
         validateBloodPressure(systolic, diastolic)
         BloodPressure(number, datetime, systolic, diastolic)
+      }
+  }
+
+  implicit object CaloriesWeightValidator extends Validator[CaloriesWeight] {
+    def validate(number: Int, columns: Array[String]): Try[CaloriesWeight] =
+      Try {
+        validateColumnCount(columns.length, 4)
+        val datetime = datetimeToMinute(columns(0))
+        val in = columns(1).toInt
+        val out = columns(2).toInt
+        val weight = columns(3).toDouble
+        validateCaloriesWeight(in, out, weight)
+        CaloriesWeight(number, datetime, in, out, weight)
       }
   }
 
