@@ -6,8 +6,8 @@ import scala.collection.immutable.SortedMap
 import scala.reflect.ClassTag
 
 sealed trait Entity extends Product with Serializable {
-  val number: Int
-  val datetime: Minute
+  def number: Int
+  def datetime: Minute
 }
 
 final case class Entities[E](entities: Array[E], invalidLines: Array[InvalidLine]) extends Product with Serializable {
@@ -22,6 +22,10 @@ object Entities {
 
 final case class BloodPressure(number: Int, datetime: Minute, systolic: Int, diastolic: Int) extends Entity {
   override def toString: String = s"$number, $datetime, $systolic, $diastolic"
+}
+
+final case class CaloriesWeight(number: Int, datetime: Minute, in: Int, out: Int, weight: Double) extends Entity {
+  override def toString: String = s"$number, $datetime, $in, $out, $weight"
 }
 
 final case class Glucose(number: Int, datetime: Minute, level: Int) extends Entity {
