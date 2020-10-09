@@ -23,5 +23,5 @@ final case class Pulse(datetime: Minute, beatsPerMinute: Int)
 Pulse CSV
 ---------
 >See data/pulse/pulse.txt
-1. datetime - yyyy-MM-ddThh:mm:ss ( 2020-07-04T10:04:00 )
+1. datetime - yyyy-MM-ddThh:mm:ss
 2. beatsPerMinute - nnn

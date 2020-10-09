@@ -24,6 +24,6 @@ final case class Med(datetime: Minute, medtype: MedType.Value, dosage: Int)
 Med CSV
 -------
 >See data/med/med.txt
-1. datetime - yyyy-MM-ddThh:mm:ss ( 2020-07-04T10:04:00 )
-2. medtype - 1 ( insulin ), 2 ( steroid )
-3. dosage - nnn ( 1-100)
+1. datetime - yyyy-MM-ddThh:mm:ss
+2. medtype - n
+3. dosage - nnn

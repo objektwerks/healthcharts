@@ -24,6 +24,6 @@ final case class PulseOxygen(datetime: Minute, breathesPerMinute: Int, bloodOxyg
 PulseOxygen CSV
 ---------------
 >See data/pulseoxygen/pulse-oxygen.txt
-1. datetime - yyyy-MM-ddThh:mm:ss ( 2020-07-04T10:04:00 )
+1. datetime - yyyy-MM-ddThh:mm:ss
 2. breathesPerMinute - nn
 3. bloodOxygenPercentage - nnn

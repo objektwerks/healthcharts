@@ -23,5 +23,5 @@ final case class Weight(datetime: Minute, pounds: Double)
 Weight CSV
 ----------
 >See data/weight/weight.txt
-1. datetime - yyyy-MM-ddThh:mm:ss ( 2020-07-04T10:04:00 )
+1. datetime - yyyy-MM-ddThh:mm:ss
 2. pounds - nnn.nn

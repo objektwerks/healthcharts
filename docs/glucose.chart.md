@@ -23,5 +23,5 @@ final case class Glucose(datetime: Minute, level: Int)
 Glucose CSV
 -----------
 >See data/glucose/glucose.txt
-1. datetime - yyyy-MM-ddThh:mm:ss ( 2020-07-04T10:04:00 )
-2. level - nnn ( 0-300 )
+1. datetime - yyyy-MM-ddThh:mm:ss
+2. level - nnn

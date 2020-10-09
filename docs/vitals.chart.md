@@ -34,7 +34,7 @@ final case class Vitals(datetime: Minute,
 Vitals CSV
 ----------
 >See data/vitals/vitals.txt
-1. datetime - yyyy-MM-ddThh:mm:ss ( 2020-07-04T10:04:00 )
+1. datetime - yyyy-MM-ddThh:mm:ss
 2. temperature - nnn.nn
 3. respiration - nn
 4. pulse - nnn

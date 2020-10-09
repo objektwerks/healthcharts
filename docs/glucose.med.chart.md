@@ -27,7 +27,7 @@ final case class GlucoseMed(number: Int, datetime: Minute, level: Int, medtype: 
 GlucoseMed CSV
 --------------
 >See data/glucosemed/glucosemed.txt
-1. datetime - yyyy-MM-ddThh:mm:ss ( 2020-07-04T10:04:00 )
-2. level - nnn ( 0-300 )
-3. medtype - 1 ( insulin ), 2 ( steroid )
-4. dosage - nnn ( 1-100)
+1. datetime - yyyy-MM-ddThh:mm:ss
+2. level - nnn
+3. medtype - n
+4. dosage - nnn

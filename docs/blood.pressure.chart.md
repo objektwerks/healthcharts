@@ -24,6 +24,6 @@ final case class BloodPressure(datetime: Minute, systolic: Int, diastolic: Int)
 Blood Pressure CSV
 ------------------
 >See data/bloodpressure/blood-pressure.txt
-1. datetime - yyyy-MM-ddThh:mm:ss ( 2020-07-04T10:04:00 )
+1. datetime - yyyy-MM-ddThh:mm:ss
 2. systolic - nnn
 3. diastolic - nnn

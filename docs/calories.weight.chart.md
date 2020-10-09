@@ -1,33 +1,33 @@
 Chart
 -----
 1. X-Axis : Day,Hour ( d,H )
-2. Y-Axis : Glucose Level / Med Dosage ( n )
-3. Glucose Tooltip ( Glucose: ( dayHourMinute, level, delta ) )
-4. Med Tooltip ( Meds: ( dayHourMinute, dosage, med, delta ) )
-5. Legend : Glucose (Red), Med (Blue)
-6. Title : Glucose-Med : (y.m.d - y.m.d)
+2. Y-Axis : Calories Int/Out ( nnnn ) / Weight ( nnn )
+3. Calories In Tooltip ( Calories: ( dayHourMinute, in, delta ) )
+4. Calories Out Tooltip ( Calories: ( dayHourMinute, out, delta ) )
+4. Weight Tooltip ( Meds: ( dayHourMinute, weight, delta ) )
+5. Legend : Calories In, Calories Out, Weight
+6. Title : Calories-Weight : (y.m.d - y.m.d)
 
 Model
 -----
-1. Glucose: datetime, level (1)
-2. Med: datetime, medtype (2), dosage (3)
+1. Calories: datetime, in (1), out (2), weight (3)
 
 Constraints
 -----------
-1. 0 - 300, 70 - 100 is normal
-2. 1 -> insulin, 2 -> steroids
-3. 1 - 100 
+1. 0 - 9999
+2. 0 - 9999
+1. > 0.00 <= 500.00
 
 GlucoseMed
 ----------
 ```scala
-final case class GlucoseMed(number: Int, datetime: Minute, level: Int, medtype: MedType.Value, dosage: Int)
+final case class CaloriesWeight(number: Int, datetime: Minute, in: Int, out: Int, weight: Double)
 ```
 
 GlucoseMed CSV
 --------------
->See data/glucosemed/glucosemed.txt
-1. datetime - yyyy-MM-ddThh:mm:ss ( 2020-07-04T10:04:00 )
-2. level - nnn ( 0-300 )
-3. medtype - 1 ( insulin ), 2 ( steroid )
-4. dosage - nnn ( 1-100)
+>See data/caloriesweight/calorieweight.txt
+1. datetime - yyyy-MM-ddThh:mm:ss
+2. in - nnnn
+3. out - nnnn
+4. weight - nnn
