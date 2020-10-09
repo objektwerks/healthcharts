@@ -14,9 +14,9 @@ Model
 
 Constraints
 -----------
-1. 0 - 9999
-2. 0 - 9999
-1. 0.00 - 500.00
+1. nnnn >= 0 && in <= 9999
+2. nnnn >= 0 && in <= 9999
+1. nnn.nn > 0.00 <= 500.00
 
 GlucoseMed
 ----------
@@ -30,4 +30,4 @@ GlucoseMed CSV
 1. datetime - yyyy-MM-ddThh:mm:ss
 2. in - nnnn
 3. out - nnnn
-4. weight - nnn
+4. weight - nnn.nn

@@ -12,7 +12,7 @@ Model
 
 Constraints
 -----------
-1. 0 - 300, 70 - 100 is normal
+1. nnn >= 0 && nnn <= 300 [ 70 - 100 is normal ]
 
 Glucose
 -------

@@ -12,7 +12,7 @@ Model
 
 Constraints
 -----------
-1. >= 12 <= 25
+1. nn >= 12 <= 25
 
 Respiration
 -----------

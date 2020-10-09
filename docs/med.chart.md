@@ -13,7 +13,7 @@ Model
 Constraints
 -----------
 1. 1 -> insulin, 2 -> steroids
-2. 1 - 100
+2. nnn >= 1 && nnn <= 100
 
 Med
 ---

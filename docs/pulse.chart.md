@@ -12,7 +12,7 @@ Model
 
 Constraints
 -----------
-1. >= 40 <= 200
+1. nnn >= 40 <= 200
 
 Pulse
 -----
