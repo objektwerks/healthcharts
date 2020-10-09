@@ -12,12 +12,12 @@ Model
 
 Constraints
 -----------
-1. nnn.nn >= 95.0 <= 105.0
-2. nn >= 12 <= 25
-3. nnn >= 40 <= 200
-4. nnn >= 50 <= 100
-5. nnn >= 120 <= 200
-6. nnn >= 80 <= 120
+1. temperature >= 95.00 && temperature <= 105.00
+2. respiration >= 12 && respiration <= 25
+3. pulse >= 40 && pulse <= 200
+4. oxygen >= 50 && oxygen <= 100
+5. systolic >= 120 && systolic <= 200
+6. diastolic >= 80 && diastolic <= 120
 
 Vitals
 ------

@@ -48,7 +48,7 @@ object Validator {
     require(breathesPerMinute >= 12 && breathesPerMinute <= 25, s"breathes per minute not >= 12 and <= 25")
 
   private def validateTemperature(degrees: Double): Unit =
-    require(degrees >= 95.0 && degrees <= 105.0, s"temperature, in degrees, not >= 95.0 and <= 105.0")
+    require(degrees >= 95.00 && degrees <= 105.00, s"temperature, in degrees, not >= 95.00 and <= 105.00")
 
   private def validateWeight(pounds: Double): Unit =
     require(pounds > 0.00 && pounds <= 500.00, s"pounds not > 0.00 and <= 500.00")

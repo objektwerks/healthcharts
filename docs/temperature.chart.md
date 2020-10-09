@@ -12,7 +12,7 @@ Model
 
 Constraints
 -----------
-1. nn >= 95.0 <= 105.0
+1. degrees >= 95.00 && degrees <= 105.00
 
 Temperature
 -----------

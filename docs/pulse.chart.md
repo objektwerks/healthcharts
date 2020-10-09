@@ -12,7 +12,7 @@ Model
 
 Constraints
 -----------
-1. nnn >= 40 <= 200
+1. beatsPerMinute >= 40 && beatsPerMinute <= 200
 
 Pulse
 -----

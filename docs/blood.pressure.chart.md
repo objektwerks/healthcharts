@@ -12,8 +12,8 @@ Model
 
 Constraints
 -----------
-1. nnn >= 120 <= 200
-2. nnn >= 80 <= 120
+1. systolic >= 120 && systolic <= 200
+2. diastolic >= 80 && diastolic <= 120
 
 Blood Pressure
 --------------

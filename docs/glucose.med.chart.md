@@ -14,9 +14,9 @@ Model
 
 Constraints
 -----------
-1. nnn >= 0 && nnn <= 300 [ 70 - 100 is normal ]
+1. level >= 0 && level <= 300 [ 70 - 100 is normal ]
 2. 1 -> insulin, 2 -> steroids
-3. nnn >= 1 && nnn <= 100
+3. dosage >= 1 && dosage <= 100
 
 GlucoseMed
 ----------

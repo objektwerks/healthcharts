@@ -8,22 +8,22 @@ Chart
 
 Model
 -----
-1. Pulse Oxygen: datetime, breathesPerMinute (1), bloodOxygenPercentage (2)
+1. Pulse Oxygen: datetime, beatsPerMinute (1), bloodOxygenPercentage (2)
 
 Constraints
 -----------
-1. nn >= 12 <= 25
-2. nnn >= 50 <= 100
+1. beatsPerMinute >= 40 && beatsPerMinute <= 200
+2. bloodOxygenPercentage >= 50 && bloodOxygenPercentage <= 100
 
 PulseOxygen
 -----------
 ```scala
-final case class PulseOxygen(datetime: Minute, breathesPerMinute: Int, bloodOxygenPercentage: Int)
+final case class PulseOxygen(datetime: Minute, beatsPerMinute: Int, bloodOxygenPercentage: Int)
 ```
 
 PulseOxygen CSV
 ---------------
 >See data/pulseoxygen/pulse-oxygen.txt
 1. datetime - yyyy-MM-ddThh:mm:ss
-2. breathesPerMinute - nn
+2. breatsPerMinute - nnn
 3. bloodOxygenPercentage - nnn

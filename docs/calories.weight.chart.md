@@ -14,9 +14,9 @@ Model
 
 Constraints
 -----------
-1. nnnn >= 0 && in <= 9999
-2. nnnn >= 0 && in <= 9999
-1. nnn.nn > 0.00 <= 500.00
+1. in >= 0 && in <= 9999
+2. out >= 0 && out <= 9999
+1. weight > 0.00 && weight <= 500.00
 
 GlucoseMed
 ----------

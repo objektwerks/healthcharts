@@ -12,7 +12,7 @@ Model
 
 Constraints
 -----------
-1. nn >= 12 <= 25
+1. breathesPerMinute >= 12 && breathesPerMinute <= 25
 
 Respiration
 -----------
