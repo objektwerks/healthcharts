@@ -6,6 +6,7 @@ HealthCharts
 Charts
 ------
 - [x] [Blood Pressure](./docs/blood.pressure.chart.md)
+- [x] [Calories Weight](docs/calories.weight.chart.md)
 - [x] [Glucose](docs/glucose.chart.md)
 - [x] [Glucose Med](docs/glucose.med.chart.md)
 - [x] [Med](docs/med.chart.md)
