@@ -43,6 +43,7 @@ object Conf {
   val titleSystolic = conf.getString("title.systolic")
   val titleDiastolic = conf.getString("title.diastolic")
   val titleCaloriesWeight = conf.getString("title.caloriesWeight")
+  val titleCaloriesChartYAxis = conf.getString("title.caloriesChartYAxis")
   val titleGlucoseMed = conf.getString("title.glucoseMed")
   val titleGlucose = conf.getString("title.glucose")
   val titleMed = conf.getString("title.med")
