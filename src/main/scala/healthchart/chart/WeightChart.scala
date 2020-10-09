@@ -31,7 +31,7 @@ object WeightChart extends Chart {
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
   }
 
-  private def buildWeightDataset(weights: Entities[Weight]): XYDataset = {
+  def buildWeightDataset(weights: Entities[Weight]): XYDataset = {
     val timeSeries = new TimeSeries(Conf.titleWeight)
     weights.entities.foreach { weight =>
       timeSeries.add( weight.datetime, weight.pounds )
@@ -39,7 +39,7 @@ object WeightChart extends Chart {
     new TimeSeriesCollection(timeSeries)
   }
 
-  private def buildWeightRenderer(): XYItemRenderer = {
+  def buildWeightRenderer(): XYItemRenderer = {
     val renderer = new XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String = {
