@@ -44,7 +44,7 @@ object CaloriesWeightChart extends Chart {
     val xyPlot = new XYPlot()
     xyPlot.setBackgroundPaint(Color.LIGHT_GRAY)
 
-    val yAxis = new NumberAxis(Conf.titleWeightChartYAxis)
+    val yAxis = new NumberAxis(Conf.titleCaloriesWeightChartTopYAxis)
     yAxis.setAutoRangeIncludesZero(false)
     yAxis.setAutoRange(true)
 
@@ -60,7 +60,7 @@ object CaloriesWeightChart extends Chart {
     val xyPlot = new XYPlot()
     xyPlot.setBackgroundPaint(Color.LIGHT_GRAY)
 
-    val yAxis = new NumberAxis(Conf.titleCaloriesChartYAxis)
+    val yAxis = new NumberAxis(Conf.titleCaloriesWeightChartBottomYAxis)
     yAxis.setAutoRangeIncludesZero(false)
     yAxis.setAutoRange(true)
 
@@ -77,7 +77,7 @@ object CaloriesWeightChart extends Chart {
 
 
   def buildWeightDataset(caloriesWeights: Entities[CaloriesWeight]): XYDataset = {
-    val timeSeries = new TimeSeries(Conf.titleTemperature)
+    val timeSeries = new TimeSeries(Conf.titleWeight)
     caloriesWeights.entities.foreach { caloriesWeight =>
       timeSeries.add( caloriesWeight.datetime, caloriesWeight.weight )
     }
@@ -85,7 +85,7 @@ object CaloriesWeightChart extends Chart {
   }
 
   def buildCaloriesInDataset(caloriesWeights: Entities[CaloriesWeight]): XYDataset = {
-    val timeSeries = new TimeSeries(Conf.titleRespiration)
+    val timeSeries = new TimeSeries(Conf.titleCaloriesIn)
     caloriesWeights.entities.foreach { caloriesWeight =>
       timeSeries.add( caloriesWeight.datetime, caloriesWeight.in.toDouble )
     }
@@ -93,7 +93,7 @@ object CaloriesWeightChart extends Chart {
   }
 
   def buildCaloriesOutDataset(caloriesWeights: Entities[CaloriesWeight]): XYDataset = {
-    val timeSeries = new TimeSeries(Conf.titlePulse)
+    val timeSeries = new TimeSeries(Conf.titleCaloriesOut)
     caloriesWeights.entities.foreach { caloriesWeight =>
       timeSeries.add( caloriesWeight.datetime, caloriesWeight.out.toDouble )
     }
