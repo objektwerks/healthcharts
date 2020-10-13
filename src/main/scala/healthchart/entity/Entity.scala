@@ -10,14 +10,19 @@ sealed trait Entity extends Product with Serializable {
   def datetime: Minute
 }
 
-final case class Entities[E](entities: Array[E], invalidLines: Array[InvalidLine]) extends Product with Serializable {
+final case class Entities[E](entities: Array[E], invalidEntities: Array[InvalidEntity]) extends Product with Serializable {
   def toEntity: Array[Entity] = entities.asInstanceOf[Array[Entity]]
 }
 
 object Entities {
-  def apply[E: ClassTag](entities: Array[E], invalidLines: Array[InvalidLine]): Entities[E] = new Entities[E]( entities, invalidLines )
+  def apply[E: ClassTag](entities: Array[E], invalidLines: Array[InvalidEntity]): Entities[E] = new Entities[E]( entities, invalidLines )
 
-  def empty[E: ClassTag]: Entities[E] = new Entities[E]( Array.empty[E], Array.empty[InvalidLine] )
+  def empty[E: ClassTag]: Entities[E] = new Entities[E]( Array.empty[E], Array.empty[InvalidEntity] )
+}
+
+final case class InvalidEntity(number: Int, line: String, error: Throwable) extends Product with Serializable {
+  /** Error getMessage starts with: 'requirement failed: ' The substring(20) cuts it out. */
+  override def toString: String = s"$number, $line, [ ${error.getMessage.substring(20)} ]"
 }
 
 final case class BloodPressure(number: Int, datetime: Minute, systolic: Int, diastolic: Int) extends Entity {
@@ -75,9 +80,4 @@ final case class Vitals(number: Int,
 
 final case class Weight(number: Int, datetime: Minute, pounds: Double) extends Entity {
   override def toString: String = s"$number, $datetime, $pounds"
-}
-
-final case class InvalidLine(number: Int, line: String, error: Throwable) extends Product with Serializable {
-  /** Error getMessage starts with: 'requirement failed: ' The substring(20) cuts it out. */
-  override def toString: String = s"$number, ${error.getMessage.substring(20)}, $line"
 }

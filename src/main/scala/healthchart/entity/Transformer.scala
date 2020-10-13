@@ -16,21 +16,21 @@ object Transformer {
                              delimiter: String = ",")(implicit validator: Validator[E]): Try[Entities[E]] =
     Try {
       val entitiesBuilder = mutable.ArrayBuilder.make[E]
-      val invalidLinesBuilder = mutable.ArrayBuilder.make[InvalidLine]
+      val invalidEntitiesBuilder = mutable.ArrayBuilder.make[InvalidEntity]
       val source = Source.fromFile(path, utf8)
       var number = 1
       for (line <- source.getLines) {
         val columns = line.split(delimiter).map(_.trim)
         validate[E](number, columns) match {
           case Success(entity) => entitiesBuilder += entity
-          case Failure(error) => invalidLinesBuilder += InvalidLine(number, line, error)
+          case Failure(error) => invalidEntitiesBuilder += InvalidEntity(number, line, error)
         }
         number = number + 1
       }
       source.close()
-      val (entities, invalidLines) = (entitiesBuilder.result(), invalidLinesBuilder.result())
-      logEntitiesAndInvalidLines(entities, invalidLines)
-      new Entities[E](entities, invalidLines)
+      val (entities, invalidEntities) = (entitiesBuilder.result(), invalidEntitiesBuilder.result())
+      logEntitiesAndInvalidEntities(entities, invalidEntities)
+      new Entities[E](entities, invalidEntities)
     }
 
   def transformEntities[E: ClassTag](path: String)(implicit validator: Validator[E]): Entities[E] =

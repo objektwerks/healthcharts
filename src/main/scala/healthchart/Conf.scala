@@ -31,7 +31,7 @@ object Conf {
 
   val tabChart = conf.getString("tab.chart")
   val tabEntities = conf.getString("tab.entities")
-  val tabInvalidLines = conf.getString("tab.invalidlines")
+  val tabInvalidEntities = conf.getString("tab.invalidEntities")
 
   val titleFileChooser = conf.getString("title.fileChooser")
   val titleMenuBar = conf.getString("title.menuBar")

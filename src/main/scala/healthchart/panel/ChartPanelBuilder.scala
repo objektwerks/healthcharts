@@ -6,7 +6,7 @@ import javax.swing.{BorderFactory, JPanel, JScrollPane, JTabbedPane, JTextArea, 
 
 import healthchart.Conf
 import healthchart.entity.Entities
-import healthchart.entity.InvalidLine
+import healthchart.entity.InvalidEntity
 
 import org.jfree.chart.{ChartPanel, JFreeChart}
 
@@ -24,7 +24,7 @@ object ChartPanelBuilder {
     tabbedPane.setTabPlacement( SwingConstants.BOTTOM )
     tabbedPane.addTab( Conf.tabChart, buildChartPanel(chart) )
     tabbedPane.addTab( Conf.tabEntities, buildEntitiesPanel(entities.entities) )
-    tabbedPane.addTab( Conf.tabInvalidLines, buildInvalidLinesPanel(entities.invalidLines) )
+    tabbedPane.addTab( Conf.tabInvalidEntities, buildInvalidEntitiesPanel(entities.invalidEntities) )
     tabbedPane
   }
 
@@ -51,12 +51,12 @@ object ChartPanelBuilder {
     panel
   }
 
-  def buildInvalidLinesPanel(invalidLines: Array[InvalidLine]): JPanel = {
+  def buildInvalidEntitiesPanel(invalidEntities: Array[InvalidEntity]): JPanel = {
     val textArea = new JTextArea()
     textArea.setBackground(Color.lightGray)
     textArea.setEditable(false)
-    if (invalidLines.nonEmpty)
-      for ( line <- invalidLines ) textArea.append( s"${line.toString}\n" )
+    if (invalidEntities.nonEmpty)
+      for ( invalidEntity <- invalidEntities) textArea.append( s"${invalidEntity.toString}\n" )
     else textArea.append("0")
     val scrollPane = new JScrollPane(textArea)
     val panel = new JPanel( new BorderLayout() )

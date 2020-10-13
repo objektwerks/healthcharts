@@ -70,11 +70,11 @@ class TransformerTest extends AnyFunSuite with Matchers {
 
   private def testTransformer[E: ClassTag](path: String,
                                            entitiesCount: Int,
-                                           invalidLinesCount: Int)(implicit validator: Validator[E]): Unit = {
+                                           invalidEntitiesCount: Int)(implicit validator: Validator[E]): Unit = {
     Transformer.transform[E](path) match {
       case Success(entities) =>
         entities.entities.length shouldEqual entitiesCount
-        entities.invalidLines.length shouldEqual invalidLinesCount
+        entities.invalidEntities.length shouldEqual invalidEntitiesCount
       case Failure(failure) =>
         Logger.logFileIOFailure(path, failure)
         fail
