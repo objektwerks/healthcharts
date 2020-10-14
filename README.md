@@ -36,6 +36,10 @@ Package
 -------
 1. sbt clean test universal:packageBin
 
+Research
+--------
+>This project is tracked by ETH Open Source Research in Zurich, Switzerland ( https://blogs.ethz.ch/open-source-research/ ).
+
 License
 -------
 > Copyright (c) [2020] [Mike Funk]
