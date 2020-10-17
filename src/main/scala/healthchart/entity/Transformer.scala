@@ -19,7 +19,7 @@ object Transformer {
       val invalidEntitiesBuilder = mutable.ArrayBuilder.make[InvalidEntity]
       val source = Source.fromFile(path, utf8)
       var number = 1
-      for (line <- source.getLines) {
+      for (line <- source.getLines()) {
         val columns = line.split(delimiter).map(_.trim)
         validate[E](number, columns) match {
           case Success(entity) => entitiesBuilder += entity

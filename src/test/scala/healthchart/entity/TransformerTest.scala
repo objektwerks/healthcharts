@@ -77,7 +77,7 @@ class TransformerTest extends AnyFunSuite with Matchers {
         entities.invalidEntities.length shouldEqual invalidEntitiesCount
       case Failure(failure) =>
         Logger.logFileIOFailure(path, failure)
-        fail
+        fail(s"*** TransformerTest.testTransformer failed: ${failure.getMessage()}")
     }
     ()
   }

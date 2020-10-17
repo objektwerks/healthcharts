@@ -3,7 +3,7 @@ enablePlugins(JlinkPlugin)
 name := "healthcharts"
 organization := "objektwerks"
 version := "0.7-SNAPSHOT"
-scalaVersion := "2.13.2"
+scalaVersion := "2.13.3"
 libraryDependencies ++= {
   Seq(
     "org.jfree" % "jfreechart" % "1.5.0",
