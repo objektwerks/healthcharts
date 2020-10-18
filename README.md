@@ -35,8 +35,9 @@ Run
 Package
 -------
 1. sbt clean test universal:packageBin
-2. See ./target/universal/healthcharts-0.N-SNAPSHOT.zip
+2. See ./target/universal/healthcharts-VERSION.zip
 >As required, rename, move and unpack zip file. Run via Unix or Windows script in package ***bin*** directory.
+>Also see ./target/universal/jlink for a custom JRE OS distribution.
 
 Research
 --------
