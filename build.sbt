@@ -4,6 +4,7 @@ name := "healthcharts"
 organization := "objektwerks"
 version := "0.7-SNAPSHOT"
 scalaVersion := "2.13.3"
+maintainer := "objektwerks@runbox.com"
 libraryDependencies ++= {
   Seq(
     "org.jfree" % "jfreechart" % "1.5.0",

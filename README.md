@@ -35,6 +35,7 @@ Run
 Package
 -------
 1. sbt clean test universal:packageBin
+2. See ./target/universal/healthcharts-0.N-SNAPSHOT.zip
 
 Research
 --------
