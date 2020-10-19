@@ -1,7 +1,6 @@
 HealthCharts
 ------------
->Healthcharts is an open source project, governed by the Apache 2.0 license, with the
->singular objective of providing useful health charts sourced by simple csv/txt files.
+>Healthcharts is an open source project that provides useful health charts sourced by csv/txt files.
 
 Charts
 ------
