@@ -44,22 +44,6 @@ object CaloriesWeightChart extends Chart {
     val xyPlot = new XYPlot()
     xyPlot.setBackgroundPaint(Color.LIGHT_GRAY)
 
-    val yAxis = new NumberAxis(Conf.titleCaloriesWeightChartTopYAxis)
-    yAxis.setAutoRangeIncludesZero(false)
-    yAxis.setAutoRange(true)
-
-    xyPlot.setRangeAxis(yAxis)
-    xyPlot.getRangeAxis.setUpperMargin(xyPlot.getRangeAxis.getUpperMargin + 0.10)
-
-    xyPlot.setDataset(0, buildWeightDataset(caloriesWeights))
-    xyPlot.setRenderer(0, buildWeightRenderer())
-    xyPlot
-  }
-
-  def buildBottomXYPlot(caloriesWeights: Entities[CaloriesWeight]): XYPlot = {
-    val xyPlot = new XYPlot()
-    xyPlot.setBackgroundPaint(Color.LIGHT_GRAY)
-
     val yAxis = new NumberAxis(Conf.titleCaloriesWeightChartBottomYAxis)
     yAxis.setAutoRangeIncludesZero(false)
     yAxis.setAutoRange(true)
@@ -75,6 +59,21 @@ object CaloriesWeightChart extends Chart {
     xyPlot
   }
 
+  def buildBottomXYPlot(caloriesWeights: Entities[CaloriesWeight]): XYPlot = {
+    val xyPlot = new XYPlot()
+    xyPlot.setBackgroundPaint(Color.LIGHT_GRAY)
+
+    val yAxis = new NumberAxis(Conf.titleCaloriesWeightChartTopYAxis)
+    yAxis.setAutoRangeIncludesZero(false)
+    yAxis.setAutoRange(true)
+
+    xyPlot.setRangeAxis(yAxis)
+    xyPlot.getRangeAxis.setUpperMargin(xyPlot.getRangeAxis.getUpperMargin + 0.10)
+
+    xyPlot.setDataset(0, buildWeightDataset(caloriesWeights))
+    xyPlot.setRenderer(0, buildWeightRenderer())
+    xyPlot
+  }
 
   def buildWeightDataset(caloriesWeights: Entities[CaloriesWeight]): XYDataset = {
     val timeSeries = new TimeSeries(Conf.titleWeight)

@@ -26,7 +26,7 @@ final case class CaloriesWeight(number: Int, datetime: Minute, in: Int, out: Int
 
 GlucoseMed CSV
 --------------
->See data/caloriesweight/calorieweight.txt
+>See data/caloriesweight/caloriesweight.txt
 1. datetime - yyyy-MM-ddThh:mm:ss
 2. in - nnnn
 3. out - nnnn
