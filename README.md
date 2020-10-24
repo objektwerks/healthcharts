@@ -34,9 +34,17 @@ Run
 Package
 -------
 1. sbt clean test universal:packageBin
-2. See ./target/universal/healthcharts-VERSION.zip
->As required, rename, move and unpack zip file. Run via Unix or Windows script in package ***bin*** directory.
->Also see ./target/universal/jlink for a custom JRE OS distribution.
+2. verify ./target/universal/healthcharts-${version}.zip
+
+Install
+-------
+1. unzip ./target/universal/healthcharts-${version}.zip
+2. copy unzipped healthcharts-${version} directory to ${healthcharts.directory}
+3. set executable permissions for ${healthcharts.directory}/healthcharts-${version}/bin/healthcharts
+
+Execute
+-------
+1. execute installation-directory/healthcharts-${version}/bin/healthcharts
 
 Research
 --------
