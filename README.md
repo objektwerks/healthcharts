@@ -44,7 +44,7 @@ Install
 
 Execute
 -------
-1. execute installation-directory/healthcharts-${version}/bin/healthcharts
+1. execute ${healthcharts-directory}/healthcharts-${version}/bin/healthcharts
 
 Research
 --------
