@@ -2,13 +2,12 @@ package healthchart.entity
 
 import healthchart.Logger
 
-import org.scalatest.funsuite.AnyFunSuite
-import org.scalatest.matchers.should.Matchers
+import munit._
 
 import scala.reflect.ClassTag
 import scala.util.{Failure, Success}
 
-class TransformerTest extends AnyFunSuite with Matchers {
+class TransformerTest extends FunSuite {
   test("blood pressure") {
     testTransformer[BloodPressure]("./data/blood-pressure/blood-pressure.txt", 7, 0)
     testTransformer[BloodPressure]("./data/blood-pressure/blood-pressure-invalid.txt", 5, 2)
@@ -73,8 +72,8 @@ class TransformerTest extends AnyFunSuite with Matchers {
                                            invalidEntitiesCount: Int)(implicit validator: Validator[E]): Unit = {
     Transformer.transform[E](path) match {
       case Success(entities) =>
-        entities.entities.length shouldEqual entitiesCount
-        entities.invalidEntities.length shouldEqual invalidEntitiesCount
+        assert(entities.entities.length == entitiesCount)
+        assert(entities.invalidEntities.length == invalidEntitiesCount)
       case Failure(failure) =>
         Logger.logFileIOFailure(path, failure)
         fail(s"*** TransformerTest.testTransformer failed: ${failure.getMessage()}")

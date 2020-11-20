@@ -2,6 +2,10 @@ HealthCharts
 ------------
 >Healthcharts is an open source project that provides useful health charts sourced by csv/txt files.
 
+Scala 3
+-------
+>Upgraded to Scala 3 on 2020.11.20
+
 Charts
 ------
 - [Blood Pressure](./docs/blood.pressure.chart.md)
