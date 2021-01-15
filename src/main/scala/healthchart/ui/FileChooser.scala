@@ -4,7 +4,8 @@ import javax.swing.JFileChooser
 import javax.swing.filechooser.{FileNameExtensionFilter, FileSystemView}
 
 object FileChooser {
-  def chooseFile(frame: Frame, dialogTitle: String,
+  def chooseFile(frame: Frame, 
+                 dialogTitle: String,
                  fileExtensionFilterDesc: String,
                  fileExtensions: Array[String]): Option[String] = {
     val fileChooser = new JFileChooser(FileSystemView.getFileSystemView.getHomeDirectory)
