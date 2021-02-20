@@ -11,7 +11,7 @@ libraryDependencies ++= {
     "com.miglayout" % "miglayout-swing" % "5.2",
     "com.typesafe" % "config" % "1.4.0",
     "ch.qos.logback" % "logback-classic" % "1.2.3",
-    "org.scalameta" %% "munit" % "0.7.19" % Test
+    "org.scalameta" %% "munit" % "0.7.22" % Test
   )
 }
 testFrameworks += new TestFramework("munit.Framework")
