@@ -25,7 +25,7 @@ object Transformer {
           case Success(entity) => entitiesBuilder += entity
           case Failure(error) => invalidEntitiesBuilder += InvalidEntity(number, line, error)
         }
-        number = number + 1
+        number += 1
       }
       source.close()
       val (entities, invalidEntities) = (entitiesBuilder.result(), invalidEntitiesBuilder.result())
