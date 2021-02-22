@@ -15,9 +15,7 @@ final case class Entities[E](entities: Array[E], invalidEntities: Array[InvalidE
 }
 
 object Entities {
-  def apply[E: ClassTag](entities: Array[E], invalidLines: Array[InvalidEntity]): Entities[E] = new Entities[E]( entities, invalidLines )
-
-  def empty[E: ClassTag]: Entities[E] = new Entities[E]( Array.empty[E], Array.empty[InvalidEntity] )
+  def empty[E: ClassTag]: Entities[E] = Entities[E]( Array.empty[E], Array.empty[InvalidEntity] )
 }
 
 final case class InvalidEntity(number: Int, line: String, error: Throwable) extends Product with Serializable {

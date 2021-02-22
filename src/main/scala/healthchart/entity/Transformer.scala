@@ -30,7 +30,7 @@ object Transformer {
       source.close()
       val (entities, invalidEntities) = (entitiesBuilder.result(), invalidEntitiesBuilder.result())
       logEntitiesAndInvalidEntities(entities, invalidEntities)
-      new Entities[E](entities, invalidEntities)
+      Entities[E](entities, invalidEntities)
     }
 
   def transformEntities[E: ClassTag](path: String)(implicit validator: Validator[E]): Entities[E] =
