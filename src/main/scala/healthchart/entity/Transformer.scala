@@ -32,7 +32,7 @@ object Transformer {
     }
 
   def transformEntities[E: ClassTag](path: String)(implicit validator: Validator[E]): Entities[E] =
-    Transformer.transform[E](path) match {
+    transform[E](path) match {
       case Success(entities) => entities
       case Failure(failure) =>
         Logger.logFileIOFailure(path, failure)
