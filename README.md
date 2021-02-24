@@ -46,13 +46,9 @@ Execute
 -------
 1. execute ${healthcharts-directory}/healthcharts-${version}/bin/healthcharts
 
-Research
---------
->This project is tracked by ETH Open Source Research in Zurich, Switzerland ( https://blogs.ethz.ch/open-source-research/ ).
-
 License
 -------
-> Copyright (c) [2020] [Mike Funk]
+> Copyright (c) [2021] [Mike Funk]
 
 >Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
