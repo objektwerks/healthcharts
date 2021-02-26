@@ -16,7 +16,6 @@ libraryDependencies ++= {
 }
 testFrameworks += new TestFramework("munit.Framework")
 parallelExecution in Test := false
-semanticdbEnabled := true
 jlinkModules := {
   jlinkModules.value :+ "jdk.unsupported"
 }
