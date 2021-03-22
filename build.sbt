@@ -2,7 +2,7 @@ enablePlugins(JlinkPlugin)
 
 name := "healthcharts"
 organization := "objektwerks"
-version := "1.8-SNAPSHOT"
+version := "1.8"
 scalaVersion := "2.13.5"
 maintainer := "objektwerks@runbox.com"
 libraryDependencies ++= {
@@ -16,7 +16,3 @@ libraryDependencies ++= {
 }
 testFrameworks += new TestFramework("munit.Framework")
 parallelExecution in Test := false
-jlinkModules := {
-  jlinkModules.value :+ "jdk.unsupported"
-}
-jlinkIgnoreMissingDependency := JlinkIgnore.everything
