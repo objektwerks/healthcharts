@@ -10,16 +10,14 @@ import healthchart.entity.InvalidEntity
 
 import org.jfree.chart.{ChartPanel, JFreeChart}
 
-import scala.reflect.ClassTag
-
 object ChartPanelBuilder {
-  def build[E: ClassTag](chart: JFreeChart, entities: Entities[E]): JPanel = {
+  def build[E](chart: JFreeChart, entities: Entities[E]): JPanel = {
     val compositePanel = new JPanel( new BorderLayout() )
     compositePanel.add( buildTabbedPane(chart, entities), BorderLayout.CENTER )
     compositePanel
   }
 
-  def buildTabbedPane[E: ClassTag](chart: JFreeChart, entities: Entities[E]): JTabbedPane = {
+  def buildTabbedPane[E](chart: JFreeChart, entities: Entities[E]): JTabbedPane = {
     val tabbedPane = new JTabbedPane()
     tabbedPane.setTabPlacement( SwingConstants.BOTTOM )
     tabbedPane.addTab( Conf.tabChart, buildChartPanel(chart) )
@@ -38,7 +36,7 @@ object ChartPanelBuilder {
     chartPanel
   }
 
-  def buildEntitiesPanel[E: ClassTag](entities: Array[E]): JPanel = {
+  def buildEntitiesPanel[E](entities: Array[E]): JPanel = {
     val textArea = new JTextArea()
     textArea.setBackground(Color.lightGray)
     textArea.setEditable(false)
