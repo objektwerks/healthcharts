@@ -8,7 +8,7 @@ maintainer := "objektwerks@runbox.com"
 libraryDependencies ++= {
   Seq(
     "org.jfree" % "jfreechart" % "1.5.3",
-    "com.miglayout" % "miglayout-swing" % "5.2",
+    "com.miglayout" % "miglayout-swing" % "11.0",
     "com.typesafe" % "config" % "1.4.1",
     "ch.qos.logback" % "logback-classic" % "1.2.5",
     "org.scalameta" %% "munit" % "0.7.23" % Test
