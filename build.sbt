@@ -9,7 +9,7 @@ libraryDependencies ++= {
   Seq(
     "org.jfree" % "jfreechart" % "1.5.3",
     "com.miglayout" % "miglayout-swing" % "11.0",
-    "com.typesafe" % "config" % "1.4.1",
+    "com.typesafe" % "config" % "1.4.2",
     "ch.qos.logback" % "logback-classic" % "1.2.10",
     "org.scalameta" %% "munit" % "0.7.29" % Test
   )
