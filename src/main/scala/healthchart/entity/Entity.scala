@@ -40,10 +40,6 @@ final case class Glucose(number: Int,
                          level: Int) extends Entity:
   override def toString: String = s"$number, $datetime, $level"
 
-enum MedT(val typeof: String): // TODO!
-  case insulin extends MedT("insulin")
-  case steroid extends MedT("steroid")
-
 object MedType extends Enumeration:
   val insulin = Value(1, "insulin")
   val steroid = Value(2, "steroid")
