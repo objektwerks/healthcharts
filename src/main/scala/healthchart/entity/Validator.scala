@@ -10,7 +10,7 @@ trait Validator[E]:
 object Validator:
   def validate[E](number: Int, columns: Array[String])(using validator: Validator[E]): Try[E] = validator.validate(number, columns)
 
-  implicit object BloodPressureValidator extends Validator[BloodPressure]:
+  given Validator[BloodPressure] with
     def validate(number: Int, columns: Array[String]): Try[BloodPressure] =
       Try {
         validateColumnCount(columns.length, 3)
@@ -21,7 +21,7 @@ object Validator:
         BloodPressure(number, datetime, systolic, diastolic)
       }
 
-  implicit object CaloriesWeightValidator extends Validator[CaloriesWeight]:
+  given Validator[CaloriesWeight] with
     def validate(number: Int, columns: Array[String]): Try[CaloriesWeight] =
       Try {
         validateColumnCount(columns.length, 4)
@@ -33,7 +33,7 @@ object Validator:
         CaloriesWeight(number, datetime, in, out, weight)
       }
 
-  implicit object GlucoseValidator extends Validator[Glucose]:
+  given Validator[Glucose] with
     def validate(number: Int, columns: Array[String]): Try[Glucose] =
       Try {
         validateColumnCount(columns.length, 2)
@@ -43,7 +43,7 @@ object Validator:
         Glucose(number, datetime, level)
       }
 
-  implicit object MedValidator extends Validator[Med]:
+  given Validator[Med] with
     def validate(number: Int, columns: Array[String]): Try[Med] =
       Try {
         validateColumnCount(columns.length, 3)
@@ -55,7 +55,7 @@ object Validator:
         Med(number, datetime, medtype, dosage)
       }
 
-  implicit object GlucoseMedValidator extends Validator[GlucoseMed]:
+  given Validator[GlucoseMed] with
     def validate(number: Int, columns: Array[String]): Try[GlucoseMed] =
       Try {
         validateColumnCount(columns.length, 4)
@@ -68,7 +68,7 @@ object Validator:
         GlucoseMed(number, datetime, level, medtype, dosage)
       }
 
-  implicit object PulseValidator extends Validator[Pulse]:
+  given Validator[Pulse] with
     def validate(number: Int, columns: Array[String]): Try[Pulse] =
       Try {
         validateColumnCount(columns.length, 2)
@@ -78,7 +78,7 @@ object Validator:
         Pulse(number, datetime, beatsPerMinute)
       }
 
-  implicit object PulseOxygenValidator extends Validator[PulseOxygen]:
+  given Validator[PulseOxygen] with
     def validate(number: Int, columns: Array[String]): Try[PulseOxygen] =
       Try {
         validateColumnCount(columns.length, 3)
@@ -89,7 +89,7 @@ object Validator:
         PulseOxygen(number, datetime, beatsPerMinute, bloodOxygenPercentage)
       }
 
-  implicit object RespirationValidator extends Validator[Respiration]:
+  given Validator[Respiration] with
     def validate(number: Int, columns: Array[String]): Try[Respiration] =
       Try {
         validateColumnCount(columns.length, 2)
@@ -99,7 +99,7 @@ object Validator:
         Respiration(number, datetime, breathesPerMinute)
       }
 
-  implicit object TemperatureValidator extends Validator[Temperature]:
+  given Validator[Temperature] with
     def validate(number: Int, columns: Array[String]): Try[Temperature] =
       Try {
         validateColumnCount(columns.length, 2)
@@ -109,7 +109,7 @@ object Validator:
         Temperature(number, datetime, degrees)
       }
 
-  implicit object VitalsValidator extends Validator[Vitals]:
+  given Validator[Vitals] with
     def validate(number: Int, columns: Array[String]): Try[Vitals] =
       Try {
         validateColumnCount(columns.length, 7)
@@ -128,7 +128,7 @@ object Validator:
         Vitals(number, datetime, temperature, respiration, pulse, oxygen, systolic, diastolic)
       }
 
-  implicit object WeightValidator extends Validator[Weight]:
+  given Validator[Weight] with
     def validate(number: Int, columns: Array[String]): Try[Weight] =
       Try {
         validateColumnCount(columns.length, 2)
