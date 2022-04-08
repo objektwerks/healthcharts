@@ -14,8 +14,8 @@ import org.jfree.chart.renderer.xy.{XYItemRenderer, XYLineAndShapeRenderer}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.XYDataset
 
-object PulseChart extends Chart {
-  def build(pulses: Entities[Pulse]): JFreeChart = {
+object PulseChart extends Chart:
+  def build(pulses: Entities[Pulse]): JFreeChart =
     val xyPlot = new XYPlot()
     xyPlot.setDataset( buildPulseDataset(pulses) )
     xyPlot.setRenderer( buildPulseRenderer() )
@@ -29,27 +29,24 @@ object PulseChart extends Chart {
 
     val title = buildTitle(Conf.titlePulse, pulses.toEntity)
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
-  }
 
-  def buildPulseDataset(pulses: Entities[Pulse]): XYDataset = {
+  def buildPulseDataset(pulses: Entities[Pulse]): XYDataset =
     val timeSeries = new TimeSeries(Conf.titlePulse)
     pulses.entities.foreach { pulse =>
       timeSeries.add( pulse.datetime, pulse.beatsPerMinute.toDouble )
     }
     new TimeSeriesCollection(timeSeries)
-  }
 
-  def buildPulseRenderer(): XYItemRenderer = {
+  def buildPulseRenderer(): XYItemRenderer =
     val renderer = new XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator() {
-      override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String = {
+      override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String =
         val xValue = dataset.getXValue(series, item)
         val yValue = dataset.getYValue(series, item)
         val dayHourMinute = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
         val beatsPerMinute = new DecimalFormat("0").format( yValue )
         val delta = calculateDeltaAsPercentage(dataset, series, item)
         s"${Conf.titlePulse}: ($dayHourMinute, $beatsPerMinute, $delta%)"
-      }
       override def clone() = this
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
@@ -57,5 +54,3 @@ object PulseChart extends Chart {
     renderer.setDefaultItemLabelGenerator( buildItemLabelGenerator("0") )
     renderer.setDefaultItemLabelsVisible(true)
     renderer
-  }
-}
