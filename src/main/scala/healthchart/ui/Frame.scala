@@ -6,7 +6,7 @@ import javax.swing.{JFrame, JPanel, WindowConstants}
 
 import healthchart.Conf
 
-class Frame extends JFrame {
+class Frame extends JFrame:
   val tabbedPane = new TabbedPane()
   add(tabbedPane, BorderLayout.CENTER)
 
@@ -16,8 +16,6 @@ class Frame extends JFrame {
   setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
   setLocationRelativeTo(null)
 
-  def addCompositeChartPanel(title: String, chartPanel: JPanel): Unit = {
+  def addCompositeChartPanel(title: String, chartPanel: JPanel): Unit =
     tabbedPane.addCompositeChartPanel(title, chartPanel)
     revalidate()
-  }
-}
