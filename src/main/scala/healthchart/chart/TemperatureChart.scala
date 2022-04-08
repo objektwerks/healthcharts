@@ -14,8 +14,8 @@ import org.jfree.chart.renderer.xy.{XYItemRenderer, XYLineAndShapeRenderer}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.XYDataset
 
-object TemperatureChart extends Chart {
-  def build(temperatures: Entities[Temperature]): JFreeChart = {
+object TemperatureChart extends Chart:
+  def build(temperatures: Entities[Temperature]): JFreeChart =
     val xyPlot = new XYPlot()
     xyPlot.setDataset( buildTemperatureDataset(temperatures) )
     xyPlot.setRenderer( buildTemperatureRenderer() )
@@ -29,17 +29,15 @@ object TemperatureChart extends Chart {
 
     val title = buildTitle(Conf.titleTemperature, temperatures.toEntity)
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
-  }
 
-  def buildTemperatureDataset(temperatures: Entities[Temperature]): XYDataset = {
+  def buildTemperatureDataset(temperatures: Entities[Temperature]): XYDataset =
     val timeSeries = new TimeSeries(Conf.titleTemperature)
     temperatures.entities.foreach { weight =>
       timeSeries.add( weight.datetime, weight.degrees )
     }
     new TimeSeriesCollection(timeSeries)
-  }
 
-  def buildTemperatureRenderer(): XYItemRenderer = {
+  def buildTemperatureRenderer(): XYItemRenderer =
     val renderer = new XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String = {
@@ -57,5 +55,3 @@ object TemperatureChart extends Chart {
     renderer.setDefaultItemLabelGenerator( buildItemLabelGenerator("0.0") )
     renderer.setDefaultItemLabelsVisible(true)
     renderer
-  }
-}
