@@ -14,8 +14,8 @@ import org.jfree.chart.renderer.xy.{XYItemRenderer, XYLineAndShapeRenderer}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.XYDataset
 
-object WeightChart extends Chart {
-  def build(weights: Entities[Weight]): JFreeChart = {
+object WeightChart extends Chart:
+  def build(weights: Entities[Weight]): JFreeChart =
     val xyPlot = new XYPlot()
     xyPlot.setDataset( buildWeightDataset(weights) )
     xyPlot.setRenderer( buildWeightRenderer() )
@@ -29,17 +29,15 @@ object WeightChart extends Chart {
 
     val title = buildTitle(Conf.titleWeight, weights.toEntity)
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
-  }
 
-  def buildWeightDataset(weights: Entities[Weight]): XYDataset = {
+  def buildWeightDataset(weights: Entities[Weight]): XYDataset =
     val timeSeries = new TimeSeries(Conf.titleWeight)
     weights.entities.foreach { weight =>
       timeSeries.add( weight.datetime, weight.pounds )
     }
     new TimeSeriesCollection(timeSeries)
-  }
 
-  def buildWeightRenderer(): XYItemRenderer = {
+  def buildWeightRenderer(): XYItemRenderer =
     val renderer = new XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String = {
@@ -57,5 +55,3 @@ object WeightChart extends Chart {
     renderer.setDefaultItemLabelGenerator( buildItemLabelGenerator("0.0") )
     renderer.setDefaultItemLabelsVisible(true)
     renderer
-  }
-}
