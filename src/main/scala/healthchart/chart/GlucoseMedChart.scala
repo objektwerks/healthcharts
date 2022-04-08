@@ -11,8 +11,8 @@ import org.jfree.chart.plot.{DatasetRenderingOrder, XYPlot}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.XYDataset
 
-object GlucoseMedChart extends Chart {
-  def build(glucosemeds: Entities[GlucoseMed]): JFreeChart = {
+object GlucoseMedChart extends Chart:
+  def build(glucosemeds: Entities[GlucoseMed]): JFreeChart =
     val xyPlot = new XYPlot()
     xyPlot.setDatasetRenderingOrder(DatasetRenderingOrder.FORWARD)
 
@@ -31,21 +31,17 @@ object GlucoseMedChart extends Chart {
 
     val title = buildTitle(Conf.titleGlucoseMed, glucosemeds.toEntity)
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
-  }
 
-  def buildGlucoseDataset(glucosemeds: Entities[GlucoseMed]): XYDataset = {
+  def buildGlucoseDataset(glucosemeds: Entities[GlucoseMed]): XYDataset =
     val timeSeries = new TimeSeries(Conf.titleGlucose)
     glucosemeds.entities.foreach { glucosemed =>
       timeSeries.add( glucosemed.datetime, glucosemed.level.toDouble )
     }
     new TimeSeriesCollection(timeSeries)
-  }
 
-  def buildMedDataset(glucosemeds: Entities[GlucoseMed]): XYDataset = {
+  def buildMedDataset(glucosemeds: Entities[GlucoseMed]): XYDataset =
     val timeSeries = new TimeSeries(Conf.titleMed)
     glucosemeds.entities.foreach { glucosemed =>
       timeSeries.add( glucosemed.datetime, s"${glucosemed.dosage}.${glucosemed.medtype.id}".toDouble )
     }
     new TimeSeriesCollection(timeSeries)
-  }
-}
