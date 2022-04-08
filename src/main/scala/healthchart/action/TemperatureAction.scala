@@ -12,18 +12,15 @@ import healthchart.entity.Transformer._
 import healthchart.panel.ChartPanelBuilder
 import healthchart.ui.{Frame, PathDialog}
 
-class TemperatureAction(name: String, frame: Frame) extends AbstractAction(name) {
+class TemperatureAction(name: String, frame: Frame) extends AbstractAction(name):
   protected val counter = new AtomicInteger(1)
 
-  def actionPerformed(event: ActionEvent): Unit = {
+  def actionPerformed(event: ActionEvent): Unit =
     val path = new PathDialog(frame, Conf.labelTemperatureCsv).view
-    path match {
+    path match
       case Some( temperatureCsvPath ) =>
         val temperatures = transformEntities[Temperature](temperatureCsvPath)
         val chart = TemperatureChart.build(temperatures)
         val chartPanel = ChartPanelBuilder.build(chart, temperatures)
         frame.addCompositeChartPanel(s"${Conf.titleTemperature}-${counter.getAndIncrement}", chartPanel)
       case None =>
-    }
-  }
-}
