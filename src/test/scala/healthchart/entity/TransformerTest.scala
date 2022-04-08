@@ -70,7 +70,7 @@ class TransformerTest extends AnyFunSuite with Matchers:
 
   private def testTransformer[E: ClassTag](path: String,
                                            entitiesCount: Int,
-                                           invalidEntitiesCount: Int)(implicit validator: Validator[E]): Unit =
+                                           invalidEntitiesCount: Int)(using validator: Validator[E]): Unit =
     Transformer.transform[E](path) match
       case Success(entities) =>
         entities.entities.length shouldBe entitiesCount
