@@ -9,7 +9,7 @@ import scala.io.{Codec, Source}
 import scala.reflect.ClassTag
 import scala.util.{Failure, Success, Try, Using}
 
-object Transformer {
+object Transformer:
   private val utf8 = Codec.UTF8.name
 
   def transform[E: ClassTag](path: String,
@@ -20,10 +20,9 @@ object Transformer {
       var number = 1
       for (line <- source.getLines()) {
         val columns = line.split(delimiter).map(_.trim)
-        validate[E](number, columns) match {
+        validate[E](number, columns) match
           case Success(entity) => entitiesBuilder += entity
           case Failure(error) => invalidEntitiesBuilder += InvalidEntity(number, line, error)
-        }
         number += 1
       }
       val (entities, invalidEntities) = (entitiesBuilder.result(), invalidEntitiesBuilder.result())
@@ -32,10 +31,8 @@ object Transformer {
     }
 
   def transformEntities[E: ClassTag](path: String)(implicit validator: Validator[E]): Entities[E] =
-    transform[E](path) match {
+    transform[E](path) match
       case Success(entities) => entities
       case Failure(failure) =>
         Logger.logFileIOFailure(path, failure)
         Entities.empty
-    }
-}
