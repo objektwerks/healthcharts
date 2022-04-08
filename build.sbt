@@ -14,4 +14,3 @@ libraryDependencies ++= {
     "org.scalatest" %% "scalatest" % "3.2.11" % Test
   )
 }
-parallelExecution in Test := false
