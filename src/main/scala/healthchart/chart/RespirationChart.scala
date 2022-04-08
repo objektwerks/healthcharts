@@ -14,8 +14,8 @@ import org.jfree.chart.renderer.xy.{XYItemRenderer, XYLineAndShapeRenderer}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.XYDataset
 
-object RespirationChart extends Chart {
-  def build(respirations: Entities[Respiration]): JFreeChart = {
+object RespirationChart extends Chart:
+  def build(respirations: Entities[Respiration]): JFreeChart =
     val xyPlot = new XYPlot()
     xyPlot.setDataset( buildRespirationDataset(respirations) )
     xyPlot.setRenderer( buildRespirationRenderer() )
@@ -29,27 +29,24 @@ object RespirationChart extends Chart {
 
     val title = buildTitle(Conf.titleRespiration, respirations.toEntity)
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
-  }
 
-  def buildRespirationDataset(respirations: Entities[Respiration]): XYDataset = {
+  def buildRespirationDataset(respirations: Entities[Respiration]): XYDataset =
     val timeSeries = new TimeSeries(Conf.titleRespiration)
     respirations.entities.foreach { respiration =>
       timeSeries.add( respiration.datetime, respiration.breathesPerMinute.toDouble )
     }
     new TimeSeriesCollection(timeSeries)
-  }
 
-  def buildRespirationRenderer(): XYItemRenderer = {
+  def buildRespirationRenderer(): XYItemRenderer =
     val renderer = new XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator() {
-      override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String = {
+      override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String =
         val xValue = dataset.getXValue(series, item)
         val yValue = dataset.getYValue(series, item)
         val dayHourMinute = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
         val breathesPerMinute = new DecimalFormat("0").format( yValue )
         val delta = calculateDeltaAsPercentage(dataset, series, item)
         s"${Conf.titleRespiration}: ($dayHourMinute, $breathesPerMinute, $delta%)"
-      }
       override def clone() = this
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
@@ -57,5 +54,3 @@ object RespirationChart extends Chart {
     renderer.setDefaultItemLabelGenerator( buildItemLabelGenerator("0") )
     renderer.setDefaultItemLabelsVisible(true)
     renderer
-  }
-}
