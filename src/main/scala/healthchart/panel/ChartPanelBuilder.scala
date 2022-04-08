@@ -10,23 +10,21 @@ import healthchart.entity.InvalidEntity
 
 import org.jfree.chart.{ChartPanel, JFreeChart}
 
-object ChartPanelBuilder {
-  def build[E](chart: JFreeChart, entities: Entities[E]): JPanel = {
+object ChartPanelBuilder:
+  def build[E](chart: JFreeChart, entities: Entities[E]): JPanel =
     val compositePanel = new JPanel( new BorderLayout() )
     compositePanel.add( buildTabbedPane(chart, entities), BorderLayout.CENTER )
     compositePanel
-  }
 
-  def buildTabbedPane[E](chart: JFreeChart, entities: Entities[E]): JTabbedPane = {
+  def buildTabbedPane[E](chart: JFreeChart, entities: Entities[E]): JTabbedPane =
     val tabbedPane = new JTabbedPane()
     tabbedPane.setTabPlacement( SwingConstants.BOTTOM )
     tabbedPane.addTab( Conf.tabChart, buildChartPanel(chart) )
     tabbedPane.addTab( Conf.tabEntities, buildEntitiesPanel(entities.entities) )
     tabbedPane.addTab( Conf.tabInvalidEntities, buildInvalidEntitiesPanel(entities.invalidEntities) )
     tabbedPane
-  }
 
-  def buildChartPanel(chart: JFreeChart): ChartPanel = {
+  def buildChartPanel(chart: JFreeChart): ChartPanel =
     chart.getPlot.setBackgroundPaint(Color.LIGHT_GRAY)
     val chartPanel = new ChartPanel(chart)
     chartPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15))
@@ -34,9 +32,8 @@ object ChartPanelBuilder {
     chartPanel.setReshowDelay(100)
     chartPanel.setDismissDelay(10000)
     chartPanel
-  }
 
-  def buildEntitiesPanel[E](entities: Array[E]): JPanel = {
+  def buildEntitiesPanel[E](entities: Array[E]): JPanel =
     val textArea = new JTextArea()
     textArea.setBackground(Color.lightGray)
     textArea.setEditable(false)
@@ -47,9 +44,8 @@ object ChartPanelBuilder {
     val panel = new JPanel( new BorderLayout() )
     panel.add(scrollPane, BorderLayout.CENTER )
     panel
-  }
 
-  def buildInvalidEntitiesPanel(invalidEntities: Array[InvalidEntity]): JPanel = {
+  def buildInvalidEntitiesPanel(invalidEntities: Array[InvalidEntity]): JPanel =
     val textArea = new JTextArea()
     textArea.setBackground(Color.lightGray)
     textArea.setEditable(false)
@@ -60,5 +56,3 @@ object ChartPanelBuilder {
     val panel = new JPanel( new BorderLayout() )
     panel.add(scrollPane, BorderLayout.CENTER )
     panel
-  }
-}
