@@ -8,10 +8,10 @@ trait Validator[E] {
   def validate(number: Int, columns: Array[String]): Try[E]
 }
 
-object Validator {
-  def validate[E](number: Int, columns: Array[String])(implicit validator: Validator[E]): Try[E] = validator.validate(number, columns)
+object Validator:
+  def validate[E](number: Int, columns: Array[String])(using validator: Validator[E]): Try[E] = validator.validate(number, columns)
 
-  implicit object BloodPressureValidator extends Validator[BloodPressure] {
+  implicit object BloodPressureValidator extends Validator[BloodPressure]:
     def validate(number: Int, columns: Array[String]): Try[BloodPressure] =
       Try {
         validateColumnCount(columns.length, 3)
@@ -21,9 +21,8 @@ object Validator {
         validateBloodPressure(systolic, diastolic)
         BloodPressure(number, datetime, systolic, diastolic)
       }
-  }
 
-  implicit object CaloriesWeightValidator extends Validator[CaloriesWeight] {
+  implicit object CaloriesWeightValidator extends Validator[CaloriesWeight]:
     def validate(number: Int, columns: Array[String]): Try[CaloriesWeight] =
       Try {
         validateColumnCount(columns.length, 4)
@@ -34,9 +33,8 @@ object Validator {
         validateCaloriesWeight(in, out, weight)
         CaloriesWeight(number, datetime, in, out, weight)
       }
-  }
 
-  implicit object GlucoseValidator extends Validator[Glucose] {
+  implicit object GlucoseValidator extends Validator[Glucose]:
     def validate(number: Int, columns: Array[String]): Try[Glucose] =
       Try {
         validateColumnCount(columns.length, 2)
@@ -45,9 +43,8 @@ object Validator {
         validateGlucose(level)
         Glucose(number, datetime, level)
       }
-  }
 
-  implicit object MedValidator extends Validator[Med] {
+  implicit object MedValidator extends Validator[Med]:
     def validate(number: Int, columns: Array[String]): Try[Med] =
       Try {
         validateColumnCount(columns.length, 3)
@@ -58,9 +55,8 @@ object Validator {
         validateMed(dosage)
         Med(number, datetime, medtype, dosage)
       }
-  }
 
-  implicit object GlucoseMedValidator extends Validator[GlucoseMed] {
+  implicit object GlucoseMedValidator extends Validator[GlucoseMed]:
     def validate(number: Int, columns: Array[String]): Try[GlucoseMed] =
       Try {
         validateColumnCount(columns.length, 4)
@@ -72,9 +68,8 @@ object Validator {
         validateGlucoseMed(level, dosage)
         GlucoseMed(number, datetime, level, medtype, dosage)
       }
-  }
 
-  implicit object PulseValidator extends Validator[Pulse] {
+  implicit object PulseValidator extends Validator[Pulse]:
     def validate(number: Int, columns: Array[String]): Try[Pulse] =
       Try {
         validateColumnCount(columns.length, 2)
@@ -83,9 +78,8 @@ object Validator {
         validatePulse(beatsPerMinute)
         Pulse(number, datetime, beatsPerMinute)
       }
-  }
 
-  implicit object PulseOxygenValidator extends Validator[PulseOxygen] {
+  implicit object PulseOxygenValidator extends Validator[PulseOxygen]:
     def validate(number: Int, columns: Array[String]): Try[PulseOxygen] =
       Try {
         validateColumnCount(columns.length, 3)
@@ -95,9 +89,8 @@ object Validator {
         validatePulseOxygen(beatsPerMinute, bloodOxygenPercentage)
         PulseOxygen(number, datetime, beatsPerMinute, bloodOxygenPercentage)
       }
-  }
 
-  implicit object RespirationValidator extends Validator[Respiration] {
+  implicit object RespirationValidator extends Validator[Respiration]:
     def validate(number: Int, columns: Array[String]): Try[Respiration] =
       Try {
         validateColumnCount(columns.length, 2)
@@ -106,9 +99,8 @@ object Validator {
         validateRespiration(breathesPerMinute)
         Respiration(number, datetime, breathesPerMinute)
       }
-  }
 
-  implicit object TemperatureValidator extends Validator[Temperature] {
+  implicit object TemperatureValidator extends Validator[Temperature]:
     def validate(number: Int, columns: Array[String]): Try[Temperature] =
       Try {
         validateColumnCount(columns.length, 2)
@@ -117,9 +109,8 @@ object Validator {
         validateTemperature(degrees)
         Temperature(number, datetime, degrees)
       }
-  }
 
-  implicit object VitalsValidator extends Validator[Vitals] {
+  implicit object VitalsValidator extends Validator[Vitals]:
     def validate(number: Int, columns: Array[String]): Try[Vitals] =
       Try {
         validateColumnCount(columns.length, 7)
@@ -137,9 +128,8 @@ object Validator {
         validateBloodPressure(systolic, diastolic)
         Vitals(number, datetime, temperature, respiration, pulse, oxygen, systolic, diastolic)
       }
-  }
 
-  implicit object WeightValidator extends Validator[Weight] {
+  implicit object WeightValidator extends Validator[Weight]:
     def validate(number: Int, columns: Array[String]): Try[Weight] =
       Try {
         validateColumnCount(columns.length, 2)
@@ -148,21 +138,18 @@ object Validator {
         validateWeight(pounds)
         Weight(number, datetime, pounds)
       }
-  }
 
-  private def validateCaloriesWeight(in: Int, out: Int, weight: Double): Unit = {
+  private def validateCaloriesWeight(in: Int, out: Int, weight: Double): Unit =
     require(in >= 0 && in <= 9999, s"$in calories in not >= 0 and <= 9999")
     require(out >= 0 && out <= 9999, s"$out calories out not >= 0 and <= 9999")
     validateWeight(weight)
-  }
 
   private def validateColumnCount(length: Int, count: Int): Unit =
     require(length == count, s"$length column count != $count")
 
-  private def validateBloodPressure(systolic: Int, diastolic: Int): Unit = {
+  private def validateBloodPressure(systolic: Int, diastolic: Int): Unit =
     require(systolic >= 120 && systolic <= 200, s"$systolic systolic not >= 120 and <= 200")
     require(diastolic >= 80 && diastolic <= 120, s"$diastolic diastolic not >= 80 and <= 120")
-  }
 
   private def validateGlucose(level: Int): Unit =
     require(level >= 0 && level <= 300, s"$level level not >= 0 and <= 300")
@@ -170,10 +157,9 @@ object Validator {
   private def validateMed(dosage: Int): Unit =
     require(dosage >= 1 && dosage <= 100, s"$dosage dosage not >= 1 and <= 100")
 
-  private def validateGlucoseMed(level: Int, dosage:Int): Unit = {
+  private def validateGlucoseMed(level: Int, dosage:Int): Unit =
     validateGlucose(level)
     validateMed(dosage)
-  }
 
   private def validatePulse(beatsPerMinute: Int): Unit =
     require(beatsPerMinute >= 40 && beatsPerMinute <= 200, s"$beatsPerMinute beats per minute not >= 40 and <= 200")
@@ -191,4 +177,3 @@ object Validator {
 
   private def validateWeight(pounds: Double): Unit =
     require(pounds > 0.00 && pounds <= 500.00, s"$pounds pounds not > 0.00 and <= 500.00")
-}
