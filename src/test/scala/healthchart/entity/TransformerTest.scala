@@ -8,7 +8,7 @@ import org.scalatest.matchers.should.Matchers
 import scala.reflect.ClassTag
 import scala.util.{Failure, Success}
 
-class TransformerTest extends AnyFunSuite with Matchers {
+class TransformerTest extends AnyFunSuite with Matchers:
   test("blood pressure") {
     testTransformer[BloodPressure]("./data/blood-pressure/blood-pressure.txt", 7, 0)
     testTransformer[BloodPressure]("./data/blood-pressure/blood-pressure-invalid.txt", 5, 2)
@@ -70,15 +70,12 @@ class TransformerTest extends AnyFunSuite with Matchers {
 
   private def testTransformer[E: ClassTag](path: String,
                                            entitiesCount: Int,
-                                           invalidEntitiesCount: Int)(implicit validator: Validator[E]): Unit = {
-    Transformer.transform[E](path) match {
+                                           invalidEntitiesCount: Int)(implicit validator: Validator[E]): Unit =
+    Transformer.transform[E](path) match
       case Success(entities) =>
         entities.entities.length shouldBe entitiesCount
         entities.invalidEntities.length shouldBe invalidEntitiesCount
       case Failure(failure) =>
         Logger.logFileIOFailure(path, failure)
         fail(s"*** TransformerTest.testTransformer failed: ${failure.getMessage()}")
-    }
     ()
-  }
-}
