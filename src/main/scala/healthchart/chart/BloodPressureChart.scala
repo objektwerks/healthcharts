@@ -14,8 +14,8 @@ import org.jfree.chart.renderer.xy.{XYItemRenderer, XYLineAndShapeRenderer}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.XYDataset
 
-object BloodPressureChart extends Chart {
-  def build(bloodpressures: Entities[BloodPressure]): JFreeChart = {
+object BloodPressureChart extends Chart:
+  def build(bloodpressures: Entities[BloodPressure]): JFreeChart =
     val xyPlot = new XYPlot()
     xyPlot.setDatasetRenderingOrder(DatasetRenderingOrder.FORWARD)
 
@@ -31,20 +31,18 @@ object BloodPressureChart extends Chart {
 
     val title = buildTitle(Conf.titleBloodPressure, bloodpressures.toEntity)
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
-  }
 
-  def buildBloodPressureDataset(bloodpressures: Entities[BloodPressure]): XYDataset = {
+  def buildBloodPressureDataset(bloodpressures: Entities[BloodPressure]): XYDataset =
     val timeSeries = new TimeSeries(Conf.titleSystolic)
     bloodpressures.entities.foreach { bloodpressure =>
       timeSeries.add( bloodpressure.datetime, s"${bloodpressure.systolic}.${bloodpressure.diastolic }".toDouble )
     }
     new TimeSeriesCollection(timeSeries)
-  }
 
-  def buildBloodPressureRenderer(): XYItemRenderer = {
+  def buildBloodPressureRenderer(): XYItemRenderer =
     val renderer = new XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator() {
-      override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String = {
+      override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String =
         val xValue = dataset.getXValue(series, item)
         val yValue = dataset.getYValue(series, item)
         val yValues = yValue.toString.split("\\.")
@@ -55,18 +53,16 @@ object BloodPressureChart extends Chart {
         val bloodpressure = s"$systolic/$diastolic"
         val delta = calculateDeltaAsPercentage(dataset, series, item)
         s"${Conf.titleBloodPressure}: ($dayHourMinute, $bloodpressure, $delta%)"
-      }
       override def clone() = this
     }
     val itemLabelGenerator = new StandardXYItemLabelGenerator() {
-      override def generateLabel(dataset: XYDataset, series: Int, item: Int): String = {
+      override def generateLabel(dataset: XYDataset, series: Int, item: Int): String =
         val yValue = dataset.getYValue(series, item)
         val yValues = yValue.toString.split("\\.")
         val systolic = yValues(0)
         var diastolic = yValues(1)
         if (diastolic.length == 1) diastolic = diastolic + 0  // Hack! DecimalFormat dropping trailing zero!
         s"$systolic/$diastolic"
-      }
       override def clone() = this
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
@@ -74,5 +70,3 @@ object BloodPressureChart extends Chart {
     renderer.setDefaultItemLabelGenerator( itemLabelGenerator )
     renderer.setDefaultItemLabelsVisible(true)
     renderer
-  }
-}
