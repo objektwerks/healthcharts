@@ -12,18 +12,15 @@ import healthchart.entity.Transformer._
 import healthchart.panel.ChartPanelBuilder
 import healthchart.ui.{Frame, PathDialog}
 
-class GlucoseMedAction(name: String, frame: Frame) extends AbstractAction(name) {
+class GlucoseMedAction(name: String, frame: Frame) extends AbstractAction(name):
   protected val counter = new AtomicInteger(1)
 
-  def actionPerformed(event: ActionEvent): Unit = {
+  def actionPerformed(event: ActionEvent): Unit =
     val path = new PathDialog(frame, Conf.labelGlucoseMedCsv).view
-    path match {
+    path match
       case Some( glucosemedCsvPath ) =>
         val glucosemeds = transformEntities[GlucoseMed](glucosemedCsvPath)
         val chart = GlucoseMedChart.build(glucosemeds)
         val chartPanel = ChartPanelBuilder.build(chart, glucosemeds)
         frame.addCompositeChartPanel(s"${Conf.titleGlucoseMed}-${counter.getAndIncrement}", chartPanel)
       case None =>
-    }
-  }
-}
