@@ -4,7 +4,7 @@ import com.typesafe.config.ConfigFactory
 
 import scala.jdk.CollectionConverters._
 
-object Conf {
+object Conf:
   val conf = ConfigFactory.load("app.conf")
 
   val appTitle = conf.getString("app.title")
@@ -65,4 +65,3 @@ object Conf {
   val titleVitalsChartBottomYAxis = conf.getString("title.vitalsChartBottomYAxis")
   val titleWeight = conf.getString("title.weight")
   val titleWeightChartYAxis = conf.getString("title.weightChartYAxis")
-}
