@@ -12,18 +12,15 @@ import healthchart.entity._
 import healthchart.panel.ChartPanelBuilder
 import healthchart.ui.{Frame, PathDialog}
 
-class CaloriesWeightAction(name: String, frame: Frame) extends AbstractAction(name) {
+class CaloriesWeightAction(name: String, frame: Frame) extends AbstractAction(name):
   protected val counter = new AtomicInteger(1)
 
-  def actionPerformed(event: ActionEvent): Unit = {
+  def actionPerformed(event: ActionEvent): Unit =
     val path = new PathDialog(frame, Conf.labelCaloriesWeightCsv).view
-    path match {
+    path match
       case Some( caloriesWeightCsvPath ) =>
         val caloriesWeights = transformEntities[CaloriesWeight](caloriesWeightCsvPath)
         val chart = CaloriesWeightChart.build(caloriesWeights)
         val chartPanel = ChartPanelBuilder.build(chart, caloriesWeights)
         frame.addCompositeChartPanel(s"${Conf.titleCaloriesWeight}-${counter.getAndIncrement}", chartPanel)
       case None =>
-    }
-  }
-}
