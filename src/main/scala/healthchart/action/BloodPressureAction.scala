@@ -12,18 +12,15 @@ import healthchart.entity.Transformer._
 import healthchart.panel.ChartPanelBuilder
 import healthchart.ui.{Frame, PathDialog}
 
-class BloodPressureAction(name: String, frame: Frame) extends AbstractAction(name) {
+class BloodPressureAction(name: String, frame: Frame) extends AbstractAction(name):
   protected val counter = new AtomicInteger(1)
 
-  def actionPerformed(event: ActionEvent): Unit = {
+  def actionPerformed(event: ActionEvent): Unit =
     val path = new PathDialog(frame, Conf.labelBloodPressureCsv).view
-    path match {
+    path match
       case Some( bloodPressureCsvPath ) =>
         val bloodpressures = transformEntities[BloodPressure](bloodPressureCsvPath)
         val chart = BloodPressureChart.build(bloodpressures)
         val chartPanel = ChartPanelBuilder.build(chart, bloodpressures)
         frame.addCompositeChartPanel(s"${Conf.titleBloodPressure}-${counter.getAndIncrement}", chartPanel)
       case None =>
-    }
-  }
-}
