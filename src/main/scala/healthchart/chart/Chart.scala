@@ -24,6 +24,7 @@ abstract class Chart {
       val yValue = dataset.getYValue(series, item)
       new DecimalFormat(decimalFormat).format( yValue )
     }
+    override def clone() = this
   }
 
   def calculateDeltaAsPercentage(dataset: XYDataset, series: Int, item: Int): Long = {

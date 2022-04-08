@@ -56,6 +56,7 @@ object BloodPressureChart extends Chart {
         val delta = calculateDeltaAsPercentage(dataset, series, item)
         s"${Conf.titleBloodPressure}: ($dayHourMinute, $bloodpressure, $delta%)"
       }
+      override def clone() = this
     }
     val itemLabelGenerator = new StandardXYItemLabelGenerator() {
       override def generateLabel(dataset: XYDataset, series: Int, item: Int): String = {
@@ -66,6 +67,7 @@ object BloodPressureChart extends Chart {
         if (diastolic.length == 1) diastolic = diastolic + 0  // Hack! DecimalFormat dropping trailing zero!
         s"$systolic/$diastolic"
       }
+      override def clone() = this
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
     renderer.setDefaultShapesVisible(true)

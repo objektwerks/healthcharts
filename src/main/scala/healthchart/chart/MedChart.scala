@@ -56,6 +56,7 @@ object MedChart extends Chart {
         val delta = calculateDeltaAsPercentage(dataset, series, item)
         s"${Conf.titleMed}: ($dayHourMinute, $dosage, $med, $delta%)"
       }
+      override def clone() = this
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
     renderer.setDefaultShapesVisible(true)

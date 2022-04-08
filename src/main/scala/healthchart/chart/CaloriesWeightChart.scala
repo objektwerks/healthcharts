@@ -110,6 +110,7 @@ object CaloriesWeightChart extends Chart {
         val delta = calculateDeltaAsPercentage(dataset, series, item)
         s"($dayHourMinute, $calorie, $delta%)"
       }
+      override def clone() = this
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
     renderer.setDefaultShapesVisible(true)

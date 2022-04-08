@@ -50,6 +50,7 @@ object RespirationChart extends Chart {
         val delta = calculateDeltaAsPercentage(dataset, series, item)
         s"${Conf.titleRespiration}: ($dayHourMinute, $breathesPerMinute, $delta%)"
       }
+      override def clone() = this
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
     renderer.setDefaultShapesVisible(true)

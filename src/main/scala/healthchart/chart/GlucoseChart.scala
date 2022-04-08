@@ -51,6 +51,7 @@ object GlucoseChart extends Chart {
         val delta = calculateDeltaAsPercentage(dataset, series, item)
         s"${Conf.titleGlucose}: ($dayHourMinute, $level, $delta%)"
       }
+      override def clone() = this
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
     renderer.setDefaultShapesVisible(true)

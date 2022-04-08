@@ -50,6 +50,7 @@ object TemperatureChart extends Chart {
         val delta = calculateDeltaAsPercentage(dataset, series, item)
         s"${Conf.titleTemperature}: ($dayHourMinute, $degrees, $delta%)"
       }
+      override def clone() = this
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
     renderer.setDefaultShapesVisible(true)
