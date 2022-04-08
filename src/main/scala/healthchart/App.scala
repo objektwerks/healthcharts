@@ -6,8 +6,8 @@ import javax.swing.UIManager._
 
 import healthchart.ui.Frame
 
-object App {
-  def main(args: Array[String]): Unit = {
+object App:
+  def main(args: Array[String]): Unit =
     EventQueue.invokeLater( new Runnable() {
       override def run(): Unit = {
         setLookAndFeel(getCrossPlatformLookAndFeelClassName)
@@ -15,5 +15,3 @@ object App {
         frame.setVisible(true)
       }
     })
-  }
-}
