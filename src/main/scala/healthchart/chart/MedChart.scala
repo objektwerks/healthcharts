@@ -16,8 +16,8 @@ import org.jfree.data.xy.XYDataset
 
 import scala.util.Try
 
-object MedChart extends Chart {
-  def build(meds: Entities[Med]): JFreeChart = {
+object MedChart extends Chart:
+  def build(meds: Entities[Med]): JFreeChart =
     val xyPlot = new XYPlot()
 
     xyPlot.setDataset(1, buildMedDataset(meds))
@@ -32,20 +32,18 @@ object MedChart extends Chart {
 
     val title = buildTitle(Conf.titleMed, meds.toEntity)
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
-  }
 
-  def buildMedDataset(meds: Entities[Med]): XYDataset = {
+  def buildMedDataset(meds: Entities[Med]): XYDataset =
     val timeSeries = new TimeSeries(Conf.titleMed)
     meds.entities.foreach { med =>
       timeSeries.add( med.datetime, s"${med.dosage}.${med.medtype.id}".toDouble )
     }
     new TimeSeriesCollection(timeSeries)
-  }
 
-  def buildMedRenderer(): XYItemRenderer = {
+  def buildMedRenderer(): XYItemRenderer =
     val renderer = new XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator() {
-      override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String = {
+      override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String =
         val xValue = dataset.getXValue(series, item)
         val yValue = dataset.getYValue(series, item)
         val yValues = yValue.toString.split("\\.")
@@ -55,7 +53,6 @@ object MedChart extends Chart {
         val med = MedType.idToMedType.getOrElse(medtype, "n/a")
         val delta = calculateDeltaAsPercentage(dataset, series, item)
         s"${Conf.titleMed}: ($dayHourMinute, $dosage, $med, $delta%)"
-      }
       override def clone() = this
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
@@ -63,5 +60,3 @@ object MedChart extends Chart {
     renderer.setDefaultItemLabelGenerator( buildItemLabelGenerator("0") )
     renderer.setDefaultItemLabelsVisible(true)
     renderer
-  }
-}
