@@ -2,7 +2,7 @@ enablePlugins(JlinkPlugin)
 
 name := "healthcharts"
 organization := "objektwerks"
-version := "2.0"
+version := "1.9"
 scalaVersion := "3.1.2"
 maintainer := "objektwerks@runbox.com"
 libraryDependencies ++= {
