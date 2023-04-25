@@ -13,7 +13,7 @@ import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.XYDataset
 
 import healthchart.Conf
-import healthchart.chart.WeightChart._
+import healthchart.chart.WeightChart.*
 import healthchart.entity.{CaloriesWeight, Entities}
 
 object CaloriesWeightChart extends Chart:
