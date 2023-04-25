@@ -12,8 +12,8 @@ object App:
   def main(args: Array[String]): Unit =  
     EventQueue.invokeLater(
       () => {
-        UIManager.setLookAndFeel( new FlatLightLaf() )
-        val frame = new Frame()
+        UIManager.setLookAndFeel( FlatLightLaf() )
+        val frame = Frame()
         frame.setVisible(true)
       }
     )
