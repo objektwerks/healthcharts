@@ -9,7 +9,7 @@ import javax.swing.UIManager
 import healthchart.ui.Frame
 
 object App:
-  def main(args: Array[String]): Unit =
+  def main(args: Array[String]): Unit =  
     EventQueue.invokeLater(
       () => {
         UIManager.setLookAndFeel( new FlatLightLaf() )
