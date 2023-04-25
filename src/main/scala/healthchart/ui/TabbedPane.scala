@@ -7,12 +7,12 @@ import javax.swing.*
 class TabbedPane extends JTabbedPane:
   def addCompositeChartPanel(title: String, chartPanel: JPanel): Unit =
     addTab(null, chartPanel)
-    setTabComponentAt( getTabCount - 1, new CloseableTab(title, this, chartPanel) )
+    setTabComponentAt( getTabCount - 1, CloseableTab(title, this, chartPanel) )
     setSelectedIndex( indexOfComponent(chartPanel) )
 
 class CloseableTab(title: String, tabbedPane: JTabbedPane, panel: JPanel) extends JPanel:
-  private val closeLabel = new JLabel(title)
-  private val closeableLabel = new JLabel("x")
+  private val closeLabel = JLabel(title)
+  private val closeableLabel = JLabel("x")
 
   closeableLabel.addMouseListener( new MouseAdapter() {
     override def mouseEntered(event: MouseEvent): Unit =
