@@ -1,14 +1,13 @@
 package healthchart.panel
 
 import java.awt.{BorderLayout, Color}
-
 import javax.swing.{BorderFactory, JPanel, JScrollPane, JTabbedPane, JTextArea, SwingConstants}
+
+import org.jfree.chart.{ChartPanel, JFreeChart}
 
 import healthchart.Conf
 import healthchart.entity.Entities
 import healthchart.entity.InvalidEntity
-
-import org.jfree.chart.{ChartPanel, JFreeChart}
 
 object ChartPanelBuilder:
   def build[E](chart: JFreeChart, entities: Entities[E]): JPanel =
