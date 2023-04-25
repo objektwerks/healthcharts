@@ -7,9 +7,9 @@ scalaVersion := "3.3.0-RC4"
 maintainer := "objektwerks@runbox.com"
 libraryDependencies ++= {
   Seq(
+    "com.formdev" % "flatlaf" % "3.1.1",
     "org.jfree" % "jfreechart" % "1.5.4",
     "com.miglayout" % "miglayout-swing" % "11.1",
-    "com.formdev" % "flatlaf" % "3.1.1",
     "com.typesafe" % "config" % "1.4.2",
     "ch.qos.logback" % "logback-classic" % "1.4.6",
     "org.scalatest" %% "scalatest" % "3.2.15" % Test
