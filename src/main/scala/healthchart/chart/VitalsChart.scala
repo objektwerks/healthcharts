@@ -3,19 +3,19 @@ package healthchart.chart
 import java.awt.Color
 import java.text.SimpleDateFormat
 
-import healthchart.Conf
-import healthchart.chart.BloodPressureChart._
-import healthchart.chart.PulseChart._
-import healthchart.chart.PulseOxygenChart._
-import healthchart.chart.RespirationChart._
-import healthchart.chart.TemperatureChart._
-import healthchart.entity.{Entities, Vitals}
-
 import org.jfree.chart.JFreeChart
 import org.jfree.chart.axis.{DateAxis, NumberAxis}
 import org.jfree.chart.plot.{CombinedDomainXYPlot, PlotOrientation, XYPlot}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.XYDataset
+
+import healthchart.Conf
+import healthchart.chart.BloodPressureChart.*
+import healthchart.chart.PulseChart.*
+import healthchart.chart.PulseOxygenChart.*
+import healthchart.chart.RespirationChart.*
+import healthchart.chart.TemperatureChart.*
+import healthchart.entity.{Entities, Vitals}
 
 object VitalsChart extends Chart:
   def build(vitals: Entities[Vitals]): JFreeChart =
