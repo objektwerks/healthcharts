@@ -2,6 +2,11 @@ HealthCharts
 ------------
 >Healthcharts is an open source project that provides useful health charts sourced by csv/txt files.
 
+README
+------
+>As of 2023.4.25, sbt run fails with a NULL logger error and missing resource error due to a classpath issue.
+>Running App via VSCode embedded run command works! Troubleshooting in progress.
+
 Charts
 ------
 - [Blood Pressure](docs/blood.pressure.chart.md)
