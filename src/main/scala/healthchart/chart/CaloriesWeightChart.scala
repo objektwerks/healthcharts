@@ -4,10 +4,6 @@ import java.awt.Color
 import java.text.{DecimalFormat, SimpleDateFormat}
 import java.{util => jdate}
 
-import healthchart.Conf
-import healthchart.chart.WeightChart._
-import healthchart.entity.{CaloriesWeight, Entities}
-
 import org.jfree.chart.JFreeChart
 import org.jfree.chart.axis.{DateAxis, NumberAxis}
 import org.jfree.chart.labels.StandardXYToolTipGenerator
@@ -15,6 +11,10 @@ import org.jfree.chart.plot.{CombinedDomainXYPlot, PlotOrientation, XYPlot}
 import org.jfree.chart.renderer.xy.{XYItemRenderer, XYLineAndShapeRenderer}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.XYDataset
+
+import healthchart.Conf
+import healthchart.chart.WeightChart._
+import healthchart.entity.{CaloriesWeight, Entities}
 
 object CaloriesWeightChart extends Chart:
   def build(caloriesWeights: Entities[CaloriesWeight]): JFreeChart =
