@@ -1,13 +1,13 @@
 package healthchart.entity
 
-import healthchart.Logger
-import healthchart.Logger._
-import healthchart.entity.Validator._
-
 import scala.collection.mutable
 import scala.io.{Codec, Source}
 import scala.reflect.ClassTag
 import scala.util.{Failure, Success, Try, Using}
+
+import healthchart.Logger
+import healthchart.Logger.*
+import healthchart.entity.Validator.*
 
 object Transformer:
   private val utf8 = Codec.UTF8.name
