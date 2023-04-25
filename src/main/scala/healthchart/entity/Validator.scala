@@ -1,8 +1,8 @@
 package healthchart.entity
 
-import healthchart.entity.Converter._
-
 import scala.util.Try
+
+import healthchart.entity.Converter.*
 
 trait Validator[E]:
   def validate(number: Int, columns: Array[String]): Try[E]
