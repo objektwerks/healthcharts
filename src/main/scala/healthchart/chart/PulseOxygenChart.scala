@@ -3,10 +3,6 @@ package healthchart.chart
 import java.text.{DecimalFormat, SimpleDateFormat}
 import java.{util => jdate}
 
-import healthchart.Conf
-import healthchart.chart.PulseChart._
-import healthchart.entity.{Entities, PulseOxygen}
-
 import org.jfree.chart.JFreeChart
 import org.jfree.chart.axis.{DateAxis, NumberAxis}
 import org.jfree.chart.labels.StandardXYToolTipGenerator
@@ -14,6 +10,10 @@ import org.jfree.chart.plot.{DatasetRenderingOrder, XYPlot}
 import org.jfree.chart.renderer.xy.{XYItemRenderer, XYLineAndShapeRenderer}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.XYDataset
+
+import healthchart.Conf
+import healthchart.chart.PulseChart._
+import healthchart.entity.{Entities, PulseOxygen}
 
 object PulseOxygenChart extends Chart:
   def build(pulseoxygens: Entities[PulseOxygen]): JFreeChart =
