@@ -2,13 +2,13 @@ package healthchart.chart
 
 import java.text.DecimalFormat
 
-import healthchart.entity.Converter.minuteToYearMonthDay
-import healthchart.entity.Entity
-
 import org.jfree.chart.labels.{StandardXYItemLabelGenerator, XYItemLabelGenerator}
 import org.jfree.data.xy.XYDataset
 
 import scala.math.abs
+
+import healthchart.entity.Converter.minuteToYearMonthDay
+import healthchart.entity.Entity
 
 abstract class Chart:
   def buildTitle(title: String, entities: Array[Entity]): String =
