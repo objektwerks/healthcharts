@@ -2,7 +2,7 @@ package healthchart.ui
 
 import java.awt.event.{MouseAdapter, MouseEvent}
 
-import javax.swing._
+import javax.swing.*
 
 class TabbedPane extends JTabbedPane:
   def addCompositeChartPanel(title: String, chartPanel: JPanel): Unit =
