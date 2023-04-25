@@ -45,29 +45,27 @@ class PathDialog(frame: Frame, labelPath: String) extends JDialog:
 
   private def buildPathSelectButton(ellipsisLabel: String): JButton =
     val button = JButton(ellipsisLabel)
-    button.addActionListener( new ActionListener() {
-      override def actionPerformed(event: ActionEvent): Unit = {
+    button.addActionListener( (event: ActionEvent) => {
         pathTextField.setText( selectFile.getOrElse("") )
         validateCsvTextFields()
       }
-    })
+    )
     button
 
   private def buildCancelButton(canceLabel: String): JButton =
     val button = JButton(canceLabel)
-    button.addActionListener( new ActionListener() {
-      override def actionPerformed(event: ActionEvent): Unit = {
+    button.addActionListener( (event: ActionEvent) => {
         wasNotCancelled = false
         setVisible(false)
       }
-    })
+    )
     button
 
   private def buildSelectButton(selectLabel: String): JButton =
     val button = JButton(selectLabel)
     button.setEnabled(false)
-    button.addActionListener( new ActionListener() {
-      override def actionPerformed(event: ActionEvent): Unit = setVisible(false)
+    button.addActionListener( (event: ActionEvent) => {
+      setVisible(false)
     })
     button
 
