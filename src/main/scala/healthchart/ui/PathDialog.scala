@@ -2,12 +2,11 @@ package healthchart.ui
 
 import java.awt.event.{ActionEvent, ActionListener}
 import java.awt.{BorderLayout, Dimension}
-
 import javax.swing._
 
-import healthchart.Conf
-
 import net.miginfocom.swing.MigLayout
+
+import healthchart.Conf
 
 class PathDialog(frame: Frame, labelPath: String) extends JDialog:
   private val pathTextField = buildPathTextField
@@ -72,8 +71,6 @@ class PathDialog(frame: Frame, labelPath: String) extends JDialog:
     })
     button
 
-  private def selectFile: Option[String] =
-    FileChooser.chooseFile(frame, fileChooserTitle, fileExtensionFilterDesc, fileExtensions)
+  private def selectFile: Option[String] = FileChooser.chooseFile(frame, fileChooserTitle, fileExtensionFilterDesc, fileExtensions)
 
-  private def validateCsvTextFields(): Unit =
-    if (pathTextField.getText.nonEmpty) selectButton.setEnabled(true)
+  private def validateCsvTextFields(): Unit = if pathTextField.getText.nonEmpty then selectButton.setEnabled(true)
