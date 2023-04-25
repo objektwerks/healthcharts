@@ -1,12 +1,12 @@
 package healthchart.entity
 
-import healthchart.Logger
-
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
 import scala.reflect.ClassTag
 import scala.util.{Failure, Success}
+
+import healthchart.Logger
 
 class TransformerTest extends AnyFunSuite with Matchers:
   test("blood pressure") {
