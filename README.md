@@ -8,8 +8,8 @@ TODO
 
 README
 ------
->As of 2023.4.25, sbt run fails with a NULL logger error and missing resource error due to a classpath issue.
->Running App via VSCode embedded run command works! The packaged app works as well! Troubleshooting in progress. 
+>As of 2023.4.25, sbt run fails with a NULL logger error and missing resource error due to a likely classpath issue.
+>Running App via VSCode embedded run command works! The packaged app works as well! Troubleshooting a WIP. 
 
 Charts
 ------
