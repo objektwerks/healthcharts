@@ -3,9 +3,6 @@ package healthchart.chart
 import java.text.SimpleDateFormat
 import java.{util => jdate}
 
-import healthchart.Conf
-import healthchart.entity._
-
 import org.jfree.chart.JFreeChart
 import org.jfree.chart.axis.{DateAxis, NumberAxis}
 import org.jfree.chart.labels.StandardXYToolTipGenerator
@@ -15,6 +12,9 @@ import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.XYDataset
 
 import scala.util.Try
+
+import healthchart.Conf
+import healthchart.entity.*
 
 object MedChart extends Chart:
   def build(meds: Entities[Med]): JFreeChart =
