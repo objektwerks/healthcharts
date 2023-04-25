@@ -2,7 +2,7 @@ package healthchart.ui
 
 import java.awt.event.{ActionEvent, ActionListener}
 import java.awt.{BorderLayout, Dimension}
-import javax.swing._
+import javax.swing.*
 
 import net.miginfocom.swing.MigLayout
 
