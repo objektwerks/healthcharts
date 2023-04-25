@@ -2,13 +2,12 @@ package healthchart.action
 
 import java.awt.event.ActionEvent
 import java.util.concurrent.atomic.AtomicInteger
-
 import javax.swing.AbstractAction
 
 import healthchart.Conf
 import healthchart.chart.GlucoseChart
-import healthchart.entity._
-import healthchart.entity.Transformer._
+import healthchart.entity.*
+import healthchart.entity.Transformer.*
 import healthchart.panel.ChartPanelBuilder
 import healthchart.ui.{Frame, PathDialog}
 
