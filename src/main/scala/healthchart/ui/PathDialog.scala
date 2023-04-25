@@ -24,7 +24,7 @@ class PathDialog(frame: Frame, labelPath: String) extends JDialog:
     setLocationRelativeTo(frame)
     setVisible(true)
     val path = pathTextField.getText
-    if (wasNotCancelled && path.nonEmpty) Some(path) else None
+    if wasNotCancelled && path.nonEmpty then Some(path) else None
 
   private def buildDialogPanel(labelPath: String,
                                labelCancel: String,
