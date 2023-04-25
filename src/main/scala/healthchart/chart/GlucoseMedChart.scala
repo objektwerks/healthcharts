@@ -2,14 +2,14 @@ package healthchart.chart
 
 import java.text.SimpleDateFormat
 
-import healthchart.Conf
-import healthchart.entity._
-
 import org.jfree.chart.JFreeChart
 import org.jfree.chart.axis.{DateAxis, NumberAxis}
 import org.jfree.chart.plot.{DatasetRenderingOrder, XYPlot}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.XYDataset
+
+import healthchart.Conf
+import healthchart.entity.*
 
 object GlucoseMedChart extends Chart:
   def build(glucosemeds: Entities[GlucoseMed]): JFreeChart =
