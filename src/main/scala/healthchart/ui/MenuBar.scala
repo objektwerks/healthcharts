@@ -3,7 +3,7 @@ package healthchart.ui
 import javax.swing.{JMenu, JMenuBar, JMenuItem, JSeparator}
 
 import healthchart.Conf
-import healthchart.action._
+import healthchart.action.*
 
 class MenuBar(frame: Frame) extends JMenuBar():
   val menu = new JMenu(Conf.titleMenuBar)
