@@ -29,8 +29,8 @@ class PathDialog(frame: Frame, labelPath: String) extends JDialog:
   private def buildDialogPanel(labelPath: String,
                                labelCancel: String,
                                labelEllipsis: String): JPanel =
-    val panel = new JPanel( new MigLayout() )
-    panel.add( new JLabel(labelPath), "align label" )
+    val panel = JPanel( MigLayout() )
+    panel.add( JLabel(labelPath), "align label" )
     panel.add( pathTextField, "grow" )
     panel.add( buildPathSelectButton(labelEllipsis), "wrap" )
     panel.add( buildCancelButton(labelCancel), "span, split 2, align right" )
@@ -38,13 +38,13 @@ class PathDialog(frame: Frame, labelPath: String) extends JDialog:
     panel
 
   private def buildPathTextField: JTextField =
-    val textField = new JTextField()
+    val textField = JTextField()
     textField.setEditable(false)
-    textField.setPreferredSize(new Dimension(400, 30))
+    textField.setPreferredSize(Dimension(400, 30))
     textField
 
   private def buildPathSelectButton(ellipsisLabel: String): JButton =
-    val button = new JButton(ellipsisLabel)
+    val button = JButton(ellipsisLabel)
     button.addActionListener( new ActionListener() {
       override def actionPerformed(event: ActionEvent): Unit = {
         pathTextField.setText( selectFile.getOrElse("") )
@@ -54,7 +54,7 @@ class PathDialog(frame: Frame, labelPath: String) extends JDialog:
     button
 
   private def buildCancelButton(canceLabel: String): JButton =
-    val button = new JButton(canceLabel)
+    val button = JButton(canceLabel)
     button.addActionListener( new ActionListener() {
       override def actionPerformed(event: ActionEvent): Unit = {
         wasNotCancelled = false
@@ -64,7 +64,7 @@ class PathDialog(frame: Frame, labelPath: String) extends JDialog:
     button
 
   private def buildSelectButton(selectLabel: String): JButton =
-    val button = new JButton(selectLabel)
+    val button = JButton(selectLabel)
     button.setEnabled(false)
     button.addActionListener( new ActionListener() {
       override def actionPerformed(event: ActionEvent): Unit = setVisible(false)
