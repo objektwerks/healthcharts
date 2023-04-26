@@ -2,10 +2,6 @@ HealthCharts
 ------------
 >Healthcharts is an open source project that provides useful health charts sourced by csv/txt files.
 
-TODO
-----
-1. Update images!
-
 README
 ------
 >As of 2023.4.25, sbt run fails with a NULL logger error and missing resource error due to a likely classpath issue.
