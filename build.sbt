@@ -17,3 +17,4 @@ libraryDependencies ++= {
   )
 }
 jlinkIgnoreMissingDependency := JlinkIgnore.everything
+run / fork := true // Required to run Swing UI!
