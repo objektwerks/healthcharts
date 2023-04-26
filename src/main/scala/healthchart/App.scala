@@ -8,10 +8,6 @@ import javax.swing.UIManager
 
 import healthchart.ui.Frame
 
-/**
-  * sbt run fails to load App.
-  * run | debug works fine.
-  */
 object App:
   def main(args: Array[String]): Unit =  
     EventQueue.invokeLater(
