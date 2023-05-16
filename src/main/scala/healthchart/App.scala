@@ -1,7 +1,6 @@
 package healthchart
 
 import com.formdev.flatlaf.FlatLightLaf
-import com.formdev.flatlaf.util.SystemInfo
 
 import java.awt.EventQueue
 import javax.swing.UIManager
