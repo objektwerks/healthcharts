@@ -7,7 +7,7 @@ scalaVersion := "3.3.1"
 maintainer := "objektwerks@runbox.com"
 libraryDependencies ++= {
   Seq(
-    "com.formdev" % "flatlaf" % "3.2.4",
+    "com.formdev" % "flatlaf" % "3.2.5",
     "org.jfree" % "jfreechart" % "1.5.4",
     "com.miglayout" % "miglayout-swing" % "11.1",
     "com.typesafe" % "config" % "1.4.2",
