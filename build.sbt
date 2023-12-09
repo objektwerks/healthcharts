@@ -9,7 +9,7 @@ libraryDependencies ++= {
   Seq(
     "com.formdev" % "flatlaf" % "3.2.5",
     "org.jfree" % "jfreechart" % "1.5.4",
-    "com.miglayout" % "miglayout-swing" % "11.1",
+    "com.miglayout" % "miglayout-swing" % "11.2",
     "com.typesafe" % "config" % "1.4.2",
     "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
     "ch.qos.logback" % "logback-classic" % "1.4.14",
