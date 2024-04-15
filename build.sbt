@@ -12,7 +12,7 @@ libraryDependencies ++= {
     "com.miglayout" % "miglayout-swing" % "11.2",
     "com.typesafe" % "config" % "1.4.3",
     "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
-    "ch.qos.logback" % "logback-classic" % "1.5.4",
+    "ch.qos.logback" % "logback-classic" % "1.5.5",
     "org.scalatest" %% "scalatest" % "3.2.18" % Test
   )
 }
