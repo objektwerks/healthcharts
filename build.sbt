@@ -17,7 +17,7 @@ libraryDependencies ++= {
   )
 }
 scalacOptions ++= Seq(
-  "-Wall"
+  "-Wunused:all"
 )
 jlinkIgnoreMissingDependency := JlinkIgnore.everything
 run / fork := true // Required to run Swing UI!
