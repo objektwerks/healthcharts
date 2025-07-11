@@ -21,4 +21,6 @@ final class MenuBar(frame: Frame) extends JMenuBar():
   menu.add( JMenuItem( GlucoseMedAction(Context.titleGlucoseMed, frame) ) )
   menu.add( JSeparator() )
   menu.add( JMenuItem( CaloriesWeightAction(Context.titleCaloriesWeight, frame) ) )
+  menu.add( JSeparator() )
+  menu.add( JMenuItem( ExitAction("Exit") ) )
   add(menu)
