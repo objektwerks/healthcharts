@@ -6,7 +6,7 @@ import scala.collection.immutable.SortedMap
 import scala.reflect.ClassTag
 
 sealed trait Entity:
-  def number: Int
+  def line: Int
   def datetime: Minute
 
 final case class Entities[E](entities: Array[E],
@@ -22,64 +22,64 @@ final case class InvalidEntity(number: Int,
   /** Error getMessage starts with: 'requirement failed: ' The substring(20) cuts it out. */
   override def toString: String = s"$number, $line, [ ${error.getMessage.substring(20)} ]"
 
-final case class BloodPressure(number: Int,
+final case class BloodPressure(line: Int,
                                datetime: Minute, 
                                systolic: Int, 
                                diastolic: Int) extends Entity:
-  override def toString: String = s"$number, $datetime, $systolic, $diastolic"
+  override def toString: String = s"$line, $datetime, $systolic, $diastolic"
 
-final case class CaloriesWeight(number: Int, 
+final case class CaloriesWeight(line: Int, 
                                 datetime: Minute, 
                                 in: Int, 
                                 out: Int, 
                                 weight: Double) extends Entity:
-  override def toString: String = s"$number, $datetime, $in, $out, $weight"
+  override def toString: String = s"$line, $datetime, $in, $out, $weight"
 
-final case class Glucose(number: Int, 
+final case class Glucose(line: Int, 
                          datetime: Minute, 
                          level: Int) extends Entity:
-  override def toString: String = s"$number, $datetime, $level"
+  override def toString: String = s"$line, $datetime, $level"
 
 object MedType extends Enumeration:
   val insulin = Value(1, "insulin")
   val steroid = Value(2, "steroid")
   val idToMedType = SortedMap[Int, Value](insulin.id -> insulin, steroid.id -> steroid)
 
-final case class Med(number: Int, 
+final case class Med(line: Int, 
                      datetime: Minute, 
                      medtype: MedType.Value,
                      dosage: Int) extends Entity:
-  override def toString: String = s"$number, $datetime, $medtype, $dosage"
+  override def toString: String = s"$line, $datetime, $medtype, $dosage"
 
-final case class GlucoseMed(number: Int, 
+final case class GlucoseMed(line: Int, 
                             datetime: Minute, 
                             level: Int, 
                             medtype: MedType.Value,
                             dosage: Int) extends Entity:
-  override def toString: String = s"$number, $datetime, $level, $medtype, $dosage"
+  override def toString: String = s"$line, $datetime, $level, $medtype, $dosage"
 
-final case class Pulse(number: Int, 
+final case class Pulse(line: Int, 
                        datetime: Minute, 
                        beatsPerMinute: Int) extends Entity:
-  override def toString: String = s"$number, $datetime, $beatsPerMinute"
+  override def toString: String = s"$line, $datetime, $beatsPerMinute"
 
-final case class PulseOxygen(number: Int, 
+final case class PulseOxygen(line: Int, 
                              datetime: Minute, 
                              beatsPerMinute: Int, 
                              bloodOxygenPercentage: Int) extends Entity:
-  override def toString: String = s"$number, $datetime, $beatsPerMinute, $bloodOxygenPercentage"
+  override def toString: String = s"$line, $datetime, $beatsPerMinute, $bloodOxygenPercentage"
 
-final case class Respiration(number: Int, 
+final case class Respiration(line: Int, 
                              datetime: Minute, 
                              breathesPerMinute: Int) extends Entity:
-  override def toString: String = s"$number, $datetime, $breathesPerMinute"
+  override def toString: String = s"$line, $datetime, $breathesPerMinute"
 
-final case class Temperature(number: Int, 
+final case class Temperature(line: Int, 
                              datetime: Minute, 
                              degrees: Double) extends Entity:
-  override def toString: String = s"$number, $datetime, $degrees"
+  override def toString: String = s"$line, $datetime, $degrees"
 
-final case class Vitals(number: Int,
+final case class Vitals(line: Int,
                         datetime: Minute,
                         temperature: Double,
                         respiration: Int,
@@ -87,9 +87,9 @@ final case class Vitals(number: Int,
                         oxygen: Int,
                         systolic: Int,
                         diastolic: Int) extends Entity:
-  override def toString: String = s"$number, $datetime, $temperature, $respiration, $pulse, $oxygen, $systolic, $diastolic"
+  override def toString: String = s"$line, $datetime, $temperature, $respiration, $pulse, $oxygen, $systolic, $diastolic"
 
-final case class Weight(number: Int, 
+final case class Weight(line: Int, 
                         datetime: Minute, 
                         pounds: Double) extends Entity:
-  override def toString: String = s"$number, $datetime, $pounds"
+  override def toString: String = s"$line, $datetime, $pounds"
