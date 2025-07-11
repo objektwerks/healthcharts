@@ -6,11 +6,11 @@ import javax.swing.{JFrame, JPanel, WindowConstants}
 
 import healthchart.Conf
 
-class Frame extends JFrame:
-  val tabbedPane = new TabbedPane()
+final class Frame extends JFrame:
+  val tabbedPane = TabbedPane()
   add(tabbedPane, BorderLayout.CENTER)
 
-  setJMenuBar( new MenuBar(this) )
+  setJMenuBar( MenuBar(this) )
   setTitle(Conf.appTitle)
   setSize(Conf.appWidth, Conf.appHeight)
   setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
