@@ -23,7 +23,7 @@ import healthchart.ui.Frame
       if Taskbar.isTaskbarSupported() then
         val taskbar = Taskbar.getTaskbar()
         if taskbar.isSupported(Feature.ICON_IMAGE) then
-          val appIcon = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/icon.png"))
+          val appIcon = Toolkit.getDefaultToolkit.getImage(this.getClass().getResource("/icon.png"))
           taskbar.setIconImage(appIcon)
     }
   )
