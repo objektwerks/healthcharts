@@ -1,7 +1,6 @@
 package healthchart.ui
 
 import java.awt.BorderLayout
-
 import javax.swing.{JFrame, JPanel, WindowConstants}
 
 import healthchart.Context

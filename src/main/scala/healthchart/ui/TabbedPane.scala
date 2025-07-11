@@ -1,7 +1,6 @@
 package healthchart.ui
 
 import java.awt.event.{MouseAdapter, MouseEvent}
-
 import javax.swing.*
 
 final class TabbedPane extends JTabbedPane:
