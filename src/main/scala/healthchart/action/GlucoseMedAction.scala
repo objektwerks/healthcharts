@@ -23,4 +23,4 @@ final class GlucoseMedAction(name: String, frame: Frame) extends AbstractAction(
         val chart = GlucoseMedChart.build(glucosemeds)
         val chartPanel = ChartPanelBuilder.build(chart, glucosemeds)
         frame.addCompositeChartPanel(s"${Context.titleGlucoseMed}-${counter.getAndIncrement}", chartPanel)
-      case None => logError("*** Path falled: $path")
+      case None => logError(s"*** Path falled: $path")

@@ -23,4 +23,4 @@ final class CaloriesWeightAction(name: String, frame: Frame) extends AbstractAct
         val chart = CaloriesWeightChart.build(caloriesWeights)
         val chartPanel = ChartPanelBuilder.build(chart, caloriesWeights)
         frame.addCompositeChartPanel(s"${Context.titleCaloriesWeight}-${counter.getAndIncrement}", chartPanel)
-      case None => logError("*** Path falled: $path")
+      case None => logError(s"*** Path falled: $path")

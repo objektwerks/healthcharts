@@ -23,4 +23,4 @@ final class BloodPressureAction(name: String, frame: Frame) extends AbstractActi
         val chart = BloodPressureChart.build(bloodpressures)
         val chartPanel = ChartPanelBuilder.build(chart, bloodpressures)
         frame.addCompositeChartPanel(s"${Context.titleBloodPressure}-${counter.getAndIncrement}", chartPanel)
-      case None => logError("*** Path falled: $path")
+      case None => logError(s"*** Path falled: $path")
