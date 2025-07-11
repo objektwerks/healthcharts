@@ -7,7 +7,6 @@ import scala.io.{Codec, Source}
 import scala.reflect.ClassTag
 import scala.util.{Failure, Success, Try, Using}
 
-import healthchart.Logger
 import healthchart.Logger.*
 import healthchart.entity.Validator.*
 
@@ -37,5 +36,5 @@ object Transformer:
     transform[E](path) match
       case Success(entities) => entities
       case Failure(failure) =>
-        Logger.logFileIOFailure(path, failure)
+        logFileIOFailure(path, failure)
         Entities.empty
