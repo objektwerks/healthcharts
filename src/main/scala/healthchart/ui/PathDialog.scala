@@ -45,7 +45,7 @@ class PathDialog(frame: Frame, labelPath: String) extends JDialog:
 
   private def buildPathSelectButton(ellipsisLabel: String): JButton =
     val button = JButton(ellipsisLabel)
-    button.addActionListener( (event: ActionEvent) => {
+    button.addActionListener( (_: ActionEvent) => {
         pathTextField.setText( selectFile.getOrElse("") )
         validateCsvTextFields()
       }
@@ -54,7 +54,7 @@ class PathDialog(frame: Frame, labelPath: String) extends JDialog:
 
   private def buildCancelButton(canceLabel: String): JButton =
     val button = JButton(canceLabel)
-    button.addActionListener( (event: ActionEvent) => {
+    button.addActionListener( (_: ActionEvent) => {
         wasNotCancelled = false
         setVisible(false)
       }
@@ -64,7 +64,7 @@ class PathDialog(frame: Frame, labelPath: String) extends JDialog:
   private def buildSelectButton(selectLabel: String): JButton =
     val button = JButton(selectLabel)
     button.setEnabled(false)
-    button.addActionListener( (event: ActionEvent) => {
+    button.addActionListener( (_: ActionEvent) => {
       setVisible(false)
     })
     button
