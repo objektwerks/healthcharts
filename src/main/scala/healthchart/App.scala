@@ -29,3 +29,7 @@ import healthchart.ui.Frame
   )
 
   logger.info("*** App started!")
+
+  sys.addShutdownHook(
+    logger.info("*** App stopped!")
+  )
