@@ -4,13 +4,13 @@ import java.awt.event.{MouseAdapter, MouseEvent}
 
 import javax.swing.*
 
-class TabbedPane extends JTabbedPane:
+final class TabbedPane extends JTabbedPane:
   def addCompositeChartPanel(title: String, chartPanel: JPanel): Unit =
     addTab(null, chartPanel)
     setTabComponentAt( getTabCount - 1, CloseableTab(title, this, chartPanel) )
     setSelectedIndex( indexOfComponent(chartPanel) )
 
-class CloseableTab(title: String, tabbedPane: JTabbedPane, panel: JPanel) extends JPanel:
+final class CloseableTab(title: String, tabbedPane: JTabbedPane, panel: JPanel) extends JPanel:
   private val closeLabel = JLabel(title)
   private val closeableLabel = JLabel("x")
 
