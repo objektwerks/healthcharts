@@ -8,6 +8,7 @@ import healthchart.Context
 import healthchart.chart.VitalsChart
 import healthchart.entity.*
 import healthchart.entity.Transformer.*
+import healthchart.Logger.logError
 import healthchart.panel.ChartPanelBuilder
 import healthchart.ui.{Frame, PathDialog}
 
@@ -22,4 +23,4 @@ final class VitalsAction(name: String, frame: Frame) extends AbstractAction(name
         val chart = VitalsChart.build(vitals)
         val chartPanel = ChartPanelBuilder.build(chart, vitals)
         frame.addCompositeChartPanel(s"${Context.titleVitals}-${counter.getAndIncrement}", chartPanel)
-      case None =>
+      case None => logError(s"*** Path falled: $path")
