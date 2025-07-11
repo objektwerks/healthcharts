@@ -9,7 +9,9 @@ final class TabbedPane extends JTabbedPane:
     setTabComponentAt( getTabCount - 1, CloseableTab(title, this, chartPanel) )
     setSelectedIndex( indexOfComponent(chartPanel) )
 
-final class CloseableTab(title: String, tabbedPane: JTabbedPane, panel: JPanel) extends JPanel:
+final class CloseableTab(title: String,
+                         tabbedPane: JTabbedPane,
+                         panel: JPanel) extends JPanel:
   private val closeLabel = JLabel(title)
   private val closeableLabel = JLabel("x")
 
