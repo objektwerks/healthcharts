@@ -12,7 +12,6 @@ object App:
     EventQueue.invokeLater(
       () => {
         UIManager.setLookAndFeel( FlatLightLaf() )
-        val frame = Frame()
-        frame.setVisible(true)
+        Frame().setVisible(true)
       }
     )
