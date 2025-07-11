@@ -12,18 +12,17 @@ object Validator:
 
   given Validator[BloodPressure] with
     def validate(number: Int, columns: Array[String]): Try[BloodPressure] =
-      Try {
+      Try:
         validateColumnCount(columns.length, 3)
         val datetime = datetimeToMinute(columns(0))
         val systolic = columns(1).toInt
         val diastolic = columns(2).toInt
         validateBloodPressure(systolic, diastolic)
         BloodPressure(number, datetime, systolic, diastolic)
-      }
 
   given Validator[CaloriesWeight] with
     def validate(number: Int, columns: Array[String]): Try[CaloriesWeight] =
-      Try {
+      Try:
         validateColumnCount(columns.length, 4)
         val datetime = datetimeToMinute(columns(0))
         val in = columns(1).toInt
@@ -31,21 +30,19 @@ object Validator:
         val weight = columns(3).toDouble
         validateCaloriesWeight(in, out, weight)
         CaloriesWeight(number, datetime, in, out, weight)
-      }
 
   given Validator[Glucose] with
     def validate(number: Int, columns: Array[String]): Try[Glucose] =
-      Try {
+      Try:
         validateColumnCount(columns.length, 2)
         val datetime = datetimeToMinute(columns(0))
         val level = columns(1).toInt
         validateGlucose(level)
         Glucose(number, datetime, level)
-      }
 
   given Validator[Med] with
     def validate(number: Int, columns: Array[String]): Try[Med] =
-      Try {
+      Try:
         validateColumnCount(columns.length, 3)
         val datetime = datetimeToMinute(columns(0))
         val medTypeId = columns(1).toInt
@@ -53,11 +50,10 @@ object Validator:
         val dosage = columns(2).toInt
         validateMed(dosage)
         Med(number, datetime, medtype, dosage)
-      }
 
   given Validator[GlucoseMed] with
     def validate(number: Int, columns: Array[String]): Try[GlucoseMed] =
-      Try {
+      Try:
         validateColumnCount(columns.length, 4)
         val datetime = datetimeToMinute(columns(0))
         val level = columns(1).toInt
@@ -66,52 +62,47 @@ object Validator:
         val dosage = columns(3).toInt
         validateGlucoseMed(level, dosage)
         GlucoseMed(number, datetime, level, medtype, dosage)
-      }
 
   given Validator[Pulse] with
     def validate(number: Int, columns: Array[String]): Try[Pulse] =
-      Try {
+      Try:
         validateColumnCount(columns.length, 2)
         val datetime = datetimeToMinute(columns(0))
         val beatsPerMinute = columns(1).toInt
         validatePulse(beatsPerMinute)
         Pulse(number, datetime, beatsPerMinute)
-      }
 
   given Validator[PulseOxygen] with
     def validate(number: Int, columns: Array[String]): Try[PulseOxygen] =
-      Try {
+      Try:
         validateColumnCount(columns.length, 3)
         val datetime = datetimeToMinute(columns(0))
         val beatsPerMinute = columns(1).toInt
         val bloodOxygenPercentage = columns(2).toInt
         validatePulseOxygen(beatsPerMinute, bloodOxygenPercentage)
         PulseOxygen(number, datetime, beatsPerMinute, bloodOxygenPercentage)
-      }
 
   given Validator[Respiration] with
     def validate(number: Int, columns: Array[String]): Try[Respiration] =
-      Try {
+      Try:
         validateColumnCount(columns.length, 2)
         val datetime = datetimeToMinute(columns(0))
         val breathesPerMinute = columns(1).toInt
         validateRespiration(breathesPerMinute)
         Respiration(number, datetime, breathesPerMinute)
-      }
 
   given Validator[Temperature] with
     def validate(number: Int, columns: Array[String]): Try[Temperature] =
-      Try {
+      Try:
         validateColumnCount(columns.length, 2)
         val datetime = datetimeToMinute(columns(0))
         val degrees = columns(1).toDouble
         validateTemperature(degrees)
         Temperature(number, datetime, degrees)
-      }
 
   given Validator[Vitals] with
     def validate(number: Int, columns: Array[String]): Try[Vitals] =
-      Try {
+      Try:
         validateColumnCount(columns.length, 7)
         val datetime = datetimeToMinute(columns(0))
         val temperature = columns(1).toDouble
@@ -126,17 +117,15 @@ object Validator:
         validatePulseOxygen(pulse, oxygen)
         validateBloodPressure(systolic, diastolic)
         Vitals(number, datetime, temperature, respiration, pulse, oxygen, systolic, diastolic)
-      }
 
   given Validator[Weight] with
     def validate(number: Int, columns: Array[String]): Try[Weight] =
-      Try {
+      Try:
         validateColumnCount(columns.length, 2)
         val datetime = datetimeToMinute(columns(0))
         val pounds = columns(1).toDouble
         validateWeight(pounds)
         Weight(number, datetime, pounds)
-      }
 
   private def validateCaloriesWeight(in: Int, out: Int, weight: Double): Unit =
     require(in >= 0 && in <= 9999, s"$in calories in not >= 0 and <= 9999")
