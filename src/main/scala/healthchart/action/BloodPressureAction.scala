@@ -11,7 +11,7 @@ import healthchart.entity.Transformer.*
 import healthchart.panel.ChartPanelBuilder
 import healthchart.ui.{Frame, PathDialog}
 
-class BloodPressureAction(name: String, frame: Frame) extends AbstractAction(name):
+final class BloodPressureAction(name: String, frame: Frame) extends AbstractAction(name):
   protected val counter = new AtomicInteger(1)
 
   def actionPerformed(event: ActionEvent): Unit =
