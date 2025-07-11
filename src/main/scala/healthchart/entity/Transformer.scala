@@ -15,7 +15,7 @@ object Transformer:
   private val utf8 = Codec.UTF8.name
 
   def transform[E: ClassTag](path: String,
-                             delimiter: String = ",")(implicit validator: Validator[E]): Try[Entities[E]] =
+                             delimiter: String = ",")(using validator: Validator[E]): Try[Entities[E]] =
     Using( Source.fromFile(path, utf8) ) { source =>
       supervised:
         val entitiesBuilder = mutable.ArrayBuilder.make[E]
@@ -33,7 +33,7 @@ object Transformer:
         Entities[E](entities, invalidEntities)
     }
 
-  def transformEntities[E: ClassTag](path: String)(implicit validator: Validator[E]): Entities[E] =
+  def transformEntities[E: ClassTag](path: String)(using validator: Validator[E]): Entities[E] =
     transform[E](path) match
       case Success(entities) => entities
       case Failure(failure) =>
