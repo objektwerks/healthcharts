@@ -10,6 +10,7 @@ libraryDependencies ++= {
     "com.formdev" % "flatlaf" % "3.6",
     "org.jfree" % "jfreechart" % "1.5.5",
     "com.miglayout" % "miglayout-swing" % "11.4.2",
+    "com.softwaremill.ox" %% "core" % "0.7.3",
     "com.typesafe" % "config" % "1.4.3",
     "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
     "ch.qos.logback" % "logback-classic" % "1.5.18",
