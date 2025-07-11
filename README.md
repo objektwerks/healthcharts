@@ -1,7 +1,6 @@
 HealthCharts
 ------------
->Healthcharts is an open source project that provides useful health charts sourced by csv/txt files,
->using Swing, Flatlaf, MigLayout, JFreeChart, Ox and Scala 3.
+>Healthcharts app provides useful health charts sourced by csv/txt files, using Swing, Flatlaf, MigLayout, JFreeChart, Ox and Scala 3.
 
 Charts
 ------
