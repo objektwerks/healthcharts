@@ -13,6 +13,6 @@ object FileChooser:
     fileChooser.setAcceptAllFileFilterUsed(false)
     val filter = new FileNameExtensionFilter(fileExtensionFilterDesc, fileExtensions*)
     fileChooser.addChoosableFileFilter(filter)
-    if (fileChooser.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION)
+    if (fileChooser.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) then
       Some(fileChooser.getSelectedFile.getAbsolutePath)
     else None
