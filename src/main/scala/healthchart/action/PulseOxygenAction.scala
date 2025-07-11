@@ -8,6 +8,7 @@ import healthchart.Context
 import healthchart.chart.PulseOxygenChart
 import healthchart.entity.*
 import healthchart.entity.Transformer.*
+import healthchart.Logger.logError
 import healthchart.panel.ChartPanelBuilder
 import healthchart.ui.{Frame, PathDialog}
 
@@ -22,4 +23,4 @@ final class PulseOxygenAction(name: String, frame: Frame) extends AbstractAction
         val chart = PulseOxygenChart.build(pulseoxygens)
         val chartPanel = ChartPanelBuilder.build(chart, pulseoxygens)
         frame.addCompositeChartPanel(s"${Context.titlePulseOxygen}-${counter.getAndIncrement}", chartPanel)
-      case None =>
+      case None => logError(s"*** Path falled: $path")
