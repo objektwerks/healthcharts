@@ -11,6 +11,8 @@ object Context:
   val appWidth = conf.getInt("app.width")
   val appHeight = conf.getInt("app.height")
 
+  val menuExit = conf.getString("menu.exit")
+
   val fileFilterExtensions = conf.getStringList("file.filterExtensions").asScala.toArray
   val fileExtensionFilterDesc = conf.getString("file.extensionsFilterDesc")
 
