@@ -17,9 +17,7 @@ libraryDependencies ++= {
   )
 }
 scalacOptions ++= Seq(
-  "-Wunused:all",
-  "-rewrite",
-  "-source:3.4-migration"
+  "-Wunused:all"
 )
 jlinkIgnoreMissingDependency := JlinkIgnore.everything
 run / fork := true // Required to run Swing UI!
