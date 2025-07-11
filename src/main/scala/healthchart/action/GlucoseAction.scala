@@ -8,6 +8,7 @@ import healthchart.Context
 import healthchart.chart.GlucoseChart
 import healthchart.entity.*
 import healthchart.entity.Transformer.*
+import healthchart.Logger.logError
 import healthchart.panel.ChartPanelBuilder
 import healthchart.ui.{Frame, PathDialog}
 
@@ -22,4 +23,4 @@ final class GlucoseAction(name: String, frame: Frame) extends AbstractAction(nam
         val chart = GlucoseChart.build(glucoses)
         val chartPanel = ChartPanelBuilder.build(chart, glucoses)
         frame.addCompositeChartPanel(s"${Context.titleGlucose}-${counter.getAndIncrement}", chartPanel)
-      case None =>
+      case None => logError("*** Path falled: $path")
