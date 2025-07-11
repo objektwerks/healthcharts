@@ -11,7 +11,7 @@ object FileChooser:
     val fileChooser = new JFileChooser(FileSystemView.getFileSystemView.getHomeDirectory)
     fileChooser.setDialogTitle(dialogTitle)
     fileChooser.setAcceptAllFileFilterUsed(false)
-    val filter = new FileNameExtensionFilter(fileExtensionFilterDesc, fileExtensions: _*)
+    val filter = new FileNameExtensionFilter(fileExtensionFilterDesc, fileExtensions*)
     fileChooser.addChoosableFileFilter(filter)
     if (fileChooser.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION)
       Some(fileChooser.getSelectedFile.getAbsolutePath)
