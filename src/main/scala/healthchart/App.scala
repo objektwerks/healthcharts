@@ -1,19 +1,17 @@
 package healthchart
 
 import com.formdev.flatlaf.FlatLightLaf
-import com.typesafe.scalalogging.Logger
 
 import java.awt.{EventQueue, Taskbar, Toolkit}
 import java.awt.Taskbar.Feature
 
 import javax.swing.UIManager
 
+import healthchart.Logger.logInfo
 import healthchart.ui.Frame
 
 @main def runApp(): Unit =
-  val logger = Logger.apply(this.getClass())
-
-  logger.info("*** Starting app ...")
+  logInfo("*** Starting app ...")
 
   EventQueue.invokeLater(
     () => {
@@ -28,8 +26,8 @@ import healthchart.ui.Frame
     }
   )
 
-  logger.info("*** App started!")
+  logInfo("*** App started!")
 
   sys.addShutdownHook(
-    logger.info("*** App stopped!")
+    logInfo("*** App stopped!")
   )
