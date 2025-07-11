@@ -1,6 +1,6 @@
 HealthCharts
 ------------
->Healthcharts app providing 11 health charts sourced by csv text files, using Swing, Flatlaf, MigLayout, JFreeChart, Ox and Scala 3.
+>Healthcharts app providing 11 health charts sourced by **csv** text files, using Swing, Flatlaf, MigLayout, JFreeChart, Ox and Scala 3.
 
 Charts
 ------
