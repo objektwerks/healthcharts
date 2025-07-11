@@ -16,6 +16,10 @@ Charts
 - [Vitals](docs/vitals.chart.md)
 - [Weight](docs/weight.chart.md)
 
+Build
+-----
+1. sbt clean compile
+
 Test
 ----
 1. sbt clean test
