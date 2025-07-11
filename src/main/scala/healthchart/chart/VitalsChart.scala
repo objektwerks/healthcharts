@@ -9,7 +9,7 @@ import org.jfree.chart.plot.{CombinedDomainXYPlot, PlotOrientation, XYPlot}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.XYDataset
 
-import healthchart.Conf
+import healthchart.Context
 import healthchart.chart.BloodPressureChart.*
 import healthchart.chart.PulseChart.*
 import healthchart.chart.PulseOxygenChart.*
@@ -19,14 +19,14 @@ import healthchart.entity.{Entities, Vitals}
 
 object VitalsChart extends Chart:
   def build(vitals: Entities[Vitals]): JFreeChart =
-    val xAxis = new DateAxis(Conf.titleDayHourChartXAxis)
+    val xAxis = new DateAxis(Context.titleDayHourChartXAxis)
     xAxis.setDateFormatOverride( new SimpleDateFormat("d,H") )
 
     val topXYPlot = buildTopXYPlot(vitals)
     val bottomXYPlot = buildBottomXYPlot(vitals)
     val combinedXYPlot = buildCombindedXYPlot(xAxis, topXYPlot, bottomXYPlot)
 
-    val title = buildTitle(Conf.titleVitals, vitals.toEntity)
+    val title = buildTitle(Context.titleVitals, vitals.toEntity)
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, combinedXYPlot, true)
 
   def buildCombindedXYPlot(xAxis: DateAxis,
@@ -43,7 +43,7 @@ object VitalsChart extends Chart:
     val xyPlot = new XYPlot()
     xyPlot.setBackgroundPaint(Color.LIGHT_GRAY)
 
-    val yAxis = new NumberAxis(Conf.titleVitalsChartTopYAxis)
+    val yAxis = new NumberAxis(Context.titleVitalsChartTopYAxis)
     yAxis.setAutoRangeIncludesZero(false)
     yAxis.setAutoRange(true)
 
@@ -61,7 +61,7 @@ object VitalsChart extends Chart:
     val xyPlot = new XYPlot()
     xyPlot.setBackgroundPaint(Color.LIGHT_GRAY)
 
-    val yAxis = new NumberAxis(Conf.titleVitalsChartBottomYAxis)
+    val yAxis = new NumberAxis(Context.titleVitalsChartBottomYAxis)
     yAxis.setAutoRangeIncludesZero(false)
     yAxis.setAutoRange(true)
 
@@ -79,35 +79,35 @@ object VitalsChart extends Chart:
     xyPlot
 
   def buildTemperatureDataset(vitals: Entities[Vitals]): XYDataset =
-    val timeSeries = new TimeSeries(Conf.titleTemperature)
+    val timeSeries = new TimeSeries(Context.titleTemperature)
     vitals.entities.foreach { vital =>
       timeSeries.add( vital.datetime, vital.temperature )
     }
     new TimeSeriesCollection(timeSeries)
 
   def buildRespirationDataset(vitals: Entities[Vitals]): XYDataset =
-    val timeSeries = new TimeSeries(Conf.titleRespiration)
+    val timeSeries = new TimeSeries(Context.titleRespiration)
     vitals.entities.foreach { vital =>
       timeSeries.add( vital.datetime, vital.respiration.toDouble )
     }
     new TimeSeriesCollection(timeSeries)
 
   def buildPulseDataset(vitals: Entities[Vitals]): XYDataset =
-    val timeSeries = new TimeSeries(Conf.titlePulse)
+    val timeSeries = new TimeSeries(Context.titlePulse)
     vitals.entities.foreach { vital =>
       timeSeries.add( vital.datetime, vital.pulse.toDouble )
     }
     new TimeSeriesCollection(timeSeries)
 
   def buildOxygenDataset(vitals: Entities[Vitals]): XYDataset =
-    val timeSeries = new TimeSeries(Conf.titleOxygen)
+    val timeSeries = new TimeSeries(Context.titleOxygen)
     vitals.entities.foreach { vital =>
       timeSeries.add( vital.datetime, vital.oxygen.toDouble )
     }
     new TimeSeriesCollection(timeSeries)
 
   def buildBloodPressureDataset(vitals: Entities[Vitals]): XYDataset =
-    val timeSeries = new TimeSeries(Conf.titleSystolic)
+    val timeSeries = new TimeSeries(Context.titleSystolic)
     vitals.entities.foreach { vital =>
       timeSeries.add( vital.datetime, s"${vital.systolic}.${vital.diastolic}".toDouble )
     }

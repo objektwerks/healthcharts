@@ -11,7 +11,7 @@ import org.jfree.chart.renderer.xy.{XYItemRenderer, XYLineAndShapeRenderer}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.XYDataset
 
-import healthchart.Conf
+import healthchart.Context
 import healthchart.entity.*
 
 object GlucoseChart extends Chart:
@@ -21,18 +21,18 @@ object GlucoseChart extends Chart:
     xyPlot.setDataset(0, buildGlucoseDataset(glucoses))
     xyPlot.setRenderer(0, buildGlucoseRenderer())
 
-    val xAxis = new DateAxis(Conf.titleDayHourChartXAxis)
+    val xAxis = new DateAxis(Context.titleDayHourChartXAxis)
     xAxis.setDateFormatOverride( new SimpleDateFormat("d,H") )
     xyPlot.setDomainAxis(0, xAxis)
 
-    val yAxis = new NumberAxis(Conf.titleGlucoseMedChartYAxis)
+    val yAxis = new NumberAxis(Context.titleGlucoseMedChartYAxis)
     xyPlot.setRangeAxis(yAxis)
 
-    val title = buildTitle(Conf.titleGlucose, glucoses.toEntity)
+    val title = buildTitle(Context.titleGlucose, glucoses.toEntity)
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
 
   def buildGlucoseDataset(glucoses: Entities[Glucose]): XYDataset =
-    val timeSeries = new TimeSeries(Conf.titleGlucose)
+    val timeSeries = new TimeSeries(Context.titleGlucose)
     glucoses.entities.foreach { glucose =>
       timeSeries.add( glucose.datetime, glucose.level.toDouble )
     }
@@ -47,7 +47,7 @@ object GlucoseChart extends Chart:
         val dayHourMinute = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
         val level = new DecimalFormat("0").format( yValue )
         val delta = calculateDeltaAsPercentage(dataset, series, item)
-        s"${Conf.titleGlucose}: ($dayHourMinute, $level, $delta%)"
+        s"${Context.titleGlucose}: ($dayHourMinute, $level, $delta%)"
       override def clone() = this
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)

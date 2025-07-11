@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent
 import java.util.concurrent.atomic.AtomicInteger
 import javax.swing.AbstractAction
 
-import healthchart.Conf
+import healthchart.Context
 import healthchart.chart.BloodPressureChart
 import healthchart.entity.*
 import healthchart.entity.Transformer.*
@@ -15,11 +15,11 @@ class BloodPressureAction(name: String, frame: Frame) extends AbstractAction(nam
   protected val counter = new AtomicInteger(1)
 
   def actionPerformed(event: ActionEvent): Unit =
-    val path = new PathDialog(frame, Conf.labelBloodPressureCsv).view
+    val path = new PathDialog(frame, Context.labelBloodPressureCsv).view
     path match
       case Some( bloodPressureCsvPath ) =>
         val bloodpressures = transformEntities[BloodPressure](bloodPressureCsvPath)
         val chart = BloodPressureChart.build(bloodpressures)
         val chartPanel = ChartPanelBuilder.build(chart, bloodpressures)
-        frame.addCompositeChartPanel(s"${Conf.titleBloodPressure}-${counter.getAndIncrement}", chartPanel)
+        frame.addCompositeChartPanel(s"${Context.titleBloodPressure}-${counter.getAndIncrement}", chartPanel)
       case None =>

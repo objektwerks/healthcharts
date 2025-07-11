@@ -4,15 +4,15 @@ import java.awt.BorderLayout
 
 import javax.swing.{JFrame, JPanel, WindowConstants}
 
-import healthchart.Conf
+import healthchart.Context
 
 final class Frame extends JFrame:
   val tabbedPane = TabbedPane()
   add(tabbedPane, BorderLayout.CENTER)
 
   setJMenuBar( MenuBar(this) )
-  setTitle(Conf.appTitle)
-  setSize(Conf.appWidth, Conf.appHeight)
+  setTitle(Context.appTitle)
+  setSize(Context.appWidth, Context.appHeight)
   setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
   setLocationRelativeTo(null)
 

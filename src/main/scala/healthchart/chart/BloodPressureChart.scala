@@ -11,7 +11,7 @@ import org.jfree.chart.renderer.xy.{XYItemRenderer, XYLineAndShapeRenderer}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.XYDataset
 
-import healthchart.Conf
+import healthchart.Context
 import healthchart.entity.{BloodPressure, Entities}
 
 object BloodPressureChart extends Chart:
@@ -22,18 +22,18 @@ object BloodPressureChart extends Chart:
     xyPlot.setDataset(0, buildBloodPressureDataset(bloodpressures))
     xyPlot.setRenderer(0, buildBloodPressureRenderer())
 
-    val xAxis = new DateAxis(Conf.titleDayHourChartXAxis)
+    val xAxis = new DateAxis(Context.titleDayHourChartXAxis)
     xAxis.setDateFormatOverride( new SimpleDateFormat("d,H") )
     xyPlot.setDomainAxis(0, xAxis)
 
-    val yAxis = new NumberAxis(Conf.titleBloodPressureChartYAxis)
+    val yAxis = new NumberAxis(Context.titleBloodPressureChartYAxis)
     xyPlot.setRangeAxis(yAxis)
 
-    val title = buildTitle(Conf.titleBloodPressure, bloodpressures.toEntity)
+    val title = buildTitle(Context.titleBloodPressure, bloodpressures.toEntity)
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
 
   def buildBloodPressureDataset(bloodpressures: Entities[BloodPressure]): XYDataset =
-    val timeSeries = new TimeSeries(Conf.titleSystolic)
+    val timeSeries = new TimeSeries(Context.titleSystolic)
     bloodpressures.entities.foreach { bloodpressure =>
       timeSeries.add( bloodpressure.datetime, s"${bloodpressure.systolic}.${bloodpressure.diastolic }".toDouble )
     }
@@ -52,7 +52,7 @@ object BloodPressureChart extends Chart:
         if (diastolic.length == 1) diastolic = diastolic + 0  // Hack! DecimalFormat dropping trailing zero!
         val bloodpressure = s"$systolic/$diastolic"
         val delta = calculateDeltaAsPercentage(dataset, series, item)
-        s"${Conf.titleBloodPressure}: ($dayHourMinute, $bloodpressure, $delta%)"
+        s"${Context.titleBloodPressure}: ($dayHourMinute, $bloodpressure, $delta%)"
       override def clone() = this
     }
     val itemLabelGenerator = new StandardXYItemLabelGenerator() {

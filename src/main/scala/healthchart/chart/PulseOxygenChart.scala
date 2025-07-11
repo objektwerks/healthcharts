@@ -11,7 +11,7 @@ import org.jfree.chart.renderer.xy.{XYItemRenderer, XYLineAndShapeRenderer}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.XYDataset
 
-import healthchart.Conf
+import healthchart.Context
 import healthchart.chart.PulseChart._
 import healthchart.entity.{Entities, PulseOxygen}
 
@@ -26,25 +26,25 @@ object PulseOxygenChart extends Chart:
     xyPlot.setDataset(1, buildOxygenDataset(pulseoxygens))
     xyPlot.setRenderer(1, buildOxygenRenderer())
 
-    val xAxis = new DateAxis(Conf.titleDayHourChartXAxis)
+    val xAxis = new DateAxis(Context.titleDayHourChartXAxis)
     xAxis.setDateFormatOverride( new SimpleDateFormat("d,H") )
     xyPlot.setDomainAxis(0, xAxis)
 
-    val yAxis = new NumberAxis(Conf.titlePulseOxygenChartYAxis)
+    val yAxis = new NumberAxis(Context.titlePulseOxygenChartYAxis)
     xyPlot.setRangeAxis(yAxis)
 
-    val title = buildTitle(Conf.titlePulseOxygen, pulseoxygens.toEntity)
+    val title = buildTitle(Context.titlePulseOxygen, pulseoxygens.toEntity)
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
 
   def buildPulseDataset(pulseoxygens: Entities[PulseOxygen]): XYDataset =
-    val timeSeries = new TimeSeries(Conf.titlePulse)
+    val timeSeries = new TimeSeries(Context.titlePulse)
     pulseoxygens.entities.foreach { pulseoxygen =>
       timeSeries.add( pulseoxygen.datetime, pulseoxygen.beatsPerMinute.toDouble )
     }
     new TimeSeriesCollection(timeSeries)
 
   def buildOxygenDataset(pulseoxygens: Entities[PulseOxygen]): XYDataset =
-    val timeSeries = new TimeSeries(Conf.titleOxygen)
+    val timeSeries = new TimeSeries(Context.titleOxygen)
     pulseoxygens.entities.foreach { pulseoxygen =>
       timeSeries.add( pulseoxygen.datetime, pulseoxygen.bloodOxygenPercentage.toDouble )
     }
@@ -59,7 +59,7 @@ object PulseOxygenChart extends Chart:
         val dayHourMinute = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
         val bloodOxygenPercentage = new DecimalFormat("0").format( yValue )
         val delta = calculateDeltaAsPercentage(dataset, series, item)
-        s"${Conf.titleOxygen}: ($dayHourMinute, $bloodOxygenPercentage, $delta%)"
+        s"${Context.titleOxygen}: ($dayHourMinute, $bloodOxygenPercentage, $delta%)"
       override def clone() = this
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)

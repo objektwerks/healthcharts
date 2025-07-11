@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent
 import java.util.concurrent.atomic.AtomicInteger
 import javax.swing.AbstractAction
 
-import healthchart.Conf
+import healthchart.Context
 import healthchart.chart.CaloriesWeightChart
 import healthchart.entity.Transformer.*
 import healthchart.entity.*
@@ -15,11 +15,11 @@ class CaloriesWeightAction(name: String, frame: Frame) extends AbstractAction(na
   protected val counter = new AtomicInteger(1)
 
   def actionPerformed(event: ActionEvent): Unit =
-    val path = new PathDialog(frame, Conf.labelCaloriesWeightCsv).view
+    val path = new PathDialog(frame, Context.labelCaloriesWeightCsv).view
     path match
       case Some( caloriesWeightCsvPath ) =>
         val caloriesWeights = transformEntities[CaloriesWeight](caloriesWeightCsvPath)
         val chart = CaloriesWeightChart.build(caloriesWeights)
         val chartPanel = ChartPanelBuilder.build(chart, caloriesWeights)
-        frame.addCompositeChartPanel(s"${Conf.titleCaloriesWeight}-${counter.getAndIncrement}", chartPanel)
+        frame.addCompositeChartPanel(s"${Context.titleCaloriesWeight}-${counter.getAndIncrement}", chartPanel)
       case None =>

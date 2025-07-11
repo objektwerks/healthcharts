@@ -2,23 +2,23 @@ package healthchart.ui
 
 import javax.swing.{JMenu, JMenuBar, JMenuItem, JSeparator}
 
-import healthchart.Conf
+import healthchart.Context
 import healthchart.action.*
 
 final class MenuBar(frame: Frame) extends JMenuBar():
-  val menu = JMenu(Conf.titleMenuBar)
-  menu.add( JMenuItem( VitalsAction(Conf.titleVitals, frame) ) )
+  val menu = JMenu(Context.titleMenuBar)
+  menu.add( JMenuItem( VitalsAction(Context.titleVitals, frame) ) )
   menu.add( JSeparator() )
-  menu.add( JMenuItem( BloodPressureAction(Conf.titleBloodPressure, frame) ) )
-  menu.add( JMenuItem( PulseAction(Conf.titlePulse, frame) ) )
-  menu.add( JMenuItem( PulseOxygenAction(Conf.titlePulseOxygen, frame) ) )
-  menu.add( JMenuItem( RespirationAction(Conf.titleRespiration, frame) ) )
-  menu.add( JMenuItem( TemperatureAction(Conf.titleTemperature, frame) ) )
-  menu.add( JMenuItem( WeightAction(Conf.titleWeight, frame) ) )
+  menu.add( JMenuItem( BloodPressureAction(Context.titleBloodPressure, frame) ) )
+  menu.add( JMenuItem( PulseAction(Context.titlePulse, frame) ) )
+  menu.add( JMenuItem( PulseOxygenAction(Context.titlePulseOxygen, frame) ) )
+  menu.add( JMenuItem( RespirationAction(Context.titleRespiration, frame) ) )
+  menu.add( JMenuItem( TemperatureAction(Context.titleTemperature, frame) ) )
+  menu.add( JMenuItem( WeightAction(Context.titleWeight, frame) ) )
   menu.add( JSeparator() )
-  menu.add( JMenuItem( GlucoseAction(Conf.titleGlucose, frame) ) )
-  menu.add( JMenuItem( MedAction(Conf.titleMed, frame) ) )
-  menu.add( JMenuItem( GlucoseMedAction(Conf.titleGlucoseMed, frame) ) )
+  menu.add( JMenuItem( GlucoseAction(Context.titleGlucose, frame) ) )
+  menu.add( JMenuItem( MedAction(Context.titleMed, frame) ) )
+  menu.add( JMenuItem( GlucoseMedAction(Context.titleGlucoseMed, frame) ) )
   menu.add( JSeparator() )
-  menu.add( JMenuItem( CaloriesWeightAction(Conf.titleCaloriesWeight, frame) ) )
+  menu.add( JMenuItem( CaloriesWeightAction(Context.titleCaloriesWeight, frame) ) )
   add(menu)

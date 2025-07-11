@@ -13,7 +13,7 @@ import org.jfree.data.xy.XYDataset
 
 import scala.util.Try
 
-import healthchart.Conf
+import healthchart.Context
 import healthchart.entity.*
 
 object MedChart extends Chart:
@@ -23,18 +23,18 @@ object MedChart extends Chart:
     xyPlot.setDataset(1, buildMedDataset(meds))
     xyPlot.setRenderer(1, buildMedRenderer())
 
-    val xAxis = new DateAxis(Conf.titleDayHourChartXAxis)
+    val xAxis = new DateAxis(Context.titleDayHourChartXAxis)
     xAxis.setDateFormatOverride( new SimpleDateFormat("d,H") )
     xyPlot.setDomainAxis(0, xAxis)
 
-    val yAxis = new NumberAxis(Conf.titleGlucoseMedChartYAxis)
+    val yAxis = new NumberAxis(Context.titleGlucoseMedChartYAxis)
     xyPlot.setRangeAxis(yAxis)
 
-    val title = buildTitle(Conf.titleMed, meds.toEntity)
+    val title = buildTitle(Context.titleMed, meds.toEntity)
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
 
   def buildMedDataset(meds: Entities[Med]): XYDataset =
-    val timeSeries = new TimeSeries(Conf.titleMed)
+    val timeSeries = new TimeSeries(Context.titleMed)
     meds.entities.foreach { med =>
       timeSeries.add( med.datetime, s"${med.dosage}.${med.medtype.id}".toDouble )
     }
@@ -52,7 +52,7 @@ object MedChart extends Chart:
         val medtype = Try{ yValues(1).toInt }.getOrElse(-1)
         val med = MedType.idToMedType.getOrElse(medtype, "n/a")
         val delta = calculateDeltaAsPercentage(dataset, series, item)
-        s"${Conf.titleMed}: ($dayHourMinute, $dosage, $med, $delta%)"
+        s"${Context.titleMed}: ($dayHourMinute, $dosage, $med, $delta%)"
       override def clone() = this
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)

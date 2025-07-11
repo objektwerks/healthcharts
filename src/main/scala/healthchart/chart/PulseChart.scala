@@ -11,7 +11,7 @@ import org.jfree.chart.renderer.xy.{XYItemRenderer, XYLineAndShapeRenderer}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.XYDataset
 
-import healthchart.Conf
+import healthchart.Context
 import healthchart.entity.*
 
 object PulseChart extends Chart:
@@ -20,18 +20,18 @@ object PulseChart extends Chart:
     xyPlot.setDataset( buildPulseDataset(pulses) )
     xyPlot.setRenderer( buildPulseRenderer() )
 
-    val xAxis = new DateAxis(Conf.titleDayHourChartXAxis)
+    val xAxis = new DateAxis(Context.titleDayHourChartXAxis)
     xAxis.setDateFormatOverride( new SimpleDateFormat("d,H") )
     xyPlot.setDomainAxis(xAxis)
 
-    val yAxis = new NumberAxis(Conf.titlePulseChartYAxis)
+    val yAxis = new NumberAxis(Context.titlePulseChartYAxis)
     xyPlot.setRangeAxis(yAxis)
 
-    val title = buildTitle(Conf.titlePulse, pulses.toEntity)
+    val title = buildTitle(Context.titlePulse, pulses.toEntity)
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
 
   def buildPulseDataset(pulses: Entities[Pulse]): XYDataset =
-    val timeSeries = new TimeSeries(Conf.titlePulse)
+    val timeSeries = new TimeSeries(Context.titlePulse)
     pulses.entities.foreach { pulse =>
       timeSeries.add( pulse.datetime, pulse.beatsPerMinute.toDouble )
     }
@@ -46,7 +46,7 @@ object PulseChart extends Chart:
         val dayHourMinute = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
         val beatsPerMinute = new DecimalFormat("0").format( yValue )
         val delta = calculateDeltaAsPercentage(dataset, series, item)
-        s"${Conf.titlePulse}: ($dayHourMinute, $beatsPerMinute, $delta%)"
+        s"${Context.titlePulse}: ($dayHourMinute, $beatsPerMinute, $delta%)"
       override def clone() = this
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)

@@ -8,7 +8,7 @@ import org.jfree.chart.plot.{DatasetRenderingOrder, XYPlot}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.XYDataset
 
-import healthchart.Conf
+import healthchart.Context
 import healthchart.entity.*
 
 object GlucoseMedChart extends Chart:
@@ -22,25 +22,25 @@ object GlucoseMedChart extends Chart:
     xyPlot.setDataset(1, buildMedDataset(glucosemeds))
     xyPlot.setRenderer(1, MedChart.buildMedRenderer())
 
-    val xAxis = new DateAxis(Conf.titleDayHourChartXAxis)
+    val xAxis = new DateAxis(Context.titleDayHourChartXAxis)
     xAxis.setDateFormatOverride( new SimpleDateFormat("d,H") )
     xyPlot.setDomainAxis(0, xAxis)
 
-    val yAxis = new NumberAxis(Conf.titleGlucoseMedChartYAxis)
+    val yAxis = new NumberAxis(Context.titleGlucoseMedChartYAxis)
     xyPlot.setRangeAxis(yAxis)
 
-    val title = buildTitle(Conf.titleGlucoseMed, glucosemeds.toEntity)
+    val title = buildTitle(Context.titleGlucoseMed, glucosemeds.toEntity)
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
 
   def buildGlucoseDataset(glucosemeds: Entities[GlucoseMed]): XYDataset =
-    val timeSeries = new TimeSeries(Conf.titleGlucose)
+    val timeSeries = new TimeSeries(Context.titleGlucose)
     glucosemeds.entities.foreach { glucosemed =>
       timeSeries.add( glucosemed.datetime, glucosemed.level.toDouble )
     }
     new TimeSeriesCollection(timeSeries)
 
   def buildMedDataset(glucosemeds: Entities[GlucoseMed]): XYDataset =
-    val timeSeries = new TimeSeries(Conf.titleMed)
+    val timeSeries = new TimeSeries(Context.titleMed)
     glucosemeds.entities.foreach { glucosemed =>
       timeSeries.add( glucosemed.datetime, s"${glucosemed.dosage}.${glucosemed.medtype.id}".toDouble )
     }

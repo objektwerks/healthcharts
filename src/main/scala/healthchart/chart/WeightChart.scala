@@ -11,7 +11,7 @@ import org.jfree.chart.renderer.xy.{XYItemRenderer, XYLineAndShapeRenderer}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.XYDataset
 
-import healthchart.Conf
+import healthchart.Context
 import healthchart.entity.*
 
 object WeightChart extends Chart:
@@ -20,18 +20,18 @@ object WeightChart extends Chart:
     xyPlot.setDataset( buildWeightDataset(weights) )
     xyPlot.setRenderer( buildWeightRenderer() )
 
-    val xAxis = new DateAxis(Conf.titleDayHourChartXAxis)
+    val xAxis = new DateAxis(Context.titleDayHourChartXAxis)
     xAxis.setDateFormatOverride( new SimpleDateFormat("d,H") )
     xyPlot.setDomainAxis(xAxis)
 
-    val yAxis = new NumberAxis(Conf.titleWeightChartYAxis)
+    val yAxis = new NumberAxis(Context.titleWeightChartYAxis)
     xyPlot.setRangeAxis(yAxis)
 
-    val title = buildTitle(Conf.titleWeight, weights.toEntity)
+    val title = buildTitle(Context.titleWeight, weights.toEntity)
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
 
   def buildWeightDataset(weights: Entities[Weight]): XYDataset =
-    val timeSeries = new TimeSeries(Conf.titleWeight)
+    val timeSeries = new TimeSeries(Context.titleWeight)
     weights.entities.foreach { weight =>
       timeSeries.add( weight.datetime, weight.pounds )
     }

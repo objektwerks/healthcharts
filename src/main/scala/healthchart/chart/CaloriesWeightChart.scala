@@ -12,20 +12,20 @@ import org.jfree.chart.renderer.xy.{XYItemRenderer, XYLineAndShapeRenderer}
 import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.XYDataset
 
-import healthchart.Conf
+import healthchart.Context
 import healthchart.chart.WeightChart.*
 import healthchart.entity.{CaloriesWeight, Entities}
 
 object CaloriesWeightChart extends Chart:
   def build(caloriesWeights: Entities[CaloriesWeight]): JFreeChart =
-    val xAxis = new DateAxis(Conf.titleDayHourChartXAxis)
+    val xAxis = new DateAxis(Context.titleDayHourChartXAxis)
     xAxis.setDateFormatOverride( new SimpleDateFormat("d,H") )
 
     val topXYPlot = buildTopXYPlot(caloriesWeights)
     val bottomXYPlot = buildBottomXYPlot(caloriesWeights)
     val combinedXYPlot = buildCombindedXYPlot(xAxis, topXYPlot, bottomXYPlot)
 
-    val title = buildTitle(Conf.titleCaloriesWeight, caloriesWeights.toEntity)
+    val title = buildTitle(Context.titleCaloriesWeight, caloriesWeights.toEntity)
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, combinedXYPlot, true)
 
   def buildCombindedXYPlot(xAxis: DateAxis,
@@ -42,7 +42,7 @@ object CaloriesWeightChart extends Chart:
     val xyPlot = new XYPlot()
     xyPlot.setBackgroundPaint(Color.LIGHT_GRAY)
 
-    val yAxis = new NumberAxis(Conf.titleCaloriesWeightChartBottomYAxis)
+    val yAxis = new NumberAxis(Context.titleCaloriesWeightChartBottomYAxis)
     yAxis.setAutoRangeIncludesZero(false)
     yAxis.setAutoRange(true)
 
@@ -60,7 +60,7 @@ object CaloriesWeightChart extends Chart:
     val xyPlot = new XYPlot()
     xyPlot.setBackgroundPaint(Color.LIGHT_GRAY)
 
-    val yAxis = new NumberAxis(Conf.titleCaloriesWeightChartTopYAxis)
+    val yAxis = new NumberAxis(Context.titleCaloriesWeightChartTopYAxis)
     yAxis.setAutoRangeIncludesZero(false)
     yAxis.setAutoRange(true)
 
@@ -72,21 +72,21 @@ object CaloriesWeightChart extends Chart:
     xyPlot
 
   def buildWeightDataset(caloriesWeights: Entities[CaloriesWeight]): XYDataset =
-    val timeSeries = new TimeSeries(Conf.titleWeight)
+    val timeSeries = new TimeSeries(Context.titleWeight)
     caloriesWeights.entities.foreach { caloriesWeight =>
       timeSeries.add( caloriesWeight.datetime, caloriesWeight.weight )
     }
     new TimeSeriesCollection(timeSeries)
 
   def buildCaloriesInDataset(caloriesWeights: Entities[CaloriesWeight]): XYDataset =
-    val timeSeries = new TimeSeries(Conf.titleCaloriesIn)
+    val timeSeries = new TimeSeries(Context.titleCaloriesIn)
     caloriesWeights.entities.foreach { caloriesWeight =>
       timeSeries.add( caloriesWeight.datetime, caloriesWeight.in.toDouble )
     }
     new TimeSeriesCollection(timeSeries)
 
   def buildCaloriesOutDataset(caloriesWeights: Entities[CaloriesWeight]): XYDataset =
-    val timeSeries = new TimeSeries(Conf.titleCaloriesOut)
+    val timeSeries = new TimeSeries(Context.titleCaloriesOut)
     caloriesWeights.entities.foreach { caloriesWeight =>
       timeSeries.add( caloriesWeight.datetime, caloriesWeight.out.toDouble )
     }

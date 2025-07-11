@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent
 import java.util.concurrent.atomic.AtomicInteger
 import javax.swing.AbstractAction
 
-import healthchart.Conf
+import healthchart.Context
 import healthchart.chart.PulseOxygenChart
 import healthchart.entity.*
 import healthchart.entity.Transformer.*
@@ -15,11 +15,11 @@ class PulseOxygenAction(name: String, frame: Frame) extends AbstractAction(name)
   protected val counter = new AtomicInteger(1)
 
   def actionPerformed(event: ActionEvent): Unit =
-    val path = new PathDialog(frame, Conf.labelPulseOxygenCsv).view
+    val path = new PathDialog(frame, Context.labelPulseOxygenCsv).view
     path match
       case Some( pulseOxygenCsvPath ) =>
         val pulseoxygens = transformEntities[PulseOxygen](pulseOxygenCsvPath)
         val chart = PulseOxygenChart.build(pulseoxygens)
         val chartPanel = ChartPanelBuilder.build(chart, pulseoxygens)
-        frame.addCompositeChartPanel(s"${Conf.titlePulseOxygen}-${counter.getAndIncrement}", chartPanel)
+        frame.addCompositeChartPanel(s"${Context.titlePulseOxygen}-${counter.getAndIncrement}", chartPanel)
       case None =>

@@ -5,7 +5,7 @@ import javax.swing.{BorderFactory, JPanel, JScrollPane, JTabbedPane, JTextArea, 
 
 import org.jfree.chart.{ChartPanel, JFreeChart}
 
-import healthchart.Conf
+import healthchart.Context
 import healthchart.entity.Entities
 import healthchart.entity.InvalidEntity
 
@@ -18,9 +18,9 @@ object ChartPanelBuilder:
   def buildTabbedPane[E](chart: JFreeChart, entities: Entities[E]): JTabbedPane =
     val tabbedPane = JTabbedPane()
     tabbedPane.setTabPlacement( SwingConstants.BOTTOM )
-    tabbedPane.addTab( Conf.tabChart, buildChartPanel(chart) )
-    tabbedPane.addTab( Conf.tabEntities, buildEntitiesPanel(entities.entities) )
-    tabbedPane.addTab( Conf.tabInvalidEntities, buildInvalidEntitiesPanel(entities.invalidEntities) )
+    tabbedPane.addTab( Context.tabChart, buildChartPanel(chart) )
+    tabbedPane.addTab( Context.tabEntities, buildEntitiesPanel(entities.entities) )
+    tabbedPane.addTab( Context.tabInvalidEntities, buildInvalidEntitiesPanel(entities.invalidEntities) )
     tabbedPane
 
   def buildChartPanel(chart: JFreeChart): ChartPanel =

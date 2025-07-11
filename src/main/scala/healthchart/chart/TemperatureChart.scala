@@ -12,7 +12,7 @@ import org.jfree.data.time.{TimeSeries, TimeSeriesCollection}
 import org.jfree.data.xy.XYDataset
 
 
-import healthchart.Conf
+import healthchart.Context
 import healthchart.entity.*
 
 object TemperatureChart extends Chart:
@@ -21,18 +21,18 @@ object TemperatureChart extends Chart:
     xyPlot.setDataset( buildTemperatureDataset(temperatures) )
     xyPlot.setRenderer( buildTemperatureRenderer() )
 
-    val xAxis = new DateAxis(Conf.titleDayHourChartXAxis)
+    val xAxis = new DateAxis(Context.titleDayHourChartXAxis)
     xAxis.setDateFormatOverride( new SimpleDateFormat("d,H") )
     xyPlot.setDomainAxis(xAxis)
 
-    val yAxis = new NumberAxis(Conf.titleTemperatureChartYAxis)
+    val yAxis = new NumberAxis(Context.titleTemperatureChartYAxis)
     xyPlot.setRangeAxis(yAxis)
 
-    val title = buildTitle(Conf.titleTemperature, temperatures.toEntity)
+    val title = buildTitle(Context.titleTemperature, temperatures.toEntity)
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
 
   def buildTemperatureDataset(temperatures: Entities[Temperature]): XYDataset =
-    val timeSeries = new TimeSeries(Conf.titleTemperature)
+    val timeSeries = new TimeSeries(Context.titleTemperature)
     temperatures.entities.foreach { weight =>
       timeSeries.add( weight.datetime, weight.degrees )
     }
@@ -47,7 +47,7 @@ object TemperatureChart extends Chart:
         val dayHourMinute = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
         val degrees = new DecimalFormat("0.0").format( yValue )
         val delta = calculateDeltaAsPercentage(dataset, series, item)
-        s"${Conf.titleTemperature}: ($dayHourMinute, $degrees, $delta%)"
+        s"${Context.titleTemperature}: ($dayHourMinute, $degrees, $delta%)"
       override def clone() = this
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)

@@ -4,7 +4,7 @@ import com.typesafe.config.ConfigFactory
 
 import scala.jdk.CollectionConverters._
 
-object Conf:
+object Context:
   val conf = ConfigFactory.load("app.conf")
 
   val appTitle = conf.getString("app.title")

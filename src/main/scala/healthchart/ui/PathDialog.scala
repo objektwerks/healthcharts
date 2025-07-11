@@ -6,19 +6,19 @@ import javax.swing.*
 
 import net.miginfocom.swing.MigLayout
 
-import healthchart.Conf
+import healthchart.Context
 
 final class PathDialog(frame: Frame, labelPath: String) extends JDialog:
   private val pathTextField = buildPathTextField
-  private val selectButton = buildSelectButton(Conf.labelSelect)
-  private val fileChooserTitle = Conf.titleFileChooser
-  private val fileExtensionFilterDesc = Conf.fileExtensionFilterDesc
-  private val fileExtensions = Conf.fileFilterExtensions
+  private val selectButton = buildSelectButton(Context.labelSelect)
+  private val fileChooserTitle = Context.titleFileChooser
+  private val fileExtensionFilterDesc = Context.fileExtensionFilterDesc
+  private val fileExtensions = Context.fileFilterExtensions
   private var wasNotCancelled = true
 
   def view: Option[String] =
-    setTitle(Conf.titlePathDialog)
-    add(buildDialogPanel(labelPath, Conf.labelCancel, Conf.labelEllipsis), BorderLayout.CENTER)
+    setTitle(Context.titlePathDialog)
+    add(buildDialogPanel(labelPath, Context.labelCancel, Context.labelEllipsis), BorderLayout.CENTER)
     setModal(true)
     pack()
     setLocationRelativeTo(frame)
