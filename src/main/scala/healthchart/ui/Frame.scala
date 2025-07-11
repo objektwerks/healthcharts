@@ -1,10 +1,8 @@
 package healthchart.ui
 
 import java.awt.BorderLayout
-import java.io.File
 
 import javax.swing.{JFrame, JPanel, WindowConstants}
-import javax.imageio.ImageIO
 
 import healthchart.Context
 
@@ -14,9 +12,6 @@ final class Frame extends JFrame:
 
   setJMenuBar( MenuBar(this) )
   setTitle(Context.appTitle)
-  // setIconImage( Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon.png")) )
-  // setIconImage( ImageIcon("/icon.png").getImage() )
-  setIconImage( ImageIO.read( File("./icon.png") ) )
   setSize(Context.appWidth, Context.appHeight)
   setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
   setLocationRelativeTo(null)
