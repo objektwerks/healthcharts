@@ -2,7 +2,7 @@ package healthchart
 
 import com.typesafe.config.ConfigFactory
 
-import scala.jdk.CollectionConverters._
+import scala.jdk.CollectionConverters.*
 
 object Context:
   val conf = ConfigFactory.load("app.conf")
