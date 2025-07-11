@@ -1,14 +1,15 @@
 package healthchart.ui
 
 import javax.swing.JFileChooser
-import javax.swing.filechooser.{FileNameExtensionFilter, FileSystemView}
+import javax.swing.filechooser.FileNameExtensionFilter
+import java.nio.file.Paths
 
 object FileChooser:
   def chooseFile(frame: Frame, 
                  dialogTitle: String,
                  fileExtensionFilterDesc: String,
                  fileExtensions: Array[String]): Option[String] =
-    val fileChooser = JFileChooser(FileSystemView.getFileSystemView.getHomeDirectory)
+    val fileChooser = JFileChooser(Paths.get(".").toAbsolutePath.toFile())
     fileChooser.setDialogTitle(dialogTitle)
     fileChooser.setAcceptAllFileFilterUsed(false)
     val filter = FileNameExtensionFilter(fileExtensionFilterDesc, fileExtensions*)
