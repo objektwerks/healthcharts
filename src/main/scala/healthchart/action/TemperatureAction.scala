@@ -8,6 +8,7 @@ import healthchart.Context
 import healthchart.chart.TemperatureChart
 import healthchart.entity.*
 import healthchart.entity.Transformer.*
+import healthchart.Logger.logError
 import healthchart.panel.ChartPanelBuilder
 import healthchart.ui.{Frame, PathDialog}
 
@@ -22,4 +23,4 @@ final class TemperatureAction(name: String, frame: Frame) extends AbstractAction
         val chart = TemperatureChart.build(temperatures)
         val chartPanel = ChartPanelBuilder.build(chart, temperatures)
         frame.addCompositeChartPanel(s"${Context.titleTemperature}-${counter.getAndIncrement}", chartPanel)
-      case None =>
+      case None => logError(s"*** Path falled: $path")
