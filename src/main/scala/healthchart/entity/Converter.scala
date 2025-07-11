@@ -7,7 +7,7 @@ import org.jfree.data.time.Minute
 object Converter:
   def datetimeToMinute(datetime: String): Minute =
     val localDateTime = LocalDateTime.parse(datetime)
-    new Minute(
+    Minute(
       localDateTime.getMinute,
       localDateTime.getHour,
       localDateTime.getDayOfMonth,
