@@ -8,6 +8,7 @@ import healthchart.Context
 import healthchart.chart.CaloriesWeightChart
 import healthchart.entity.Transformer.*
 import healthchart.entity.*
+import healthchart.Logger.logError
 import healthchart.panel.ChartPanelBuilder
 import healthchart.ui.{Frame, PathDialog}
 
@@ -22,4 +23,4 @@ final class CaloriesWeightAction(name: String, frame: Frame) extends AbstractAct
         val chart = CaloriesWeightChart.build(caloriesWeights)
         val chartPanel = ChartPanelBuilder.build(chart, caloriesWeights)
         frame.addCompositeChartPanel(s"${Context.titleCaloriesWeight}-${counter.getAndIncrement}", chartPanel)
-      case None =>
+      case None => logError("*** Path falled: $path")
