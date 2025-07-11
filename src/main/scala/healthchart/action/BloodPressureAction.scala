@@ -8,6 +8,7 @@ import healthchart.Context
 import healthchart.chart.BloodPressureChart
 import healthchart.entity.*
 import healthchart.entity.Transformer.*
+import healthchart.Logger.logError
 import healthchart.panel.ChartPanelBuilder
 import healthchart.ui.{Frame, PathDialog}
 
@@ -22,4 +23,4 @@ final class BloodPressureAction(name: String, frame: Frame) extends AbstractActi
         val chart = BloodPressureChart.build(bloodpressures)
         val chartPanel = ChartPanelBuilder.build(chart, bloodpressures)
         frame.addCompositeChartPanel(s"${Context.titleBloodPressure}-${counter.getAndIncrement}", chartPanel)
-      case None =>
+      case None => logError("*** Path falled: $path")
