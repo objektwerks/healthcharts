@@ -8,10 +8,10 @@ object FileChooser:
                  dialogTitle: String,
                  fileExtensionFilterDesc: String,
                  fileExtensions: Array[String]): Option[String] =
-    val fileChooser = new JFileChooser(FileSystemView.getFileSystemView.getHomeDirectory)
+    val fileChooser = JFileChooser(FileSystemView.getFileSystemView.getHomeDirectory)
     fileChooser.setDialogTitle(dialogTitle)
     fileChooser.setAcceptAllFileFilterUsed(false)
-    val filter = new FileNameExtensionFilter(fileExtensionFilterDesc, fileExtensions*)
+    val filter = FileNameExtensionFilter(fileExtensionFilterDesc, fileExtensions*)
     fileChooser.addChoosableFileFilter(filter)
     if (fileChooser.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) then
       Some(fileChooser.getSelectedFile.getAbsolutePath)
