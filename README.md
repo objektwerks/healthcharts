@@ -1,20 +1,20 @@
 HealthCharts
 ------------
->Healthcharts app providing 13 health charts sourced by csv/txt files, using Swing, Flatlaf, MigLayout, JFreeChart, Ox and Scala 3.
+>Healthcharts app providing 11 health charts sourced by csv/txt files, using Swing, Flatlaf, MigLayout, JFreeChart, Ox and Scala 3.
 
 Charts
 ------
-- [Blood Pressure](docs/blood.pressure.chart.md)
-- [Calories Weight](docs/calories.weight.chart.md)
-- [Glucose](docs/glucose.chart.md)
-- [Glucose Med](docs/glucose.med.chart.md)
-- [Med](docs/med.chart.md)
-- [Pulse](docs/pulse.chart.md)
-- [Pulse Oxygen](docs/pulse.oxygen.chart.md)
-- [Respiration](docs/respiration.chart.md)
-- [Temperature](docs/temperature.chart.md)
-- [Vitals](docs/vitals.chart.md)
-- [Weight](docs/weight.chart.md)
+1. [Blood Pressure](docs/blood.pressure.chart.md)
+2. [Calories Weight](docs/calories.weight.chart.md)
+3. [Glucose](docs/glucose.chart.md)
+4. [Glucose Med](docs/glucose.med.chart.md)
+5. [Med](docs/med.chart.md)
+6. [Pulse](docs/pulse.chart.md)
+7. [Pulse Oxygen](docs/pulse.oxygen.chart.md)
+8. [Respiration](docs/respiration.chart.md)
+9. [Temperature](docs/temperature.chart.md)
+10. [Vitals](docs/vitals.chart.md)
+11. [Weight](docs/weight.chart.md)
 
 Build
 -----
