@@ -8,9 +8,9 @@ import healthchart.Context
 
 final class Frame extends JFrame:
   val tabbedPane = TabbedPane()
-  add(tabbedPane, BorderLayout.CENTER)
+  add(TabbedPane(), BorderLayout.CENTER)
 
-  setJMenuBar( MenuBar(this) )
+  setJMenuBar(MenuBar(this))
   setTitle(Context.appTitle)
   setSize(Context.appWidth, Context.appHeight)
   setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
