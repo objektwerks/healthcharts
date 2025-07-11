@@ -4,7 +4,7 @@ import scala.util.Try
 
 import healthchart.entity.Converter.*
 
-trait Validator[E]:
+sealed trait Validator[E]:
   def validate(number: Int, columns: Array[String]): Try[E]
 
 object Validator:
