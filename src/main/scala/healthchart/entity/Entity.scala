@@ -5,12 +5,12 @@ import org.jfree.data.time.Minute
 import scala.collection.immutable.SortedMap
 import scala.reflect.ClassTag
 
-sealed trait Entity extends Product with Serializable:
+sealed trait Entity:
   def number: Int
   def datetime: Minute
 
 final case class Entities[E](entities: Array[E],
-                             invalidEntities: Array[InvalidEntity]) extends Product with Serializable:
+                             invalidEntities: Array[InvalidEntity]):
   def toEntity: Array[Entity] = entities.asInstanceOf[Array[Entity]]
 
 object Entities:
@@ -18,7 +18,7 @@ object Entities:
 
 final case class InvalidEntity(number: Int,
                                line: String,
-                               error: Throwable) extends Product with Serializable:
+                               error: Throwable):
   /** Error getMessage starts with: 'requirement failed: ' The substring(20) cuts it out. */
   override def toString: String = s"$number, $line, [ ${error.getMessage.substring(20)} ]"
 
