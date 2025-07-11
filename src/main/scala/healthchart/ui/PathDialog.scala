@@ -8,7 +8,7 @@ import net.miginfocom.swing.MigLayout
 
 import healthchart.Conf
 
-class PathDialog(frame: Frame, labelPath: String) extends JDialog:
+final class PathDialog(frame: Frame, labelPath: String) extends JDialog:
   private val pathTextField = buildPathTextField
   private val selectButton = buildSelectButton(Conf.labelSelect)
   private val fileChooserTitle = Conf.titleFileChooser
@@ -40,7 +40,7 @@ class PathDialog(frame: Frame, labelPath: String) extends JDialog:
   private def buildPathTextField: JTextField =
     val textField = JTextField()
     textField.setEditable(false)
-    textField.setPreferredSize(Dimension(400, 30))
+    textField.setPreferredSize( Dimension(400, 30) )
     textField
 
   private def buildPathSelectButton(ellipsisLabel: String): JButton =
@@ -69,6 +69,8 @@ class PathDialog(frame: Frame, labelPath: String) extends JDialog:
     })
     button
 
-  private def selectFile: Option[String] = FileChooser.chooseFile(frame, fileChooserTitle, fileExtensionFilterDesc, fileExtensions)
+  private def selectFile: Option[String] =
+    FileChooser.chooseFile(frame, fileChooserTitle, fileExtensionFilterDesc, fileExtensions)
 
-  private def validateCsvTextFields(): Unit = if pathTextField.getText.nonEmpty then selectButton.setEnabled(true)
+  private def validateCsvTextFields(): Unit =
+    if pathTextField.getText.nonEmpty then selectButton.setEnabled(true)
