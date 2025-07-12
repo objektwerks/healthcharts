@@ -5,7 +5,7 @@ import javax.swing.{JFrame, JPanel, WindowConstants}
 
 import healthchart.Context
 
-final class Frame extends JFrame:
+class Frame extends JFrame:
   val tabbedPane = TabbedPane()
   add(TabbedPane(), BorderLayout.CENTER)
 

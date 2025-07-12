@@ -8,7 +8,7 @@ import scala.util.{Failure, Success}
 
 import healthchart.Logger
 
-final class TransformerTest extends AnyFunSuite with Matchers:
+class TransformerTest extends AnyFunSuite with Matchers:
   test("blood pressure"):
     testTransformer[BloodPressure]("./data/blood-pressure/blood-pressure.txt", 7, 0)
     testTransformer[BloodPressure]("./data/blood-pressure/blood-pressure-invalid.txt", 5, 2)

@@ -8,7 +8,7 @@ import net.miginfocom.swing.MigLayout
 
 import healthchart.Context
 
-final class PathDialog(frame: Frame, labelPath: String) extends JDialog:
+class PathDialog(frame: Frame, labelPath: String) extends JDialog:
   private val pathTextField = buildPathTextField
   private val selectButton = buildSelectButton(Context.labelSelect)
   private val fileChooserTitle = Context.titleFileChooser
