@@ -36,7 +36,7 @@ object ChartPanelBuilder:
     val textArea = JTextArea()
     textArea.setBackground(Color.lightGray)
     textArea.setEditable(false)
-    if (entities.nonEmpty)
+    if (entities.nonEmpty) then
       for ( entity <- entities ) textArea.append( s"${entity.toString}\n" )
     else textArea.append("0")
     val scrollPane = JScrollPane(textArea)
@@ -48,7 +48,7 @@ object ChartPanelBuilder:
     val textArea = JTextArea()
     textArea.setBackground(Color.lightGray)
     textArea.setEditable(false)
-    if (invalidEntities.nonEmpty)
+    if (invalidEntities.nonEmpty) then
       for ( invalidEntity <- invalidEntities) textArea.append( s"${invalidEntity.toString}\n" )
     else textArea.append("0")
     val scrollPane = JScrollPane(textArea)
