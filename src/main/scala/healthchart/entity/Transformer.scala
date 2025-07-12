@@ -15,10 +15,9 @@ object Transformer:
 
   def transform[E: ClassTag](path: String,
                              delimiter: String = ",")(using validator: Validator[E]): Try[Entities[E]] =
-    logInfo("*** Transformer.transform path: $path, delimiter: $delimter")
-
     Using( Source.fromFile(path, utf8) ) { source =>
       supervised:
+        logInfo(s"*** Transformer.transform path: $path, delimiter: $delimiter")
         val entitiesBuilder = mutable.ArrayBuilder.make[E]
         val invalidEntitiesBuilder = mutable.ArrayBuilder.make[InvalidEntity]
         var number = 1
