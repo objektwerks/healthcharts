@@ -12,7 +12,7 @@ import healthchart.Logger.logError
 import healthchart.panel.ChartPanelBuilder
 import healthchart.ui.{Frame, PathDialog}
 
-class RespirationAction(name: String, frame: Frame) extends AbstractAction(name):
+final class RespirationAction(name: String, frame: Frame) extends AbstractAction(name):
   protected val counter = new AtomicInteger(1)
 
   def actionPerformed(event: ActionEvent): Unit =
