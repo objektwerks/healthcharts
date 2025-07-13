@@ -13,7 +13,7 @@ import healthchart.entity.*
 
 object GlucoseMedChart extends Chart:
   def build(glucosemeds: Entities[GlucoseMed]): JFreeChart =
-    val xyPlot = new XYPlot()
+    val xyPlot = XYPlot()
     xyPlot.setDatasetRenderingOrder(DatasetRenderingOrder.FORWARD)
 
     xyPlot.setDataset(0, buildGlucoseDataset(glucosemeds))
@@ -22,26 +22,26 @@ object GlucoseMedChart extends Chart:
     xyPlot.setDataset(1, buildMedDataset(glucosemeds))
     xyPlot.setRenderer(1, MedChart.buildMedRenderer())
 
-    val xAxis = new DateAxis(Context.titleDayHourChartXAxis)
-    xAxis.setDateFormatOverride( new SimpleDateFormat("d,H") )
+    val xAxis = DateAxis(Context.titleDayHourChartXAxis)
+    xAxis.setDateFormatOverride( SimpleDateFormat("d,H") )
     xyPlot.setDomainAxis(0, xAxis)
 
-    val yAxis = new NumberAxis(Context.titleGlucoseMedChartYAxis)
+    val yAxis = NumberAxis(Context.titleGlucoseMedChartYAxis)
     xyPlot.setRangeAxis(yAxis)
 
     val title = buildTitle(Context.titleGlucoseMed, glucosemeds.toEntity)
-    new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
+    JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
 
   def buildGlucoseDataset(glucosemeds: Entities[GlucoseMed]): XYDataset =
-    val timeSeries = new TimeSeries(Context.titleGlucose)
+    val timeSeries = TimeSeries(Context.titleGlucose)
     glucosemeds.entities.foreach { glucosemed =>
       timeSeries.add( glucosemed.datetime, glucosemed.level.toDouble )
     }
-    new TimeSeriesCollection(timeSeries)
+    TimeSeriesCollection(timeSeries)
 
   def buildMedDataset(glucosemeds: Entities[GlucoseMed]): XYDataset =
-    val timeSeries = new TimeSeries(Context.titleMed)
+    val timeSeries = TimeSeries(Context.titleMed)
     glucosemeds.entities.foreach { glucosemed =>
       timeSeries.add( glucosemed.datetime, s"${glucosemed.dosage}.${glucosemed.medtype.id}".toDouble )
     }
-    new TimeSeriesCollection(timeSeries)
+    TimeSeriesCollection(timeSeries)
