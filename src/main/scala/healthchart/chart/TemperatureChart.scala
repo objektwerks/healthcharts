@@ -17,35 +17,35 @@ import healthchart.entity.*
 
 object TemperatureChart extends Chart:
   def build(temperatures: Entities[Temperature]): JFreeChart =
-    val xyPlot = new XYPlot()
+    val xyPlot = XYPlot()
     xyPlot.setDataset( buildTemperatureDataset(temperatures) )
     xyPlot.setRenderer( buildTemperatureRenderer() )
 
-    val xAxis = new DateAxis(Context.titleDayHourChartXAxis)
-    xAxis.setDateFormatOverride( new SimpleDateFormat("d,H") )
+    val xAxis = DateAxis(Context.titleDayHourChartXAxis)
+    xAxis.setDateFormatOverride( SimpleDateFormat("d,H") )
     xyPlot.setDomainAxis(xAxis)
 
-    val yAxis = new NumberAxis(Context.titleTemperatureChartYAxis)
+    val yAxis = NumberAxis(Context.titleTemperatureChartYAxis)
     xyPlot.setRangeAxis(yAxis)
 
     val title = buildTitle(Context.titleTemperature, temperatures.toEntity)
-    new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
+    JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
 
   def buildTemperatureDataset(temperatures: Entities[Temperature]): XYDataset =
-    val timeSeries = new TimeSeries(Context.titleTemperature)
+    val timeSeries = TimeSeries(Context.titleTemperature)
     temperatures.entities.foreach { weight =>
       timeSeries.add( weight.datetime, weight.degrees )
     }
-    new TimeSeriesCollection(timeSeries)
+    TimeSeriesCollection(timeSeries)
 
   def buildTemperatureRenderer(): XYItemRenderer =
-    val renderer = new XYLineAndShapeRenderer()
+    val renderer = XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String =
         val xValue = dataset.getXValue(series, item)
         val yValue = dataset.getYValue(series, item)
-        val dayHourMinute = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
-        val degrees = new DecimalFormat("0.0").format( yValue )
+        val dayHourMinute = SimpleDateFormat("d,H:m").format( jdate.Date( xValue.toLong ) )
+        val degrees = DecimalFormat("0.0").format( yValue )
         val delta = calculateDeltaAsPercentage(dataset, series, item)
         s"${Context.titleTemperature}: ($dayHourMinute, $degrees, $delta%)"
       override def clone() = this
