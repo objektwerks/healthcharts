@@ -28,9 +28,9 @@ Data
 6. [Pulse](data/pulse/pulse.txt)
 7. [Pulse Oxygen](data/pulse-oxygen/pulse-oxygen.txt)
 8. [Respiration](data/respiration/respiration.txt)
-9. [Temperature](data/temperature.chart.md)
-10. [Vitals](data/vitals.chart.md)
-11. [Weight](data/weight.chart.md)
+9. [Temperature](data/temperature/temperature.txt)
+10. [Vitals](data/vitals/vitals.txt)
+11. [Weight](data/weight/weight.txt)
 
 Build
 -----
