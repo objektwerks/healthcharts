@@ -17,6 +17,12 @@ Charts
 10. [Vitals](docs/vitals.chart.md)
 11. [Weight](docs/weight.chart.md)
 
+Data
+----
+>Sample data for each chart type:
+1. [Blood Pressure](data/blood-pressure/blood-pressure.txt)
+
+
 Build
 -----
 1. sbt clean compile
