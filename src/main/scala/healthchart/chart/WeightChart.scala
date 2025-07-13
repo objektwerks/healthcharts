@@ -16,35 +16,35 @@ import healthchart.entity.*
 
 object WeightChart extends Chart:
   def build(weights: Entities[Weight]): JFreeChart =
-    val xyPlot = new XYPlot()
+    val xyPlot = XYPlot()
     xyPlot.setDataset( buildWeightDataset(weights) )
     xyPlot.setRenderer( buildWeightRenderer() )
 
-    val xAxis = new DateAxis(Context.titleDayHourChartXAxis)
-    xAxis.setDateFormatOverride( new SimpleDateFormat("d,H") )
+    val xAxis = DateAxis(Context.titleDayHourChartXAxis)
+    xAxis.setDateFormatOverride( SimpleDateFormat("d,H") )
     xyPlot.setDomainAxis(xAxis)
 
-    val yAxis = new NumberAxis(Context.titleWeightChartYAxis)
+    val yAxis = NumberAxis(Context.titleWeightChartYAxis)
     xyPlot.setRangeAxis(yAxis)
 
     val title = buildTitle(Context.titleWeight, weights.toEntity)
-    new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
+    JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
 
   def buildWeightDataset(weights: Entities[Weight]): XYDataset =
-    val timeSeries = new TimeSeries(Context.titleWeight)
+    val timeSeries = TimeSeries(Context.titleWeight)
     weights.entities.foreach { weight =>
       timeSeries.add( weight.datetime, weight.pounds )
     }
-    new TimeSeriesCollection(timeSeries)
+    TimeSeriesCollection(timeSeries)
 
   def buildWeightRenderer(): XYItemRenderer =
-    val renderer = new XYLineAndShapeRenderer()
+    val renderer = XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String =
         val xValue = dataset.getXValue(series, item)
         val yValue = dataset.getYValue(series, item)
-        val dayHourMinute = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
-        val pounds = new DecimalFormat("0.0").format( yValue )
+        val dayHourMinute = SimpleDateFormat("d,H:m").format( jdate.Date( xValue.toLong ) )
+        val pounds = DecimalFormat("0.0").format( yValue )
         val delta = calculateDeltaAsPercentage(dataset, series, item)
         s"($dayHourMinute, $pounds, $delta%)"
       override def clone() = this
