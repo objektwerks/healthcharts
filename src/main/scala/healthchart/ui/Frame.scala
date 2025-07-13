@@ -4,6 +4,7 @@ import java.awt.BorderLayout
 import javax.swing.{JFrame, JPanel, WindowConstants}
 
 import healthchart.Context
+import healthchart.Logger.logInfo
 
 final class Frame extends JFrame:
   val tabbedPane = TabbedPane()
@@ -16,6 +17,6 @@ final class Frame extends JFrame:
   setLocationRelativeTo(null)
 
   def addCompositeChartPanel(title: String, chartPanel: JPanel): Unit =
-    println(s"*** Frame.addCompositeChartPanel -> title: $title, chart panel: ${chartPanel.toString()}")
+    logInfo(s"*** Frame.addCompositeChartPanel -> title: $title, chart panel: ${chartPanel.toString()}")
     tabbedPane.addCompositeChartPanel(title, chartPanel)
     revalidate()
