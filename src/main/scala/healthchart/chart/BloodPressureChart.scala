@@ -55,6 +55,7 @@ object BloodPressureChart extends Chart:
         s"${Context.titleBloodPressure}: ($dayHourMinute, $bloodpressure, $delta%)"
       override def clone() = this
     }
+    
     val itemLabelGenerator = new StandardXYItemLabelGenerator() {
       override def generateLabel(dataset: XYDataset, series: Int, item: Int): String =
         val yValue = dataset.getYValue(series, item)
