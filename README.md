@@ -21,7 +21,16 @@ Data
 ----
 >Sample data for each chart type:
 1. [Blood Pressure](data/blood-pressure/blood-pressure.txt)
-
+2. [Calories Weight](data/calories-weight/calories-weight.txt)
+3. [Glucose](data/glucose.chart.md)
+4. [Glucose Med](data/glucose.med.chart.md)
+5. [Med](data/med.chart.md)
+6. [Pulse](data/pulse.chart.md)
+7. [Pulse Oxygen](data/pulse.oxygen.chart.md)
+8. [Respiration](data/respiration.chart.md)
+9. [Temperature](data/temperature.chart.md)
+10. [Vitals](data/vitals.chart.md)
+11. [Weight](data/weight.chart.md)
 
 Build
 -----
