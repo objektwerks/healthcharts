@@ -18,20 +18,20 @@ import healthchart.entity.{CaloriesWeight, Entities}
 
 object CaloriesWeightChart extends Chart:
   def build(caloriesWeights: Entities[CaloriesWeight]): JFreeChart =
-    val xAxis = new DateAxis(Context.titleDayHourChartXAxis)
-    xAxis.setDateFormatOverride( new SimpleDateFormat("d,H") )
+    val xAxis = DateAxis(Context.titleDayHourChartXAxis)
+    xAxis.setDateFormatOverride( SimpleDateFormat("d,H") )
 
     val topXYPlot = buildTopXYPlot(caloriesWeights)
     val bottomXYPlot = buildBottomXYPlot(caloriesWeights)
     val combinedXYPlot = buildCombindedXYPlot(xAxis, topXYPlot, bottomXYPlot)
 
     val title = buildTitle(Context.titleCaloriesWeight, caloriesWeights.toEntity)
-    new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, combinedXYPlot, true)
+    JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, combinedXYPlot, true)
 
   def buildCombindedXYPlot(xAxis: DateAxis,
                            topXYPlot: XYPlot, 
                            bottomXYPlot: XYPlot): CombinedDomainXYPlot =
-    val combinedXYPlot = new CombinedDomainXYPlot(xAxis)
+    val combinedXYPlot = CombinedDomainXYPlot(xAxis)
     combinedXYPlot.setGap(3.0)
     combinedXYPlot.add(topXYPlot, 1)
     combinedXYPlot.add(bottomXYPlot, 1)
@@ -39,10 +39,10 @@ object CaloriesWeightChart extends Chart:
     combinedXYPlot
 
   def buildTopXYPlot(caloriesWeights: Entities[CaloriesWeight]): XYPlot =
-    val xyPlot = new XYPlot()
+    val xyPlot = XYPlot()
     xyPlot.setBackgroundPaint(Color.LIGHT_GRAY)
 
-    val yAxis = new NumberAxis(Context.titleCaloriesWeightChartBottomYAxis)
+    val yAxis = NumberAxis(Context.titleCaloriesWeightChartBottomYAxis)
     yAxis.setAutoRangeIncludesZero(false)
     yAxis.setAutoRange(true)
 
@@ -57,10 +57,10 @@ object CaloriesWeightChart extends Chart:
     xyPlot
 
   def buildBottomXYPlot(caloriesWeights: Entities[CaloriesWeight]): XYPlot =
-    val xyPlot = new XYPlot()
+    val xyPlot = XYPlot()
     xyPlot.setBackgroundPaint(Color.LIGHT_GRAY)
 
-    val yAxis = new NumberAxis(Context.titleCaloriesWeightChartTopYAxis)
+    val yAxis = NumberAxis(Context.titleCaloriesWeightChartTopYAxis)
     yAxis.setAutoRangeIncludesZero(false)
     yAxis.setAutoRange(true)
 
@@ -72,34 +72,34 @@ object CaloriesWeightChart extends Chart:
     xyPlot
 
   def buildWeightDataset(caloriesWeights: Entities[CaloriesWeight]): XYDataset =
-    val timeSeries = new TimeSeries(Context.titleWeight)
+    val timeSeries = TimeSeries(Context.titleWeight)
     caloriesWeights.entities.foreach { caloriesWeight =>
       timeSeries.add( caloriesWeight.datetime, caloriesWeight.weight )
     }
-    new TimeSeriesCollection(timeSeries)
+    TimeSeriesCollection(timeSeries)
 
   def buildCaloriesInDataset(caloriesWeights: Entities[CaloriesWeight]): XYDataset =
-    val timeSeries = new TimeSeries(Context.titleCaloriesIn)
+    val timeSeries = TimeSeries(Context.titleCaloriesIn)
     caloriesWeights.entities.foreach { caloriesWeight =>
       timeSeries.add( caloriesWeight.datetime, caloriesWeight.in.toDouble )
     }
-    new TimeSeriesCollection(timeSeries)
+    TimeSeriesCollection(timeSeries)
 
   def buildCaloriesOutDataset(caloriesWeights: Entities[CaloriesWeight]): XYDataset =
-    val timeSeries = new TimeSeries(Context.titleCaloriesOut)
+    val timeSeries = TimeSeries(Context.titleCaloriesOut)
     caloriesWeights.entities.foreach { caloriesWeight =>
       timeSeries.add( caloriesWeight.datetime, caloriesWeight.out.toDouble )
     }
-    new TimeSeriesCollection(timeSeries)
+    TimeSeriesCollection(timeSeries)
 
   def buildCaloriesRenderer(): XYItemRenderer =
-    val renderer = new XYLineAndShapeRenderer()
+    val renderer = XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String =
         val xValue = dataset.getXValue(series, item)
         val yValue = dataset.getYValue(series, item)
-        val dayHourMinute = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
-        val calorie = new DecimalFormat("0").format( yValue )
+        val dayHourMinute = SimpleDateFormat("d,H:m").format( jdate.Date( xValue.toLong ) )
+        val calorie = DecimalFormat("0").format( yValue )
         val delta = calculateDeltaAsPercentage(dataset, series, item)
         s"($dayHourMinute, $calorie, $delta%)"
       override def clone() = this
