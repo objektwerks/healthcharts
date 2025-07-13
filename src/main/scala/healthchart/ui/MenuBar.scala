@@ -5,7 +5,7 @@ import javax.swing.{JMenu, JMenuBar, JMenuItem, JSeparator}
 import healthchart.Context
 import healthchart.action.*
 
-class MenuBar(frame: Frame) extends JMenuBar():
+final class MenuBar(frame: Frame) extends JMenuBar():
   val menu = JMenu(Context.titleMenuBar)
   menu.add( JMenuItem( VitalsAction(Context.titleVitals, frame) ) )
   menu.add( JSeparator() )
