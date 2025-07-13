@@ -16,35 +16,35 @@ import healthchart.entity.*
 
 object PulseChart extends Chart:
   def build(pulses: Entities[Pulse]): JFreeChart =
-    val xyPlot = new XYPlot()
+    val xyPlot = XYPlot()
     xyPlot.setDataset( buildPulseDataset(pulses) )
     xyPlot.setRenderer( buildPulseRenderer() )
 
-    val xAxis = new DateAxis(Context.titleDayHourChartXAxis)
-    xAxis.setDateFormatOverride( new SimpleDateFormat("d,H") )
+    val xAxis = DateAxis(Context.titleDayHourChartXAxis)
+    xAxis.setDateFormatOverride( SimpleDateFormat("d,H") )
     xyPlot.setDomainAxis(xAxis)
 
-    val yAxis = new NumberAxis(Context.titlePulseChartYAxis)
+    val yAxis = NumberAxis(Context.titlePulseChartYAxis)
     xyPlot.setRangeAxis(yAxis)
 
     val title = buildTitle(Context.titlePulse, pulses.toEntity)
-    new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
+    JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
 
   def buildPulseDataset(pulses: Entities[Pulse]): XYDataset =
-    val timeSeries = new TimeSeries(Context.titlePulse)
+    val timeSeries = TimeSeries(Context.titlePulse)
     pulses.entities.foreach { pulse =>
       timeSeries.add( pulse.datetime, pulse.beatsPerMinute.toDouble )
     }
-    new TimeSeriesCollection(timeSeries)
+    TimeSeriesCollection(timeSeries)
 
   def buildPulseRenderer(): XYItemRenderer =
-    val renderer = new XYLineAndShapeRenderer()
+    val renderer = XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String =
         val xValue = dataset.getXValue(series, item)
         val yValue = dataset.getYValue(series, item)
-        val dayHourMinute = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
-        val beatsPerMinute = new DecimalFormat("0").format( yValue )
+        val dayHourMinute = SimpleDateFormat("d,H:m").format( jdate.Date( xValue.toLong ) )
+        val beatsPerMinute = DecimalFormat("0").format( yValue )
         val delta = calculateDeltaAsPercentage(dataset, series, item)
         s"${Context.titlePulse}: ($dayHourMinute, $beatsPerMinute, $delta%)"
       override def clone() = this
