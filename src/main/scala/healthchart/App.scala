@@ -11,7 +11,7 @@ import healthchart.Logger.logInfo
 import healthchart.ui.Frame
 
 @main def runApp(): Unit =
-  logInfo("*** Starting app ...")
+  logInfo("*** App starting ...")
 
   EventQueue.invokeLater(
     () => {
@@ -29,5 +29,5 @@ import healthchart.ui.Frame
   logInfo("*** App started!")
 
   sys.addShutdownHook(
-    logInfo("*** App stopped!")
+    logInfo("*** App shutdown!")
   )
