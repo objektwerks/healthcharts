@@ -17,7 +17,7 @@ import healthchart.entity.{Entities, PulseOxygen}
 
 object PulseOxygenChart extends Chart:
   def build(pulseoxygens: Entities[PulseOxygen]): JFreeChart =
-    val xyPlot = new XYPlot()
+    val xyPlot = XYPlot()
     xyPlot.setDatasetRenderingOrder(DatasetRenderingOrder.FORWARD)
 
     xyPlot.setDataset(0, buildPulseDataset(pulseoxygens))
@@ -26,38 +26,38 @@ object PulseOxygenChart extends Chart:
     xyPlot.setDataset(1, buildOxygenDataset(pulseoxygens))
     xyPlot.setRenderer(1, buildOxygenRenderer())
 
-    val xAxis = new DateAxis(Context.titleDayHourChartXAxis)
-    xAxis.setDateFormatOverride( new SimpleDateFormat("d,H") )
+    val xAxis = DateAxis(Context.titleDayHourChartXAxis)
+    xAxis.setDateFormatOverride( SimpleDateFormat("d,H") )
     xyPlot.setDomainAxis(0, xAxis)
 
-    val yAxis = new NumberAxis(Context.titlePulseOxygenChartYAxis)
+    val yAxis = NumberAxis(Context.titlePulseOxygenChartYAxis)
     xyPlot.setRangeAxis(yAxis)
 
     val title = buildTitle(Context.titlePulseOxygen, pulseoxygens.toEntity)
-    new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
+    JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
 
   def buildPulseDataset(pulseoxygens: Entities[PulseOxygen]): XYDataset =
-    val timeSeries = new TimeSeries(Context.titlePulse)
+    val timeSeries = TimeSeries(Context.titlePulse)
     pulseoxygens.entities.foreach { pulseoxygen =>
       timeSeries.add( pulseoxygen.datetime, pulseoxygen.beatsPerMinute.toDouble )
     }
-    new TimeSeriesCollection(timeSeries)
+    TimeSeriesCollection(timeSeries)
 
   def buildOxygenDataset(pulseoxygens: Entities[PulseOxygen]): XYDataset =
-    val timeSeries = new TimeSeries(Context.titleOxygen)
+    val timeSeries = TimeSeries(Context.titleOxygen)
     pulseoxygens.entities.foreach { pulseoxygen =>
       timeSeries.add( pulseoxygen.datetime, pulseoxygen.bloodOxygenPercentage.toDouble )
     }
-    new TimeSeriesCollection(timeSeries)
+    TimeSeriesCollection(timeSeries)
 
   def buildOxygenRenderer(): XYItemRenderer =
-    val renderer = new XYLineAndShapeRenderer()
+    val renderer = XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String =
         val xValue = dataset.getXValue(series, item)
         val yValue = dataset.getYValue(series, item)
-        val dayHourMinute = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
-        val bloodOxygenPercentage = new DecimalFormat("0").format( yValue )
+        val dayHourMinute = SimpleDateFormat("d,H:m").format( jdate.Date( xValue.toLong ) )
+        val bloodOxygenPercentage = DecimalFormat("0").format( yValue )
         val delta = calculateDeltaAsPercentage(dataset, series, item)
         s"${Context.titleOxygen}: ($dayHourMinute, $bloodOxygenPercentage, $delta%)"
       override def clone() = this
