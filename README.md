@@ -4,7 +4,7 @@ HealthCharts
 
 Charts
 ------
->Technical details on each chart type:
+>Technical specifications for each chart type:
 1. [Blood Pressure](docs/blood.pressure.chart.md)
 2. [Calories Weight](docs/calories.weight.chart.md)
 3. [Glucose](docs/glucose.chart.md)
