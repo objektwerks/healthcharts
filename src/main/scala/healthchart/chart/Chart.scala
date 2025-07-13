@@ -21,7 +21,7 @@ abstract class Chart:
   def buildItemLabelGenerator(decimalFormat: String): XYItemLabelGenerator = new StandardXYItemLabelGenerator() {
     override def generateLabel(dataset: XYDataset, series: Int, item: Int): String =
       val yValue = dataset.getYValue(series, item)
-      new DecimalFormat(decimalFormat).format( yValue )
+      DecimalFormat(decimalFormat).format( yValue )
     override def clone() = this
   }
 
