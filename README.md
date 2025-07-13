@@ -22,8 +22,8 @@ Data
 >Sample data for each chart type:
 1. [Blood Pressure](data/blood-pressure/blood-pressure.txt)
 2. [Calories Weight](data/calories-weight/calories-weight.txt)
-3. [Glucose](data/glucose.chart.md)
-4. [Glucose Med](data/glucose.med.chart.md)
+3. [Glucose](data/glucose/glucose.txt)
+4. [Glucose Med](data/glucose-med/glucose-med.txt)
 5. [Med](data/med.chart.md)
 6. [Pulse](data/pulse.chart.md)
 7. [Pulse Oxygen](data/pulse.oxygen.chart.md)
