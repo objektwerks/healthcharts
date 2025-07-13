@@ -18,36 +18,36 @@ import healthchart.entity.*
 
 object MedChart extends Chart:
   def build(meds: Entities[Med]): JFreeChart =
-    val xyPlot = new XYPlot()
+    val xyPlot = XYPlot()
 
     xyPlot.setDataset(1, buildMedDataset(meds))
     xyPlot.setRenderer(1, buildMedRenderer())
 
-    val xAxis = new DateAxis(Context.titleDayHourChartXAxis)
-    xAxis.setDateFormatOverride( new SimpleDateFormat("d,H") )
+    val xAxis = DateAxis(Context.titleDayHourChartXAxis)
+    xAxis.setDateFormatOverride( SimpleDateFormat("d,H") )
     xyPlot.setDomainAxis(0, xAxis)
 
-    val yAxis = new NumberAxis(Context.titleGlucoseMedChartYAxis)
+    val yAxis = NumberAxis(Context.titleGlucoseMedChartYAxis)
     xyPlot.setRangeAxis(yAxis)
 
     val title = buildTitle(Context.titleMed, meds.toEntity)
-    new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
+    JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
 
   def buildMedDataset(meds: Entities[Med]): XYDataset =
-    val timeSeries = new TimeSeries(Context.titleMed)
+    val timeSeries = TimeSeries(Context.titleMed)
     meds.entities.foreach { med =>
       timeSeries.add( med.datetime, s"${med.dosage}.${med.medtype.id}".toDouble )
     }
-    new TimeSeriesCollection(timeSeries)
+    TimeSeriesCollection(timeSeries)
 
   def buildMedRenderer(): XYItemRenderer =
-    val renderer = new XYLineAndShapeRenderer()
+    val renderer = XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String =
         val xValue = dataset.getXValue(series, item)
         val yValue = dataset.getYValue(series, item)
         val yValues = yValue.toString.split("\\.")
-        val dayHourMinute = new SimpleDateFormat("d,H:m").format( new jdate.Date( xValue.toLong ) )
+        val dayHourMinute = SimpleDateFormat("d,H:m").format( jdate.Date( xValue.toLong ) )
         val dosage = Try{ yValues(0).toInt }.getOrElse(-1)
         val medtype = Try{ yValues(1).toInt }.getOrElse(-1)
         val med = MedType.idToMedType.getOrElse(medtype, "n/a")
