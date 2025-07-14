@@ -48,7 +48,7 @@ object MedType extends Enumeration:
 final case class Med(line: Int, 
                      datetime: Minute, 
                      medtype: MedType.Value,
-                     dosage: Int) extends Entity:
+                     dosage: Int) extends Entity derives CanEqual:
   override def toString: String = s"$line, $datetime, $medtype, $dosage"
 
 final case class GlucoseMed(line: Int, 
