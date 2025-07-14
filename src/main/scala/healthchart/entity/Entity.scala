@@ -86,7 +86,7 @@ final case class Vitals(line: Int,
                         pulse: Int,
                         oxygen: Int,
                         systolic: Int,
-                        diastolic: Int) extends Entity:
+                        diastolic: Int) extends Entity derives CanEqual:
   override def toString: String = s"$line, $datetime, $temperature, $respiration, $pulse, $oxygen, $systolic, $diastolic"
 
 final case class Weight(line: Int, 
