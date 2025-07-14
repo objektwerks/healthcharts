@@ -37,7 +37,7 @@ final case class CaloriesWeight(line: Int,
 
 final case class Glucose(line: Int, 
                          datetime: Minute, 
-                         level: Int) extends Entity:
+                         level: Int) extends Entity derives CanEqual:
   override def toString: String = s"$line, $datetime, $level"
 
 object MedType extends Enumeration:
