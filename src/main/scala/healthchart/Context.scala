@@ -11,6 +11,7 @@ object Context:
   val appWidth = conf.getInt("app.width")
   val appHeight = conf.getInt("app.height")
 
+  val menuTitle = conf.getString("menu.title")
   val menuExit = conf.getString("menu.exit")
 
   val fileFilterExtensions = conf.getStringList("file.filterExtensions").asScala.toArray
@@ -36,7 +37,6 @@ object Context:
   val tabInvalidEntities = conf.getString("tab.invalidEntities")
 
   val titleFileChooser = conf.getString("title.fileChooser")
-  val titleMenu = conf.getString("title.menu")
   val titlePathDialog = conf.getString("title.pathDialog")
   val titlePathsDialog = conf.getString("title.pathsDialog")
   val titleDayHourChartXAxis = conf.getString("title.dayHourChartXAxis")
