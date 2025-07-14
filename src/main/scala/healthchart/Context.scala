@@ -12,6 +12,7 @@ object Context:
   val appHeight = conf.getInt("app.height")
 
   val menuTitle = conf.getString("menu.title")
+  val menuAbout = conf.getString("menu.about")
   val menuExit = conf.getString("menu.exit")
 
   val fileFilterExtensions = conf.getStringList("file.filterExtensions").asScala.toArray
