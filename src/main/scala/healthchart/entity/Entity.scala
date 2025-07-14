@@ -55,7 +55,7 @@ final case class GlucoseMed(line: Int,
                             datetime: Minute, 
                             level: Int, 
                             medtype: MedType.Value,
-                            dosage: Int) extends Entity:
+                            dosage: Int) extends Entity derives CanEqual:
   override def toString: String = s"$line, $datetime, $level, $medtype, $dosage"
 
 final case class Pulse(line: Int, 
