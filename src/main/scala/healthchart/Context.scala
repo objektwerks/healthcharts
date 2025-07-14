@@ -36,7 +36,7 @@ object Context:
   val tabInvalidEntities = conf.getString("tab.invalidEntities")
 
   val titleFileChooser = conf.getString("title.fileChooser")
-  val titleMenuBar = conf.getString("title.menuBar")
+  val titleMenu = conf.getString("title.menu")
   val titlePathDialog = conf.getString("title.pathDialog")
   val titlePathsDialog = conf.getString("title.pathsDialog")
   val titleDayHourChartXAxis = conf.getString("title.dayHourChartXAxis")
