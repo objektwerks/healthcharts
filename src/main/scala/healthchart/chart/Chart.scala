@@ -27,7 +27,9 @@ abstract class Chart:
 
   def calculateDeltaAsPercentage(dataset: XYDataset, series: Int, item: Int): Long =
     val datasetLastIndex = dataset.getItemCount(series) - 1
+
     val previousItemIndex = item - 1
+
     val datasetIndexRange = Range.inclusive(0, datasetLastIndex)
     if ( datasetIndexRange.contains( previousItemIndex ) ) then
       val yCurrentValue = dataset.getYValue(series, item)
