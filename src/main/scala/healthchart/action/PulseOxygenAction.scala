@@ -13,7 +13,7 @@ import healthchart.panel.ChartPanelBuilder
 import healthchart.ui.{Frame, PathDialog}
 
 final class PulseOxygenAction(name: String, frame: Frame) extends AbstractAction(name):
-  val counter = new AtomicInteger(1)
+  private val counter = new AtomicInteger(1)
 
   def actionPerformed(event: ActionEvent): Unit =
     val path = new PathDialog(frame, Context.labelPulseOxygenCsv).view
