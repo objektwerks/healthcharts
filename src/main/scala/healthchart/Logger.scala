@@ -3,7 +3,7 @@ package healthchart
 import com.typesafe.scalalogging.LazyLogging
 
 object Logger extends LazyLogging:
-  def logInfo(statement: String): Unit = logger.info(statement)
+  def logInfo(info: String): Unit = logger.info(info)
 
   def logError(statement: String): Unit = logger.error(statement)
   
