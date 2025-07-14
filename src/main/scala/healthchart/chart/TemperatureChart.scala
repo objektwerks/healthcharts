@@ -23,9 +23,11 @@ object TemperatureChart extends Chart:
 
     val xAxis = DateAxis(Context.titleDayHourChartXAxis)
     xAxis.setDateFormatOverride( SimpleDateFormat("d,H") )
+
     xyPlot.setDomainAxis(xAxis)
 
     val yAxis = NumberAxis(Context.titleTemperatureChartYAxis)
+
     xyPlot.setRangeAxis(yAxis)
 
     val title = buildTitle(Context.titleTemperature, temperatures.toEntity)
@@ -33,13 +35,16 @@ object TemperatureChart extends Chart:
 
   def buildTemperatureDataset(temperatures: Entities[Temperature]): XYDataset =
     val timeSeries = TimeSeries(Context.titleTemperature)
+
     temperatures.entities.foreach { weight =>
       timeSeries.add( weight.datetime, weight.degrees )
     }
+
     TimeSeriesCollection(timeSeries)
 
   def buildTemperatureRenderer(): XYItemRenderer =
     val renderer = XYLineAndShapeRenderer()
+
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String =
         val xValue = dataset.getXValue(series, item)
@@ -50,6 +55,7 @@ object TemperatureChart extends Chart:
         s"${Context.titleTemperature}: ($dayHourMinute, $degrees, $delta%)"
       override def clone() = this
     }
+    
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
     renderer.setDefaultShapesVisible(true)
     renderer.setDefaultItemLabelGenerator( buildItemLabelGenerator("0.0") )
