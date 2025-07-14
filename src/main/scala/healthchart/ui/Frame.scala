@@ -10,7 +10,7 @@ final class Frame extends JFrame:
   val tabbedPane = TabbedPane()
   add(tabbedPane, BorderLayout.CENTER)
 
-  setJMenuBar(MenuBar(this))
+  setJMenuBar(Menu(this))
 
   setTitle(Context.appTitle)
   setSize(Context.appWidth, Context.appHeight)
