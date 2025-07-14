@@ -91,5 +91,5 @@ final case class Vitals(line: Int,
 
 final case class Weight(line: Int, 
                         datetime: Minute, 
-                        pounds: Double) extends Entity:
+                        pounds: Double) extends Entity derives CanEqual:
   override def toString: String = s"$line, $datetime, $pounds"
