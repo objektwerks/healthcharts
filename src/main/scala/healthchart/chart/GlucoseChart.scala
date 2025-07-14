@@ -33,9 +33,11 @@ object GlucoseChart extends Chart:
 
   def buildGlucoseDataset(glucoses: Entities[Glucose]): XYDataset =
     val timeSeries = TimeSeries(Context.titleGlucose)
+
     glucoses.entities.foreach { glucose =>
       timeSeries.add( glucose.datetime, glucose.level.toDouble )
     }
+    
     TimeSeriesCollection(timeSeries)
 
   def buildGlucoseRenderer(): XYItemRenderer =
