@@ -22,9 +22,11 @@ object WeightChart extends Chart:
 
     val xAxis = DateAxis(Context.titleDayHourChartXAxis)
     xAxis.setDateFormatOverride( SimpleDateFormat("d,H") )
+
     xyPlot.setDomainAxis(xAxis)
 
     val yAxis = NumberAxis(Context.titleWeightChartYAxis)
+
     xyPlot.setRangeAxis(yAxis)
 
     val title = buildTitle(Context.titleWeight, weights.toEntity)
@@ -32,13 +34,16 @@ object WeightChart extends Chart:
 
   def buildWeightDataset(weights: Entities[Weight]): XYDataset =
     val timeSeries = TimeSeries(Context.titleWeight)
+
     weights.entities.foreach { weight =>
       timeSeries.add( weight.datetime, weight.pounds )
     }
+
     TimeSeriesCollection(timeSeries)
 
   def buildWeightRenderer(): XYItemRenderer =
     val renderer = XYLineAndShapeRenderer()
+
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String =
         val xValue = dataset.getXValue(series, item)
@@ -49,6 +54,7 @@ object WeightChart extends Chart:
         s"($dayHourMinute, $pounds, $delta%)"
       override def clone() = this
     }
+    
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
     renderer.setDefaultShapesVisible(true)
     renderer.setDefaultItemLabelGenerator( buildItemLabelGenerator("0.0") )
