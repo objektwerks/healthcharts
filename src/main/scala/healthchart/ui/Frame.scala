@@ -11,8 +11,10 @@ final class Frame extends JFrame:
   add(tabbedPane, BorderLayout.CENTER)
 
   setJMenuBar(MenuBar(this))
+
   setTitle(Context.appTitle)
   setSize(Context.appWidth, Context.appHeight)
+  
   setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
   setLocationRelativeTo(null)
 
