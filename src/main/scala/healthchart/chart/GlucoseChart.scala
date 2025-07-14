@@ -17,7 +17,6 @@ import healthchart.entity.*
 object GlucoseChart extends Chart:
   def build(glucoses: Entities[Glucose]): JFreeChart =
     val xyPlot = XYPlot()
-
     xyPlot.setDataset(0, buildGlucoseDataset(glucoses))
     xyPlot.setRenderer(0, buildGlucoseRenderer())
 
@@ -26,6 +25,7 @@ object GlucoseChart extends Chart:
     xyPlot.setDomainAxis(0, xAxis)
 
     val yAxis = NumberAxis(Context.titleGlucoseMedChartYAxis)
+
     xyPlot.setRangeAxis(yAxis)
 
     val title = buildTitle(Context.titleGlucose, glucoses.toEntity)
@@ -40,6 +40,7 @@ object GlucoseChart extends Chart:
 
   def buildGlucoseRenderer(): XYItemRenderer =
     val renderer = XYLineAndShapeRenderer()
+
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String =
         val xValue = dataset.getXValue(series, item)
@@ -50,6 +51,7 @@ object GlucoseChart extends Chart:
         s"${Context.titleGlucose}: ($dayHourMinute, $level, $delta%)"
       override def clone() = this
     }
+    
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
     renderer.setDefaultShapesVisible(true)
     renderer.setDefaultItemLabelGenerator( buildItemLabelGenerator("0") )
