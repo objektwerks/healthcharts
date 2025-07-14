@@ -67,6 +67,7 @@ object BloodPressureChart extends Chart:
         s"$systolic/$diastolic"
       override def clone() = this
     }
+    
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
     renderer.setDefaultShapesVisible(true)
     renderer.setDefaultItemLabelGenerator( itemLabelGenerator )

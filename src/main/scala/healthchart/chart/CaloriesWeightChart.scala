@@ -94,6 +94,7 @@ object CaloriesWeightChart extends Chart:
 
   def buildCaloriesRenderer(): XYItemRenderer =
     val renderer = XYLineAndShapeRenderer()
+
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String =
         val xValue = dataset.getXValue(series, item)
@@ -104,6 +105,7 @@ object CaloriesWeightChart extends Chart:
         s"($dayHourMinute, $calorie, $delta%)"
       override def clone() = this
     }
+    
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
     renderer.setDefaultShapesVisible(true)
     renderer.setDefaultItemLabelGenerator( buildItemLabelGenerator("0") )
