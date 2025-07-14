@@ -25,7 +25,7 @@ final case class InvalidEntity(number: Int,
 final case class BloodPressure(line: Int,
                                datetime: Minute, 
                                systolic: Int, 
-                               diastolic: Int) extends Entity:
+                               diastolic: Int) extends Entity derives CanEqual:
   override def toString: String = s"$line, $datetime, $systolic, $diastolic"
 
 final case class CaloriesWeight(line: Int, 
