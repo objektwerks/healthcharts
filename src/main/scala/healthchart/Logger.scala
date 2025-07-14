@@ -5,7 +5,7 @@ import com.typesafe.scalalogging.LazyLogging
 object Logger extends LazyLogging:
   def logInfo(info: String): Unit = logger.info(info)
 
-  def logError(statement: String): Unit = logger.error(statement)
+  def logError(error: String): Unit = logger.error(error)
   
   def logEntitiesAndInvalidEntities[E, IE](entities: Array[E], invalidEntities: Array[IE]): Unit =
     logger.info(s"*** Entities [${entities.length}]: ${entities.toList.map(entity => "\n" + entity.toString)}")
