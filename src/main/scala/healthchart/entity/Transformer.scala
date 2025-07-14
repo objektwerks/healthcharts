@@ -20,6 +20,7 @@ object Transformer:
         logInfo(s"*** transform path: $path, delimiter: $delimiter")
         val entitiesBuilder = mutable.ArrayBuilder.make[E]
         val invalidEntitiesBuilder = mutable.ArrayBuilder.make[InvalidEntity]
+
         var number = 1
         for (line <- source.getLines())
           val columns = line.split(delimiter).map(_.trim)
@@ -27,7 +28,9 @@ object Transformer:
             case Success(entity) => entitiesBuilder += entity
             case Failure(error) => invalidEntitiesBuilder += InvalidEntity(number, line, error)
           number += 1
+        
         val (entities, invalidEntities) = (entitiesBuilder.result(), invalidEntitiesBuilder.result())
+
         logEntitiesAndInvalidEntities(entities, invalidEntities)
         Entities[E](entities, invalidEntities)
     }
