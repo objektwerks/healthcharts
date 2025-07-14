@@ -7,6 +7,8 @@ import healthchart.action.*
 
 final class Menu(frame: Frame) extends JMenuBar():
   val menu = JMenu(Context.menuTitle)
+  menu.add( JMenuItem( AboutAction(Context.menuAbout) ) )
+  menu.add( JSeparator() )
   menu.add( JMenuItem( VitalsAction(Context.titleVitals, frame) ) )
   menu.add( JSeparator() )
   menu.add( JMenuItem( BloodPressureAction(Context.titleBloodPressure, frame) ) )
