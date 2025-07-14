@@ -19,12 +19,12 @@ import healthchart.entity.*
 object MedChart extends Chart:
   def build(meds: Entities[Med]): JFreeChart =
     val xyPlot = XYPlot()
-
     xyPlot.setDataset(1, buildMedDataset(meds))
     xyPlot.setRenderer(1, buildMedRenderer())
 
     val xAxis = DateAxis(Context.titleDayHourChartXAxis)
     xAxis.setDateFormatOverride( SimpleDateFormat("d,H") )
+
     xyPlot.setDomainAxis(0, xAxis)
 
     val yAxis = NumberAxis(Context.titleGlucoseMedChartYAxis)
@@ -35,13 +35,16 @@ object MedChart extends Chart:
 
   def buildMedDataset(meds: Entities[Med]): XYDataset =
     val timeSeries = TimeSeries(Context.titleMed)
+
     meds.entities.foreach { med =>
       timeSeries.add( med.datetime, s"${med.dosage}.${med.medtype.id}".toDouble )
     }
+
     TimeSeriesCollection(timeSeries)
 
   def buildMedRenderer(): XYItemRenderer =
     val renderer = XYLineAndShapeRenderer()
+
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String =
         val xValue = dataset.getXValue(series, item)
@@ -55,6 +58,7 @@ object MedChart extends Chart:
         s"${Context.titleMed}: ($dayHourMinute, $dosage, $med, $delta%)"
       override def clone() = this
     }
+    
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
     renderer.setDefaultShapesVisible(true)
     renderer.setDefaultItemLabelGenerator( buildItemLabelGenerator("0") )
