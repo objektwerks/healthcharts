@@ -71,7 +71,7 @@ final case class PulseOxygen(line: Int,
 
 final case class Respiration(line: Int, 
                              datetime: Minute, 
-                             breathesPerMinute: Int) extends Entity:
+                             breathesPerMinute: Int) extends Entity derives CanEqual:
   override def toString: String = s"$line, $datetime, $breathesPerMinute"
 
 final case class Temperature(line: Int, 
