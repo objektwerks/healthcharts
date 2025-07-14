@@ -66,4 +66,3 @@ class TransformerTest extends AnyFunSuite with Matchers:
       case Failure(failure) =>
         Logger.logFileIOFailure(path, failure)
         fail(s"*** TransformerTest.testTransformer failed: ${failure.getMessage()}")
-    ()
