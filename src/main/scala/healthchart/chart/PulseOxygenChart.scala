@@ -19,18 +19,18 @@ object PulseOxygenChart extends Chart:
   def build(pulseoxygens: Entities[PulseOxygen]): JFreeChart =
     val xyPlot = XYPlot()
     xyPlot.setDatasetRenderingOrder(DatasetRenderingOrder.FORWARD)
-
     xyPlot.setDataset(0, buildPulseDataset(pulseoxygens))
     xyPlot.setRenderer(0, buildPulseRenderer())
-
     xyPlot.setDataset(1, buildOxygenDataset(pulseoxygens))
     xyPlot.setRenderer(1, buildOxygenRenderer())
 
     val xAxis = DateAxis(Context.titleDayHourChartXAxis)
     xAxis.setDateFormatOverride( SimpleDateFormat("d,H") )
+
     xyPlot.setDomainAxis(0, xAxis)
 
     val yAxis = NumberAxis(Context.titlePulseOxygenChartYAxis)
+
     xyPlot.setRangeAxis(yAxis)
 
     val title = buildTitle(Context.titlePulseOxygen, pulseoxygens.toEntity)
@@ -38,20 +38,25 @@ object PulseOxygenChart extends Chart:
 
   def buildPulseDataset(pulseoxygens: Entities[PulseOxygen]): XYDataset =
     val timeSeries = TimeSeries(Context.titlePulse)
+
     pulseoxygens.entities.foreach { pulseoxygen =>
       timeSeries.add( pulseoxygen.datetime, pulseoxygen.beatsPerMinute.toDouble )
     }
+
     TimeSeriesCollection(timeSeries)
 
   def buildOxygenDataset(pulseoxygens: Entities[PulseOxygen]): XYDataset =
     val timeSeries = TimeSeries(Context.titleOxygen)
+
     pulseoxygens.entities.foreach { pulseoxygen =>
       timeSeries.add( pulseoxygen.datetime, pulseoxygen.bloodOxygenPercentage.toDouble )
     }
+
     TimeSeriesCollection(timeSeries)
 
   def buildOxygenRenderer(): XYItemRenderer =
     val renderer = XYLineAndShapeRenderer()
+
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String =
         val xValue = dataset.getXValue(series, item)
@@ -62,6 +67,7 @@ object PulseOxygenChart extends Chart:
         s"${Context.titleOxygen}: ($dayHourMinute, $bloodOxygenPercentage, $delta%)"
       override def clone() = this
     }
+    
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
     renderer.setDefaultShapesVisible(true)
     renderer.setDefaultItemLabelGenerator( buildItemLabelGenerator("0") )
