@@ -15,6 +15,8 @@ object Context:
   val menuAbout = conf.getString("menu.about")
   val menuExit = conf.getString("menu.exit")
 
+  val aboutText = conf.getString("about.text")
+
   val fileFilterExtensions = conf.getStringList("file.filterExtensions").asScala.toArray
   val fileExtensionFilterDesc = conf.getString("file.extensionsFilterDesc")
 
