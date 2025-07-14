@@ -49,7 +49,7 @@ object BloodPressureChart extends Chart:
         val dayHourMinute = SimpleDateFormat("d,H:m").format( jdate.Date( xValue.toLong ) )
         val systolic = yValues(0)
         var diastolic = yValues(1)
-        if (diastolic.length == 1) diastolic = diastolic + 0  // Hack! DecimalFormat dropping trailing zero!
+        if (diastolic.length == 1) then diastolic = diastolic + 0  // Hack! DecimalFormat dropping trailing zero!
         val bloodpressure = s"$systolic/$diastolic"
         val delta = calculateDeltaAsPercentage(dataset, series, item)
         s"${Context.titleBloodPressure}: ($dayHourMinute, $bloodpressure, $delta%)"
@@ -62,7 +62,7 @@ object BloodPressureChart extends Chart:
         val yValues = yValue.toString.split("\\.")
         val systolic = yValues(0)
         var diastolic = yValues(1)
-        if (diastolic.length == 1) diastolic = diastolic + 0  // Hack! DecimalFormat dropping trailing zero!
+        if (diastolic.length == 1) then diastolic = diastolic + 0  // Hack! DecimalFormat dropping trailing zero!
         s"$systolic/$diastolic"
       override def clone() = this
     }
