@@ -32,7 +32,7 @@ final case class CaloriesWeight(line: Int,
                                 datetime: Minute, 
                                 in: Int, 
                                 out: Int, 
-                                weight: Double) extends Entity:
+                                weight: Double) extends Entity derives CanEqual:
   override def toString: String = s"$line, $datetime, $in, $out, $weight"
 
 final case class Glucose(line: Int, 
