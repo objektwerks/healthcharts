@@ -22,6 +22,7 @@ object PulseChart extends Chart:
 
     val xAxis = DateAxis(Context.titleDayHourChartXAxis)
     xAxis.setDateFormatOverride( SimpleDateFormat("d,H") )
+
     xyPlot.setDomainAxis(xAxis)
 
     val yAxis = NumberAxis(Context.titlePulseChartYAxis)
@@ -32,13 +33,16 @@ object PulseChart extends Chart:
 
   def buildPulseDataset(pulses: Entities[Pulse]): XYDataset =
     val timeSeries = TimeSeries(Context.titlePulse)
+
     pulses.entities.foreach { pulse =>
       timeSeries.add( pulse.datetime, pulse.beatsPerMinute.toDouble )
     }
+
     TimeSeriesCollection(timeSeries)
 
   def buildPulseRenderer(): XYItemRenderer =
     val renderer = XYLineAndShapeRenderer()
+
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String =
         val xValue = dataset.getXValue(series, item)
@@ -49,6 +53,7 @@ object PulseChart extends Chart:
         s"${Context.titlePulse}: ($dayHourMinute, $beatsPerMinute, $delta%)"
       override def clone() = this
     }
+    
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
     renderer.setDefaultShapesVisible(true)
     renderer.setDefaultItemLabelGenerator( buildItemLabelGenerator("0") )
