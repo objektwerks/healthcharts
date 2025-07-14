@@ -22,9 +22,11 @@ object RespirationChart extends Chart:
 
     val xAxis = DateAxis(Context.titleDayHourChartXAxis)
     xAxis.setDateFormatOverride( SimpleDateFormat("d,H") )
+
     xyPlot.setDomainAxis(xAxis)
 
     val yAxis = NumberAxis(Context.titleRespirationChartYAxis)
+
     xyPlot.setRangeAxis(yAxis)
 
     val title = buildTitle(Context.titleRespiration, respirations.toEntity)
@@ -32,13 +34,16 @@ object RespirationChart extends Chart:
 
   def buildRespirationDataset(respirations: Entities[Respiration]): XYDataset =
     val timeSeries = TimeSeries(Context.titleRespiration)
+
     respirations.entities.foreach { respiration =>
       timeSeries.add( respiration.datetime, respiration.breathesPerMinute.toDouble )
     }
+
     TimeSeriesCollection(timeSeries)
 
   def buildRespirationRenderer(): XYItemRenderer =
     val renderer = XYLineAndShapeRenderer()
+
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String =
         val xValue = dataset.getXValue(series, item)
@@ -49,6 +54,7 @@ object RespirationChart extends Chart:
         s"${Context.titleRespiration}: ($dayHourMinute, $breathesPerMinute, $delta%)"
       override def clone() = this
     }
+    
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
     renderer.setDefaultShapesVisible(true)
     renderer.setDefaultItemLabelGenerator( buildItemLabelGenerator("0") )
