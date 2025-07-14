@@ -23,7 +23,9 @@ object VitalsChart extends Chart:
     xAxis.setDateFormatOverride( SimpleDateFormat("d,H") )
 
     val topXYPlot = buildTopXYPlot(vitals)
+
     val bottomXYPlot = buildBottomXYPlot(vitals)
+
     val combinedXYPlot = buildCombindedXYPlot(xAxis, topXYPlot, bottomXYPlot)
 
     val title = buildTitle(Context.titleVitals, vitals.toEntity)
@@ -80,35 +82,45 @@ object VitalsChart extends Chart:
 
   def buildTemperatureDataset(vitals: Entities[Vitals]): XYDataset =
     val timeSeries = TimeSeries(Context.titleTemperature)
+
     vitals.entities.foreach { vital =>
       timeSeries.add( vital.datetime, vital.temperature )
     }
+
     TimeSeriesCollection(timeSeries)
 
   def buildRespirationDataset(vitals: Entities[Vitals]): XYDataset =
     val timeSeries = TimeSeries(Context.titleRespiration)
+
     vitals.entities.foreach { vital =>
       timeSeries.add( vital.datetime, vital.respiration.toDouble )
     }
+
     TimeSeriesCollection(timeSeries)
 
   def buildPulseDataset(vitals: Entities[Vitals]): XYDataset =
     val timeSeries = TimeSeries(Context.titlePulse)
+
     vitals.entities.foreach { vital =>
       timeSeries.add( vital.datetime, vital.pulse.toDouble )
     }
+
     TimeSeriesCollection(timeSeries)
 
   def buildOxygenDataset(vitals: Entities[Vitals]): XYDataset =
     val timeSeries = TimeSeries(Context.titleOxygen)
+
     vitals.entities.foreach { vital =>
       timeSeries.add( vital.datetime, vital.oxygen.toDouble )
     }
+
     TimeSeriesCollection(timeSeries)
 
   def buildBloodPressureDataset(vitals: Entities[Vitals]): XYDataset =
     val timeSeries = TimeSeries(Context.titleSystolic)
+
     vitals.entities.foreach { vital =>
       timeSeries.add( vital.datetime, s"${vital.systolic}.${vital.diastolic}".toDouble )
     }
+    
     TimeSeriesCollection(timeSeries)
