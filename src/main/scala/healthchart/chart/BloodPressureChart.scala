@@ -41,6 +41,7 @@ object BloodPressureChart extends Chart:
 
   def buildBloodPressureRenderer(): XYItemRenderer =
     val renderer = XYLineAndShapeRenderer()
+    
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String =
         val xValue = dataset.getXValue(series, item)
