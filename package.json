@@ -17,7 +17,7 @@
       "jar": ".assembly/healthcharts-11.0.0.jar",
       "javafx": true,
       "javafxVersion": "24.0.1",
-      "title": "PoolMate"
+      "title": "healthcharts"
   },
   "dependencies": {
       "command-exists-promise": "^2.0.2",
