@@ -96,6 +96,10 @@ NPM Versioning
 --------------
 >The ```build.sbt``` **must** contain a ```semver 3-digit``` **version** number. See: [Npmjs Semver](https://docs.npmjs.com/about-semantic-versioning)
 
+NPM Registry
+------------
+>Healthcharts is deployed to: https://www.npmjs.com/package/healthcharts
+
 License
 -------
 >Copyright (c) [2022 - 2025] [Objektwerks]
