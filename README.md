@@ -4,7 +4,7 @@ HealthCharts
 
 Install
 -------
-1. Select [Homeschool](https://www.jdeploy.com/~healthcharts)
+1. Select [Healthcharts](https://www.jdeploy.com/~healthcharts)
 2. Select a platform to download a compressed app installer.
 3. Decompress app installer.
 4. Install app by double-clicking app installer.
