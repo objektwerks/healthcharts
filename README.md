@@ -54,6 +54,10 @@ Usage
 6. close app via top-left 'x' icon
 >Tabs are typed, numbered and closeable.
 
+Assembly
+--------
+1. sbt clean test assembly copyAssemblyJar
+
 Package
 -------
 1. sbt clean test universal:packageBin
