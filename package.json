@@ -3,7 +3,7 @@
       "healthcharts": "jdeploy-bundle/jdeploy.js"
   },
   "author": "Objektwerks",
-  "description": "Pool maintenance app.",
+  "description": "Health charts app.",
   "main": "index.js",
   "preferGlobal": true,
   "repository": {
