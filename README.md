@@ -2,6 +2,15 @@ HealthCharts
 ------------
 >Healthchart app providing 11 health charts sourced by **csv** text files, using Swing, Flatlaf, MigLayout, JFreeChart, Ox and Scala 3.
 
+Install
+-------
+1. Select [Homeschool](https://www.jdeploy.com/~healthcharts)
+2. Select a platform to download a compressed app installer.
+3. Decompress app installer.
+4. Install app by double-clicking app installer.
+5. Select app icon to launch app.
+>This install has been tested on macOS.
+
 Charts
 ------
 >Technical specifications for each chart type:
