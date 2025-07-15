@@ -58,20 +58,9 @@ Assembly
 --------
 1. sbt clean test assembly copyAssemblyJar
 
-Package
--------
-1. sbt clean test universal:packageBin
-2. verify ./target/universal/healthcharts-${version}.zip
-
-Install
--------
-1. unzip ./target/universal/healthcharts-${version}.zip
-2. copy unzipped healthcharts-${version} directory to ${healthcharts.directory}
-3. set executable permissions for ${healthcharts.directory}/healthcharts-${version}/bin/healthcharts
-
 Execute
 -------
-1. execute ${healthcharts-directory}/healthcharts-${version}/bin/healthcharts
+1. java -jar .assembly/healthcharts-$version.jar ( or double-click executable jar )
 
 License
 -------
