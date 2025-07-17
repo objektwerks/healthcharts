@@ -65,11 +65,11 @@ Usage
 
 Assembly
 --------
-1. sbt clean test assembly copyAssemblyJar
+1. ```sbt clean test assembly copyAssemblyJar```
 
 Execute
 -------
-1. java -jar .assembly/healthcharts-$version.jar ( or double-click executable jar )
+1. ```java -jar .assembly/healthcharts-$version.jar```
 
 Deploy
 ------
