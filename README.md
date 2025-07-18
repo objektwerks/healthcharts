@@ -11,6 +11,16 @@ Install
 5. Select app icon to launch app.
 >This install has been tested on macOS.
 
+Usage
+-----
+1. click Menu
+2. click Chart menu item
+3. via the Chart Dialog, select *.csv / *.txt file
+4. click 'Select' button
+5. view tabbed chart ( mouseover line data points to view details )
+6. close app via Menu > Exit
+>Tabs are typed, numbered and closeable.
+
 Charts
 ------
 >Technical specifications for each chart type:
@@ -52,16 +62,6 @@ Test
 Run
 ---
 1. ```sbt run```
-
-Usage
------
-1. click Charts menu
-2. click Chart menu item
-3. via the Chart Dialog, select *.csv / *.txt file
-4. click 'Select' button
-5. view tabbed chart ( mouseover line data points to view details )
-6. close app via top-left 'x' icon
->Tabs are typed, numbered and closeable.
 
 Assembly
 --------
