@@ -3,7 +3,7 @@
       "healthcharts": "jdeploy-bundle/jdeploy.js"
   },
   "author": "Objektwerks",
-  "description": "Health charts app providing 11 health charts sourced by csv text files.",
+  "description": "Health charts app providing 11 charts sourced by csv text files.",
   "main": "index.js",
   "preferGlobal": true,
   "repository": {
