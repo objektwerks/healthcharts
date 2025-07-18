@@ -13,13 +13,13 @@ Install
 
 Usage
 -----
-1. click Menu
-2. click Chart menu item
-3. via the Chart Dialog, select *.csv / *.txt file
-4. click 'Select' button
+1. click ```Menu```
+2. click ```Chart type```
+3. via the ```Chart Dialog```, select a *.csv or *.txt file for the selected Chart type
+4. click ```Select``` button
 5. view tabbed chart ( mouseover line data points to view details )
-6. close app via Menu > Exit
->Tabs are typed, numbered and closeable.
+6. close ```App``` via ```Menu > Exit```
+>Chart tabs are typed, numbered and closeable.
 
 Charts
 ------
