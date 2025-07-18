@@ -17,7 +17,7 @@
       "jar": ".assembly/healthcharts-14.0.0.jar",
       "javafx": true,
       "javafxVersion": "24.0.1",
-      "title": "Healthcharts"
+      "title": "Health Charts"
   },
   "dependencies": {
       "command-exists-promise": "^2.0.2",
