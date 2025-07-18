@@ -26,8 +26,8 @@ import healthchart.ui.Frame
     }
   )
 
-  logInfo("Healthcharts started!")
+  logInfo("Healthcharts started.")
 
   sys.addShutdownHook(
-    logInfo("*** App shutdown!")
+    logInfo("Healthcharts shutdown.")
   )
