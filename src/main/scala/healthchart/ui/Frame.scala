@@ -19,6 +19,6 @@ final class Frame extends JFrame:
   setLocationRelativeTo(null)
 
   def addCompositeChartPanel(title: String, chartPanel: JPanel): Unit =
-    logInfo(s"*** Frame.addCompositeChartPanel -> title: $title, chart panel: ${chartPanel.toString()}")
+    logInfo(s"Frame.addCompositeChartPanel -> title: $title, chart panel: ${chartPanel.toString()}")
     tabbedPane.addCompositeChartPanel(title, chartPanel)
     revalidate()
