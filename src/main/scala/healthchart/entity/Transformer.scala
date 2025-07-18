@@ -17,7 +17,7 @@ object Transformer:
                              delimiter: String = ",")(using validator: Validator[E]): Try[Entities[E]] =
     Using( Source.fromFile(path, utf8) ) { source =>
       supervised:
-        logInfo(s"transform path: $path, delimiter: $delimiter")
+        logInfo(s"Transformer.transform path: $path, delimiter: $delimiter")
         val entitiesBuilder = mutable.ArrayBuilder.make[E]
         val invalidEntitiesBuilder = mutable.ArrayBuilder.make[InvalidEntity]
 
