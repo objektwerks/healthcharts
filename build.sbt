@@ -8,7 +8,7 @@ maintainer := "objektwerks@runbox.com"
 libraryDependencies ++= {
   Seq(
     "com.formdev" % "flatlaf" % "3.6.2",
-    "org.jfree" % "jfreechart" % "1.5.5",
+    "org.jfree" % "jfreechart" % "1.5.6",
     "com.miglayout" % "miglayout-swing" % "11.4.2",
     "com.softwaremill.ox" %% "core" % "1.0.1",
     "com.typesafe" % "config" % "1.4.3",
